@@ -167,8 +167,8 @@ class _SignUpState extends State<SignUp> {
                           ),
                         ),),
                       Container(
-                        margin: EdgeInsets.only(top: 70),
-                          child: Text('or',
+                        margin: const EdgeInsets.only(top: 70),
+                          child: const Text('or',
                             style: TextStyle(
                               fontSize: 40,
                               fontWeight: FontWeight.w700
