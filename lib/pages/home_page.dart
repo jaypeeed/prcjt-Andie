@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'andie_sign_up_page.dart';
 
-void main() {
+/*void main() {
   runApp(const MaterialApp(home: homePage()));
-}
+}*/
 
 // ignore: camel_case_types
 class homePage extends StatefulWidget {
@@ -72,14 +73,14 @@ class _homePageState extends State<homePage> {
                     Expanded(
                       flex: 200,
                       child: Row(
-                        children: const [
-                          Expanded(
+                        children: [
+                          const Expanded(
                               flex: 5,
                               child: SizedBox(
                                 width: 20,
                                 height: 20,
                               )),
-                          Expanded(
+                          const Expanded(
                             flex: 50,
                             child: Text(
                               'WELCOME ANDIE / CLIENT',
@@ -89,6 +90,16 @@ class _homePageState extends State<homePage> {
                               ),
                             ),
                           ),
+                          ElevatedButton(
+                            onPressed: (){
+                              Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
+                                  Animation secondaryAnimation)=>SignUp(),
+                                  transitionDuration: Duration(seconds: 0)),
+                              );
+                            },
+                            child: const Text('Move to page 2 new'),
+                          ),
+
                         ],
                       ),
                     ),

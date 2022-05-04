@@ -1,12 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:prjct_andie/pages/andie_sign_up_page.dart';
-
-
-
-
-
-
-
+import 'package:prjct_andie/pages/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -113,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ElevatedButton(
                 onPressed: (){
                   Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
-                      Animation secondaryAnimation)=>SignUp(),
+                      Animation secondaryAnimation)=>homePage(),
                       transitionDuration: Duration(seconds: 0)),
                   );
                 },
