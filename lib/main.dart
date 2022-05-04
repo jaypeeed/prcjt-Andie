@@ -1,4 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:prjct_andie/pages/andie_sign_up_page.dart';
+
+
+
+
+
+
+
 
 void main() {
   runApp(const MyApp());
@@ -101,6 +109,15 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
+            ),
+            ElevatedButton(
+                onPressed: (){
+                  Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
+                      Animation secondaryAnimation)=>SignUp(),
+                      transitionDuration: Duration(seconds: 0)),
+                  );
+                },
+              child: const Text('Move to page 2 new'),
             ),
           ],
         ),

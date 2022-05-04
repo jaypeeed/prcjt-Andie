@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MaterialApp(home: SignUp()));
+  runApp(const MaterialApp(home: AndieSignUp2()));
 }
 
-class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
+class AndieSignUp2 extends StatefulWidget {
+  const AndieSignUp2({Key? key}) : super(key: key);
 
   @override
-  _SignUpState createState() => _SignUpState();
+  _AndieSignUp2State createState() => _AndieSignUp2State();
 }
 
-class _SignUpState extends State<SignUp> {
-  List<String> items = ['Male', 'Female',];
-  String? selectedItem = 'Male';
-
+class _AndieSignUp2State extends State<AndieSignUp2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,9 +84,9 @@ class _SignUpState extends State<SignUp> {
               flex: 1,
               child: Container(
                 margin: const EdgeInsets.all(50),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(20))
+                decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(20))
                 ),
                 child: Expanded(
                   flex: 1,
@@ -97,92 +94,45 @@ class _SignUpState extends State<SignUp> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Container(
-                        margin: EdgeInsets.only(top: 50),
-                        child: Text('Sign-Up as ANDIE!',
+                        margin: const EdgeInsets.only(top: 50),
+                        child: const Text('Sign-Up as ANDIE!',
                           style: TextStyle(
-                            fontSize: 50,
+                            fontSize: 40,
                             fontWeight: FontWeight.w900,
                           ),
                         ),
                       ),
                       Container(
-                          margin: const EdgeInsets.only(top: 70, left: 40, right: 40),
-                          child: const TextField(
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              hintText: 'First Name',
-                            ),
-                          ),),
+                        margin: const EdgeInsets.only(top: 70, left: 40, right: 40),
+                        child: const TextField(
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Email',
+                          ),
+                        ),),
                       Container(
                         margin: const EdgeInsets.only(top: 30, left: 40, right: 40),
                         child: const TextField(
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
-                            hintText: 'Last Name',
+                            hintText: 'Password',
                           ),
                         ),),
-                      Container(
-                        margin: EdgeInsets.only(top: 30, left: 45),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              flex: 2,
-                              child: DropdownButtonFormField<String>(
-                                dropdownColor: Colors.orange[300],
-                                value: selectedItem,
-                                items: items
-                                    .map((item) => DropdownMenuItem(
-                                    value: item,
-                                    child: Text(item,
-                                      style: const TextStyle(
-                                          fontSize: 20,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold
-                                      )
-                                      ,)
-                                ))
-                                    .toList(),
-                                onChanged: (item)=> setState(()=>selectedItem = item),
-                              ),
-                            ),
-                            Expanded(flex:3,
-                                child: Container(
-                                  margin: const EdgeInsets.only(top: 5, left: 40, right: 40),
-                                  child: const TextField(
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
-                                      hintText: 'Age',
-                                    ),
-                                  ),)),
-                          ],
-                        ),
-                      ),
                       Container(
                         margin: const EdgeInsets.only(top:30,left: 40, right: 40),
                         child: const TextField(
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
-                            hintText: 'Contact Number',
+                            hintText: 'Confirm Password',
                           ),
                         ),),
-                      Container(
-                        margin: const EdgeInsets.only(top: 70),
-                          child: const Text('or',
-                            style: TextStyle(
-                              fontSize: 40,
-                              fontWeight: FontWeight.w700
-                            ),
-                            )),
 
-                          // BUTTON FOR GOOGLE SIGN IN
-
+                      // BUTTON FOR GOOGLE SIGN IN
                     ],
                   ),
                 ),
               ),
             )
-
           ],
         ),
       ),
