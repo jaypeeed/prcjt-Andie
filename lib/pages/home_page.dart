@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MaterialApp(home: homePage()));
-}
-
 // ignore: camel_case_types
 class homePage extends StatefulWidget {
   const homePage({Key? key}) : super(key: key);
