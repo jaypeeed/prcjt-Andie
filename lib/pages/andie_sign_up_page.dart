@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'andie_sign_up_page2.dart';
+import 'andie_sign_up_page3.dart';
 
-/*void main() {
+void main() {
   runApp(const MaterialApp(home: SignUp()));
-}*/
+}
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -114,23 +116,26 @@ class _SignUpState extends State<SignUp> {
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Expanded(
-                      flex: 1,
-                      child: Container(
-                        margin: const EdgeInsets.only(top: 50),
-                        child: const Text('Sign-Up as ANDIE!',
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.w900,
+                      flex: 10,
+                      child: Center(
+                        child: Container(
+                          margin: const EdgeInsets.only(top: 20, bottom: 10),
+                          child: const Text('Sign-Up as ANDIE!',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w900,
+                            ),
                           ),
                         ),
                       ),
                     ),
                     Expanded(
-                      flex: 1,
+                      flex: 10,
                       child: Container(
-                          margin: const EdgeInsets.only(top: 15, left: 40, right: 40),
+                          margin: const EdgeInsets.only(top: 5, left: 40, right: 40),
                           child: const TextField(
                             decoration: InputDecoration(
                               border: OutlineInputBorder(),
@@ -139,7 +144,7 @@ class _SignUpState extends State<SignUp> {
                           ),),
                     ),
                     Expanded(
-                      flex: 1,
+                      flex: 10,
                       child: Container(
                         margin: const EdgeInsets.only(top: 15, left: 40, right: 40),
                         child: const TextField(
@@ -150,7 +155,7 @@ class _SignUpState extends State<SignUp> {
                         ),),
                     ),
                     Expanded(
-                      flex: 1,
+                      flex: 10,
                       child: Container(
                         margin: EdgeInsets.only(top: 5, left: 45),
                         child: Row(
@@ -193,7 +198,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
                     Expanded(
-                      flex: 1,
+                      flex: 10,
                       child: Container(
                         margin: const EdgeInsets.only(top:15,left: 40, right: 40),
                         child: const TextField(
@@ -204,16 +209,56 @@ class _SignUpState extends State<SignUp> {
                         ),),
                     ),
                     Expanded(
-                      flex:1,
+                      flex: 5,
                       child: Container(
-                        margin: const EdgeInsets.only(top: 15),
-                          child: const Text('or',
-                            style: TextStyle(
-                              fontSize: 40,
-                              fontWeight: FontWeight.w700
-                            ),
-                            )),
+                        margin: const EdgeInsets.only(top:1,left: 40, right: 50),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            IconButton(onPressed: (){},
+                                icon: const Icon(Icons.arrow_circle_right_rounded,
+                                size: 40,
+                                ),
+                   ),
+                          ],
+                        ),
+                      ),
                     ),
+                    const Expanded(
+                      flex:10,
+                      child: Center(
+                        child: Text('or',
+                          style: TextStyle(
+                            fontSize: 25,
+                          ),
+                          ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 10,
+                      child: Container(
+                        margin: EdgeInsets.only(left: 40, right: 40, bottom: 30 ),
+                        child: OutlinedButton(
+                          onPressed: (){
+                            Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
+                                Animation secondaryAnimation)=>const AndieSignUp3(), //Change here to open Google Login
+                                transitionDuration: const Duration(seconds: 0)),
+                            );
+                          },
+
+                          child: const Text('Sign Up Using Google',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+
+                        ),
+                      ),
+                    ),
+
+
+
 
                         // BUTTON FOR GOOGLE SIGN IN
 

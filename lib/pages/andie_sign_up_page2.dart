@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-/*void main() {
+import 'andie_sign_up_page3.dart';
+
+void main() {
   runApp(const MaterialApp(home: AndieSignUp2()));
-}*/
+}
 
 class AndieSignUp2 extends StatefulWidget {
   const AndieSignUp2({Key? key}) : super(key: key);
@@ -23,6 +25,8 @@ class _AndieSignUp2State extends State<AndieSignUp2> {
             )
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children:  [
             Expanded(
               flex: 1,
@@ -82,7 +86,7 @@ class _AndieSignUp2State extends State<AndieSignUp2> {
                           ElevatedButton(
                             onPressed: (){
                               Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
-                                  Animation secondaryAnimation)=>AndieSignUp2(),
+                                  Animation secondaryAnimation)=>AndieSignUp3(),
                                   transitionDuration: Duration(seconds: 0)),
                               );
                             },
@@ -99,25 +103,19 @@ class _AndieSignUp2State extends State<AndieSignUp2> {
 
 
             // ------------------Right Pane Configurations-------------------
-
-            Expanded(
+          /*  Expanded(
               flex: 1,
               child: Container(
-                margin: const EdgeInsets.all(50),
-                decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(20))
-                ),
+                color: Colors.,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(top: 50),
-                      child: const Text('Sign-Up as ANDIE!',
-                        style: TextStyle(
-                          fontSize: 40,
-                          fontWeight: FontWeight.w900,
-                        ),
+                      color: Colors.white,
+                      margin: EdgeInsets.all(50),
+                      child: Column(
+                        children: const [
+                          Text('Sign-Up as ANDIE!'),
+                        ],
                       ),
                     ),
                     Container(
@@ -128,22 +126,83 @@ class _AndieSignUp2State extends State<AndieSignUp2> {
                           hintText: 'Email',
                         ),
                       ),),
-                    Container(
-                      margin: const EdgeInsets.only(top: 30, left: 40, right: 40),
-                      child: const TextField(
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          hintText: 'Password',
+
+                  ],
+                ),
+              ),
+            ),*/
+            Expanded(
+              /*flex:1,*/
+              child: Container(
+                margin: const EdgeInsets.only(top: 50, left: 50,right: 50,bottom: 70),
+                decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(20))
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      flex:1,
+                      child: Container(
+                        margin: const EdgeInsets.only(top: 20),
+                        child: const Text('Sign-Up as ANDIE!',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w900,
+                          ),
                         ),
-                      ),),
-                    Container(
-                      margin: const EdgeInsets.only(top:15,left: 40, right: 40),
-                      child: const TextField(
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          hintText: 'Confirm Password',
+                      ),
+                    ),
+                    Expanded(
+                      flex:1,
+                      child: Container(
+                        margin: const EdgeInsets.only(top: 30, left: 40, right: 40),
+                        child: const TextField(
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Email',
+                          ),
+                        ),),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        margin: const EdgeInsets.only(top: 30, left: 40, right: 40),
+                        child: const TextField(
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Password',
+                          ),
+                        ),),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        margin: const EdgeInsets.only(top:15,left: 40, right: 40),
+                        child: const TextField(
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Confirm Password',
+                          ),
+                        ),),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        margin: const EdgeInsets.only(top:1,left: 40, right: 50),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            IconButton(onPressed: (){},
+                              icon: const Icon(Icons.arrow_circle_right_rounded,
+                                size: 40,
+                              ),
+                            ),
+                          ],
                         ),
-                      ),),
+                      ),
+                    ),
 
                     // BUTTON FOR GOOGLE SIGN IN
                   ],
