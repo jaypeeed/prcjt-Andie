@@ -36,6 +36,21 @@
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
+  <script src="https://www.gstatic.com/firebasejs/9.8.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.8.1/firebase-auth.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAkhd_DTk89Lgt-QtiVlUuSc7hALGfAxEg",
+      authDomain: "prjct-andie.firebaseapp.com",
+      projectId: "prjct-andie",
+      storageBucket: "prjct-andie.appspot.com",
+      messagingSenderId: "558196395458",
+      appId: "1:558196395458:web:54d18e6ed59a974ef95a5b"
+    };
+         // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+  </script>
+  <script src="main.dart.js" type="application/javascript"></script>
   <script>
     var serviceWorkerVersion = null;
     var scriptLoaded = false;
