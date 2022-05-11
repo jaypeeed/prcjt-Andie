@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prjct_andie/auth_service.dart';
+import 'package:prjct_andie/pages/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -35,68 +36,169 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-          child: SizedBox(
-        height: 250.0,
-        width: 300.0,
-        child: Column(
-          children: <Widget>[
-            Form(
-                key: formKey,
+      body: Container(
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/background1.png'),
+              fit: BoxFit.cover,
+            )),
+        child: Row(
+          children: [
+            Expanded(
+              flex: 1,
+              child: Container(
+                // color: Colors.red,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(left: 25.0, right: 25.0),
-                      child: SizedBox(
-                        height: 50.0,
-                        child: TextFormField(
-                          decoration: const InputDecoration(hintText: 'Email'),
-                          validator: (value) => value!.isEmpty
-                              ? 'Email is required'
-                              : validateEmail(value.trim()),
-                          onChanged: (value) {
-                            email = value;
-                          },
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                          width: 5,
                         ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 25.0, right: 25.0),
-                      child: SizedBox(
-                        height: 50.0,
-                        child: TextFormField(
-                          obscureText: true,
-                          decoration:
-                              const InputDecoration(hintText: 'Password'),
-                          validator: (value) => value!.isEmpty
-                              ? 'Password is required/Wrong password'
-                              : null,
-                          onChanged: (value) {
-                            password = value;
-                          },
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                        onTap: () {
-                          if (checkFields()) {
-                            AuthService().signIn(email, password);
-                          }
-                        },
-                        child: Container(
-                          height: 40.0,
-                          width: 100.0,
-                          decoration: BoxDecoration(
-                            color: Colors.green.withOpacity(0.2),
+                        Expanded(
+                          flex: 2,
+                          child: Container(
+                            // color: Colors.cyanAccent,
+                            child: const Image(
+                              image: AssetImage(
+                                'assets/andie_logo.png',
+                              ),
+                              width: 500,
+                              height: 60,
+                            ),
                           ),
-                          child: const Center(child: Text('Sign in')),
-                        ))
+                        ),
+                        const Expanded(
+                          flex: 5,
+                          child: SizedBox(
+                            width: 20,
+                            height: 20,
+                          ),
+                        )
+                      ],
+                    ),
+                    Expanded(
+                      flex: 200,
+                      child: Row(
+                        children: [
+                          const Expanded(
+                              flex: 5,
+                              child: SizedBox(
+                                width: 20,
+                                height: 20,
+                              )),
+                          const Expanded(
+                            flex: 50,
+                            child: Text(
+                              'WELCOME ANDIE / CLIENT',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 50,
+                              ),
+                            ),
+                          ),
+                          ElevatedButton(
+                            onPressed: (){
+                              Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
+                                  Animation secondaryAnimation)=>homePage(),
+                                  transitionDuration: Duration(seconds: 0)),
+                              );
+                            },
+                            child: const Text('Move to page 2 new'),
+                          ),
+
+                        ],
+                      ),
+                    ),
                   ],
-                ))
+                ),
+              ),
+            ),
+
+
+
+
+
+
+
+
+            // RIGHT SIDE PANE
+            Expanded(
+              flex: 1,
+              child: SizedBox(
+                height: 250.0,
+                width: 300.0,
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Form(
+                    key: formKey,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        Expanded(
+                          flex:1,
+                          child: Container(
+                            margin: const EdgeInsets.only(left: 10, right: 10),
+                            child: TextFormField(
+                              decoration: const InputDecoration(hintText: 'Email'),
+                              validator: (value) => value!.isEmpty
+                                  ? 'Email is required'
+                                  : validateEmail(value.trim()),
+                              onChanged: (value) {
+                                email = value;
+                              },
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Container(
+                            margin: const EdgeInsets.only(left: 10, right: 10),
+                            child: TextFormField(
+                              obscureText: true,
+                              decoration:
+                                  const InputDecoration(hintText: 'Password'),
+                              validator: (value) => value!.isEmpty
+                                  ? 'Password is required/Wrong password'
+                                  : null,
+                              onChanged: (value) {
+                                password = value;
+                              },
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Container(
+                            margin: const EdgeInsets.only(left: 10, right: 10),
+                            child: InkWell(
+                                onTap: () {
+                                  if (checkFields()) {
+                                    AuthService().signIn(email, password);
+                                  }
+                                },
+                                child: Container(
+                                  height: 40.0,
+                                  width: 100.0,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                  ),
+                                  child: const Center(child: Text('Sign in')),
+                                )),
+                          ),
+                        )
+                      ],
+                    ))
+              ],
+                ),
+              ),
+            ),
           ],
         ),
-      )),
+      ),
     );
   }
 }
