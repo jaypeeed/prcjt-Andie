@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<MyUser?>.value(
+      catchError: (_, __) => null,
       value: AuthService().user,
       initialData: null,
       child: MaterialApp(
@@ -26,8 +27,20 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
-}
 
+
+}
+/*
+return StreamProvider<MyUser?>.value{
+catchError: (_,__) => null,
+initialData: AuthService().user,
+Child:
+
+catchError: (_, __) => null,
+      value: AuthService().user,
+      initialData: null,
+
+*/
 /*
 class MyApp2 extends StatefulWidget {
   const MyApp2({Key? key}) : super(key: key);

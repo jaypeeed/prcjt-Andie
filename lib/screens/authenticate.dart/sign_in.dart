@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:prjct_andie/services/auth.dart';
 
 class SignIn extends StatefulWidget {
-  final Function? toggleView;
+  final Function toggleView;
 
-  SignIn({this.toggleView});
+  SignIn({required this.toggleView});
 
   @override
   State<SignIn> createState() => _SignInState();
@@ -22,16 +22,16 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.brown[100],
+      backgroundColor: Colors.lightBlueAccent[100],
       appBar: AppBar(
-        backgroundColor: Colors.brown[400],
+        backgroundColor: Colors.blueAccent[400],
         elevation: 0.0,
         title: Text('Sign in to Andie'),
         actions: <Widget>[
           ElevatedButton(
-            child: Text('Sign In'),
+            child: Text('Register'),
             onPressed: () {
-              widget.toggleView;
+              widget.toggleView();
             },
           )
         ],
@@ -59,7 +59,7 @@ class _SignInState extends State<SignIn> {
                   }),
               SizedBox(height: 20.0),
               ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: Colors.yellow),
+                  style: ElevatedButton.styleFrom(primary: Colors.indigo),
                   child: const Text(
                     'Sign In',
                     style: TextStyle(color: Colors.white),

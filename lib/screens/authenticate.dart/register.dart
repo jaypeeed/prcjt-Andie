@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:prjct_andie/services/auth.dart';
 
 class Register extends StatefulWidget {
-  final Function? toggleView;
+  final Function toggleView;
 
-  Register({this.toggleView});
+  Register({required this.toggleView});
 
   @override
   State<Register> createState() => _RegisterState();
@@ -23,14 +23,14 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.brown[400],
+        backgroundColor: Colors.orangeAccent[400],
         elevation: 0.0,
         title: Text('Register to Andie'),
         actions: <Widget>[
           ElevatedButton(
-            child: Text('Register'),
+            child: Text('Sign-in'),
             onPressed: () {
-              widget.toggleView;
+              widget.toggleView();
             },
           )
         ],
@@ -43,12 +43,24 @@ class _RegisterState extends State<Register> {
             children: <Widget>[
               SizedBox(height: 20.0),
               TextFormField(
+                decoration: InputDecoration(
+                  hintText: 'Email',
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey)
+                  )
+                ),
                   validator: (val) => val!.isEmpty ? 'Enter your email' : null,
                   onChanged: (val) {
                     setState(() => email = val);
                   }),
               SizedBox(height: 20.0),
               TextFormField(
+                  decoration: InputDecoration(
+                      hintText: 'Password',
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey)
+                      )
+                  ),
                   validator: (val) => val!.length < 6
                       ? 'Enter your password with 6 chars long'
                       : null,
@@ -58,7 +70,7 @@ class _RegisterState extends State<Register> {
                   }),
               SizedBox(height: 20.0),
               ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: Colors.yellow),
+                  style: ElevatedButton.styleFrom(primary: Colors.orangeAccent),
                   child: const Text(
                     'Register',
                     style: TextStyle(color: Colors.white),

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:prjct_andie/models/user.dart';
+import 'package:prjct_andie/services/database.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -36,6 +37,9 @@ class AuthService {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       User? user = result.user;
+
+      //creat new document id
+      await DatabaseService(uid: user!.uid).updateUserData('name', 'bio', 'edu', 'exp', 0, 'email');
       return _userFromFirebaseUser(user!);
     } catch (e) {
       print(e.toString());
@@ -45,11 +49,14 @@ class AuthService {
 
   //sign out
   Future signOut() async {
+
     try {
       return await _auth.signOut();
     } catch (e) {
       print(e.toString());
       return null;
     }
+    
   }
+  
 }
