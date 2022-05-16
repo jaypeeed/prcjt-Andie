@@ -18,4 +18,8 @@ class DatabaseService{
 
     });
   }
+
+  Stream<QuerySnapshot?> get profile{
+    return userProfile.snapshots();
+  }
 }
