@@ -5,8 +5,8 @@ class DatabaseService{
   final String uid;
   DatabaseService ({required this.uid});
 
-  final CollectionReference userProfile  = FirebaseFirestore.instance.collection('profile');
-  final CollectionReference clientProfile  = FirebaseFirestore.instance.collection('Clientprofile');
+  final CollectionReference userProfile  = FirebaseFirestore.instance.collection('Andie');
+  final CollectionReference clientProfile  = FirebaseFirestore.instance.collection('Client');
 
   Future updateUserData(String name, String bio, String edu, String exp, int contNum,  String email ) async{
     return await userProfile.doc(uid).set({

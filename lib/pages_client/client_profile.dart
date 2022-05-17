@@ -1,18 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MaterialApp(home: AndieProfile()));
-}
+import 'client_my_andies.dart';
 
-class AndieProfile extends StatefulWidget {
-  const AndieProfile({Key? key}) : super(key: key);
+/*void main() {
+  runApp(const MaterialApp(home: AndieProfile()));
+}*/
+
+class ClientProfile extends StatefulWidget {
+  const ClientProfile({Key? key}) : super(key: key);
 
   @override
-  State<AndieProfile> createState() => _AndieProfileState();
+  State<ClientProfile> createState() => _ClientProfileState();
 }
 
-class _AndieProfileState extends State<AndieProfile> {
+class _ClientProfileState extends State<ClientProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +34,12 @@ class _AndieProfileState extends State<AndieProfile> {
                   style: TextButton.styleFrom(
                     textStyle: const TextStyle(fontSize: 20),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
+                        Animation secondaryAnimation)=>ClientMyAndie(),
+                        transitionDuration: Duration(seconds: 0)),
+                    );
+                  },
                   child: const Text(
                     'My Andie',
                     style: TextStyle(
@@ -48,7 +55,9 @@ class _AndieProfileState extends State<AndieProfile> {
                   style: TextButton.styleFrom(
                     textStyle: const TextStyle(fontSize: 20),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+
+                  },
                   child: const Text(
                     'Category',
                     style: TextStyle(
@@ -64,7 +73,12 @@ class _AndieProfileState extends State<AndieProfile> {
                   style: TextButton.styleFrom(
                     textStyle: const TextStyle(fontSize: 20),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
+                        Animation secondaryAnimation)=>ClientProfile(),
+                        transitionDuration: Duration(seconds: 0)),
+                    );
+                  },
                   child: const Text(
                     'Profile',
                     style: TextStyle(

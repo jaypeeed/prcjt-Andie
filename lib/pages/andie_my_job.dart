@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import '../services/auth.dart';
 import 'andie_profile_andie.dart';
 
-void main() {
+/*void main() {
   runApp(const MaterialApp(home: AndieMyJobs()));
-}
+}*/
 
 class AndieMyJobs extends StatefulWidget {
   const AndieMyJobs({Key? key}) : super(key: key);

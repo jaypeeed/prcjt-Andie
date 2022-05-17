@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import '../services/auth.dart';
 import 'andie_my_job.dart';
 
+/*
 void main() {
   runApp(const MaterialApp(home: AndieProfile()));
 }
+*/
 
 class AndieProfile extends StatefulWidget {
   const AndieProfile({Key? key}) : super(key: key);

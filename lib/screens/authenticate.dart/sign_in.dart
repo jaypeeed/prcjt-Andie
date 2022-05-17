@@ -4,6 +4,7 @@ import 'package:prjct_andie/services/auth.dart';
 
 import '../../pages/andie_log_in.dart';
 import '../../pages/andie_sign_up_page.dart';
+import '../../pages_client/client_sign_up_page.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
@@ -55,21 +56,48 @@ class _SignInState extends State<SignIn> {
                   flex: 10,
                   child: Center(
                       child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      ElevatedButton(
-                        child: const Text('Sign Up as ANDIE'),
-                        onPressed: () {
-                          widget.toggleView();
-                        },
-                      ),
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          const Expanded(
+                            flex: 30,
+                            child: SizedBox(
+                              width: 30,
+                            ),
+                          ),
+                          Expanded(
+                            flex: 10,
+                            child: ElevatedButton(
+                              child: const Text('Sign Up as ANDIE'),
+                              onPressed: () {
+                                widget.toggleView();
+                              },
+                            ),
+                          ),
+                          const Expanded(
+                            flex: 5,
+                            child: SizedBox(
+                              width: 30,
+                            ),
+                          ),
+                          Expanded(
+                            flex: 10,
+                            child: ElevatedButton(
+                              child: const Text('Sign Up as CLIENT'),
+                              onPressed: () {
+                                Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
+                                    Animation secondaryAnimation)=>const SignUpClient(), //Change here to open Google Login
+                                    transitionDuration: const Duration(seconds: 0)),
+                                );
+                              },
+                            ),
+                          ),
                     ],
                   )),
                   /* SizedBox(
                       width: 20,
                       height: 20,
                     ),*/
-                )
+                ),
               ],
             ),
 
@@ -130,7 +158,8 @@ class _SignInState extends State<SignIn> {
                   Expanded(
                     flex: 1,
                     child: Container(
-                      padding: const EdgeInsets.only(top: 50, left: 40, right: 40, bottom: 40),
+                      padding: const EdgeInsets.only(
+                          top: 50, left: 40, right: 40, bottom: 40),
                       margin: const EdgeInsets.only(
                           left: 50, right: 50, top: 80, bottom: 100),
                       decoration: const BoxDecoration(
@@ -145,7 +174,7 @@ class _SignInState extends State<SignIn> {
                             flex: 10,
                             child: Container(
                               //color: Colors.green,
-                              child: Text(
+                              child: const Text(
                                 'Login',
                                 style: TextStyle(
                                   fontSize: 35,
@@ -154,12 +183,11 @@ class _SignInState extends State<SignIn> {
                               ),
                             ),
                           ),
-
                           Expanded(
                             flex: 50,
                             child: Container(
                               //color: Colors.red,
-                           /*   margin:
+                              /*   margin:
                                   const EdgeInsets.only(left: 40, right: 40),*/
                               child: Form(
                                 key: _formkey,
@@ -180,9 +208,9 @@ class _SignInState extends State<SignIn> {
                                             setState(() => email = val);
                                           }),
                                     ),
-                                    Expanded(
+                                    const Expanded(
                                         flex: 20,
-                                        child: const SizedBox(height: 20.0)),
+                                        child: SizedBox(height: 20.0)),
                                     Expanded(
                                       flex: 100,
                                       child: TextFormField(
@@ -197,12 +225,12 @@ class _SignInState extends State<SignIn> {
                                             setState(() => password = val);
                                           }),
                                     ),
-                                    Expanded(
+                                    const Expanded(
                                         flex: 1,
-                                        child: const SizedBox(height: 20.0)),
-                                    Expanded(
+                                        child: SizedBox(height: 20.0)),
+                                    const Expanded(
                                         flex: 1,
-                                        child: const SizedBox(height: 12.0)),
+                                        child: SizedBox(height: 12.0)),
                                     Expanded(
                                       flex: 20,
                                       child: Text(
@@ -212,7 +240,6 @@ class _SignInState extends State<SignIn> {
                                       ),
                                     )
                                   ],
-
                                 ),
                               ),
                             ),
@@ -222,7 +249,8 @@ class _SignInState extends State<SignIn> {
                             child: Container(
                               //color: Colors.blue,
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
                                   Expanded(
                                     flex: 2,
@@ -232,18 +260,18 @@ class _SignInState extends State<SignIn> {
                                               primary: Colors.indigo),
                                           child: const Text(
                                             'Log In as ANDIE',
-                                            style: TextStyle(
-                                                color: Colors.white),
+                                            style:
+                                                TextStyle(color: Colors.white),
                                           ),
                                           onPressed: () async {
                                             if (_formkey.currentState!
                                                 .validate()) {
                                               dynamic result = await _auth
                                                   .signInWithEmailAndPassword(
-                                                  email, password);
+                                                      email, password);
                                               if (result == null) {
                                                 setState(() => error =
-                                                'Could not sign in with those credentials');
+                                                    'Could not sign in with those credentials');
                                               }
                                             }
                                           }),
@@ -257,18 +285,18 @@ class _SignInState extends State<SignIn> {
                                               primary: Colors.indigo),
                                           child: const Text(
                                             'Log In as CLIENT',
-                                            style: TextStyle(
-                                                color: Colors.white),
+                                            style:
+                                                TextStyle(color: Colors.white),
                                           ),
                                           onPressed: () async {
                                             if (_formkey.currentState!
                                                 .validate()) {
                                               dynamic result = await _auth
                                                   .signInWithEmailAndPassword(
-                                                  email, password);
+                                                      email, password);
                                               if (result == null) {
                                                 setState(() => error =
-                                                'Could not sign in with those credentials');
+                                                    'Could not sign in with those credentials');
                                               }
                                             }
                                           }),

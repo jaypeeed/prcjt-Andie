@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'andie_sign_up_page.dart';
 
 
+/*
 void main() {
   runApp(const MaterialApp(home: homePage()));
 }
+*/
 
 // ignore: camel_case_types
 class homePage extends StatefulWidget {

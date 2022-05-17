@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'client_profile.dart';
+
 void main() {
   runApp(const MaterialApp(home: ClientMenu()));
 }
@@ -67,7 +69,12 @@ class _ClientMenuState extends State<ClientMenu> {
                   style: TextButton.styleFrom(
                     textStyle: const TextStyle(fontSize: 20),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
+                        Animation secondaryAnimation)=>ClientProfile(),
+                        transitionDuration: Duration(seconds: 0)),
+                    );
+                  },
                   child: const Text(
                     'Profile',
                     style: TextStyle(
