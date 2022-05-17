@@ -184,7 +184,7 @@ class _AndieProfileState extends State<AndieProfile> {
                   ]),
                   Container(
                     padding:
-                        const EdgeInsets.only(left: 20, top: 20, bottom: 10),
+                        const EdgeInsets.only(left: 10, top: 20, bottom: 10),
                     child: const Text(
                       'Handy Many',
                       style: TextStyle(
@@ -203,15 +203,18 @@ class _AndieProfileState extends State<AndieProfile> {
                     ),
                     textAlign: TextAlign.left,
                   ),
-                  const Text(
-                    'Contact Information',
-                    style: TextStyle(
-                        fontSize: 30,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 2.0),
-                    textAlign: TextAlign.center,
+                   Container(
+                     padding: const EdgeInsets.only(top: 10,bottom: 10),
+                     child: const Text(
+                      'Contact Information',
+                      style: TextStyle(
+                          fontSize: 30,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w900,
+                          letterSpacing: 2.0),
+                      textAlign: TextAlign.center,
                   ),
+                   ),
                   Row(
                     children: [
                       Container(
@@ -229,7 +232,7 @@ class _AndieProfileState extends State<AndieProfile> {
                       Container(
                           padding: const EdgeInsets.only(top: 5, bottom: 0),
                           child: const Text(
-                            '0987654321',
+                            '   0987654321',
                             style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.black,
@@ -255,7 +258,7 @@ class _AndieProfileState extends State<AndieProfile> {
                       Container(
                         padding: const EdgeInsets.only(top: 5, bottom: 0),
                         child: const Text(
-                          'handymany@gmail.com',
+                          '                 handymany@gmail.com',
                           style: TextStyle(
                               fontSize: 20,
                               color: Colors.black,
@@ -282,7 +285,7 @@ class _AndieProfileState extends State<AndieProfile> {
                       Container(
                         padding: const EdgeInsets.only(top: 5, bottom: 20),
                         child: const Text(
-                          'handy many',
+                          '           Handy Many',
                           style: TextStyle(
                               fontSize: 20,
                               color: Colors.black,
@@ -299,12 +302,12 @@ class _AndieProfileState extends State<AndieProfile> {
                           onPressed: () {},
                           child: const Align(
                             alignment: Alignment.bottomRight,
-                            child: Text(
+                            child:  Text(
                               "LOG OUT",
                               style: TextStyle(
-                                  fontSize: 10,
+                                  fontSize: 13,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.black,
+                                  color: Colors.white,
                                   letterSpacing: 2.0),
                               textAlign: TextAlign.center,
                             ),
