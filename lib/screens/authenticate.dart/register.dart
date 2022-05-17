@@ -53,7 +53,7 @@ class _RegisterState extends State<Register> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  //color: Colors.green,
+                  color: Colors.green,
                   child: const SizedBox(
                     width: 5,
                   ),
@@ -103,47 +103,66 @@ class _RegisterState extends State<Register> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Container(
-                        padding: EdgeInsets.only(left: 400, right: 400),
-                        child: Form(
-                          key: _formkey,
-                          child: Column(
-                            children: <Widget>[
-                              SizedBox(height: 20.0),
-                              TextFormField(
-                                  decoration: InputDecoration(
-                                      hintText: 'Email',
-                                      focusedBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(color: Colors.grey)
-                                      )
-                                  ),
-                                  validator: (val) => val!.isEmpty ? 'Enter your email' : null,
-                                  onChanged: (val) {
-                                    setState(() => email = val);
-                                  }),
-                              SizedBox(height: 20.0),
-                              TextFormField(
-                                  decoration: InputDecoration(
-                                      hintText: 'Password',
-                                      focusedBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(color: Colors.grey)
-                                      )
-                                  ),
-                                  validator: (val) => val!.length < 6
-                                      ? 'Enter your password with 6 chars long'
-                                      : null,
-                                  obscureText: true,
-                                  onChanged: (val) {
-                                    setState(() => password = val);
-                                  }),
-                              SizedBox(height: 20.0),
-
-                              SizedBox(height: 12.0),
-                              Text(
-                                error,
-                                style: TextStyle(color: Colors.red, fontSize: 14.0),
-                              )
-                            ],
+                        // color: Colors.green,
+                        child: const Text(
+                          'Sign Up',
+                          style: TextStyle(
+                            fontSize: 50,
+                            fontWeight: FontWeight.w900,
                           ),
+                        ),
+                      ),
+                      Container(
+                       // color: Colors.green,
+                        //padding: const EdgeInsets.only(left: 400, right: 400),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex:2,
+                              child: Form(
+                                key: _formkey,
+                                child: Column(
+                                  children: <Widget>[
+                                    const SizedBox(height: 20.0),
+                                    TextFormField(
+                                        decoration: const InputDecoration(
+                                            hintText: 'Email',
+                                            focusedBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(color: Colors.grey)
+                                            )
+                                        ),
+                                        validator: (val) => val!.isEmpty ? 'Enter your email' : null,
+                                        onChanged: (val) {
+                                          setState(() => email = val);
+                                        }),
+                                    const SizedBox(height: 20.0),
+                                    TextFormField(
+                                        decoration: const InputDecoration(
+                                            hintText: 'Password',
+                                            focusedBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(color: Colors.grey)
+                                            )
+                                        ),
+                                        validator: (val) => val!.length < 6
+                                            ? 'Enter your password with 6 chars long'
+                                            : null,
+                                        obscureText: true,
+                                        onChanged: (val) {
+                                          setState(() => password = val);
+                                        }),
+                                    const SizedBox(height: 20.0),
+
+                                    const SizedBox(height: 12.0),
+                                    Text(
+                                      error,
+                                      style: const TextStyle(color: Colors.red, fontSize: 14.0),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            const Expanded(flex:5,child: SizedBox(width: 20,))
+                          ],
                         ),
                       ),
 

@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../services/auth.dart';
+import 'andie_my_job.dart';
+
 void main() {
   runApp(const MaterialApp(home: AndieProfile()));
 }
@@ -13,84 +16,96 @@ class AndieProfile extends StatefulWidget {
 }
 
 class _AndieProfileState extends State<AndieProfile> {
+  final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(65),
         child: AppBar(
-            backgroundColor: const Color.fromRGBO(255, 205, 84, 1.0),
-            title: Image.asset(
-              'assets/andie_logo.png',
-              height: 80,
-              width: 110,
+          backgroundColor: Color.fromRGBO(255, 205, 84, 1.0),
+          title: Image.asset('assets/andie_logo.png',
+            width: 180,
+          ),
+          elevation: 0.0,
+          actions: <Widget>[
+            Center(
+              child: Container(
+                margin: const EdgeInsets.only(right: 65),
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    textStyle: const TextStyle(fontSize: 20),
+                  ),
+                  onPressed: (){
+                    Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
+                        Animation secondaryAnimation)=>AndieMyJobs(),
+                        transitionDuration: Duration(seconds: 0)),
+                    );
+                  },
+                  child: const Text('My Jobs',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold
+                    ),
+                  ),
+                ),
+              ),
             ),
-            actions: [
-              Container(
+            Center(
+              child: Container(
                 margin: const EdgeInsets.only(right: 65),
                 child: TextButton(
                   style: TextButton.styleFrom(
                     textStyle: const TextStyle(fontSize: 20),
                   ),
                   onPressed: () {},
-                  child: const Text(
-                    'My Jobs',
+                  child: const Text('Ratings',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
-                        fontWeight: FontWeight.bold),
+                        fontWeight: FontWeight.bold
+                    ),
                   ),
                 ),
               ),
-              Container(
+            ),
+            Center(
+              child: Container(
                 margin: const EdgeInsets.only(right: 65),
                 child: TextButton(
                   style: TextButton.styleFrom(
                     textStyle: const TextStyle(fontSize: 20),
                   ),
-                  onPressed: () {},
-                  child: const Text(
-                    'Ratings',
+                  onPressed: (){
+                    Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
+                        Animation secondaryAnimation)=>AndieProfile(),
+                        transitionDuration: Duration(seconds: 0)),
+                    );
+                  },
+                  child: const Text('Profile',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
-                        fontWeight: FontWeight.bold),
+                        fontWeight: FontWeight.bold
+                    ),
                   ),
                 ),
               ),
-              Container(
+            ),
+            Center(
+              child: Container(
                 margin: const EdgeInsets.only(right: 65),
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    textStyle: const TextStyle(fontSize: 20),
-                  ),
-                  onPressed: () {},
-                  child: const Text(
-                    'Jobs',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  ),
+                child: ElevatedButton(
+                  child: Text('Log out'),
+                  onPressed: () async {
+                    await _auth.signOut();
+                  },
                 ),
               ),
-              Container(
-                margin: const EdgeInsets.only(right: 65),
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    textStyle: const TextStyle(fontSize: 20),
-                  ),
-                  onPressed: () {},
-                  child: const Text(
-                    'Profile',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
-            ]),
+            )
+          ],
+        ),
       ),
       body: Row(
         children: [
@@ -215,105 +230,94 @@ class _AndieProfileState extends State<AndieProfile> {
                       textAlign: TextAlign.center,
                   ),
                    ),
+
                   Row(
                     children: [
                       Container(
-                        padding: const EdgeInsets.only(top: 5, bottom: 0),
-                        child: const Text(
-                          'Phone Number: ',
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 2.0),
-                          textAlign: TextAlign.center,
+                        margin: EdgeInsets.only(right: 30),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.only(top: 5, bottom: 0),
+                              child: const Text(
+                                'Phone Number: ',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 2.0),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.only(top: 5, bottom: 0),
+                              child: const Text(
+                                'Gmail: ',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 2.0),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.only(top: 5, bottom: 20),
+                              child: const Text(
+                                'Facebook: ',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 2.0),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      Container(
-                          padding: const EdgeInsets.only(top: 5, bottom: 0),
-                          child: const Text(
-                            '   0987654321',
-                            style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.black,
-                                letterSpacing: 2.0),
-                            textAlign: TextAlign.center,
-                          )),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.only(top: 5, bottom: 0),
-                        child: const Text(
-                          'Gmail: ',
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 2.0),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.only(top: 5, bottom: 0),
-                        child: const Text(
-                          '                 handymany@gmail.com',
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.black,
-                              letterSpacing: 2.0),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.only(top: 5, bottom: 20),
-                        child: const Text(
-                          'Facebook: ',
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 2.0),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.only(top: 5, bottom: 20),
-                        child: const Text(
-                          '           Handy Many',
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.black,
-                              letterSpacing: 2.0),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      ElevatedButton(
-                          onPressed: () {},
-                          child: const Align(
-                            alignment: Alignment.bottomRight,
-                            child:  Text(
-                              "LOG OUT",
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                              padding: const EdgeInsets.only(top: 5, bottom: 0),
+                              child: const Text(
+                                '0987654321',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                    letterSpacing: 2.0),
+                                textAlign: TextAlign.center,
+                              )),
+                          Container(
+                            padding: const EdgeInsets.only(top: 5, bottom: 0),
+                            child: const Text(
+                              'handymany@gmail.com',
                               style: TextStyle(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
+                                  fontSize: 20,
+                                  color: Colors.black,
                                   letterSpacing: 2.0),
                               textAlign: TextAlign.center,
                             ),
-                          ))
+                          ),
+                          Container(
+                            padding: const EdgeInsets.only(top: 5, bottom: 20),
+                            child: const Text(
+                              'Handy Many',
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                  letterSpacing: 2.0),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
-                  )
+                  ),
+
+
                 ],
               ),
             ),
@@ -323,3 +327,5 @@ class _AndieProfileState extends State<AndieProfile> {
     );
   }
 }
+
+

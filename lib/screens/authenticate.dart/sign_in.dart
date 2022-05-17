@@ -55,16 +55,16 @@ class _SignInState extends State<SignIn> {
                   flex: 10,
                   child: Center(
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          ElevatedButton(
-                    child: const Text('Sign Up as ANDIE'),
-                    onPressed: () {
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      ElevatedButton(
+                        child: const Text('Sign Up as ANDIE'),
+                        onPressed: () {
                           widget.toggleView();
-                    },
-                  ),
-                        ],
-                      )),
+                        },
+                      ),
+                    ],
+                  )),
                   /* SizedBox(
                       width: 20,
                       height: 20,
@@ -72,7 +72,6 @@ class _SignInState extends State<SignIn> {
                 )
               ],
             ),
-
 
             // --------------- Right Side --------------------
             Expanded(
@@ -95,10 +94,10 @@ class _SignInState extends State<SignIn> {
                           Expanded(
                             flex: 50,
                             child: Container(
-                              margin: EdgeInsets.only(left: 50),
-                              child: Text(
+                              margin: const EdgeInsets.only(left: 50),
+                              child: const Text(
                                 'THERE ARE A\nLOT OF\nPEOPLE THAT\nNEED YOUR\nHELP THAN YOU\nTHINK!',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 65,
                                   color: Colors.white,
@@ -131,67 +130,114 @@ class _SignInState extends State<SignIn> {
                   Expanded(
                     flex: 1,
                     child: Container(
+                      padding: const EdgeInsets.only(top: 50, left: 40, right: 40, bottom: 40),
                       margin: const EdgeInsets.only(
-                          left: 50, right: 50, top: 80, bottom: 200),
+                          left: 50, right: 50, top: 80, bottom: 100),
                       decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(20))),
-                      padding:
-                          const EdgeInsets.only(top: 50, left: 40, right: 40),
+
                       //  color: Colors.white,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            'Login',
-                            style: TextStyle(
-                          fontSize: 35,
-                          fontWeight: FontWeight.bold,
+                          Expanded(
+                            flex: 10,
+                            child: Container(
+                              //color: Colors.green,
+                              child: Text(
+                                'Login',
+                                style: TextStyle(
+                                  fontSize: 35,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                             ),
                           ),
-                          Container(
-                            margin: EdgeInsets.only(left: 40, right: 40),
-                            child: Form(
-                              key: _formkey,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                                  const SizedBox(height: 20.0),
-                                  TextFormField(
-                                      decoration: InputDecoration(
-                                        hintText: 'Email',
+
+                          Expanded(
+                            flex: 50,
+                            child: Container(
+                              //color: Colors.red,
+                           /*   margin:
+                                  const EdgeInsets.only(left: 40, right: 40),*/
+                              child: Form(
+                                key: _formkey,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: <Widget>[
+                                    const SizedBox(height: 20.0),
+                                    Expanded(
+                                      flex: 100,
+                                      child: TextFormField(
+                                          decoration: const InputDecoration(
+                                            hintText: 'Email',
+                                          ),
+                                          validator: (val) => val!.isEmpty
+                                              ? 'Enter your email'
+                                              : null,
+                                          onChanged: (val) {
+                                            setState(() => email = val);
+                                          }),
+                                    ),
+                                    Expanded(
+                                        flex: 20,
+                                        child: const SizedBox(height: 20.0)),
+                                    Expanded(
+                                      flex: 100,
+                                      child: TextFormField(
+                                          decoration: const InputDecoration(
+                                            hintText: 'Password',
+                                          ),
+                                          validator: (val) => val!.length < 6
+                                              ? 'Enter your password with 6 chars long'
+                                              : null,
+                                          obscureText: true,
+                                          onChanged: (val) {
+                                            setState(() => password = val);
+                                          }),
+                                    ),
+                                    Expanded(
+                                        flex: 1,
+                                        child: const SizedBox(height: 20.0)),
+                                    Expanded(
+                                        flex: 1,
+                                        child: const SizedBox(height: 12.0)),
+                                    Expanded(
+                                      flex: 20,
+                                      child: Text(
+                                        error,
+                                        style: const TextStyle(
+                                            color: Colors.red, fontSize: 14.0),
                                       ),
-                                      validator: (val) => val!.isEmpty
-                                          ? 'Enter your email'
-                                          : null,
-                                      onChanged: (val) {
-                                        setState(() => email = val);
-                                      }),
-                                  const SizedBox(height: 20.0),
-                                  TextFormField(
-                                      decoration: InputDecoration(
-                                        hintText: 'Password',
-                                      ),
-                                      validator: (val) => val!.length < 6
-                                          ? 'Enter your password with 6 chars long'
-                                          : null,
-                                      obscureText: true,
-                                      onChanged: (val) {
-                                        setState(() => password = val);
-                                      }),
-                                  const SizedBox(height: 20.0),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      ElevatedButton(
+                                    )
+                                  ],
+
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 10,
+                            child: Container(
+                              //color: Colors.blue,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  Expanded(
+                                    flex: 2,
+                                    child: Center(
+                                      child: ElevatedButton(
                                           style: ElevatedButton.styleFrom(
                                               primary: Colors.indigo),
                                           child: const Text(
                                             'Log In as ANDIE',
-                                            style: TextStyle(color: Colors.white),
+                                            style: TextStyle(
+                                                color: Colors.white),
                                           ),
                                           onPressed: () async {
-                                            if (_formkey.currentState!.validate()) {
+                                            if (_formkey.currentState!
+                                                .validate()) {
                                               dynamic result = await _auth
                                                   .signInWithEmailAndPassword(
                                                   email, password);
@@ -201,33 +247,33 @@ class _SignInState extends State<SignIn> {
                                               }
                                             }
                                           }),
-                                      ElevatedButton(
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 2,
+                                    child: Center(
+                                      child: ElevatedButton(
                                           style: ElevatedButton.styleFrom(
                                               primary: Colors.indigo),
                                           child: const Text(
                                             'Log In as CLIENT',
-                                            style: TextStyle(color: Colors.white),
+                                            style: TextStyle(
+                                                color: Colors.white),
                                           ),
                                           onPressed: () async {
-                                            if (_formkey.currentState!.validate()) {
+                                            if (_formkey.currentState!
+                                                .validate()) {
                                               dynamic result = await _auth
                                                   .signInWithEmailAndPassword(
-                                                      email, password);
+                                                  email, password);
                                               if (result == null) {
                                                 setState(() => error =
-                                                    'Could not sign in with those credentials');
+                                                'Could not sign in with those credentials');
                                               }
                                             }
                                           }),
-                                    ],
+                                    ),
                                   ),
-
-                                  const SizedBox(height: 12.0),
-                                  Text(
-                                    error,
-                                    style: const TextStyle(
-                                        color: Colors.red, fontSize: 14.0),
-                                  )
                                 ],
                               ),
                             ),
