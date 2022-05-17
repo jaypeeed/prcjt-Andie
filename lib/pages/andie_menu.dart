@@ -20,8 +20,9 @@ class _MenuPageState extends State<MenuPage> {
         preferredSize: Size.fromHeight(65),
         child: AppBar(
           backgroundColor: Color.fromRGBO(255, 205, 84, 1.0),
-          title: Image.asset('assets/andie_logo.png',
-          width: 180,
+          title: Image.asset(
+            'assets/andie_logo.png',
+            width: 180,
           ),
           actions: [
             Center(
@@ -32,12 +33,12 @@ class _MenuPageState extends State<MenuPage> {
                     textStyle: const TextStyle(fontSize: 20),
                   ),
                   onPressed: () {},
-                  child: const Text('My Jobs',
+                  child: const Text(
+                    'My Jobs',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
-                        fontWeight: FontWeight.bold
-                    ),
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -50,12 +51,12 @@ class _MenuPageState extends State<MenuPage> {
                     textStyle: const TextStyle(fontSize: 20),
                   ),
                   onPressed: () {},
-                  child: const Text('Ratings',
+                  child: const Text(
+                    'Ratings',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
-                        fontWeight: FontWeight.bold
-                    ),
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -68,12 +69,12 @@ class _MenuPageState extends State<MenuPage> {
                     textStyle: const TextStyle(fontSize: 20),
                   ),
                   onPressed: () {},
-                  child: const Text('Profile',
+                  child: const Text(
+                    'Profile',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
-                        fontWeight: FontWeight.bold
-                    ),
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -83,11 +84,10 @@ class _MenuPageState extends State<MenuPage> {
       ),
       body: Container(
         decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/background2.png'),
-            fit: BoxFit.cover,
-          )
-        ),
+            image: DecorationImage(
+          image: AssetImage('assets/background2.png'),
+          fit: BoxFit.cover,
+        )),
         child: Column(
           children: [
             Container(
@@ -95,40 +95,40 @@ class _MenuPageState extends State<MenuPage> {
               child: Row(
                 children: const [
                   Expanded(
-                      child: Center(
-                          child: Text(
-                            'HI ANDIE!',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 100.0,
-                              color: Colors.black,
-                            ),
+                    child: Center(
+                      child: Text(
+                        'HI ANDIE!',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 100.0,
+                          color: Colors.black,
+                        ),
                       ),
-                  ),
+                    ),
                   ),
                 ],
               ),
             ),
-           Container(
-                margin: const EdgeInsets.only(top: 20),
-               child: Row(
-                   children: const [
-                    Expanded(
-                        child: Center(
-                          child: Text(
-              'What would you like to do today?',
-                style: TextStyle(
-                fontSize: 45.0,
-                   color: Colors.black,
-                ),
+            Container(
+              margin: const EdgeInsets.only(top: 20),
+              child: Row(
+                children: const [
+                  Expanded(
+                    child: Center(
+                      child: Text(
+                        'What would you like to do today?',
+                        style: TextStyle(
+                          fontSize: 45.0,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-          ),
-        ],
-      ),
-      ),
-    ],
-    ),
+          ],
+        ),
       ),
     );
   }
