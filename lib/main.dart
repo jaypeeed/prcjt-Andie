@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:prjct_andie/models/user.dart';
+import 'package:prjct_andie/screens/home/home.dart';
 import 'package:prjct_andie/screens/wrapper.dart';
 import 'package:prjct_andie/services/auth.dart';
 import 'firebase_options.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       value: AuthService().user,
       initialData: null,
       child: MaterialApp(
-        home: Wrapper(),
+        home:Wrapper(),
       ),
     );
   }

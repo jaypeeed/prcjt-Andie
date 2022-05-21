@@ -36,7 +36,12 @@ class _AndieProfileState extends State<AndieProfile> {
                 margin: const EdgeInsets.only(right: 65),
                 child: TextButton(
                   style: TextButton.styleFrom(
-                    textStyle: const TextStyle(fontSize: 20),
+                    textStyle: const TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w900,
+                      decoration: TextDecoration.underline,
+                    ),
                   ),
                   onPressed: (){
                     Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,

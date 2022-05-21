@@ -137,7 +137,7 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                       child: Container(
                           margin: const EdgeInsets.only(left: 30, top: 30),
                           child: const Text(
-                            'List of Clients',
+                            'Client List',
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,

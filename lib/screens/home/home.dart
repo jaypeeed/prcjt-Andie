@@ -21,7 +21,7 @@ class Home extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.orangeAccent[50],
         appBar: AppBar(
-          backgroundColor: Color.fromRGBO(255, 205, 84, 1.0),
+          backgroundColor: const Color.fromRGBO(255, 205, 84, 1.0),
           title: Image.asset('assets/andie_logo.png',
             width: 180,
           ),
@@ -36,8 +36,8 @@ class Home extends StatelessWidget {
                   ),
                   onPressed: (){
                     Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
-                        Animation secondaryAnimation)=>AndieMyJobs(),
-                        transitionDuration: Duration(seconds: 0)),
+                        Animation secondaryAnimation)=>const AndieMyJobs(),
+                        transitionDuration: const Duration(seconds: 0)),
                     );
                   },
                   child: const Text('My Jobs',
@@ -77,8 +77,8 @@ class Home extends StatelessWidget {
                   ),
                   onPressed: (){
                     Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
-                        Animation secondaryAnimation)=>AndieProfile(),
-                        transitionDuration: Duration(seconds: 0)),
+                        Animation secondaryAnimation)=>const AndieProfile(),
+                        transitionDuration: const Duration(seconds: 0)),
                     );
                   },
                   child: const Text('Profile',
@@ -95,7 +95,7 @@ class Home extends StatelessWidget {
               child: Container(
                 margin: const EdgeInsets.only(right: 65),
                 child: ElevatedButton(
-                  child: Text('Log out'),
+                  child: const Text('Log out'),
                   onPressed: () async {
                     await _auth.signOut();
                   },
@@ -150,7 +150,7 @@ class Home extends StatelessWidget {
                   ],
                 ),
               ),
-              ProfileList(),
+              const ProfileList(),
             ],
           ),
         ),

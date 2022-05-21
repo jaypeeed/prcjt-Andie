@@ -42,13 +42,14 @@ class _SignInState extends State<SignIn> {
                 Expanded(
                   flex: 2,
                   child: Container(
+                    width: 500,
+                    height: 60,
                     // color: Colors.cyanAccent,
                     child: const Image(
                       image: AssetImage(
                         'assets/andie_logo.png',
                       ),
-                      width: 500,
-                      height: 60,
+
                     ),
                   ),
                 ),
@@ -65,30 +66,28 @@ class _SignInState extends State<SignIn> {
                             ),
                           ),
                           Expanded(
-                            flex: 10,
-                            child: ElevatedButton(
-                              child: const Text('Sign Up as ANDIE'),
-                              onPressed: () {
-                                widget.toggleView();
-                              },
-                            ),
-                          ),
-                          const Expanded(
                             flex: 5,
-                            child: SizedBox(
-                              width: 30,
-                            ),
-                          ),
-                          Expanded(
-                            flex: 10,
-                            child: ElevatedButton(
-                              child: const Text('Sign Up as CLIENT'),
-                              onPressed: () {
-                                Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
-                                    Animation secondaryAnimation)=>const SignUpClient(), //Change here to open Google Login
-                                    transitionDuration: const Duration(seconds: 0)),
-                                );
-                              },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  width: 1,
+                                ),
+                              ),
+                              child: TextButton(
+                                child: const Text('Sign Up?',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w900,
+                                    //decoration: TextDecoration.underline,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  widget.toggleView();
+                                },
+                              ),
                             ),
                           ),
                     ],
@@ -124,8 +123,8 @@ class _SignInState extends State<SignIn> {
                             child: Container(
                               margin: const EdgeInsets.only(left: 50),
                               child: const Text(
-                                'THERE ARE A\nLOT OF\nPEOPLE THAT\nNEED YOUR\nHELP THAN YOU\nTHINK!',
-                                style: const TextStyle(
+                                "THERE ARE A\nLOT OF\nPEOPLE THAT\nNEED YOUR\nHELP THAN YOU\nTHINK!",
+                                style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 65,
                                   color: Colors.white,
@@ -158,6 +157,8 @@ class _SignInState extends State<SignIn> {
                   Expanded(
                     flex: 1,
                     child: Container(
+                      height: 500,
+                      width: 500,
                       padding: const EdgeInsets.only(
                           top: 50, left: 40, right: 40, bottom: 40),
                       margin: const EdgeInsets.only(
@@ -169,6 +170,7 @@ class _SignInState extends State<SignIn> {
                       //  color: Colors.white,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Expanded(
                             flex: 10,
@@ -184,7 +186,7 @@ class _SignInState extends State<SignIn> {
                             ),
                           ),
                           Expanded(
-                            flex: 50,
+                            flex: 40,
                             child: Container(
                               //color: Colors.red,
                               /*   margin:
@@ -199,6 +201,7 @@ class _SignInState extends State<SignIn> {
                                       flex: 100,
                                       child: TextFormField(
                                           decoration: const InputDecoration(
+                                            border: OutlineInputBorder(),
                                             hintText: 'Email',
                                           ),
                                           validator: (val) => val!.isEmpty
@@ -215,6 +218,7 @@ class _SignInState extends State<SignIn> {
                                       flex: 100,
                                       child: TextFormField(
                                           decoration: const InputDecoration(
+                                            border: OutlineInputBorder(),
                                             hintText: 'Password',
                                           ),
                                           validator: (val) => val!.length < 6
@@ -250,18 +254,20 @@ class _SignInState extends State<SignIn> {
                               //color: Colors.blue,
                               child: Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
-                                    flex: 2,
+                                    flex: 20,
                                     child: Center(
                                       child: ElevatedButton(
                                           style: ElevatedButton.styleFrom(
                                               primary: Colors.indigo),
                                           child: const Text(
-                                            'Log In as ANDIE',
+                                            'Log In As ANDIE',
+                                            textAlign: TextAlign.center,
                                             style:
-                                                TextStyle(color: Colors.white),
+                                                TextStyle(color: Colors.white,),
+
                                           ),
                                           onPressed: () async {
                                             if (_formkey.currentState!
@@ -277,14 +283,16 @@ class _SignInState extends State<SignIn> {
                                           }),
                                     ),
                                   ),
+                                  Expanded(flex:2,child: SizedBox(width: 10,)),
                                   Expanded(
-                                    flex: 2,
+                                    flex: 20,
                                     child: Center(
                                       child: ElevatedButton(
                                           style: ElevatedButton.styleFrom(
                                               primary: Colors.indigo),
                                           child: const Text(
-                                            'Log In as CLIENT',
+                                            'Log In As CLIENT',
+                                            textAlign: TextAlign.center,
                                             style:
                                                 TextStyle(color: Colors.white),
                                           ),

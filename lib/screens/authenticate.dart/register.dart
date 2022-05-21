@@ -3,6 +3,7 @@ import 'package:prjct_andie/services/auth.dart';
 
 import '../../checkbox/checkbox_state.dart';
 import '../../pages/andie_sign_up_page3.dart';
+import '../../pages_client/client_sign_up_page.dart';
 
 
 class Register extends StatefulWidget {
@@ -102,15 +103,46 @@ class _RegisterState extends State<Register> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Container(
-                        // color: Colors.green,
-                        child: const Text(
-                          'Sign Up',
-                          style: TextStyle(
-                            fontSize: 50,
-                            fontWeight: FontWeight.w900,
+                      Row(
+                        children: [
+                          Container(
+                            // color: Colors.green,
+                            child: const Text(
+                              'Sign Up As ANDIE',
+                              style: TextStyle(
+                                fontSize: 50,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
                           ),
-                        ),
+                          Expanded(flex: 50,child: SizedBox(width: 10,)),
+                          Expanded(
+                            flex: 10,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  width: 1,
+                                ),
+                              ),
+                              margin: const EdgeInsets.only(right: 20),
+                              child: TextButton(
+                                child: const Text('Sign Up As CLIENT??',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.black
+                                  ),
+                                ),
+                                onPressed: () {
+                                  Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
+                                      Animation secondaryAnimation)=>const SignUpClient(), //Change here to open Google Login
+                                      transitionDuration: const Duration(seconds: 0)),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       Container(
                        // color: Colors.green,

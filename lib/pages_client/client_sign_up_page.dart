@@ -6,6 +6,12 @@ import '../pages/andie_sign_up_page3.dart';
 import 'client_menu.dart';
 
 
+/*
+void main() {
+  runApp(const MaterialApp(home: SignUpClient()));
+}
+*/
+
 class SignUpClient extends StatefulWidget {
   const SignUpClient({Key? key}) : super(key: key);
 
@@ -53,8 +59,16 @@ class _SignUpClientState extends State<SignUpClient> {
                               height: 60,
                             ),
                           ),
+                        ),ElevatedButton(
+                          onPressed: (){
+                            Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
+                                Animation secondaryAnimation)=>const ClientMenu(),
+                                transitionDuration: const Duration(seconds: 0)),
+                            );
+                          },
+                          child: const Text('DONE SIGN UP'),
                         ),
-                        const Expanded(
+                         const Expanded(
                           flex: 5,
                           child: SizedBox(
                             width: 20,
@@ -65,7 +79,8 @@ class _SignUpClientState extends State<SignUpClient> {
                     ),
                     Expanded(
                       flex: 200,
-                      child: Row(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Expanded(
                               flex: 5,
@@ -76,22 +91,29 @@ class _SignUpClientState extends State<SignUpClient> {
                           const Expanded(
                             flex: 50,
                             child: Text(
-                              'WELCOME\nCLIENT',
+                              'NEED HELP\nHIRE AN\nANDIE!',
                               style: TextStyle(
                                 fontWeight: FontWeight.w500,
-                                fontSize: 50,
+                                fontSize: 80,
+                                color: Colors.white
                               ),
                             ),
                           ),
-                          ElevatedButton(
-                            onPressed: (){
-                              Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
-                                  Animation secondaryAnimation)=>ClientMenu(),
-                                  transitionDuration: Duration(seconds: 0)),
-                              );
-                            },
-                            child: const Text('DONE SIGN UP'),
+                          Expanded(
+                            flex: 50,
+                            child: Container(
+                              margin: const EdgeInsets.only(top: 25),
+                              child: const Text(
+                                'It is easier to connect with them\nwhen you have an account!',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize:  35,
+                                  color: Colors.white
+                                ),
+                              ),
+                            ),
                           ),
+
 
                         ],
                       ),
@@ -155,7 +177,7 @@ class _SignUpClientState extends State<SignUpClient> {
                     Expanded(
                       flex: 10,
                       child: Container(
-                        margin: EdgeInsets.only(top: 5, left: 45),
+                        margin: const EdgeInsets.only(top: 5, left: 45),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -235,7 +257,7 @@ class _SignUpClientState extends State<SignUpClient> {
                     Expanded(
                       flex: 10,
                       child: Container(
-                        margin: EdgeInsets.only(left: 40, right: 40, bottom: 30 ),
+                        margin: const EdgeInsets.only(left: 40, right: 40, bottom: 30 ),
                         child: OutlinedButton(
                           onPressed: (){
                             Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
@@ -244,11 +266,26 @@ class _SignUpClientState extends State<SignUpClient> {
                             );
                           },
 
-                          child: const Text('Sign Up Using Google',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children:  [
+                              Container(
+                                margin: const EdgeInsets.only(right: 20),
+                                child: const Image(
+                                  image: const AssetImage(
+                                    'assets/google.png',
+                                  ),
+                                  width: 20,
+                                  height: 20,
+                                ),
+                              ),
+                              const Text('Sign Up Using Google',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
                           ),
 
                         ),
