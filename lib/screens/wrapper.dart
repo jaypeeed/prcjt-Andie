@@ -4,6 +4,8 @@ import 'package:prjct_andie/screens/authenticate.dart/authentication.dart';
 import 'package:prjct_andie/screens/home/home.dart';
 import 'package:provider/provider.dart';
 
+import '../pages/Extra.dart';
+
 class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -12,7 +14,7 @@ class Wrapper extends StatelessWidget {
     if (user == null) {
       return const Authenticate();
     } else {
-      return Home();
+      return Extra();
     }
   }
 }

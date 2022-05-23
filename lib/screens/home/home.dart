@@ -4,8 +4,10 @@ import 'package:prjct_andie/services/auth.dart';
 import 'package:prjct_andie/services/database.dart';
 import 'package:provider/provider.dart';
 import 'package:prjct_andie/screens/home/profile_list.dart';
+import 'package:prjct_andie/models/profile.dart';
 
 import '../../appbar/andie_appbar.dart';
+import '../../models/profile.dart';
 import '../../pages/andie_my_job.dart';
 import '../../pages/andie_profile_andie.dart';
 
@@ -15,7 +17,8 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<QuerySnapshot?>.value(
+    return StreamProvider<List<Profile?>?>.value(
+      catchError: (_, __) => null,
       value: DatabaseService(uid: '').profile,
       initialData: null,
       child: Scaffold(
@@ -154,11 +157,6 @@ class Home extends StatelessWidget {
             ],
           ),
         ),
-
-
-
-
-
         //ProfileList(),
       ),
     );
