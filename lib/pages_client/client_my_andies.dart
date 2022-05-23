@@ -1,9 +1,12 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'client_profile.dart';
+
+/*void main() {
+  runApp(const MaterialApp(home: ClientMyAndie()));
+}*/
+
+
 
 class ClientMyAndie extends StatefulWidget {
   const ClientMyAndie({Key? key}) : super(key: key);
@@ -334,3 +337,4 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
     );
   }
 }
+

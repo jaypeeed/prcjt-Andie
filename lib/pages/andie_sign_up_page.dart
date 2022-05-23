@@ -256,16 +256,14 @@ class _SignUpState extends State<SignUp> {
                         ),
                       ),
                     ),
-
-
-
-
+                        
                         // BUTTON FOR GOOGLE SIGN IN
 
                   ],
                 ),
               ),
-            )
+            ),
+
 
           ],
         ),
