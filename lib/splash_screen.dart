@@ -26,12 +26,13 @@ class _SplashScreenState extends State<SplashScreen> {
         splash: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-            Image.asset('assets/andie_logo.png',),
-            Image.asset('andie_splash_screen.gif',),
+            Expanded(flex:1,child: Image.asset('assets/andie_logo.png',)),
+            Expanded(flex:5,child: Image.asset('andie_splash_screen.gif',)),
           ],
         ),
         nextScreen:SignUp(),
       splashIconSize: 800,
+     duration: 5000,
     );
   }
 }
