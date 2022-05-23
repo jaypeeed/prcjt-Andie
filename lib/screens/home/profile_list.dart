@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:prjct_andie/screens/home/profile_tile.dart';
 import 'package:provider/provider.dart';
+import 'package:prjct_andie/models/profile.dart';
 
 class ProfileList extends StatefulWidget {
   const ProfileList({Key? key}) : super(key: key);
@@ -13,14 +14,13 @@ class _ProfileListState extends State<ProfileList> {
   @override
   Widget build(BuildContext context) {
     
-    final profile = Provider.of<QuerySnapshot?>(context);
+    final profiles = Provider.of<List<Profile>?>(context);
 
-     if(profile!=null){
-      for(var doc in profile.docs){
-        print(doc.data);
-      }
-    }
-    //print(profile?.docs);
-    return Container();
+return ListView.builder(
+  itemCount: profiles!.length,
+    itemBuilder: (context, index) {
+      return ProfileTile(profile: profiles[index]);
+     },
+    );
   }
 }
