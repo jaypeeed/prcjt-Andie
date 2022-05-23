@@ -5,13 +5,17 @@ import 'package:prjct_andie/models/user.dart';
 import 'package:prjct_andie/screens/home/home.dart';
 import 'package:prjct_andie/screens/wrapper.dart';
 import 'package:prjct_andie/services/auth.dart';
+import 'package:prjct_andie/testing/screens(sign_in)/homescreen.dart';
+import 'package:prjct_andie/testing/screens(sign_in)/mainscreen.dart';
+import 'package:prjct_andie/testing/screens(sign_in)/splashscreen.dart';
+import 'package:prjct_andie/testing/services(sign_in)/auth_services.dart';
 import 'firebase_options.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp( MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -19,7 +23,39 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<MyUser?>.value(
+    return MultiProvider(
+      providers: [
+        Provider<AuthServices>(
+          create: (_) => AuthServices(FirebaseAuth.instance),
+        ),
+        StreamProvider(
+          create: (context) => context.read<AuthServices>().authStateChanges,
+          initialData: null,
+        ),
+      ],
+      child: MaterialApp(
+        title: "APP",
+        home: AuthWrapper(),
+      ),
+    );
+  }
+}
+
+class AuthWrapper extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final user = context.watch<User?>();
+
+    if (user != null) {
+      return SplashScreen();
+    } else {
+      return MainScreen();
+    }
+  }
+}
+
+/*
+return StreamProvider<MyUser?>.value(
       catchError: (_, __) => null,
       value: AuthService().user,
       initialData: null,
@@ -28,9 +64,9 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+*/
 
 
-}
 /*
 return StreamProvider<MyUser?>.value{
 catchError: (_,__) => null,
