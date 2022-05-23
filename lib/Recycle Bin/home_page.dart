@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'andie_sign_up_page.dart';
+import '../pages/andie_sign_up_page.dart';
 
 
 /*

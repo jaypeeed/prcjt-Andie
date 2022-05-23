@@ -39,7 +39,7 @@ class Home extends StatelessWidget {
                   ),
                   onPressed: (){
                     Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
-                        Animation secondaryAnimation)=>const AndieMyJobs(),
+                        Animation secondaryAnimation)=> AndieMyJobs(),
                         transitionDuration: const Duration(seconds: 0)),
                     );
                   },

@@ -111,9 +111,9 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
       body: Container(
         decoration: const BoxDecoration(
             image: DecorationImage(
-          image: AssetImage('assets/background1.png'),
-          fit: BoxFit.cover,
-        )),
+              image: AssetImage('assets/background1.png'),
+              fit: BoxFit.cover,
+            )),
         child: Row(
           children: [
             // Left Side !!!!!!!!!!!!!!!!!!!!!!
@@ -123,7 +123,7 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius:
-                        const BorderRadius.all(const Radius.circular(20)),
+                    const BorderRadius.all(const Radius.circular(20)),
                     border: Border.all(
                       color: Colors.black,
                     )),
@@ -153,7 +153,7 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                             bottom: 30, left: 30, right: 30),
                         decoration: BoxDecoration(
                             borderRadius:
-                                const BorderRadius.all(Radius.circular(0)),
+                            const BorderRadius.all(Radius.circular(0)),
                             border: Border.all(
                               color: Colors.black,
                             )),
@@ -165,7 +165,7 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
             ),
 
             // Right Side !!!!!!!!!!!!!!!!!!!!
-            
+
 
             Expanded(
               flex: 10,
@@ -245,7 +245,7 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                     Expanded(
                       flex: 30,
                       child: Container(
-                         /* color: Colors.redAccent,*/
+                        /* color: Colors.redAccent,*/
                         margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                         child: const Text('Client Contact Information',
                             style: TextStyle(
