@@ -99,6 +99,9 @@ class _MainScreenState extends State<MainScreen> {
                           "uid": user?.uid,
                           "email": email,
                           "password": password,
+                          "name": "name",
+                          "contactNumber": "number nimo",
+                          "photo": "photo",
                           "role": "client",
                         });
                       });
@@ -141,6 +144,14 @@ class _MainScreenState extends State<MainScreen> {
                           "uid": user?.uid,
                           "email": email,
                           "password": password,
+                          "name": "name",
+                          "contactNumber": "number",
+                          "skills": "skills",
+                          "experience": "experiences",
+                          "school": "school",
+                          "yearsOfWork": "years",
+                          "photo": "photo",
+                          "ratings": "rating",
                           "role": "andie",
                         });
                       });
