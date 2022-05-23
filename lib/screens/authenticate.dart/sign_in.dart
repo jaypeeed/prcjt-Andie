@@ -19,6 +19,11 @@ class _SignInState extends State<SignIn> {
   final AuthService _auth = AuthService();
   final _formkey = GlobalKey<FormState>();
 
+  void googleSignIn()async{
+
+
+  }
+
   //text field state
   String email = '';
   String password = '';

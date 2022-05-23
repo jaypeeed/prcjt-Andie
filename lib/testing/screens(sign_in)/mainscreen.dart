@@ -93,13 +93,13 @@ class _MainScreenState extends State<MainScreen> {
                         User? user = FirebaseAuth.instance.currentUser;
 
                         await FirebaseFirestore.instance
-                            .collection("users")
+                            .collection("Client")
                             .doc(user?.uid)
                             .set({
                           "uid": user?.uid,
                           "email": email,
                           "password": password,
-                          "role": "user",
+                          "role": "client",
                         });
                       });
                     }
@@ -135,7 +135,7 @@ class _MainScreenState extends State<MainScreen> {
                         User? user = FirebaseAuth.instance.currentUser;
 
                         await FirebaseFirestore.instance
-                            .collection("users")
+                            .collection("Andie")
                             .doc(user?.uid)
                             .set({
                           "uid": user?.uid,
