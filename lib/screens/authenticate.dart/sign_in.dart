@@ -1,21 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:prjct_andie/screens/authenticate.dart/register.dart';
 import 'package:prjct_andie/services/auth.dart';
+import 'package:prjct_andie/testing/services(sign_in)/auth_services.dart';
+import 'package:provider/provider.dart';
 
 import '../../pages/andie_log_in.dart';
 import '../../pages/andie_sign_up_page.dart';
 import '../../pages_client/client_sign_up_page.dart';
 
 class SignIn extends StatefulWidget {
-  final Function toggleView;
-
-  SignIn({required this.toggleView});
-
   @override
   State<SignIn> createState() => _SignInState();
 }
 
 class _SignInState extends State<SignIn> {
+  TextEditingController emailController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
   final AuthService _auth = AuthService();
   final _formkey = GlobalKey<FormState>();
 
@@ -49,7 +50,6 @@ class _SignInState extends State<SignIn> {
                       image: AssetImage(
                         'assets/andie_logo.png',
                       ),
-
                     ),
                   ),
                 ),
@@ -57,39 +57,48 @@ class _SignInState extends State<SignIn> {
                   flex: 10,
                   child: Center(
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          const Expanded(
-                            flex: 30,
-                            child: SizedBox(
-                              width: 30,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      const Expanded(
+                        flex: 30,
+                        child: SizedBox(
+                          width: 30,
+                        ),
+                      ),
+                      Expanded(
+                        flex: 5,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                              width: 1,
                             ),
                           ),
-                          Expanded(
-                            flex: 5,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                  width: 1,
-                                ),
-                              ),
-                              child: TextButton(
-                                child: const Text('Sign Up?',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w900,
-                                    //decoration: TextDecoration.underline,
-                                  ),
-                                ),
-                                onPressed: () {
-                                  widget.toggleView();
-                                },
+                          child: TextButton(
+                            child: const Text(
+                              'Sign Up?',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w900,
+                                //decoration: TextDecoration.underline,
                               ),
                             ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                    pageBuilder: (BuildContext context,
+                                            Animation animation,
+                                            Animation secondaryAnimation) =>
+                                        Register(),
+                                    transitionDuration: Duration(seconds: 0)),
+                              );
+                            },
                           ),
+                        ),
+                      ),
                     ],
                   )),
                   /* SizedBox(
@@ -200,16 +209,12 @@ class _SignInState extends State<SignIn> {
                                     Expanded(
                                       flex: 100,
                                       child: TextFormField(
-                                          decoration: const InputDecoration(
-                                            border: OutlineInputBorder(),
-                                            hintText: 'Email',
-                                          ),
-                                          validator: (val) => val!.isEmpty
-                                              ? 'Enter your email'
-                                              : null,
-                                          onChanged: (val) {
-                                            setState(() => email = val);
-                                          }),
+                                        controller: emailController,
+                                        decoration: const InputDecoration(
+                                          border: OutlineInputBorder(),
+                                          hintText: 'Email',
+                                        ),
+                                      ),
                                     ),
                                     const Expanded(
                                         flex: 20,
@@ -217,24 +222,17 @@ class _SignInState extends State<SignIn> {
                                     Expanded(
                                       flex: 100,
                                       child: TextFormField(
-                                          decoration: const InputDecoration(
-                                            border: OutlineInputBorder(),
-                                            hintText: 'Password',
-                                          ),
-                                          validator: (val) => val!.length < 6
-                                              ? 'Enter your password with 6 chars long'
-                                              : null,
-                                          obscureText: true,
-                                          onChanged: (val) {
-                                            setState(() => password = val);
-                                          }),
+                                        controller: passwordController,
+                                        decoration: const InputDecoration(
+                                          border: OutlineInputBorder(),
+                                          hintText: 'Password',
+                                        ),
+                                      ),
                                     ),
                                     const Expanded(
-                                        flex: 1,
-                                        child: SizedBox(height: 20.0)),
+                                        flex: 1, child: SizedBox(height: 20.0)),
                                     const Expanded(
-                                        flex: 1,
-                                        child: SizedBox(height: 12.0)),
+                                        flex: 1, child: SizedBox(height: 12.0)),
                                     Expanded(
                                       flex: 20,
                                       child: Text(
@@ -263,48 +261,27 @@ class _SignInState extends State<SignIn> {
                                           style: ElevatedButton.styleFrom(
                                               primary: Colors.indigo),
                                           child: const Text(
-                                            'Log In As ANDIE',
+                                            'Log In',
                                             textAlign: TextAlign.center,
-                                            style:
-                                                TextStyle(color: Colors.white,),
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          onPressed: () {
+                                            final String email =
+                                                emailController.text.trim();
+                                            final String password =
+                                                passwordController.text.trim();
 
-                                          ),
-                                          onPressed: () async {
-                                            if (_formkey.currentState!
-                                                .validate()) {
-                                              dynamic result = await _auth
-                                                  .signInWithEmailAndPassword(
-                                                      email, password);
-                                              if (result == null) {
-                                                setState(() => error =
-                                                    'Could not sign in with those credentials');
-                                              }
-                                            }
-                                          }),
-                                    ),
-                                  ),
-                                  Expanded(flex:2,child: SizedBox(width: 10,)),
-                                  Expanded(
-                                    flex: 20,
-                                    child: Center(
-                                      child: ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                              primary: Colors.indigo),
-                                          child: const Text(
-                                            'Log In As CLIENT',
-                                            textAlign: TextAlign.center,
-                                            style:
-                                                TextStyle(color: Colors.white),
-                                          ),
-                                          onPressed: () async {
-                                            if (_formkey.currentState!
-                                                .validate()) {
-                                              dynamic result = await _auth
-                                                  .signInWithEmailAndPassword(
-                                                      email, password);
-                                              if (result == null) {
-                                                setState(() => error =
-                                                    'Could not sign in with those credentials');
+                                            if (email.isEmpty) {
+                                              print("Email is Empty");
+                                            } else {
+                                              if (password.isEmpty) {
+                                                print("Password is Empty");
+                                              } else {
+                                                context
+                                                    .read<AuthServices>()
+                                                    .login(email, password);
                                               }
                                             }
                                           }),

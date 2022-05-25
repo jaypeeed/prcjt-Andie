@@ -2,6 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:prjct_andie/models/user.dart';
+import 'package:prjct_andie/pages_client/client_sign_up_page.dart';
+import 'package:prjct_andie/screens/authenticate.dart/register.dart';
+import 'package:prjct_andie/screens/authenticate.dart/sign_in.dart';
 import 'package:prjct_andie/screens/home/home.dart';
 import 'package:prjct_andie/screens/wrapper.dart';
 import 'package:prjct_andie/services/auth.dart';
@@ -49,7 +52,7 @@ class AuthWrapper extends StatelessWidget {
     if (user != null) {
       return SplashScreen();
     } else {
-      return MainScreen();
+      return SignIn();
     }
   }
 }

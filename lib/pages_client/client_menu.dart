@@ -14,6 +14,10 @@ class ClientMenu extends StatefulWidget {
 }
 
 class _ClientMenuState extends State<ClientMenu> {
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,9 +74,14 @@ class _ClientMenuState extends State<ClientMenu> {
                     textStyle: const TextStyle(fontSize: 20),
                   ),
                   onPressed: () {
-                    Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
-                        Animation secondaryAnimation)=>ClientProfile(),
-                        transitionDuration: Duration(seconds: 0)),
+                    Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                          pageBuilder: (BuildContext context,
+                                  Animation animation,
+                                  Animation secondaryAnimation) =>
+                              ClientProfile(),
+                          transitionDuration: Duration(seconds: 0)),
                     );
                   },
                   child: const Text(
@@ -91,9 +100,9 @@ class _ClientMenuState extends State<ClientMenu> {
       body: Container(
         decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/background2.png'),
-              fit: BoxFit.cover,
-            )),
+          image: AssetImage('assets/background2.png'),
+          fit: BoxFit.cover,
+        )),
         child: Column(
           children: [
             Container(

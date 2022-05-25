@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:prjct_andie/pages_client/client_menu.dart';
+import 'package:prjct_andie/screens/home/home.dart';
 import 'package:prjct_andie/testing/screens(sign_in)/andiescreen.dart';
 import 'package:prjct_andie/testing/screens(sign_in)/homescreen.dart';
 
@@ -33,9 +35,9 @@ class _SplashScreenState extends State<SplashScreen> {
     });
 
     if (role == 'user') {
-      navigateNext(HomeScreen());
+      navigateNext(ClientMenu());
     } else if (role == 'andie') {
-      navigateNext(AndieScreen());
+      navigateNext(Home());
     }
   }
 

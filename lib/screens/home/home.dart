@@ -11,7 +11,6 @@ import '../../models/profile.dart';
 import '../../pages/andie_my_job.dart';
 import '../../pages/andie_profile_andie.dart';
 
-
 class Home extends StatelessWidget {
   final AuthService _auth = AuthService();
 
@@ -25,7 +24,8 @@ class Home extends StatelessWidget {
         backgroundColor: Colors.orangeAccent[50],
         appBar: AppBar(
           backgroundColor: const Color.fromRGBO(255, 205, 84, 1.0),
-          title: Image.asset('assets/andie_logo.png',
+          title: Image.asset(
+            'assets/andie_logo.png',
             width: 180,
           ),
           elevation: 0.0,
@@ -37,18 +37,23 @@ class Home extends StatelessWidget {
                   style: TextButton.styleFrom(
                     textStyle: const TextStyle(fontSize: 20),
                   ),
-                  onPressed: (){
-                    Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
-                        Animation secondaryAnimation)=> AndieMyJobs(),
-                        transitionDuration: const Duration(seconds: 0)),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                          pageBuilder: (BuildContext context,
+                                  Animation animation,
+                                  Animation secondaryAnimation) =>
+                              AndieMyJobs(),
+                          transitionDuration: const Duration(seconds: 0)),
                     );
                   },
-                  child: const Text('My Jobs',
+                  child: const Text(
+                    'My Jobs',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
-                        fontWeight: FontWeight.bold
-                    ),
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -61,12 +66,12 @@ class Home extends StatelessWidget {
                     textStyle: const TextStyle(fontSize: 20),
                   ),
                   onPressed: () {},
-                  child: const Text('Ratings',
+                  child: const Text(
+                    'Ratings',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
-                        fontWeight: FontWeight.bold
-                    ),
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -78,18 +83,23 @@ class Home extends StatelessWidget {
                   style: TextButton.styleFrom(
                     textStyle: const TextStyle(fontSize: 20),
                   ),
-                  onPressed: (){
-                    Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
-                        Animation secondaryAnimation)=>const AndieProfile(),
-                        transitionDuration: const Duration(seconds: 0)),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                          pageBuilder: (BuildContext context,
+                                  Animation animation,
+                                  Animation secondaryAnimation) =>
+                              const AndieProfile(),
+                          transitionDuration: const Duration(seconds: 0)),
                     );
                   },
-                  child: const Text('Profile',
+                  child: const Text(
+                    'Profile',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
-                        fontWeight: FontWeight.bold
-                    ),
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -107,13 +117,12 @@ class Home extends StatelessWidget {
             )
           ],
         ),
-        body:Container(
+        body: Container(
           decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/background2.png'),
-                fit: BoxFit.cover,
-              )
-          ),
+            image: AssetImage('assets/background2.png'),
+            fit: BoxFit.cover,
+          )),
           child: Column(
             children: [
               Container(
