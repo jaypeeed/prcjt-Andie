@@ -3,10 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:prjct_andie/services/auth.dart';
 import 'client_my_andies.dart';
 import 'package:universal_html/html.dart' as html;
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 /*void main() {
   runApp(const MaterialApp(home: AndieProfile()));
 }*/
+
+final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+String myEmail = '';
+String myGender = '';
+String myAge = '';
 
 class ClientProfile extends StatefulWidget {
 
@@ -16,8 +22,29 @@ class ClientProfile extends StatefulWidget {
 }
 
 class _ClientProfileState extends State<ClientProfile> {
-  final AuthService _auth = AuthService();
+  @override
+  void initState() {
+    super.initState();
+    _getdata();
+  }
 
+  final AuthService _auth = AuthService();
+  void _getdata() async {
+    User? user = _firebaseAuth.currentUser;
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(user?.uid)
+        .snapshots()
+        .listen((userData) {
+
+      setState(() {
+        myEmail = userData.data()!['email'];
+        myGender = userData.data()!['gender'];
+        myAge = userData.data()!['age'];
+
+      });
+    });
+        }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -179,9 +206,9 @@ class _ClientProfileState extends State<ClientProfile> {
                   Container(
                     padding:
                     const EdgeInsets.only(left: 10, top: 20, bottom: 10),
-                    child: const Text(
-                      'Knough Nim',
-                      style: TextStyle(
+                    child: Text(
+                      myEmail,
+                      style: const TextStyle(
                           fontSize: 80,
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
@@ -189,9 +216,9 @@ class _ClientProfileState extends State<ClientProfile> {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  const Text(
-                    'I am beautiful in my own way.And I believe\n everyone is beautiful in their own way too.\n and that’s basically it.',
-                    style: TextStyle(
+                  Text(
+                    myAge,
+                    style: const TextStyle(
                       fontSize: 20,
                       color: Colors.black,
                     ),
@@ -213,9 +240,9 @@ class _ClientProfileState extends State<ClientProfile> {
                     children: [
                       Container(
                         padding: const EdgeInsets.only(top: 5, bottom: 0),
-                        child: const Text(
-                          'Phone Number: ',
-                          style: TextStyle(
+                        child:  Text(
+                          myGender,
+                          style: const TextStyle(
                               fontSize: 20,
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
@@ -225,9 +252,9 @@ class _ClientProfileState extends State<ClientProfile> {
                       ),
                       Container(
                           padding: const EdgeInsets.only(top: 5, bottom: 0,left: 10),
-                          child: const Text(
-                            '0987654321',
-                            style: TextStyle(
+                          child:  Text(
+                            myAge,
+                            style: const TextStyle(
                                 fontSize: 20,
                                 color: Colors.black,
                                 letterSpacing: 2.0),
@@ -319,4 +346,5 @@ class _ClientProfileState extends State<ClientProfile> {
       ),
     );
   }
+
 }
