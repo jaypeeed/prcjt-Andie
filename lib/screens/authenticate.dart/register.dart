@@ -4,10 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:prjct_andie/services/auth.dart';
 import 'package:prjct_andie/testing/services(sign_in)/auth_services.dart';
 import 'package:provider/provider.dart';
-
 import '../../checkbox/checkbox_state.dart';
 import '../../pages/andie_sign_up_page3.dart';
 import '../../pages_client/client_sign_up_page.dart';
+
+/*void main() {
+  runApp( MaterialApp(home: Register()));
+}*/
+
 
 class Register extends StatefulWidget {
   @override
@@ -22,6 +26,7 @@ class _RegisterState extends State<Register> {
   TextEditingController expController = new TextEditingController();
   TextEditingController schoolController = new TextEditingController();
   TextEditingController yearsController = new TextEditingController();
+  TextEditingController ageController = new TextEditingController();
 
   final AuthService _auth = AuthService();
   final _formkey = GlobalKey<FormState>();
@@ -65,7 +70,12 @@ class _RegisterState extends State<Register> {
     //tmpArray.clear();
   }
 
-
+  List<String> items = [
+    'Male',
+    'Female',
+  ];
+  String? selectedItem = 'Male';
+  @override
 
   @override
   Widget build(BuildContext context) {
@@ -142,9 +152,9 @@ class _RegisterState extends State<Register> {
                             ),
                           ),
                         ),
-                        Expanded(
+                        const Expanded(
                             flex: 50,
-                            child: SizedBox(
+                            child: const SizedBox(
                               width: 10,
                             )),
                         Expanded(
@@ -189,6 +199,14 @@ class _RegisterState extends State<Register> {
                             flex: 2,
                             child: Column(
                               children: <Widget>[
+                                TextFormField(
+                                  controller: emailController,
+                                  decoration: const InputDecoration(
+                                      hintText: 'Name',
+                                      focusedBorder: OutlineInputBorder(
+                                          borderSide:
+                                          BorderSide(color: Colors.grey))),
+                                ),
                                 const SizedBox(height: 20.0),
                                 TextFormField(
                                   controller: emailController,
@@ -218,11 +236,80 @@ class _RegisterState extends State<Register> {
                               ],
                             ),
                           ),
-                          const Expanded(
-                              flex: 5,
-                              child: SizedBox(
-                                width: 20,
-                              ))
+                          const SizedBox(
+                            width: 30,
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: Column(
+                              children: [
+                                TextFormField(
+                                  controller: emailController,
+                                  decoration: const InputDecoration(
+                                      hintText: 'Phone no.',
+                                      focusedBorder: OutlineInputBorder(
+                                          borderSide:
+                                          BorderSide(color: Colors.grey))),
+                                ),
+                                const SizedBox(height: 20.0),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      flex: 2,
+                                      child: Container(
+                                        //height: 48,
+                                        child: DropdownButtonFormField<String>(
+                                          dropdownColor: Colors.orange[300],
+                                          value: selectedItem,
+                                          items: items
+                                              .map((item) => DropdownMenuItem(
+                                              value: item,
+                                              child: Text(
+                                                item,
+                                                style: const TextStyle(
+                                                    fontSize: 20,
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.bold),
+                                              )))
+                                              .toList(),
+                                          onChanged: (item) =>
+                                              setState(() =>  selectedItem = item),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                        flex: 3,
+                                        child: Container(
+                                          margin: const EdgeInsets.only(
+                                           left: 40, right: 40),
+                                          child:TextFormField(
+                                            controller: ageController,
+                                            decoration: const InputDecoration(
+                                              border: OutlineInputBorder(),
+                                              hintText: 'Age',
+                                            ),
+                                          ),
+                                        )),
+                                  ],
+                                ),
+                                const SizedBox(height: 20.0),
+                                TextFormField(
+                                  controller: emailController,
+                                  decoration: const InputDecoration(
+                                      hintText: 'Facebook Link',
+                                      focusedBorder: OutlineInputBorder(
+                                          borderSide:
+                                          BorderSide(color: Colors.grey))),
+                                ),
+                                const SizedBox(height: 45.0),
+
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 30,
+                          ),
                         ],
                       ),
                     ),
@@ -332,7 +419,7 @@ class _RegisterState extends State<Register> {
                         // color: Colors.red,
                         child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                primary: Colors.orangeAccent),
+                                primary: const Color.fromRGBO(255, 205, 84, 1.0),),
                             child: const Text(
                               'Register',
                               style: TextStyle(color: Colors.white),

@@ -66,8 +66,8 @@ class _ClientProfileState extends State<ClientProfile> {
                   ),
                   onPressed: () {
                     Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
-                        Animation secondaryAnimation)=>ClientMyAndie(),
-                        transitionDuration: Duration(seconds: 0)),
+                        Animation secondaryAnimation)=>const ClientMyAndie(),
+                        transitionDuration: const Duration(seconds: 0)),
                     );
                   },
                   child: const Text(
@@ -106,7 +106,7 @@ class _ClientProfileState extends State<ClientProfile> {
                   onPressed: () {
                     Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
                         Animation secondaryAnimation)=>ClientProfile(),
-                        transitionDuration: Duration(seconds: 0)),
+                        transitionDuration: const Duration(seconds: 0)),
                     );
                   },
                   child: const Text(
@@ -240,9 +240,8 @@ class _ClientProfileState extends State<ClientProfile> {
                     children: [
                       Container(
                         padding: const EdgeInsets.only(top: 5, bottom: 0),
-                        child:  Text(
-                          myGender,
-                          style: const TextStyle(
+                        child:  const Text('Gender:',
+                          style: TextStyle(
                               fontSize: 20,
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
@@ -251,7 +250,35 @@ class _ClientProfileState extends State<ClientProfile> {
                         ),
                       ),
                       Container(
+                        padding: const EdgeInsets.only(top: 5, bottom: 0,left: 103),
+                        child:  Text(
+                          myGender,
+                          style: const TextStyle(
+                              fontSize: 20,
+                              color: Colors.black,
+                              /*fontWeight: FontWeight.bold,*/
+                              letterSpacing: 2.0),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
                           padding: const EdgeInsets.only(top: 5, bottom: 0,left: 10),
+                          child:  const Text('Age:',
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                letterSpacing: 2.0),
+                            textAlign: TextAlign.center,
+                          )),
+                      Container(
+                          padding: const EdgeInsets.only(top: 5, bottom: 0,left: 120),
+
                           child:  Text(
                             myAge,
                             style: const TextStyle(

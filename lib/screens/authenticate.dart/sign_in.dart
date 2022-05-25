@@ -9,6 +9,7 @@ import '../../pages/andie_log_in.dart';
 import '../../pages/andie_sign_up_page.dart';
 import '../../pages_client/client_sign_up_page.dart';
 
+
 class SignIn extends StatefulWidget {
   @override
   State<SignIn> createState() => _SignInState();
@@ -21,8 +22,6 @@ class _SignInState extends State<SignIn> {
   final _formkey = GlobalKey<FormState>();
 
   void googleSignIn()async{
-
-
   }
 
   //text field state

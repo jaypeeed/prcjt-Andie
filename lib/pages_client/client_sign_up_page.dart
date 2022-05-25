@@ -173,6 +173,20 @@ class _SignUpClientState extends State<SignUpClient> {
                       flex: 10,
                       child: Container(
                         margin:
+                        const EdgeInsets.only(top: 5, left: 40, right: 40),
+                        child: TextFormField(
+                          controller: emailController,
+                          decoration: const InputDecoration(
+                              hintText: 'Name',
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.grey))),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 10,
+                      child: Container(
+                        margin:
                             const EdgeInsets.only(top: 5, left: 40, right: 40),
                         child: TextFormField(
                           controller: emailController,
@@ -249,13 +263,27 @@ class _SignUpClientState extends State<SignUpClient> {
                       flex: 10,
                       child: Container(
                         margin:
-                            const EdgeInsets.only(top: 15, left: 40, right: 40),
-                        child:TextFormField(
-                          controller: numberController,
+                        const EdgeInsets.only(top: 5, left: 40, right: 40),
+                        child: TextFormField(
+                          controller: emailController,
                           decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            hintText: 'Contact Number',
-                          ),
+                              hintText: 'Phone Number',
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.grey))),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 10,
+                      child: Container(
+                        margin:
+                        const EdgeInsets.only(top: 5, left: 40, right: 40),
+                        child: TextFormField(
+                          controller: emailController,
+                          decoration: const InputDecoration(
+                              hintText: 'Facebook Link',
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.grey))),
                         ),
                       ),
                     ),
