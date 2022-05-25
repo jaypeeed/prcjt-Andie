@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:prjct_andie/pages_client/client_menu.dart';
 import 'package:prjct_andie/screens/home/home.dart';
+import 'package:universal_html/html.dart' as html;
 import 'package:prjct_andie/testing/screens(sign_in)/andiescreen.dart';
 import 'package:prjct_andie/testing/screens(sign_in)/homescreen.dart';
 
@@ -57,6 +58,7 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [ElevatedButton(
               onPressed: () {
                 FirebaseAuth.instance.signOut();
+                html.window.location.reload();
               },
               child: Text("LOG OUT")),
             Text("Welcome"),

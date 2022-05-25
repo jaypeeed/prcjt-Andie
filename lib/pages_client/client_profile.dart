@@ -1,20 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:prjct_andie/services/auth.dart';
 import 'client_my_andies.dart';
+import 'package:universal_html/html.dart' as html;
 
 /*void main() {
   runApp(const MaterialApp(home: AndieProfile()));
 }*/
 
 class ClientProfile extends StatefulWidget {
-  const ClientProfile({Key? key}) : super(key: key);
+
 
   @override
   State<ClientProfile> createState() => _ClientProfileState();
 }
 
 class _ClientProfileState extends State<ClientProfile> {
+  final AuthService _auth = AuthService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -290,7 +293,10 @@ class _ClientProfileState extends State<ClientProfile> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            await _auth.signOut();
+                            html.window.location.reload();
+                          },
                           child: const Align(
                             alignment: Alignment.bottomRight,
                             child:  Text(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../services/auth.dart';
 import 'andie_my_job.dart';
+import 'package:universal_html/html.dart' as html;
 
 /*
 void main() {
@@ -107,6 +108,7 @@ class _AndieProfileState extends State<AndieProfile> {
                   child: Text('Log out'),
                   onPressed: () async {
                     await _auth.signOut();
+                    html.window.location.reload();
                   },
                 ),
               ),

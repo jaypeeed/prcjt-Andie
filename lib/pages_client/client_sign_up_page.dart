@@ -23,6 +23,15 @@ class SignUpClient extends StatefulWidget {
 class _SignUpClientState extends State<SignUpClient> {
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
+  TextEditingController ageController = new TextEditingController();
+  TextEditingController numberController = new TextEditingController();
+  TextEditingController genderController = new TextEditingController();
+
+  String email = '';
+  String password = '';
+  String age = '';
+  String number = '';
+  String gender = '';
 
   List<String> items = [
     'Male',
@@ -215,7 +224,7 @@ class _SignUpClientState extends State<SignUpClient> {
                                           )))
                                       .toList(),
                                   onChanged: (item) =>
-                                      setState(() => selectedItem = item),
+                                      setState(() =>  selectedItem = item),
                                 ),
                               ),
                             ),
@@ -224,8 +233,9 @@ class _SignUpClientState extends State<SignUpClient> {
                                 child: Container(
                                   margin: const EdgeInsets.only(
                                       top: 5, left: 40, right: 40),
-                                  child: const TextField(
-                                    decoration: InputDecoration(
+                                  child:TextFormField(
+                                    controller: ageController,
+                                    decoration: const InputDecoration(
                                       border: OutlineInputBorder(),
                                       hintText: 'Age',
                                     ),
@@ -240,8 +250,9 @@ class _SignUpClientState extends State<SignUpClient> {
                       child: Container(
                         margin:
                             const EdgeInsets.only(top: 15, left: 40, right: 40),
-                        child: const TextField(
-                          decoration: InputDecoration(
+                        child:TextFormField(
+                          controller: numberController,
+                          decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             hintText: 'Contact Number',
                           ),
@@ -262,6 +273,9 @@ class _SignUpClientState extends State<SignUpClient> {
                                     emailController.text.trim();
                                 final String password =
                                     passwordController.text.trim();
+
+                                final String age = ageController.text.trim();
+                                final String number = numberController.text.trim();
 
                                 if (email.isEmpty) {
                                   print("Email is Empty");
@@ -286,6 +300,10 @@ class _SignUpClientState extends State<SignUpClient> {
                                         "uid": user?.uid,
                                         "email": email,
                                         "password": password,
+                                        "age": age,
+                                        "contNumber": number,
+                                        "gender": selectedItem,
+                                        "photo": "phto",
                                         "role": "user",
                                       });
                                     });

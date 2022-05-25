@@ -10,6 +10,7 @@ import '../../appbar/andie_appbar.dart';
 import '../../models/profile.dart';
 import '../../pages/andie_my_job.dart';
 import '../../pages/andie_profile_andie.dart';
+import 'package:universal_html/html.dart' as html;
 
 class Home extends StatelessWidget {
   final AuthService _auth = AuthService();
@@ -111,6 +112,7 @@ class Home extends StatelessWidget {
                   child: const Text('Log out'),
                   onPressed: () async {
                     await _auth.signOut();
+                    html.window.location.reload();
                   },
                 ),
               ),

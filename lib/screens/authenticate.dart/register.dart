@@ -14,22 +14,14 @@ class Register extends StatefulWidget {
   State<Register> createState() => _RegisterState();
 }
 
+var tmpArray = [];
+
 class _RegisterState extends State<Register> {
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
-
-  final notifications = [
-    CheckBoxState(title: 'PANDAY'),
-    CheckBoxState(title: 'PLUMBER'),
-    CheckBoxState(title: 'PAINTER'),
-    CheckBoxState(title: 'GARDENER'),
-    CheckBoxState(title: 'COOK'),
-    CheckBoxState(title: 'TECHNICIAN'),
-    CheckBoxState(title: 'ELECTRICIAN'),
-    CheckBoxState(title: 'PLUMBER'),
-    CheckBoxState(title: 'HOUSE KEEPER'),
-    CheckBoxState(title: 'LAUNDERER'),
-  ];
+  TextEditingController expController = new TextEditingController();
+  TextEditingController schoolController = new TextEditingController();
+  TextEditingController yearsController = new TextEditingController();
 
   final AuthService _auth = AuthService();
   final _formkey = GlobalKey<FormState>();
@@ -37,7 +29,43 @@ class _RegisterState extends State<Register> {
   //text field state
   String email = '';
   String password = '';
+  String exp = '';
+  String school = '';
+  String years = '';
   String error = '';
+
+
+
+  Map<String, bool> values = {
+    'PANDAY': false,
+    'PLUMBER': false,
+    'PAINTER': false,
+    'GARDENER': false,
+    'COOK': false,
+    'TECHNICIAN': false,
+    'ELECTRICIAN': false,
+    'HOUSE KEEPER': false,
+    'LAUNDERER': false,
+  };
+
+
+
+  getCheckboxItems() {
+    values.forEach((key, value) {
+      if (value == true) {
+        tmpArray.add(key);
+      }
+    });
+
+    // Printing all selected items on Terminal screen.
+    print(tmpArray);
+    // Here you will get all your selected Checkbox items.
+
+    // Clear array after use.
+    //tmpArray.clear();
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -223,18 +251,22 @@ class _RegisterState extends State<Register> {
                       //   color: Colors.blue,
                       width: 1200,
                       height: 180,
-                      child: GridView(
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          childAspectRatio: 10,
-                          crossAxisSpacing: 50,
-                          mainAxisSpacing: 10,
-                        ),
-                        children: [
-                          ...notifications.map(buildSingleCheckBox).toList(),
-                        ],
+                      child: ListView(
+                        children: values.keys.map((String key) {
+                          return CheckboxListTile(
+                            title: Text(key),
+                            value: values[key],
+                            activeColor: Colors.pink,
+                            checkColor: Colors.white,
+                            onChanged: (bool? value) async {
+                              setState(() {
+                                values[key] = value!;
+                              });
+                            },
+                          );
+                        }).toList(),
                       ),
+
                     ),
                     Container(
                       margin: const EdgeInsets.only(top: 20),
@@ -260,8 +292,9 @@ class _RegisterState extends State<Register> {
                       margin:
                           const EdgeInsets.only(top: 15, left: 20, right: 25),
                       //color: Colors.green,
-                      child: const TextField(
-                        decoration: InputDecoration(
+                      child: TextFormField(
+                        controller: expController,
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           hintText:
                               'Do you have any work experience/s? Explain it to us!',
@@ -272,8 +305,9 @@ class _RegisterState extends State<Register> {
                       margin:
                           const EdgeInsets.only(top: 15, left: 20, right: 25),
                       //color: Colors.green,
-                      child: const TextField(
-                        decoration: InputDecoration(
+                      child: TextFormField(
+                        controller: schoolController,
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           hintText:
                               'Did you go to any Technical Schools (ie. TESDA), Self- Taught, or something else?',
@@ -284,8 +318,9 @@ class _RegisterState extends State<Register> {
                       margin:
                           const EdgeInsets.only(top: 15, left: 20, right: 25),
                       //color: Colors.green,
-                      child: const TextField(
-                        decoration: InputDecoration(
+                      child: TextFormField(
+                        controller: yearsController,
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           hintText: 'How long have you been in this Industry?',
                         ),
@@ -304,8 +339,12 @@ class _RegisterState extends State<Register> {
                             ),
                             onPressed: () {
                               final String email = emailController.text.trim();
-                              final String password =
-                                  passwordController.text.trim();
+                              final String password = passwordController.text.trim();
+                              final String exp = expController.text.trim();
+                              final String school = schoolController.text.trim();
+                              final String years = yearsController.text.trim();
+
+                              getCheckboxItems();
 
                               if (email.isEmpty) {
                                 print("Email is Empty");
@@ -330,6 +369,14 @@ class _RegisterState extends State<Register> {
                                       "uid": user?.uid,
                                       "email": email,
                                       "password": password,
+                                      "name": "nme",
+                                      "contactNumber": "nmbr",
+                                      "skills": tmpArray,
+                                      "experience": exp,
+                                      "school": school,
+                                      "yearsOfWork": years,
+                                      "photo": "phto",
+                                      "ratings": "ratng",
                                       "role": "andie",
                                     });
                                   });
