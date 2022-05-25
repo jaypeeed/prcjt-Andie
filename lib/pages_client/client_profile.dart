@@ -13,6 +13,9 @@ final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 String myEmail = '';
 String myGender = '';
 String myAge = '';
+String myName = '';
+String myFb = '';
+String myNumber = '';
 
 class ClientProfile extends StatefulWidget {
 
@@ -41,6 +44,9 @@ class _ClientProfileState extends State<ClientProfile> {
         myEmail = userData.data()!['email'];
         myGender = userData.data()!['gender'];
         myAge = userData.data()!['age'];
+        myNumber = userData.data()!['contNumber'];
+        myName = userData.data()!['name'];
+        myFb = userData.data()!['fb'];
 
       });
     });
@@ -207,7 +213,7 @@ class _ClientProfileState extends State<ClientProfile> {
                     padding:
                     const EdgeInsets.only(left: 10, top: 20, bottom: 10),
                     child: Text(
-                      myEmail,
+                      myName,
                       style: const TextStyle(
                           fontSize: 80,
                           color: Colors.black,
@@ -216,9 +222,9 @@ class _ClientProfileState extends State<ClientProfile> {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  Text(
-                    myAge,
-                    style: const TextStyle(
+                  const Text(
+                    "hello ",
+                    style: TextStyle(
                       fontSize: 20,
                       color: Colors.black,
                     ),
@@ -305,9 +311,9 @@ class _ClientProfileState extends State<ClientProfile> {
                       ),
                       Container(
                         padding: const EdgeInsets.only(top: 5, bottom: 0,left: 108),
-                        child: const Text(
-                          'handymany@gmail.com',
-                          style: TextStyle(
+                        child: Text(
+                          myEmail,
+                          style: const TextStyle(
                               fontSize: 20,
                               color: Colors.black,
                               letterSpacing: 2.0),
@@ -332,9 +338,9 @@ class _ClientProfileState extends State<ClientProfile> {
                       ),
                       Container(
                         padding: const EdgeInsets.only(top: 5, bottom: 20,left: 68),
-                        child: const Text(
-                          'Handy Many',
-                          style: TextStyle(
+                        child: Text(
+                          myFb,
+                          style: const TextStyle(
                               fontSize: 20,
                               color: Colors.black,
                               letterSpacing: 2.0),

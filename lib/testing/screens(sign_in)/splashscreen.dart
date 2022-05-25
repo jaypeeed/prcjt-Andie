@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -51,18 +52,15 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [ElevatedButton(
-              onPressed: () {
-                FirebaseAuth.instance.signOut();
-                html.window.location.reload();
-              },
-              child: Text("LOG OUT")),
-            Text("Welcome"),
 
+    return Scaffold(
+      backgroundColor: Color.fromRGBO(255, 205, 84, 1.0),
+      body: Center(
+        child:  Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Expanded(flex:1,child: Image.asset('assets/andie_logo.png',)),
+            Expanded(flex:5,child: Image.asset('andie_splash_screen.gif',)),
           ],
         ),
       ),

@@ -26,12 +26,16 @@ class _SignUpClientState extends State<SignUpClient> {
   TextEditingController ageController = new TextEditingController();
   TextEditingController numberController = new TextEditingController();
   TextEditingController genderController = new TextEditingController();
+  TextEditingController nameController = new TextEditingController();
+  TextEditingController fbController = new TextEditingController();
 
   String email = '';
   String password = '';
   String age = '';
   String number = '';
   String gender = '';
+  String name = '';
+  String fb = '';
 
   List<String> items = [
     'Male',
@@ -175,7 +179,7 @@ class _SignUpClientState extends State<SignUpClient> {
                         margin:
                         const EdgeInsets.only(top: 5, left: 40, right: 40),
                         child: TextFormField(
-                          controller: emailController,
+                          controller: nameController,
                           decoration: const InputDecoration(
                               hintText: 'Name',
                               focusedBorder: OutlineInputBorder(
@@ -265,7 +269,7 @@ class _SignUpClientState extends State<SignUpClient> {
                         margin:
                         const EdgeInsets.only(top: 5, left: 40, right: 40),
                         child: TextFormField(
-                          controller: emailController,
+                          controller: numberController,
                           decoration: const InputDecoration(
                               hintText: 'Phone Number',
                               focusedBorder: OutlineInputBorder(
@@ -279,7 +283,7 @@ class _SignUpClientState extends State<SignUpClient> {
                         margin:
                         const EdgeInsets.only(top: 5, left: 40, right: 40),
                         child: TextFormField(
-                          controller: emailController,
+                          controller: fbController,
                           decoration: const InputDecoration(
                               hintText: 'Facebook Link',
                               focusedBorder: OutlineInputBorder(
@@ -304,6 +308,8 @@ class _SignUpClientState extends State<SignUpClient> {
 
                                 final String age = ageController.text.trim();
                                 final String number = numberController.text.trim();
+                                final String name = nameController.text.trim();
+                                final String fb = fbController.text.trim();
 
                                 if (email.isEmpty) {
                                   print("Email is Empty");
@@ -330,7 +336,12 @@ class _SignUpClientState extends State<SignUpClient> {
                                         "password": password,
                                         "age": age,
                                         "contNumber": number,
+                                        "name": name,
+                                        "fb": fb,
                                         "gender": selectedItem,
+                                        "pendingAndie": "pendingAndie",
+                                        "finalAndie": "finalAndie",
+                                        "historyAndie": "historyAndie",
                                         "photo": "phto",
                                         "role": "user",
                                       });

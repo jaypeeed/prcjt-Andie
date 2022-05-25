@@ -27,6 +27,9 @@ class _RegisterState extends State<Register> {
   TextEditingController schoolController = new TextEditingController();
   TextEditingController yearsController = new TextEditingController();
   TextEditingController ageController = new TextEditingController();
+  TextEditingController nameController = new TextEditingController();
+  TextEditingController fbController = new TextEditingController();
+  TextEditingController numberController = new TextEditingController();
 
   final AuthService _auth = AuthService();
   final _formkey = GlobalKey<FormState>();
@@ -37,6 +40,10 @@ class _RegisterState extends State<Register> {
   String exp = '';
   String school = '';
   String years = '';
+  String name = '';
+  String age = '';
+  String fb = '';
+  String number = '';
   String error = '';
 
 
@@ -75,7 +82,6 @@ class _RegisterState extends State<Register> {
     'Female',
   ];
   String? selectedItem = 'Male';
-  @override
 
   @override
   Widget build(BuildContext context) {
@@ -200,7 +206,7 @@ class _RegisterState extends State<Register> {
                             child: Column(
                               children: <Widget>[
                                 TextFormField(
-                                  controller: emailController,
+                                  controller: nameController,
                                   decoration: const InputDecoration(
                                       hintText: 'Name',
                                       focusedBorder: OutlineInputBorder(
@@ -244,7 +250,7 @@ class _RegisterState extends State<Register> {
                             child: Column(
                               children: [
                                 TextFormField(
-                                  controller: emailController,
+                                  controller: numberController,
                                   decoration: const InputDecoration(
                                       hintText: 'Phone no.',
                                       focusedBorder: OutlineInputBorder(
@@ -295,7 +301,7 @@ class _RegisterState extends State<Register> {
                                 ),
                                 const SizedBox(height: 20.0),
                                 TextFormField(
-                                  controller: emailController,
+                                  controller: fbController,
                                   decoration: const InputDecoration(
                                       hintText: 'Facebook Link',
                                       focusedBorder: OutlineInputBorder(
@@ -430,6 +436,10 @@ class _RegisterState extends State<Register> {
                               final String exp = expController.text.trim();
                               final String school = schoolController.text.trim();
                               final String years = yearsController.text.trim();
+                              final String name = nameController.text.trim();
+                              final String age = ageController.text.trim();
+                              final String fb = fbController.text.trim();
+                              final String number = numberController.text.trim();
 
                               getCheckboxItems();
 
@@ -456,14 +466,20 @@ class _RegisterState extends State<Register> {
                                       "uid": user?.uid,
                                       "email": email,
                                       "password": password,
-                                      "name": "nme",
-                                      "contactNumber": "nmbr",
+                                      "name": name,
+                                      "contactNumber": number,
                                       "skills": tmpArray,
                                       "experience": exp,
                                       "school": school,
                                       "yearsOfWork": years,
+                                      "age": age,
+                                      "facebook": fb,
+                                      "gender": selectedItem,
                                       "photo": "phto",
                                       "ratings": "ratng",
+                                      "pendingClients": "pendingClients",
+                                      "finalClients": "finalClients",
+                                      "historyClients": "historyClients",
                                       "role": "andie",
                                     });
                                   });

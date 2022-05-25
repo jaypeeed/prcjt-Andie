@@ -5,11 +5,25 @@ import '../services/auth.dart';
 import 'andie_my_job.dart';
 import 'package:universal_html/html.dart' as html;
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 /*
 void main() {
   runApp(const MaterialApp(home: AndieProfile()));
 }
 */
+
+final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+String myName = '';
+String myExp = '';
+String myEdu = '';
+String myYears = '';
+String myGender = '';
+String myAge = '';
+String myEmail = '';
+String myFb = '';
+String myNumber = '';
 
 class AndieProfile extends StatefulWidget {
   const AndieProfile({Key? key}) : super(key: key);
@@ -19,7 +33,37 @@ class AndieProfile extends StatefulWidget {
 }
 
 class _AndieProfileState extends State<AndieProfile> {
+  @override
+  void initState() {
+    super.initState();
+    _getdata();
+  }
+
   final AuthService _auth = AuthService();
+
+  void _getdata() async {
+    User? user = _firebaseAuth.currentUser;
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(user?.uid)
+        .snapshots()
+        .listen((userData) {
+
+      setState(() {
+
+        myName = userData.data()!['name'];
+        myExp = userData.data()!['experience'];
+        myEdu = userData.data()!['school'];
+        myYears = userData.data()!['yearsOfWork'];
+        myGender = userData.data()!['gender'];
+        myAge = userData.data()!['age'];
+        myEmail = userData.data()!['email'];
+        myFb = userData.data()!['facebook'];
+        myNumber = userData.data()!['contactNumber'];
+
+      });
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -209,9 +253,9 @@ class _AndieProfileState extends State<AndieProfile> {
                   Container(
                     padding:
                         const EdgeInsets.only(left: 10, top: 20, bottom: 10),
-                    child: const Text(
-                      'Handy Many',
-                      style: TextStyle(
+                    child: Text(
+                      myName,
+                      style: const TextStyle(
                           fontSize: 80,
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
@@ -219,9 +263,9 @@ class _AndieProfileState extends State<AndieProfile> {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  const Text(
-                    'I  have three years of experience in being a\n plumber. Finished a technical course in TESDA\n and that’s basically it.',
-                    style: TextStyle(
+                   Text(
+                    ' $myExp. $myEdu. $myYears',
+                    style: const TextStyle(
                       fontSize: 20,
                       color: Colors.black,
                     ),
@@ -249,9 +293,9 @@ class _AndieProfileState extends State<AndieProfile> {
                           children: [
                             Container(
                               padding: const EdgeInsets.only(top: 5, bottom: 0),
-                              child: const Text(
-                                'Phone Number: ',
-                                style: TextStyle(
+                              child: Text(
+                                'Phone Number: $myNumber',
+                                style: const TextStyle(
                                     fontSize: 20,
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
@@ -261,9 +305,9 @@ class _AndieProfileState extends State<AndieProfile> {
                             ),
                             Container(
                               padding: const EdgeInsets.only(top: 5, bottom: 0),
-                              child: const Text(
-                                'Gmail: ',
-                                style: TextStyle(
+                              child: Text(
+                                'Gmail: $myEmail',
+                                style: const TextStyle(
                                     fontSize: 20,
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
@@ -273,9 +317,9 @@ class _AndieProfileState extends State<AndieProfile> {
                             ),
                             Container(
                               padding: const EdgeInsets.only(top: 5, bottom: 20),
-                              child: const Text(
-                                'Facebook: ',
-                                style: TextStyle(
+                              child: Text(
+                                'Facebook: $myFb',
+                                style: const TextStyle(
                                     fontSize: 20,
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
@@ -292,7 +336,8 @@ class _AndieProfileState extends State<AndieProfile> {
                           Container(
                               padding: const EdgeInsets.only(top: 5, bottom: 0),
                               child: const Text(
-                                '0987654321',
+                                //number
+                                '',
                                 style: TextStyle(
                                     fontSize: 20,
                                     color: Colors.black,
@@ -302,7 +347,8 @@ class _AndieProfileState extends State<AndieProfile> {
                           Container(
                             padding: const EdgeInsets.only(top: 5, bottom: 0),
                             child: const Text(
-                              'handymany@gmail.com',
+                              //email
+                              '',
                               style: TextStyle(
                                   fontSize: 20,
                                   color: Colors.black,
@@ -313,7 +359,8 @@ class _AndieProfileState extends State<AndieProfile> {
                           Container(
                             padding: const EdgeInsets.only(top: 5, bottom: 20),
                             child: const Text(
-                              'Handy Many',
+                              //name
+                              '',
                               style: TextStyle(
                                   fontSize: 20,
                                   color: Colors.black,
