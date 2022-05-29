@@ -357,7 +357,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
         height: 538,
         child: AlertDialog(
           title: const Text(
-            'Review: Finn Human',
+            'Review:Finn Is not a dog',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
           ),
           content: SizedBox(
