@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:prjct_andie/pages/andie_profile_andie.dart';
 import 'package:prjct_andie/services/auth.dart';
 import 'client_my_andies.dart';
 import 'package:universal_html/html.dart' as html;
@@ -115,8 +116,8 @@ class _ClientProfileState extends State<ClientProfile> {
                         transitionDuration: const Duration(seconds: 0)),
                     );
                   },
-                  child: const Text(
-                    'Profile',
+                  child: Text(
+                    friendsList.indexOf(0).toString(),
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -147,6 +148,7 @@ class _ClientProfileState extends State<ClientProfile> {
               ),
             ),
           ),
+
           Expanded(
             flex: 60,
             child: Container(

@@ -113,7 +113,6 @@ class Home extends StatelessWidget {
                   child: const Text('Log out'),
                   onPressed: () async {
                     await _auth.signOut();
-                    html.window.location.reload();
                   },
                 ),
               ),
