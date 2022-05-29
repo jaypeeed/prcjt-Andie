@@ -1,12 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_stars/flutter_rating_stars.dart';
+
 import 'client_profile.dart';
 
-/*void main() {
-  runApp(const MaterialApp(home: ClientMyAndie()));
-}*/
-
-
+void main() => runApp(const MaterialApp(home: ClientMyAndie()));
 
 class ClientMyAndie extends StatefulWidget {
   const ClientMyAndie({Key? key}) : super(key: key);
@@ -16,6 +14,7 @@ class ClientMyAndie extends StatefulWidget {
 }
 
 class _ClientMyAndieState extends State<ClientMyAndie> {
+  double value = 3.5;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,8 +22,9 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(65),
         child: AppBar(
-          backgroundColor: Color.fromRGBO(255, 205, 84, 1.0),
-          title: Image.asset('assets/andie_logo.png',
+          backgroundColor: const Color.fromRGBO(255, 205, 84, 1.0),
+          title: Image.asset(
+            'assets/andie_logo.png',
             width: 180,
           ),
           elevation: 0.0,
@@ -36,18 +36,23 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                   style: TextButton.styleFrom(
                     textStyle: const TextStyle(fontSize: 20),
                   ),
-                  onPressed: (){
-                    Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
-                        Animation secondaryAnimation)=>ClientMyAndie(),
-                        transitionDuration: Duration(seconds: 0)),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                          pageBuilder: (BuildContext context,
+                              Animation animation,
+                              Animation secondaryAnimation) =>
+                          const ClientMyAndie(),
+                          transitionDuration: const Duration(seconds: 0)),
                     );
                   },
-                  child: const Text('My Andie',
+                  child: const Text(
+                    'My Andie',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
-                        fontWeight: FontWeight.bold
-                    ),
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -60,12 +65,12 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                     textStyle: const TextStyle(fontSize: 20),
                   ),
                   onPressed: () {},
-                  child: const Text('Ratings',
+                  child: const Text(
+                    'Ratings',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
-                        fontWeight: FontWeight.bold
-                    ),
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -77,18 +82,23 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                   style: TextButton.styleFrom(
                     textStyle: const TextStyle(fontSize: 20),
                   ),
-                  onPressed: (){
-                    Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
-                        Animation secondaryAnimation)=>ClientProfile(),
-                        transitionDuration: Duration(seconds: 0)),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                          pageBuilder: (BuildContext context,
+                              Animation animation,
+                              Animation secondaryAnimation) =>
+                              ClientProfile(),
+                          transitionDuration: const Duration(seconds: 0)),
                     );
                   },
-                  child: const Text('Profile',
+                  child: const Text(
+                    'Profile',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
-                        fontWeight: FontWeight.bold
-                    ),
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -121,8 +131,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
               child: Container(
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius:
-                    const BorderRadius.all(const Radius.circular(20)),
+                    borderRadius: const BorderRadius.all(Radius.circular(20)),
                     border: Border.all(
                       color: Colors.black,
                     )),
@@ -165,7 +174,6 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
 
             // Right Side !!!!!!!!!!!!!!!!!!!!
 
-
             Expanded(
               flex: 10,
               child: Container(
@@ -176,7 +184,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
-                      flex:110,
+                      flex: 110,
                       child: Container(
                         margin: const EdgeInsets.all(10),
                         child: const Text(
@@ -189,10 +197,9 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                       ),
                     ),
                     Expanded(
-                      flex:50,
+                      flex: 50,
                       child: Container(
-
-                        margin: const EdgeInsets.fromLTRB(10,0, 10,0),
+                        margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                         child: const Text('My Note',
                             style: TextStyle(
                                 fontSize: 17.5, fontWeight: FontWeight.bold)),
@@ -215,21 +222,22 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                         /*color: Colors.yellowAccent,*/
                         margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                         child: Row(
-
                           children: [
                             Expanded(
-                              flex:90,
+                              flex: 90,
                               child: Container(
                                 margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                                 child: const Text('Date To Start:',
                                     style: TextStyle(
-                                        fontSize: 17.5, fontWeight: FontWeight.bold)),
+                                        fontSize: 17.5,
+                                        fontWeight: FontWeight.bold)),
                               ),
                             ),
                             Expanded(
                               flex: 215,
                               child: Container(
-                                margin: const EdgeInsets.fromLTRB(0, 5, 195, 10),
+                                margin:
+                                const EdgeInsets.fromLTRB(0, 5, 195, 10),
                                 color: Colors.redAccent,
                                 child: const SizedBox(
                                   width: 150,
@@ -295,17 +303,18 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                         margin: const EdgeInsets.fromLTRB(20, 20, 10, 10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
                           children: [
                             Expanded(
                               flex: 100,
                               child: Container(
-                                margin: const EdgeInsets.only(left: 10, right: 10),
+                                margin:
+                                const EdgeInsets.only(left: 10, right: 10),
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    primary: const Color.fromRGBO(111, 215, 85, 1.0),
+                                    primary:
+                                    const Color.fromRGBO(111, 215, 85, 1.0),
                                   ),
-                                  onPressed: (){},
+                                  onPressed: () {},
                                   child: const Text('DONE'),
                                 ),
                               ),
@@ -313,12 +322,16 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                             Expanded(
                               flex: 100,
                               child: Container(
-                                margin: const EdgeInsets.only(left: 10, right: 10),
+                                margin:
+                                const EdgeInsets.only(left: 10, right: 10),
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    primary: const Color.fromRGBO(255, 205, 84, 1.0),
+                                    primary:
+                                    const Color.fromRGBO(255, 205, 84, 1.0),
                                   ),
-                                  onPressed: (){},
+                                  onPressed: () {
+                                    openDialog();
+                                  },
                                   child: const Text('RATE'),
                                 ),
                               ),
@@ -336,5 +349,100 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
       ),
     );
   }
-}
 
+  Future openDialog() => showDialog(
+      context: context,
+      builder: (context) => SizedBox(
+        width: 835,
+        height: 538,
+        child: AlertDialog(
+          title: const Text(
+            'Review: Finn Human',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
+          ),
+          content: SizedBox(
+            width: 600,
+            height: 300,
+            /*padding: const EdgeInsets.only(left: 30),*/
+            child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  const Text("Job/s: "),
+                  Container(
+                      padding: const EdgeInsets.all(5),
+                      child: const Text("Date: ")),
+                  Center(
+                    child: RatingStars(
+                      value: value,
+                      onValueChanged: (v) {
+                        //
+                        setState(() {
+                          value = v;
+                        });
+                      },
+                      starBuilder: (index, color) => Icon(
+                        Icons.star,
+                        color: color,
+                      ),
+                      starCount: 5,
+                      starSize: 30,
+                      valueLabelColor: const Color(0xff9b9b9b),
+                      valueLabelTextStyle: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w400,
+                          fontStyle: FontStyle.normal,
+                          fontSize: 12.0),
+                      valueLabelRadius: 10,
+                      maxValue: 5,
+                      starSpacing: 2,
+                      maxValueVisibility: true,
+                      valueLabelVisibility: true,
+                      animationDuration: const Duration(milliseconds: 100),
+                      valueLabelPadding: const EdgeInsets.symmetric(
+                          vertical: 1, horizontal: 8),
+                      valueLabelMargin: const EdgeInsets.only(right: 8),
+                      starOffColor: const Color(0xffe7e8ea),
+                      starColor: Colors.amber,
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(top: 20),
+                    width: 600,
+                    child: const TextField(
+                        style: TextStyle(
+                          /*height: 3,*/
+                        ),
+                        minLines: 2,
+                        maxLines: 5,
+                        keyboardType: TextInputType.multiline,
+                        // maxLines: null,
+                        decoration: InputDecoration(
+                            labelText:
+                            "What do you feel about his/her service? Share your thoughts!   ",
+                            border: OutlineInputBorder())),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(right: 65, top: 20),
+                        child: ElevatedButton(
+                          child: const Text('DONE'),
+                          onPressed: () async {},
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(right: 65, top: 20),
+                        child: ElevatedButton(
+                          child: const Text('CANCEL'),
+                          onPressed: () async {},
+                        ),
+                      ),
+                    ],
+                  ),
+                ]),
+          ),
+        ),
+      ));
+}
