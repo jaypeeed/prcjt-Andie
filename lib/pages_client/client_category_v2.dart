@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:prjct_andie/checkbox/checkbox_state.dart';
@@ -6,6 +8,9 @@ import 'client_my_andies.dart';
 import 'client_profile.dart';
 
 
+final db = FirebaseFirestore.instance;
+var tmpArray = ['ELECTRICIAN', 'HOUSE KEEPER'];
+final str = tmpArray.join(' ');
 void main() {
   runApp(const MaterialApp(home: ClientCategory()));
 }
@@ -14,8 +19,11 @@ void main() {
 class ClientCategory extends StatefulWidget {
   const ClientCategory({Key? key}) : super(key: key);
 
+
+
   @override
   State<ClientCategory> createState() => _ClientCategoryState();
+
 }
 
 class _ClientCategoryState extends State<ClientCategory> {
@@ -32,6 +40,8 @@ class _ClientCategoryState extends State<ClientCategory> {
     CheckBoxState(title: 'HOUSE KEEPER'),
     CheckBoxState(title: 'LAUNDERER'),
   ];
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -155,6 +165,7 @@ class _ClientCategoryState extends State<ClientCategory> {
                         child: ElevatedButton(
                           child: const Text('DONE'),
                           onPressed: () async {
+                            print(tmpArray.toString());
                             setState(() {
                               isVisible = !isVisible;
                             });
@@ -184,28 +195,29 @@ class _ClientCategoryState extends State<ClientCategory> {
                       height: 50,
                     ),
                     Container(
-                      color: Colors.green,
-                      height: 400,
                       width: 1500,
-                      child: ListView(
-                        padding: const EdgeInsets.all(8),
-                        children: <Widget>[
-                          Container(
-                            height: 50,
-                            color: Colors.amber[600],
-                            child: const Center(child: Text('Entry A')),
-                          ),
-                          Container(
-                            height: 50,
-                            color: Colors.amber[500],
-                            child: const Center(child: Text('Entry B')),
-                          ),
-                          Container(
-                            height: 50,
-                            color: Colors.amber[100],
-                            child: const Center(child: Text('Entry C')),
-                          ),
-                        ],
+                      height: 400,
+                      child: StreamBuilder<QuerySnapshot>(
+                        stream: db.collection('users').where('role', isEqualTo: 'andie').where('skills', arrayContainsAny: tmpArray).snapshots(),
+                        builder: (context, snapshot) {
+                          if (!snapshot.hasData) {
+                            Text ('HELLO');
+                            return const Center(
+
+                              child: CircularProgressIndicator(),
+                            );
+                          } else {
+                            return ListView (
+                              children: snapshot.data!.docs.map((doc) {
+                                return Card(
+                                  child: ListTile(
+                                    title: Text((doc.data() as Map<String, dynamic>)['name'] ),
+                                  ),
+                                );
+                              }).toList(),
+                            );
+                          }
+                        },
                       ),
                     ),
                     Center(
@@ -232,6 +244,9 @@ class _ClientCategoryState extends State<ClientCategory> {
 
     );
   }
+
+
+
 
   Widget buildSingleCheckBox(CheckBoxState checkbox) =>
       CheckboxListTile(
