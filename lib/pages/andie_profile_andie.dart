@@ -15,7 +15,7 @@ void main() {
 */
 
 final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-List<dynamic> friendsList=[];
+List<dynamic> skillsList=[];
 
 String myName = '';
 String myExp = '';
@@ -39,7 +39,7 @@ class _AndieProfileState extends State<AndieProfile> {
   void initState() {
     super.initState();
     _getdata();
-    getFriendsList();
+    getSkillsList();
 
   }
 
@@ -205,8 +205,8 @@ class _AndieProfileState extends State<AndieProfile> {
                     Container(
                       padding: const EdgeInsets.only(top: 10,bottom: 10),
                       child:  Text(
-                        friendsList.toString(),
-                        style: TextStyle(
+                        skillsList.toString(),
+                        style: const TextStyle(
                             fontSize: 30,
                             color: Colors.black,
                             fontWeight: FontWeight.w900,
@@ -221,7 +221,7 @@ class _AndieProfileState extends State<AndieProfile> {
                     padding:
                         const EdgeInsets.only(left: 10, top: 20, bottom: 10),
                     child: Text(
-                      myName,
+                      '$myName',
                       style: const TextStyle(
                           fontSize: 80,
                           color: Colors.black,
@@ -349,15 +349,26 @@ class _AndieProfileState extends State<AndieProfile> {
       ),
     );
   }
-  void getFriendsList() async{
+  void getSkillsList() async{
     User? user = _firebaseAuth.currentUser;
     FirebaseFirestore.instance
         .collection("users")
         .doc(user?.uid)
         .get()
         .then((value) {
-      friendsList = value.data()!["skills"];
-      print(friendsList);
+      skillsList = value.data()!["skills"];
+      print(skillsList);
+
+      final bool skillsList1 = skillsList.every((skillsList) => true);
+
+      print(skillsList1);
+
+      skillsList.forEach(print);
+
+      final str = skillsList.join(' ');
+
+      print(str);
+
     });
 
     final value = await FirebaseFirestore.instance
@@ -365,7 +376,8 @@ class _AndieProfileState extends State<AndieProfile> {
         .doc(user?.uid)
         .get();
 
-    friendsList = value.data()!["skills"];
+
+    skillsList = value.data()!["skills"];
   }
 
 
