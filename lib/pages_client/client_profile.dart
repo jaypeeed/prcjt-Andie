@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:prjct_andie/pages/andie_profile_andie.dart';
 import 'package:prjct_andie/services/auth.dart';
+import 'client_category_v2.dart';
 import 'client_my_andies.dart';
 import 'package:universal_html/html.dart' as html;
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -61,8 +62,7 @@ class _ClientProfileState extends State<ClientProfile> {
             backgroundColor: const Color.fromRGBO(255, 205, 84, 1.0),
             title: Image.asset(
               'assets/andie_logo.png',
-              height: 80,
-              width: 110,
+              width: 180,
             ),
             actions: [
               Container(
@@ -93,7 +93,10 @@ class _ClientProfileState extends State<ClientProfile> {
                     textStyle: const TextStyle(fontSize: 20),
                   ),
                   onPressed: () {
-
+                    Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
+                        Animation secondaryAnimation)=>ClientCategory(),
+                    transitionDuration: const Duration(seconds: 0)),
+                    );
                   },
                   child: const Text(
                     'Category',

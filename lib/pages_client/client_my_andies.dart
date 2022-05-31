@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 
+import 'client_category_v2.dart';
 import 'client_profile.dart';
 
 void main() => runApp(const MaterialApp(home: ClientMyAndie()));
@@ -22,29 +23,22 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(65),
         child: AppBar(
-          backgroundColor: const Color.fromRGBO(255, 205, 84, 1.0),
-          title: Image.asset(
-            'assets/andie_logo.png',
-            width: 180,
-          ),
-          elevation: 0.0,
-          actions: <Widget>[
-            Center(
-              child: Container(
+            backgroundColor: const Color.fromRGBO(255, 205, 84, 1.0),
+            title: Image.asset(
+              'assets/andie_logo.png',
+              width: 180,
+            ),
+            actions: [
+              Container(
                 margin: const EdgeInsets.only(right: 65),
                 child: TextButton(
                   style: TextButton.styleFrom(
                     textStyle: const TextStyle(fontSize: 20),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      PageRouteBuilder(
-                          pageBuilder: (BuildContext context,
-                              Animation animation,
-                              Animation secondaryAnimation) =>
-                          const ClientMyAndie(),
-                          transitionDuration: const Duration(seconds: 0)),
+                    Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
+                        Animation secondaryAnimation)=>const ClientMyAndie(),
+                        transitionDuration: const Duration(seconds: 0)),
                     );
                   },
                   child: const Text(
@@ -56,15 +50,18 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                   ),
                 ),
               ),
-            ),
-            Center(
-              child: Container(
+              Container(
                 margin: const EdgeInsets.only(right: 65),
                 child: TextButton(
                   style: TextButton.styleFrom(
                     textStyle: const TextStyle(fontSize: 20),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
+                        Animation secondaryAnimation)=>ClientCategory(),
+                        transitionDuration: const Duration(seconds: 0)),
+                    );
+                  },
                   child: const Text(
                     'Category',
                     style: TextStyle(
@@ -74,23 +71,16 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                   ),
                 ),
               ),
-            ),
-            Center(
-              child: Container(
+              Container(
                 margin: const EdgeInsets.only(right: 65),
                 child: TextButton(
                   style: TextButton.styleFrom(
                     textStyle: const TextStyle(fontSize: 20),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      PageRouteBuilder(
-                          pageBuilder: (BuildContext context,
-                              Animation animation,
-                              Animation secondaryAnimation) =>
-                              ClientProfile(),
-                          transitionDuration: const Duration(seconds: 0)),
+                    Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
+                        Animation secondaryAnimation)=>ClientProfile(),
+                        transitionDuration: const Duration(seconds: 0)),
                     );
                   },
                   child: const Text(
@@ -102,20 +92,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                   ),
                 ),
               ),
-            ),
-            /*Center(
-              child: Container(
-                margin: const EdgeInsets.only(right: 65),
-                child: ElevatedButton(
-                  child: Text('Log out'),
-                  onPressed: () async {
-                    await _auth.signOut();
-                  },
-                ),
-              ),
-            )*/
-          ],
-        ),
+            ]),
       ),
       body: Container(
         decoration: const BoxDecoration(
