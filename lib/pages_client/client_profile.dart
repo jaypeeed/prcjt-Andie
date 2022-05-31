@@ -116,8 +116,8 @@ class _ClientProfileState extends State<ClientProfile> {
                         transitionDuration: const Duration(seconds: 0)),
                     );
                   },
-                  child: Text(
-                    friendsList.indexOf(0).toString(),
+                  child: const Text(
+                    'Profile',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
