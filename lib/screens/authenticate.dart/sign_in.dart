@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:prjct_andie/screens/authenticate.dart/register.dart';
 import 'package:prjct_andie/services/auth.dart';
 import 'package:prjct_andie/testing/services(sign_in)/auth_services.dart';
@@ -80,7 +81,7 @@ class _SignInState extends State<SignIn> {
                           ),
                           child: TextButton(
                             child: const Text(
-                              'Sign Up?',
+                              'Sign Up',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 20,
@@ -97,7 +98,7 @@ class _SignInState extends State<SignIn> {
                                             Animation animation,
                                             Animation secondaryAnimation) =>
                                         Register(),
-                                    transitionDuration: Duration(seconds: 0)),
+                                    transitionDuration: const Duration(seconds: 0)),
                               );
                             },
                           ),
@@ -134,8 +135,38 @@ class _SignInState extends State<SignIn> {
                           Expanded(
                             flex: 50,
                             child: Container(
-                              margin: const EdgeInsets.only(left: 50),
-                              child: const Text(
+                              margin: const EdgeInsets.only(left: 10),
+                              child: RichText(
+                                  text:  TextSpan(
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 65,
+                                      color: Colors.white,
+                                      letterSpacing: 3,
+                                      shadows: [
+                                        Shadow(
+                                          blurRadius: 4.0,
+                                          color: Colors.black.withOpacity(.25),
+                                          offset: const Offset(0.0, 4.0),
+                                        ),
+                                      ]
+                                    ),
+                                    children: [
+                                      TextSpan(
+                                        style: GoogleFonts.inter(
+                                        ),
+                                        text: "THERE ARE A\nLOT OF\nPEOPLE THAT\nNEED YOUR\nHELP THAN YOU\n",
+                                      ),
+                                      TextSpan(
+                                        text: 'THINK!',
+                                        style: TextStyle(
+                                          color: Colors.red,
+                                        ),
+
+                                      )
+                                    ]
+                                  )
+                              ), /*Text(
                                 "THERE ARE A\nLOT OF\nPEOPLE THAT\nNEED YOUR\nHELP THAN YOU\nTHINK!",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
@@ -143,7 +174,7 @@ class _SignInState extends State<SignIn> {
                                   color: Colors.white,
                                   letterSpacing: 3,
                                 ),
-                              ),
+                              ),*/
                             ),
                           ),
                           /*ElevatedButton(
@@ -173,7 +204,7 @@ class _SignInState extends State<SignIn> {
                       height: 500,
                       width: 500,
                       padding: const EdgeInsets.only(
-                          top: 50, left: 40, right: 40, bottom: 40),
+                          top: 20, left: 40, right: 40, bottom: 40),
                       margin: const EdgeInsets.only(
                           left: 50, right: 50, top: 80, bottom: 100),
                       decoration: const BoxDecoration(
@@ -188,11 +219,11 @@ class _SignInState extends State<SignIn> {
                           Expanded(
                             flex: 10,
                             child: Container(
-                              //color: Colors.green,
+                              color: Colors.green,
                               child: const Text(
-                                'Login',
+                                'LOGIN',
                                 style: TextStyle(
-                                  fontSize: 35,
+                                  fontSize: 40,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -261,34 +292,38 @@ class _SignInState extends State<SignIn> {
                                   Expanded(
                                     flex: 20,
                                     child: Center(
-                                      child: ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                              primary: Colors.indigo),
-                                          child: const Text(
-                                            'Log In',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              color: Colors.white,
+                                      child: Container(
+                                        height: 70,
+                                        child: ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                                primary: const Color.fromRGBO(255, 205, 84, 1.0),),
+                                            child: const Text(
+                                              'Log In',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                fontSize: 20.0,
+                                                color: Colors.white,
+                                              ),
                                             ),
-                                          ),
-                                          onPressed: () {
-                                            final String email =
-                                                emailController.text.trim();
-                                            final String password =
-                                                passwordController.text.trim();
+                                            onPressed: () {
+                                              final String email =
+                                                  emailController.text.trim();
+                                              final String password =
+                                                  passwordController.text.trim();
 
-                                            if (email.isEmpty) {
-                                              print("Email is Empty");
-                                            } else {
-                                              if (password.isEmpty) {
-                                                print("Password is Empty");
+                                              if (email.isEmpty) {
+                                                print("Email is Empty");
                                               } else {
-                                                context
-                                                    .read<AuthServices>()
-                                                    .login(email, password);
+                                                if (password.isEmpty) {
+                                                  print("Password is Empty");
+                                                } else {
+                                                  context
+                                                      .read<AuthServices>()
+                                                      .login(email, password);
+                                                }
                                               }
-                                            }
-                                          }),
+                                            }),
+                                      ),
                                     ),
                                   ),
                                 ],

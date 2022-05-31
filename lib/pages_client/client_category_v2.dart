@@ -19,7 +19,7 @@ class ClientCategory extends StatefulWidget {
 }
 
 class _ClientCategoryState extends State<ClientCategory> {
-
+  bool isVisible = true;
   final notifications = [
     CheckBoxState(title: 'PANDAY'),
     CheckBoxState(title: 'PLUMBER'),
@@ -45,6 +45,7 @@ class _ClientCategoryState extends State<ClientCategory> {
               width: 180,
             ),
             actions: [
+
               Container(
                 margin: const EdgeInsets.only(right: 65),
                 child: TextButton(
@@ -117,47 +118,112 @@ class _ClientCategoryState extends State<ClientCategory> {
           color: Colors.white,
           width:1500,
           height: 650,
-
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              const Text('CATEGORY',
-                style: TextStyle(
-                    fontSize: 60,
-                    fontWeight: FontWeight.bold
-                ),),
+            children: [
+              Visibility(
+                visible: isVisible,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    const Text('CATEGORY',
+                      style: TextStyle(
+                          fontSize: 60,
+                          fontWeight: FontWeight.bold
+                      ),),
 
-              Container (
-                margin: const EdgeInsets.only(top: 5),
-                //   color: Colors.blue,
-                width: 1200,
-                height: 180,
-                child: GridView(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    childAspectRatio: 10,
-                    crossAxisSpacing: 50,
-                    mainAxisSpacing: 10,
-                  ),
-                  children: [
-                    ...notifications.map(buildSingleCheckBox).toList(),
+                    Container (
+                      margin: const EdgeInsets.only(top: 5),
+                      //   color: Colors.blue,
+                      width: 1200,
+                      height: 180,
+                      child: GridView(
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          childAspectRatio: 10,
+                          crossAxisSpacing: 50,
+                          mainAxisSpacing: 10,
+                        ),
+                        children: [
+                          ...notifications.map(buildSingleCheckBox).toList(),
+                        ],
+                      ),
+                    ),
+                    Center(
+                      child: Container(
+                        margin: const EdgeInsets.only(right: 65),
+                        child: ElevatedButton(
+                          child: const Text('DONE'),
+                          onPressed: () async {
+                            setState(() {
+                              isVisible = !isVisible;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
                   ],
-
-                ),
-
-              ),
-              Center(
-                child: Container(
-                  margin: const EdgeInsets.only(right: 65),
-                  child: ElevatedButton(
-                    child: const Text('DONE'),
-                    onPressed: () async {
-                    },
-                  ),
                 ),
               ),
-
+              Visibility(
+                visible: !isVisible,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text('ANDIES/S (number of results here)',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                    ),
+                    ),
+                    Container(
+                      child: Text('Check box Results'),
+                      color: Colors.cyan,
+                      width: 100,
+                      height: 50,
+                    ),
+                    Container(
+                      color: Colors.green,
+                      height: 400,
+                      width: 1500,
+                      child: ListView(
+                        padding: const EdgeInsets.all(8),
+                        children: <Widget>[
+                          Container(
+                            height: 50,
+                            color: Colors.amber[600],
+                            child: const Center(child: Text('Entry A')),
+                          ),
+                          Container(
+                            height: 50,
+                            color: Colors.amber[500],
+                            child: const Center(child: Text('Entry B')),
+                          ),
+                          Container(
+                            height: 50,
+                            color: Colors.amber[100],
+                            child: const Center(child: Text('Entry C')),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Center(
+                      child: Container(
+                        margin: const EdgeInsets.only(right: 65),
+                        child: ElevatedButton(
+                          child: const Text('Back to Categories'),
+                          onPressed: () async {
+                            setState(() {
+                              isVisible = !isVisible;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
         ),
