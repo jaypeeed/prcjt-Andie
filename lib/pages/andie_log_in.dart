@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'andie_sign_up_page3.dart';
+import '../Recycle Bin/andie_sign_up_page3.dart';
 
 void main() {
   runApp(const MaterialApp(home: AndieLogn()));

@@ -6,7 +6,7 @@ import 'package:prjct_andie/testing/services(sign_in)/auth_services.dart';
 import 'package:provider/provider.dart';
 
 import '../../pages/andie_log_in.dart';
-import '../../pages/andie_sign_up_page.dart';
+import '../../Recycle Bin/andie_sign_up_page.dart';
 import '../../pages_client/client_sign_up_page.dart';
 
 
@@ -146,7 +146,7 @@ class _SignInState extends State<SignIn> {
                               ),
                             ),
                           ),
-                          ElevatedButton(
+                          /*ElevatedButton(
                             onPressed: () {
                               Navigator.push(
                                 context,
@@ -160,7 +160,7 @@ class _SignInState extends State<SignIn> {
                               );
                             },
                             child: const Text('Move to page 2 new'),
-                          ),
+                          ),*/
                         ],
                       ),
                     ),

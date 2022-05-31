@@ -8,6 +8,8 @@ import 'package:universal_html/html.dart' as html;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'andie_ratings.dart';
+
 /*
 void main() {
   runApp(const MaterialApp(home: AndieProfile()));
@@ -70,7 +72,7 @@ class _AndieProfileState extends State<AndieProfile> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(65),
         child: AppBar(
-          backgroundColor: Color.fromRGBO(255, 205, 84, 1.0),
+          backgroundColor: const Color.fromRGBO(255, 205, 84, 1.0),
           title: Image.asset('assets/andie_logo.png',
             width: 180,
           ),
@@ -90,8 +92,8 @@ class _AndieProfileState extends State<AndieProfile> {
                   ),
                   onPressed: (){
                     Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
-                        Animation secondaryAnimation)=>AndieMyJobs(),
-                        transitionDuration: Duration(seconds: 0)),
+                        Animation secondaryAnimation)=>const AndieMyJobs(),
+                        transitionDuration: const Duration(seconds: 0)),
                     );
                   },
                   child: const Text('My Jobs',
@@ -111,7 +113,12 @@ class _AndieProfileState extends State<AndieProfile> {
                   style: TextButton.styleFrom(
                     textStyle: const TextStyle(fontSize: 20),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
+                        Animation secondaryAnimation)=>const AndieRatings1(),
+                        transitionDuration: const Duration(seconds: 0)),
+                    );
+                  },
                   child: const Text('Ratings',
                     style: TextStyle(
                         color: Colors.white,
@@ -131,8 +138,8 @@ class _AndieProfileState extends State<AndieProfile> {
                   ),
                   onPressed: (){
                     Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
-                        Animation secondaryAnimation)=>AndieProfile(),
-                        transitionDuration: Duration(seconds: 0)),
+                        Animation secondaryAnimation)=>const AndieProfile(),
+                        transitionDuration: const Duration(seconds: 0)),
                     );
                   },
                   child: const Text('Profile',
@@ -149,7 +156,7 @@ class _AndieProfileState extends State<AndieProfile> {
               child: Container(
                 margin: const EdgeInsets.only(right: 65),
                 child: ElevatedButton(
-                  child: Text('Log out'),
+                  child: const Text('Log out'),
                   onPressed: () async {
                     await _auth.signOut();
                     html.window.location.reload();
@@ -166,7 +173,7 @@ class _AndieProfileState extends State<AndieProfile> {
             flex: 40,
             child: Container(
               padding: const EdgeInsets.all(40),
-              color: Colors.white,
+              //color: Colors.white,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -192,12 +199,32 @@ class _AndieProfileState extends State<AndieProfile> {
           Expanded(
             flex: 60,
             child: Container(
-              color: Colors.white,
+              //color: Colors.green,
               padding: const EdgeInsets.only(right: 40, bottom: 40, top: 40),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(children: [
+                  SingleChildScrollView(
+                    child: Container (
+                      margin: const EdgeInsets.only(top: 5),
+                      //   color: Colors.blue,
+                      width: 1200,
+                      height: 40,
+                      child: GridView(
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          childAspectRatio: 10,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 3,
+                        ),
+                        children: const [
+
+                        ]
+                      ),
+
+                    ),
+                  ),
+                  /*Row(children: [
                     Container(
                         margin: const EdgeInsets.only(left: 5, right: 5),
                         child: const Text(
@@ -249,7 +276,7 @@ class _AndieProfileState extends State<AndieProfile> {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(2.0)),
                             color: Color.fromRGBO(196, 196, 196, 1.0)))
-                  ]),
+                  ]),*/
                   Container(
                     padding:
                         const EdgeInsets.only(left: 10, top: 20, bottom: 10),
@@ -286,16 +313,17 @@ class _AndieProfileState extends State<AndieProfile> {
 
                   Row(
                     children: [
+                      //--------- this for TEXT LABEL-----------
                       Container(
-                        margin: EdgeInsets.only(right: 30),
+                        margin: const EdgeInsets.only(right: 30.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
                               padding: const EdgeInsets.only(top: 5, bottom: 0),
-                              child: Text(
-                                'Phone Number: $myNumber',
-                                style: const TextStyle(
+                              child: const Text(
+                                'Phone Number:',
+                                style: TextStyle(
                                     fontSize: 20,
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
@@ -305,9 +333,9 @@ class _AndieProfileState extends State<AndieProfile> {
                             ),
                             Container(
                               padding: const EdgeInsets.only(top: 5, bottom: 0),
-                              child: Text(
-                                'Gmail: $myEmail',
-                                style: const TextStyle(
+                              child: const Text(
+                                'Gmail:',
+                                style: TextStyle(
                                     fontSize: 20,
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
@@ -317,9 +345,9 @@ class _AndieProfileState extends State<AndieProfile> {
                             ),
                             Container(
                               padding: const EdgeInsets.only(top: 5, bottom: 20),
-                              child: Text(
-                                'Facebook: $myFb',
-                                style: const TextStyle(
+                              child: const Text(
+                                'Facebook:',
+                                style: TextStyle(
                                     fontSize: 20,
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
@@ -330,50 +358,51 @@ class _AndieProfileState extends State<AndieProfile> {
                           ],
                         ),
                       ),
+                      //--------- this for TEXT DATA-----------
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                              padding: const EdgeInsets.only(top: 5, bottom: 0),
-                              child: const Text(
-                                //number
-                                '',
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.black,
-                                    letterSpacing: 2.0),
-                                textAlign: TextAlign.center,
-                              )),
-                          Container(
                             padding: const EdgeInsets.only(top: 5, bottom: 0),
-                            child: const Text(
-                              //email
-                              '',
-                              style: TextStyle(
+                            child: Text(
+                              '$myNumber',
+                              style: const TextStyle(
                                   fontSize: 20,
                                   color: Colors.black,
+                                  //fontWeight: FontWeight.bold,
+                                  letterSpacing: 2.0),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.only(top: 5, bottom: 0),
+                            child: Text(
+                              '$myEmail',
+                              style: const TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                  //fontWeight: FontWeight.bold,
                                   letterSpacing: 2.0),
                               textAlign: TextAlign.center,
                             ),
                           ),
                           Container(
                             padding: const EdgeInsets.only(top: 5, bottom: 20),
-                            child: const Text(
-                              //name
-                              '',
-                              style: TextStyle(
+                            child: Text(
+                              '$myFb',
+                              style: const TextStyle(
                                   fontSize: 20,
                                   color: Colors.black,
+                                  //fontWeight: FontWeight.bold,
                                   letterSpacing: 2.0),
                               textAlign: TextAlign.center,
                             ),
                           ),
                         ],
                       ),
+
                     ],
                   ),
-
-
                 ],
               ),
             ),

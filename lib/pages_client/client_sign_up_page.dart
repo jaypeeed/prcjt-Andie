@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:prjct_andie/testing/services(sign_in)/auth_services.dart';
 import 'package:provider/provider.dart';
 
-import '../pages/andie_sign_up_page2.dart';
-import '../pages/andie_sign_up_page3.dart';
+import '../Recycle Bin/andie_sign_up_page2.dart';
+import '../Recycle Bin/andie_sign_up_page3.dart';
 import 'client_menu.dart';
 
 // void main() {

@@ -244,111 +244,114 @@ class _ClientProfileState extends State<ClientProfile> {
                   ),
                   Row(
                     children: [
+                      //--------- THIS IS FOR TEXT LABEL --------
                       Container(
-                        padding: const EdgeInsets.only(top: 5, bottom: 0),
-                        child:  const Text('Gender:',
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 2.0),
-                          textAlign: TextAlign.center,
+                        margin: const EdgeInsets.only(right: 30.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.only(top: 5, bottom: 0),
+                              child:  const Text('Gender:',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 2.0),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            Container(
+                                padding: const EdgeInsets.only(top: 5, bottom: 0),
+                                child:  const Text('Age:',
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                      letterSpacing: 2.0),
+                                  textAlign: TextAlign.center,
+                                )),
+                            Container(
+                              padding: const EdgeInsets.only(top: 5, bottom: 0),
+                              child: const Text(
+                                'Gmail:',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 2.0),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.only(top: 5, bottom: 20),
+                              child: const Text(
+                                'Facebook:',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 2.0),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      Container(
-                        padding: const EdgeInsets.only(top: 5, bottom: 0,left: 103),
-                        child:  Text(
-                          myGender,
-                          style: const TextStyle(
-                              fontSize: 20,
-                              color: Colors.black,
-                              /*fontWeight: FontWeight.bold,*/
-                              letterSpacing: 2.0),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                          padding: const EdgeInsets.only(top: 5, bottom: 0,left: 10),
-                          child:  const Text('Age:',
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                                letterSpacing: 2.0),
-                            textAlign: TextAlign.center,
-                          )),
-                      Container(
-                          padding: const EdgeInsets.only(top: 5, bottom: 0,left: 120),
 
-                          child:  Text(
-                            myAge,
-                            style: const TextStyle(
-                                fontSize: 20,
-                                color: Colors.black,
-                                letterSpacing: 2.0),
-                            textAlign: TextAlign.center,
-                          )),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.only(top: 5, bottom: 0),
-                        child: const Text(
-                          'Gmail: ',
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 2.0),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.only(top: 5, bottom: 0,left: 108),
-                        child: Text(
-                          myEmail,
-                          style: const TextStyle(
-                              fontSize: 20,
-                              color: Colors.black,
-                              letterSpacing: 2.0),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.only(top: 5, bottom: 20),
-                        child: const Text(
-                          'Facebook: ',
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 2.0),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.only(top: 5, bottom: 20,left: 68),
-                        child: Text(
-                          myFb,
-                          style: const TextStyle(
-                              fontSize: 20,
-                              color: Colors.black,
-                              letterSpacing: 2.0),
-                          textAlign: TextAlign.center,
-                        ),
+                      //----------- this is IS FOR DATA  --------
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.only(top: 5,),
+                            child:  Text(
+                              '$myGender',
+                              style: const TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                  /*fontWeight: FontWeight.bold,*/
+                                  letterSpacing: 2.0),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          Container(
+                              padding: const EdgeInsets.only(top: 5),
+                              child:  Text(
+                                '$myAge',
+                                style: const TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                    letterSpacing: 2.0),
+                                textAlign: TextAlign.center,
+                              )),
+                          Container(
+                            padding: const EdgeInsets.only(top: 5,),
+                            child: Text(
+                              '$myEmail',
+                              style: const TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                  letterSpacing: 2.0),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.only(top: 5, bottom: 20),
+                            child: Text(
+                              '$myFb',
+                              style: const TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                  letterSpacing: 2.0),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [

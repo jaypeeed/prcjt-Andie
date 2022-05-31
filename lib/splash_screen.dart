@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:prjct_andie/pages/andie_profile_andie.dart';
-import 'package:prjct_andie/pages/andie_sign_up_page.dart';
+import 'package:prjct_andie/Recycle%20Bin/andie_sign_up_page.dart';
 
 import 'main.dart';
 

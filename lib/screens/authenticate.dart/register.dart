@@ -5,7 +5,7 @@ import 'package:prjct_andie/services/auth.dart';
 import 'package:prjct_andie/testing/services(sign_in)/auth_services.dart';
 import 'package:provider/provider.dart';
 import '../../checkbox/checkbox_state.dart';
-import '../../pages/andie_sign_up_page3.dart';
+import '../../Recycle Bin/andie_sign_up_page3.dart';
 import '../../pages_client/client_sign_up_page.dart';
 
 /*void main() {
@@ -96,39 +96,29 @@ class _RegisterState extends State<Register> {
         children: [
           //------this is the app bar------
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                color: Colors.green,
-                child: const SizedBox(
-                  width: 5,
-                ),
-              ),
-              Expanded(
-                flex: 2,
-                child: Container(
-                  // color: Colors.cyanAccent,
-                  child: const Image(
-                    image: AssetImage(
-                      'assets/andie_logo.png',
-                    ),
-                    width: 500,
-                    height: 60,
+                margin: EdgeInsets.only(left: 30),
+                child: const Image(
+                  image: AssetImage(
+                    'assets/andie_logo.png',
                   ),
+                  height: 60,
                 ),
               ),
-              Expanded(
+              /*Expanded(
                 flex: 10,
                 child: Center(
                     child: ElevatedButton(
                   child: const Text('Sign Up'),
                   onPressed: () {},
                 )),
-                /* SizedBox(
+                *//* SizedBox(
                         width: 20,
                         height: 20,
-                      ),*/
-              )
+                      ),*//*
+              )*/
             ],
           ),
           Expanded(
@@ -266,7 +256,7 @@ class _RegisterState extends State<Register> {
                                       child: Container(
                                         //height: 48,
                                         child: DropdownButtonFormField<String>(
-                                          dropdownColor: Colors.orange[300],
+                                          dropdownColor: const Color.fromRGBO(255, 205, 84, 1.0),
                                           value: selectedItem,
                                           items: items
                                               .map((item) => DropdownMenuItem(
@@ -276,7 +266,8 @@ class _RegisterState extends State<Register> {
                                                 style: const TextStyle(
                                                     fontSize: 20,
                                                     color: Colors.black,
-                                                    fontWeight: FontWeight.bold),
+                                                    /*fontWeight: FontWeight.bold*/
+                                                ),
                                               )))
                                               .toList(),
                                           onChanged: (item) =>
@@ -344,7 +335,13 @@ class _RegisterState extends State<Register> {
                       //   color: Colors.blue,
                       width: 1200,
                       height: 180,
-                      child: ListView(
+                      child: GridView(
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          childAspectRatio: 10,
+                          crossAxisSpacing: 30,
+                          mainAxisSpacing: 10,
+                        ),
                         children: values.keys.map((String key) {
                           return CheckboxListTile(
                             title: Text(key),

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:prjct_andie/checkbox/checkbox_state.dart';
 
-import 'andie_log_in.dart';
+import '../pages/andie_log_in.dart';
 
 void main() {
   runApp(MaterialApp(

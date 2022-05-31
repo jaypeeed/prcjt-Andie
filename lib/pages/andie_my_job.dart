@@ -3,6 +3,8 @@ import 'dart:html';
 import 'package:flutter/material.dart';
 import '../services/auth.dart';
 import 'andie_profile_andie.dart';
+import 'andie_ratings.dart';
+import 'package:universal_html/html.dart' as html;
 
 /*void main() {
   runApp(const MaterialApp(home: AndieMyJobs()));
@@ -24,7 +26,7 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(65),
         child: AppBar(
-          backgroundColor: Color.fromRGBO(255, 205, 84, 1.0),
+          backgroundColor: const Color.fromRGBO(255, 205, 84, 1.0),
           title: Image.asset('assets/andie_logo.png',
             width: 180,
           ),
@@ -35,12 +37,17 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                 margin: const EdgeInsets.only(right: 65),
                 child: TextButton(
                   style: TextButton.styleFrom(
-                    textStyle: const TextStyle(fontSize: 20),
+                    textStyle: const TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w900,
+                      decoration: TextDecoration.underline,
+                    ),
                   ),
                   onPressed: (){
                     Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
-                        Animation secondaryAnimation)=>AndieMyJobs(),
-                        transitionDuration: Duration(seconds: 0)),
+                        Animation secondaryAnimation)=>const AndieMyJobs(),
+                        transitionDuration: const Duration(seconds: 0)),
                     );
                   },
                   child: const Text('My Jobs',
@@ -60,7 +67,12 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                   style: TextButton.styleFrom(
                     textStyle: const TextStyle(fontSize: 20),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
+                        Animation secondaryAnimation)=>const AndieRatings1(),
+                        transitionDuration: const Duration(seconds: 0)),
+                    );
+                  },
                   child: const Text('Ratings',
                     style: TextStyle(
                         color: Colors.white,
@@ -80,8 +92,8 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                   ),
                   onPressed: (){
                     Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
-                        Animation secondaryAnimation)=>AndieProfile(),
-                        transitionDuration: Duration(seconds: 0)),
+                        Animation secondaryAnimation)=>const AndieProfile(),
+                        transitionDuration: const Duration(seconds: 0)),
                     );
                   },
                   child: const Text('Profile',
@@ -98,9 +110,10 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
               child: Container(
                 margin: const EdgeInsets.only(right: 65),
                 child: ElevatedButton(
-                  child: Text('Log out'),
+                  child: const Text('Log out'),
                   onPressed: () async {
                     await _auth.signOut();
+                    html.window.location.reload();
                   },
                 ),
               ),

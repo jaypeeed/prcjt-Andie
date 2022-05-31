@@ -66,7 +66,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                   ),
                   onPressed: () {},
                   child: const Text(
-                    'Ratings',
+                    'Category',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -208,12 +208,11 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                     Expanded(
                       flex: 100,
                       child: Container(
+                        child: Text('THIS IS FOR THE CLIENTS COMMENT'),
                         margin: const EdgeInsets.fromLTRB(20, 0, 10, 10),
                         color: Colors.redAccent,
-                        child: const SizedBox(
-                          width: 600,
-                          height: 50,
-                        ),
+                        width: 600,
+                        height: 50,
                       ),
                     ),
                     Expanded(
@@ -259,44 +258,47 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                 fontSize: 17.5, fontWeight: FontWeight.bold)),
                       ),
                     ),
-                    Expanded(
-                      flex: 50,
-                      child: Container(
-                        margin: const EdgeInsets.fromLTRB(20, 0, 10, 0),
-                        child: Row(
-                          children: [
-                            const Text('Contact Number:'),
-                            Container(
-                              margin: const EdgeInsets.only(left: 20),
-                              color: Colors.redAccent,
-                              child: const SizedBox(
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(20, 0, 10, 0),
+                      child: Row(
+                        children: [
+                          //--------- this for TEXT LABEL-----------
+                          Container(
+                            margin: const EdgeInsets.only(right: 30.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                    padding: const EdgeInsets.only(top: 5, bottom: 0),
+                                    child: const Text('Contact Number:')),
+                                Container(
+                                    padding: const EdgeInsets.only(top: 5, bottom: 0),
+                                    child: const Text('Messenger:')),
+                              ],
+                            ),
+                          ),
+                          //--------- this for TEXT DATA-----------
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.only(top: 5, bottom: 0),
+                                color: Colors.redAccent,
                                 width: 150,
                                 height: 25,
                               ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 50,
-                      child: Container(
-                        margin: const EdgeInsets.fromLTRB(20, 0, 10, 0),
-                        child: Row(
-                          children: [
-                            const Text(' Messenger:'),
-                            Container(
-                              margin: const EdgeInsets.only(left: 48),
-                              color: Colors.redAccent,
-                              child: const SizedBox(
+                              Container(
+                                padding: const EdgeInsets.only(top: 5, bottom: 0),
+                                color: Colors.redAccent,
                                 width: 150,
                                 height: 25,
                               ),
-                            ),
-                          ],
-                        ),
+                            ],
+                          )
+                        ],
                       ),
                     ),
+
                     Expanded(
                       flex: 100,
                       child: Container(
