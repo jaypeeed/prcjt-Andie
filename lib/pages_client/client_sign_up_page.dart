@@ -2,12 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:prjct_andie/testing/services(sign_in)/auth_services.dart';
 import 'package:provider/provider.dart';
-
-import '../Recycle Bin/andie_sign_up_page2.dart';
 import '../Recycle Bin/andie_sign_up_page3.dart';
-import 'client_menu.dart';
+
 
 // void main() {
 //   runApp(const MaterialApp(home: SignUpClient()));
@@ -55,87 +54,71 @@ class _SignUpClientState extends State<SignUpClient> {
           children: [
             Expanded(
               flex: 1,
+              //------ Left Side -------
               child: Container(
-                // color: Colors.red,
+                padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+                //color: Colors.red,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Expanded(
-                          flex: 2,
-                          child: Container(
-                            // color: Colors.cyanAccent,
-                            child: const Image(
-                              image: AssetImage(
-                                'assets/andie_logo.png',
-                              ),
-                              width: 500,
-                              height: 60,
+                        Container(
+                          margin: EdgeInsets.only(left: 20),
+                          child: const Image(
+                            image: AssetImage(
+                              'assets/andie_logo.png',
                             ),
+                            width: 200,
+                            height: 60,
                           ),
                         ),
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              PageRouteBuilder(
-                                  pageBuilder: (BuildContext context,
-                                          Animation animation,
-                                          Animation secondaryAnimation) =>
-                                      const ClientMenu(),
-                                  transitionDuration:
-                                      const Duration(seconds: 0)),
-                            );
-                          },
-                          child: const Text('DONE SIGN UP'),
-                        ),
-                        const Expanded(
-                          flex: 5,
-                          child: SizedBox(
-                            width: 20,
-                            height: 20,
-                          ),
-                        )
                       ],
                     ),
-                    Expanded(
-                      flex: 200,
+                    Container(
+                      padding: const EdgeInsets.only(top: 60, left: 30),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          const Expanded(
-                              flex: 5,
-                              child: SizedBox(
-                                width: 20,
-                                height: 20,
-                              )),
-                          const Expanded(
-                            flex: 50,
-                            child: Text(
-                              'NEED HELP\nHIRE AN\nANDIE!',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 80,
-                                  color: Colors.white),
-                            ),
+                          RichText(
+                              text:  TextSpan(
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 75,
+                                      color: Colors.white,
+                                      letterSpacing: 3,
+                                      shadows: [
+                                        Shadow(
+                                          blurRadius: 4.0,
+                                          color: Colors.black.withOpacity(.25),
+                                          offset: const Offset(0.0, 4.0),
+                                        ),
+                                      ]
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                      style: GoogleFonts.inter(
+                                      ),
+                                      text: "NEED HELP?\nHIRE AN\n",
+                                    ),
+                                    TextSpan(
+                                      text: 'ANDIE!',
+                                      style: TextStyle(
+                                        color: Colors.red,
+                                      ),
+
+                                    )
+                                  ]
+                              )
                           ),
-                          Expanded(
-                            flex: 50,
-                            child: Container(
-                              margin: const EdgeInsets.only(top: 25),
-                              child: const Text(
-                                'It is easier to connect with them\nwhen you have an account!',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 35,
-                                    color: Colors.white),
-                              ),
-                            ),
+                          const Text(
+                            'It is easier to connect with them\nwhen you have an account!',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 35,
+                                color: Colors.white),
                           ),
                         ],
                       ),

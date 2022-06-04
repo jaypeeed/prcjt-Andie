@@ -5,9 +5,6 @@ import 'package:prjct_andie/screens/authenticate.dart/register.dart';
 import 'package:prjct_andie/services/auth.dart';
 import 'package:prjct_andie/testing/services(sign_in)/auth_services.dart';
 import 'package:provider/provider.dart';
-
-import '../../pages/andie_log_in.dart';
-import '../../Recycle Bin/andie_sign_up_page.dart';
 import '../../pages_client/client_sign_up_page.dart';
 
 
@@ -43,138 +40,128 @@ class _SignInState extends State<SignIn> {
         child: Column(
           children: [
             Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    width: 500,
-                    height: 60,
-                    // color: Colors.cyanAccent,
-                    child: const Image(
-                      image: AssetImage(
-                        'assets/andie_logo.png',
-                      ),
+                Container(
+                  margin: EdgeInsets.only(left: 20),
+                  width: 200,
+                  height: 60,
+                  // color: Colors.cyanAccent,
+                  child: const Image(
+                    image: AssetImage(
+                      'assets/andie_logo.png',
                     ),
                   ),
                 ),
-                Expanded(
-                  flex: 10,
-                  child: Center(
-                      child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      const Expanded(
-                        flex: 30,
-                        child: SizedBox(
-                          width: 30,
-                        ),
+               // SizedBox(width: 30,),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      width: 1,
+                    ),
+                  ),
+                  child: TextButton(
+                    child: const Text(
+                      'Sign Up',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w900,
+                        //decoration: TextDecoration.underline,
                       ),
-                      Expanded(
-                        flex: 5,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(
-                              width: 1,
-                            ),
-                          ),
-                          child: TextButton(
-                            child: const Text(
-                              'Sign Up',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w900,
-                                //decoration: TextDecoration.underline,
-                              ),
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                PageRouteBuilder(
-                                    pageBuilder: (BuildContext context,
-                                            Animation animation,
-                                            Animation secondaryAnimation) =>
-                                        Register(),
-                                    transitionDuration: const Duration(seconds: 0)),
-                              );
-                            },
-                          ),
-                        ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                            pageBuilder: (BuildContext context,
+                                    Animation animation,
+                                    Animation secondaryAnimation) =>
+                                Register(),
+                            transitionDuration: const Duration(seconds: 0)),
+                      );
+                    },
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      width: 1,
+                    ),
+                  ),
+                  child: TextButton(
+                    child: const Text(
+                      'Regiters',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w900,
+                        //decoration: TextDecoration.underline,
                       ),
-                    ],
-                  )),
-                  /* SizedBox(
-                      width: 20,
-                      height: 20,
-                    ),*/
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                            pageBuilder: (BuildContext context,
+                                Animation animation,
+                                Animation secondaryAnimation) =>
+                                const SignUpClient(),
+                            transitionDuration: const Duration(seconds: 0)),
+                      );
+                    },
+                  ),
                 ),
               ],
             ),
-
-            // --------------- Right Side --------------------
             Expanded(
               flex: 200,
               child: Row(
                 children: [
+                  // --------------- Left Side --------------------
                   Expanded(
                     flex: 1,
                     child: Container(
-                      //color: Colors.red,
+                      padding: EdgeInsets.only(top: 30, left: 30),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Expanded(
-                              flex: 5,
-                              child: SizedBox(
-                                width: 20,
-                                height: 20,
-                              )),
                           Expanded(
                             flex: 50,
-                            child: Container(
-                              margin: const EdgeInsets.only(left: 10),
-                              child: RichText(
-                                  text:  TextSpan(
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 65,
-                                      color: Colors.white,
-                                      letterSpacing: 3,
-                                      shadows: [
-                                        Shadow(
-                                          blurRadius: 4.0,
-                                          color: Colors.black.withOpacity(.25),
-                                          offset: const Offset(0.0, 4.0),
-                                        ),
-                                      ]
-                                    ),
-                                    children: [
-                                      TextSpan(
-                                        style: GoogleFonts.inter(
-                                        ),
-                                        text: "THERE ARE A\nLOT OF\nPEOPLE THAT\nNEED YOUR\nHELP THAN YOU\n",
+                            child: RichText(
+                                text:  TextSpan(
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 75,
+                                    color: Colors.white,
+                                    letterSpacing: 3,
+                                    shadows: [
+                                      Shadow(
+                                        blurRadius: 4.0,
+                                        color: Colors.black.withOpacity(.25),
+                                        offset: const Offset(0.0, 4.0),
                                       ),
-                                      TextSpan(
-                                        text: 'THINK!',
-                                        style: TextStyle(
-                                          color: Colors.red,
-                                        ),
-
-                                      )
                                     ]
-                                  )
-                              ), /*Text(
-                                "THERE ARE A\nLOT OF\nPEOPLE THAT\nNEED YOUR\nHELP THAN YOU\nTHINK!",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 65,
-                                  color: Colors.white,
-                                  letterSpacing: 3,
-                                ),
-                              ),*/
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                      style: GoogleFonts.inter(
+                                      ),
+                                      text: "THERE ARE A\nLOT OF\nPEOPLE THAT\nNEED YOUR\nHELP THAN YOU\n",
+                                    ),
+                                    TextSpan(
+                                      text: 'THINK!',
+                                      style: TextStyle(
+                                        color: Colors.red,
+                                      ),
+
+                                    )
+                                  ]
+                                )
                             ),
                           ),
                           /*ElevatedButton(
@@ -201,8 +188,8 @@ class _SignInState extends State<SignIn> {
                   Expanded(
                     flex: 1,
                     child: Container(
-                      height: 500,
-                      width: 500,
+                      height: 300,
+                      width: 300,
                       padding: const EdgeInsets.only(
                           top: 20, left: 40, right: 40, bottom: 40),
                       margin: const EdgeInsets.only(
@@ -219,7 +206,7 @@ class _SignInState extends State<SignIn> {
                           Expanded(
                             flex: 10,
                             child: Container(
-                              color: Colors.green,
+                              //color: Colors.green,
                               child: const Text(
                                 'LOGIN',
                                 style: TextStyle(
