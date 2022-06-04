@@ -77,50 +77,55 @@ class _SignUpClientState extends State<SignUpClient> {
                       ],
                     ),
                     Container(
-                      padding: const EdgeInsets.only(top: 60, left: 30),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          RichText(
-                              text:  TextSpan(
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 75,
-                                      color: Colors.white,
-                                      letterSpacing: 3,
-                                      shadows: [
-                                        Shadow(
-                                          blurRadius: 4.0,
-                                          color: Colors.black.withOpacity(.25),
-                                          offset: const Offset(0.0, 4.0),
-                                        ),
-                                      ]
-                                  ),
-                                  children: [
-                                    TextSpan(
-                                      style: GoogleFonts.inter(
-                                      ),
-                                      text: "NEED HELP?\nHIRE AN\n",
+                      padding: const EdgeInsets.only(top: 90, left: 20),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            RichText(
+                                text:  TextSpan(
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 75,
+                                        color: Colors.white,
+                                        letterSpacing: 3,
+                                        shadows: [
+                                          Shadow(
+                                            blurRadius: 4.0,
+                                            color: Colors.black.withOpacity(.25),
+                                            offset: const Offset(0.0, 4.0),
+                                          ),
+                                        ]
                                     ),
-                                    TextSpan(
-                                      text: 'ANDIE!',
-                                      style: TextStyle(
-                                        color: Colors.red,
+                                    children: [
+                                      TextSpan(
+                                        style: GoogleFonts.inter(
+                                        ),
+                                        text: "NEED HELP?\nHIRE AN\n",
                                       ),
+                                      TextSpan(
+                                        text: 'ANDIE!',
+                                        style: TextStyle(
+                                          color: Colors.red,
+                                        ),
 
-                                    )
-                                  ]
-                              )
-                          ),
-                          const Text(
-                            'It is easier to connect with them\nwhen you have an account!',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 35,
-                                color: Colors.white),
-                          ),
-                        ],
+                                      )
+                                    ]
+                                )
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 30, left: 30),
+                              child: const Text(
+                                'It is easier to connect with them\nwhen you have an account!',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 35,
+                                    color: Colors.white),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -147,9 +152,9 @@ class _SignUpClientState extends State<SignUpClient> {
                         child: Container(
                           margin: const EdgeInsets.only(top: 20, bottom: 10),
                           child: const Text(
-                            'Sign-Up as CLIENT!',
+                            'Sign Up as CLIENT!',
                             style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 30,
                               fontWeight: FontWeight.w900,
                             ),
                           ),
@@ -211,7 +216,7 @@ class _SignUpClientState extends State<SignUpClient> {
                               child: Container(
                                 height: 48,
                                 child: DropdownButtonFormField<String>(
-                                  dropdownColor: Colors.orange[300],
+                                  dropdownColor: Colors.white,
                                   value: selectedItem,
                                   items: items
                                       .map((item) => DropdownMenuItem(
@@ -335,6 +340,7 @@ class _SignUpClientState extends State<SignUpClient> {
                               icon: const Icon(
                                 Icons.arrow_circle_right_rounded,
                                 size: 40,
+                                color: Color.fromRGBO(137, 137, 137, 1.0),
                               ),
                             ),
                           ],

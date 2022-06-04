@@ -306,7 +306,7 @@ class _RegisterState extends State<Register> {
                                         child: Container(
                                           //height: 48,
                                           child: DropdownButtonFormField<String>(
-                                            dropdownColor: const Color.fromRGBO(255, 205, 84, 1.0),
+                                            dropdownColor: Colors.white,
                                             value: selectedItem,
                                             items: items
                                                 .map((item) => DropdownMenuItem(

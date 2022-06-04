@@ -247,7 +247,8 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                               children: [
                                 Container(
                                     padding: const EdgeInsets.only(top: 5, bottom: 0),
-                                    child: const Text('Contact Number:')),
+                                    child: const Text('Contact Number:',
+                                    )),
                                 Container(
                                     padding: const EdgeInsets.only(top: 5, bottom: 0),
                                     child: const Text('Messenger:')),

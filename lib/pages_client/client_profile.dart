@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:prjct_andie/pages/andie_profile_andie.dart';
 import 'package:prjct_andie/services/auth.dart';
 import 'client_category_v2.dart';
@@ -161,58 +162,6 @@ class _ClientProfileState extends State<ClientProfile> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(children: const [
-                    /*
-                    Container(
-                        margin: const EdgeInsets.only(left: 5, right: 5),
-                        child: const Text(
-                          'Builder',
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.center,
-                        ),
-                        padding: const EdgeInsets.only(top: 8),
-                        height: 40.0,
-                        width: 140.0,
-                        decoration: const BoxDecoration(
-                            borderRadius:
-                            BorderRadius.all(Radius.circular(2.0)),
-                            color: Color.fromRGBO(196, 196, 196, 1.0))),*/
-                    /*Container(
-                        margin: const EdgeInsets.only(left: 5, right: 5),
-                        child: const Text(
-                          'Plumber',
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.center,
-                        ),
-                        padding: const EdgeInsets.only(top: 8),
-                        height: 40.0,
-                        width: 140.0,
-                        decoration: const BoxDecoration(
-                            borderRadius:
-                            BorderRadius.all(Radius.circular(2.0)),
-                            color: Color.fromRGBO(196, 196, 196, 1.0))),*/
-                    /*Container(
-                        margin: const EdgeInsets.only(left: 5, right: 5),
-                        child: const Text(
-                          'Painter',
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.center,
-                        ),
-                        padding: const EdgeInsets.only(top: 8),
-                        height: 40.0,
-                        width: 140.0,
-                        decoration: const BoxDecoration(
-                            borderRadius:
-                            BorderRadius.all(Radius.circular(2.0)),
-                            color: Color.fromRGBO(196, 196, 196, 1.0)))*/
                   ]),
                   Container(
                     padding:
