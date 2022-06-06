@@ -168,30 +168,22 @@ class _ClientProfileState extends State<ClientProfile> {
                     const EdgeInsets.only(left: 10, top: 20, bottom: 10),
                     child: Text(
                       myName,
-                      style: const TextStyle(
-                          fontSize: 80,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 2.0),
+                      style: GoogleFonts.robotoMono(
+                        fontSize:96,
+                        fontWeight: FontWeight.bold,
+                      ),
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  const Text(
-                    "hello ",
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
+
                   Container(
-                    padding: const EdgeInsets.only(top: 10,bottom: 10),
-                    child: const Text(
+                    padding: const EdgeInsets.only(top: 10,bottom: 30),
+                    child: Text(
                       'Contact Information',
-                      style: TextStyle(
-                          fontSize: 30,
+                      style: GoogleFonts.roboto(
+                          fontSize: 40,
                           color: Colors.black,
-                          fontWeight: FontWeight.w900,
+                          fontWeight: FontWeight.bold,
                           letterSpacing: 2.0),
                       textAlign: TextAlign.center,
                     ),
@@ -206,9 +198,9 @@ class _ClientProfileState extends State<ClientProfile> {
                           children: [
                             Container(
                               padding: const EdgeInsets.only(top: 5, bottom: 0),
-                              child:  const Text('Gender:',
-                                style: TextStyle(
-                                    fontSize: 20,
+                              child:  Text('Phone Number:',
+                                style: GoogleFonts.roboto(
+                                    fontSize: 35,
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
                                     letterSpacing: 2.0),
@@ -216,10 +208,20 @@ class _ClientProfileState extends State<ClientProfile> {
                               ),
                             ),
                             Container(
+                              padding: const EdgeInsets.only(top: 5, bottom: 0),
+                              child: Text('Gender:',
+                                style: GoogleFonts.roboto(
+                                    fontSize: 35,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 2.0),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            Container(
                                 padding: const EdgeInsets.only(top: 5, bottom: 0),
-                                child:  const Text('Age:',
-                                  style: TextStyle(
-                                      fontSize: 20,
+                                child:   Text('Age:',
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 35,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black,
                                       letterSpacing: 2.0),
@@ -227,10 +229,9 @@ class _ClientProfileState extends State<ClientProfile> {
                                 )),
                             Container(
                               padding: const EdgeInsets.only(top: 5, bottom: 0),
-                              child: const Text(
-                                'Gmail:',
-                                style: TextStyle(
-                                    fontSize: 20,
+                              child: Text('Gmail:',
+                                style: GoogleFonts.roboto(
+                                    fontSize: 35,
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
                                     letterSpacing: 2.0),
@@ -239,10 +240,9 @@ class _ClientProfileState extends State<ClientProfile> {
                             ),
                             Container(
                               padding: const EdgeInsets.only(top: 5, bottom: 20),
-                              child: const Text(
-                                'Facebook:',
-                                style: TextStyle(
-                                    fontSize: 20,
+                              child: Text('Facebook:',
+                                style: GoogleFonts.roboto(
+                                    fontSize: 35,
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
                                     letterSpacing: 2.0),
@@ -260,9 +260,21 @@ class _ClientProfileState extends State<ClientProfile> {
                           Container(
                             padding: const EdgeInsets.only(top: 5,),
                             child:  Text(
+                              '$myNumber',
+                              style: GoogleFonts.roboto(
+                                  fontSize: 35,
+                                  color: Colors.black,
+                                  /*fontWeight: FontWeight.bold,*/
+                                  letterSpacing: 2.0),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.only(top: 5,),
+                            child:  Text(
                               '$myGender',
-                              style: const TextStyle(
-                                  fontSize: 20,
+                              style: GoogleFonts.roboto(
+                                  fontSize: 35,
                                   color: Colors.black,
                                   /*fontWeight: FontWeight.bold,*/
                                   letterSpacing: 2.0),
@@ -273,8 +285,8 @@ class _ClientProfileState extends State<ClientProfile> {
                               padding: const EdgeInsets.only(top: 5),
                               child:  Text(
                                 '$myAge',
-                                style: const TextStyle(
-                                    fontSize: 20,
+                                style: GoogleFonts.roboto(
+                                    fontSize: 35,
                                     color: Colors.black,
                                     letterSpacing: 2.0),
                                 textAlign: TextAlign.center,
@@ -283,8 +295,8 @@ class _ClientProfileState extends State<ClientProfile> {
                             padding: const EdgeInsets.only(top: 5,),
                             child: Text(
                               '$myEmail',
-                              style: const TextStyle(
-                                  fontSize: 20,
+                              style: GoogleFonts.roboto(
+                                  fontSize: 35,
                                   color: Colors.black,
                                   letterSpacing: 2.0),
                               textAlign: TextAlign.center,
@@ -294,8 +306,8 @@ class _ClientProfileState extends State<ClientProfile> {
                             padding: const EdgeInsets.only(top: 5, bottom: 20),
                             child: Text(
                               '$myFb',
-                              style: const TextStyle(
-                                  fontSize: 20,
+                              style: GoogleFonts.roboto(
+                                  fontSize: 35,
                                   color: Colors.black,
                                   letterSpacing: 2.0),
                               textAlign: TextAlign.center,
@@ -306,27 +318,37 @@ class _ClientProfileState extends State<ClientProfile> {
                     ],
                   ),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      ElevatedButton(
-                          onPressed: () async {
-                            await _auth.signOut();
-                            html.window.location.reload();
-                          },
-                          child: const Align(
-                            alignment: Alignment.bottomRight,
-                            child:  Text(
-                              "LOG OUT",
-                              style: TextStyle(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  letterSpacing: 2.0),
-                              textAlign: TextAlign.center,
+                  Container(
+                    margin: EdgeInsets.only(top: 30),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        ElevatedButton(
+                            onPressed: () async {
+                              await _auth.signOut();
+                              html.window.location.reload();
+                            },
+                            style: ElevatedButton.styleFrom(
+                              minimumSize: Size(40,50),
+                              side: const BorderSide(
+                                width: 1, color: Colors.black,
+                              ),
+                              primary: Color.fromRGBO(220, 57, 57, 1.0)
                             ),
-                          ))
-                    ],
+                            child: Align(
+                              alignment: Alignment.bottomRight,
+                              child:  Text(
+                                "LOG OUT",
+                                style: GoogleFonts.roboto(
+                                    fontSize:21,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                    letterSpacing: 2.0),
+                                textAlign: TextAlign.center,
+                              ),
+                            ))
+                      ],
+                    ),
                   )
                 ],
               ),

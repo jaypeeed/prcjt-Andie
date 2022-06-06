@@ -7,7 +7,6 @@ import 'package:prjct_andie/testing/services(sign_in)/auth_services.dart';
 import 'package:provider/provider.dart';
 import '../Recycle Bin/andie_sign_up_page3.dart';
 
-
 // void main() {
 //   runApp(const MaterialApp(home: SignUpClient()));
 // }
@@ -56,7 +55,8 @@ class _SignUpClientState extends State<SignUpClient> {
               flex: 1,
               //------ Left Side -------
               child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+                padding: const EdgeInsets.symmetric(
+                    vertical: 20.0, horizontal: 50.0),
                 //color: Colors.red,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +65,7 @@ class _SignUpClientState extends State<SignUpClient> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Container(
-                          margin: EdgeInsets.only(left: 20),
+                          margin: const EdgeInsets.only(left: 20),
                           child: const Image(
                             image: AssetImage(
                               'assets/andie_logo.png',
@@ -84,7 +84,7 @@ class _SignUpClientState extends State<SignUpClient> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             RichText(
-                                text:  TextSpan(
+                                text: TextSpan(
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 75,
@@ -93,29 +93,25 @@ class _SignUpClientState extends State<SignUpClient> {
                                         shadows: [
                                           Shadow(
                                             blurRadius: 4.0,
-                                            color: Colors.black.withOpacity(.25),
+                                            color:
+                                                Colors.black.withOpacity(.25),
                                             offset: const Offset(0.0, 4.0),
                                           ),
-                                        ]
-                                    ),
+                                        ]),
                                     children: [
-                                      TextSpan(
-                                        style: GoogleFonts.inter(
-                                        ),
-                                        text: "NEED HELP?\nHIRE AN\n",
-                                      ),
-                                      TextSpan(
-                                        text: 'ANDIE!',
-                                        style: TextStyle(
-                                          color: Colors.red,
-                                        ),
-
-                                      )
-                                    ]
-                                )
-                            ),
+                                  TextSpan(
+                                    style: GoogleFonts.inter(),
+                                    text: "NEED HELP?\nHIRE AN\n",
+                                  ),
+                                  const TextSpan(
+                                    text: 'ANDIE!',
+                                    style: TextStyle(
+                                      color: Colors.red,
+                                    ),
+                                  )
+                                ])),
                             Container(
-                              margin: EdgeInsets.only(top: 30, left: 30),
+                              margin: const EdgeInsets.only(top: 30, left: 30),
                               child: const Text(
                                 'It is easier to connect with them\nwhen you have an account!',
                                 style: TextStyle(
@@ -140,8 +136,9 @@ class _SignUpClientState extends State<SignUpClient> {
               child: Container(
                 margin: const EdgeInsets.all(50),
                 decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -165,7 +162,7 @@ class _SignUpClientState extends State<SignUpClient> {
                       flex: 10,
                       child: Container(
                         margin:
-                        const EdgeInsets.only(top: 5, left: 40, right: 40),
+                            const EdgeInsets.only(top: 5, left: 40, right: 40),
                         child: TextFormField(
                           controller: nameController,
                           decoration: const InputDecoration(
@@ -230,7 +227,7 @@ class _SignUpClientState extends State<SignUpClient> {
                                           )))
                                       .toList(),
                                   onChanged: (item) =>
-                                      setState(() =>  selectedItem = item),
+                                      setState(() => selectedItem = item),
                                 ),
                               ),
                             ),
@@ -239,7 +236,7 @@ class _SignUpClientState extends State<SignUpClient> {
                                 child: Container(
                                   margin: const EdgeInsets.only(
                                       top: 5, left: 40, right: 40),
-                                  child:TextFormField(
+                                  child: TextFormField(
                                     controller: ageController,
                                     decoration: const InputDecoration(
                                       border: OutlineInputBorder(),
@@ -255,7 +252,7 @@ class _SignUpClientState extends State<SignUpClient> {
                       flex: 10,
                       child: Container(
                         margin:
-                        const EdgeInsets.only(top: 5, left: 40, right: 40),
+                            const EdgeInsets.only(top: 5, left: 40, right: 40),
                         child: TextFormField(
                           controller: numberController,
                           decoration: const InputDecoration(
@@ -269,7 +266,7 @@ class _SignUpClientState extends State<SignUpClient> {
                       flex: 10,
                       child: Container(
                         margin:
-                        const EdgeInsets.only(top: 5, left: 40, right: 40),
+                            const EdgeInsets.only(top: 5, left: 40, right: 40),
                         child: TextFormField(
                           controller: fbController,
                           decoration: const InputDecoration(
@@ -295,7 +292,8 @@ class _SignUpClientState extends State<SignUpClient> {
                                     passwordController.text.trim();
 
                                 final String age = ageController.text.trim();
-                                final String number = numberController.text.trim();
+                                final String number =
+                                    numberController.text.trim();
                                 final String name = nameController.text.trim();
                                 final String fb = fbController.text.trim();
 

@@ -130,7 +130,7 @@ class _RegisterState extends State<Register> {
               margin: const EdgeInsets.fromLTRB(40, 30, 40, 30),
               padding: const EdgeInsets.all(20),
               decoration: const BoxDecoration(
-                  color: Colors.white,
+                  color: Colors.black,
                   borderRadius: BorderRadius.all(Radius.circular(20))),
               child: Scrollbar(
                 controller: _scrollController, // <---- Here, the controller

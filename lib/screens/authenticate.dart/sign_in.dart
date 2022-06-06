@@ -43,7 +43,7 @@ class _SignInState extends State<SignIn> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  margin: EdgeInsets.only(left: 20),
+                  margin: const EdgeInsets.only(left: 20),
                   width: 200,
                   height: 60,
                   // color: Colors.cyanAccent,
@@ -126,7 +126,7 @@ class _SignInState extends State<SignIn> {
                   Expanded(
                     flex: 1,
                     child: Container(
-                      padding: EdgeInsets.only(top: 30, left: 30),
+                      padding: const EdgeInsets.only(top: 30, left: 30),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -153,9 +153,9 @@ class _SignInState extends State<SignIn> {
                                       ),
                                       text: "THERE ARE A\nLOT OF\nPEOPLE THAT\nNEED YOUR\nHELP THAN YOU\n",
                                     ),
-                                    TextSpan(
+                                    const TextSpan(
                                       text: 'THINK!',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: Colors.red,
                                       ),
 
@@ -194,9 +194,15 @@ class _SignInState extends State<SignIn> {
                           top: 20, left: 40, right: 40, bottom: 40),
                       margin: const EdgeInsets.only(
                           left: 50, right: 50, top: 80, bottom: 100),
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                          borderRadius: const BorderRadius.all(const Radius.circular(20)),
+                            image: DecorationImage(
+                              image: const AssetImage('spin_gear.gif'),
+                              fit: BoxFit.cover,
+                              colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.1), BlendMode.dstATop),
+                            ),
+                      ),
 
                       //  color: Colors.white,
                       child: Column(
