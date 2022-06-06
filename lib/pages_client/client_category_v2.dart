@@ -125,8 +125,13 @@ class _ClientCategoryState extends State<ClientCategory> {
       body:
       Center(
         child: Container(
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              border: Border.all(
+                color: Colors.black,
+              )),
           padding: const EdgeInsets.all(15),
-          color: Colors.white,
           width:1500,
           height: 650,
           child: Column(

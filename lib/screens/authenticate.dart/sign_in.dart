@@ -85,37 +85,6 @@ class _SignInState extends State<SignIn> {
                     },
                   ),
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                      width: 1,
-                    ),
-                  ),
-                  child: TextButton(
-                    child: const Text(
-                      'Regiters',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w900,
-                        //decoration: TextDecoration.underline,
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                            pageBuilder: (BuildContext context,
-                                Animation animation,
-                                Animation secondaryAnimation) =>
-                                const SignUpClient(),
-                            transitionDuration: const Duration(seconds: 0)),
-                      );
-                    },
-                  ),
-                ),
               ],
             ),
             Expanded(

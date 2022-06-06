@@ -202,7 +202,7 @@ class _AndieProfileState extends State<AndieProfile> {
                       padding: const EdgeInsets.only(top: 10,bottom: 10),
                       child:  Text(
                         skillsList.toString(),
-                        style: const TextStyle(
+                        style: GoogleFonts.robotoMono(
                             fontSize: 30,
                             color: Colors.black,
                             fontWeight: FontWeight.w900,
@@ -215,39 +215,39 @@ class _AndieProfileState extends State<AndieProfile> {
                   ]),
                   Container(
                     padding:
-                        const EdgeInsets.only(left: 10, top: 20, bottom: 10),
+                        const EdgeInsets.only(left: 10, top: 10, bottom: 10),
                     child: Text(
                       '$myName',
-                      style: const TextStyle(
-                          fontSize: 80,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 2.0),
+                      style: GoogleFonts.robotoMono(
+                        fontSize:96,
+                        fontWeight: FontWeight.bold,
+                      ),
                       textAlign: TextAlign.center,
                     ),
                   ),
                    Text(
                     ' $myExp. $myEdu. $myYears',
-                    style: const TextStyle(
+                    style: GoogleFonts.roboto(
                       fontSize: 20,
                       color: Colors.black,
                     ),
                     textAlign: TextAlign.left,
                   ),
                    Container(
-                     padding: const EdgeInsets.only(top: 10,bottom: 10),
-                     child: const Text(
+                     padding: const EdgeInsets.only(top: 30,bottom: 10),
+                     child:  Text(
                       'Contact Information',
-                      style: TextStyle(
-                          fontSize: 30,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w900,
-                          letterSpacing: 2.0),
-                      textAlign: TextAlign.center,
+                       style: GoogleFonts.roboto(
+                           fontSize: 40,
+                           color: Colors.black,
+                           fontWeight: FontWeight.bold,
+                           letterSpacing: 2.0),
+                       textAlign: TextAlign.center,
                   ),
                    ),
 
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
                         margin: const EdgeInsets.only(right: 30),
@@ -256,10 +256,10 @@ class _AndieProfileState extends State<AndieProfile> {
                           children: [
                             Container(
                               padding: const EdgeInsets.only(top: 5, bottom: 0),
-                              child: const Text(
+                              child: Text(
                                 'Phone Number:',
-                                style: TextStyle(
-                                    fontSize: 20,
+                                style: GoogleFonts.roboto(
+                                    fontSize: 35,
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
                                     letterSpacing: 2.0),
@@ -268,10 +268,10 @@ class _AndieProfileState extends State<AndieProfile> {
                             ),
                             Container(
                               padding: const EdgeInsets.only(top: 5, bottom: 0),
-                              child: const Text(
+                              child:  Text(
                                 'Gmail:',
-                                style: TextStyle(
-                                    fontSize: 20,
+                                style: GoogleFonts.roboto(
+                                    fontSize: 35,
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
                                     letterSpacing: 2.0),
@@ -280,10 +280,10 @@ class _AndieProfileState extends State<AndieProfile> {
                             ),
                             Container(
                               padding: const EdgeInsets.only(top: 5, bottom: 20),
-                              child: const Text(
+                              child: Text(
                                 'Facebook:',
-                                style: TextStyle(
-                                    fontSize: 20,
+                                style: GoogleFonts.roboto(
+                                    fontSize: 35,
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
                                     letterSpacing: 2.0),
@@ -293,45 +293,52 @@ class _AndieProfileState extends State<AndieProfile> {
                           ],
                         ),
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
+                      Container(
+                        margin: const EdgeInsets.only(right: 1),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                                padding: const EdgeInsets.only(top: 5, bottom: 0),
+                                child: Text(
+                                  //number
+                                  '$myNumber',
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 35,
+                                      color: Colors.black,
+                                      /*fontWeight: FontWeight.bold,*/
+                                      letterSpacing: 2.0),
+                                  textAlign: TextAlign.center,
+                                )),
+                            Container(
                               padding: const EdgeInsets.only(top: 5, bottom: 0),
                               child: Text(
-                                //number
-                                '$myNumber',
-                                style: const TextStyle(
-                                    fontSize: 20,
+                                //email
+                                '$myEmail',
+                                style: GoogleFonts.roboto(
+                                    fontSize: 35,
                                     color: Colors.black,
+                                    /*fontWeight: FontWeight.bold,*/
                                     letterSpacing: 2.0),
                                 textAlign: TextAlign.center,
-                              )),
-                          Container(
-                            padding: const EdgeInsets.only(top: 5, bottom: 0),
-                            child: Text(
-                              //email
-                              '$myEmail',
-                              style: const TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.black,
-                                  letterSpacing: 2.0),
-                              textAlign: TextAlign.center,
+                              ),
                             ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.only(top: 5, bottom: 20),
-                            child: Text(
-                              //name
-                              '$myName',
-                              style: const TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.black,
-                                  letterSpacing: 2.0),
-                              textAlign: TextAlign.center,
+                            Container(
+                              padding: const EdgeInsets.only(top: 5, bottom: 0),
+                              child: Text(
+                                //email
+                                '$myFb',
+                                style: GoogleFonts.roboto(
+                                    fontSize: 35,
+                                    color: Colors.black,
+                                    /*fontWeight: FontWeight.bold,*/
+                                    letterSpacing: 2.0),
+                                textAlign: TextAlign.center,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ],
                   ),

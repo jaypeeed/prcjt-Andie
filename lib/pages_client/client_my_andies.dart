@@ -102,7 +102,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
             )),
         child: Row(
           children: [
-            // Left Side !!!!!!!!!!!!!!!!!!!!!!
+            // ------------------ Left Side ----------------
             Expanded(
               flex: 10,
               child: Container(

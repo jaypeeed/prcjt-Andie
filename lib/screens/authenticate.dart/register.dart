@@ -58,6 +58,7 @@ class _RegisterState extends State<Register> {
     'ELECTRICIAN': false,
     'HOUSE KEEPER': false,
     'LAUNDERER': false,
+
   };
 
 
