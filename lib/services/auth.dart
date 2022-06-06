@@ -18,6 +18,10 @@ class AuthService {
         .map((User? user) => _userFromFirebaseUser(user!));
   }
 
+  String getCurrentUID(){
+    return _auth.currentUser!.uid;
+  }
+
   //sign in with email and password
   Future signInWithEmailAndPassword(String email, String password) async {
     try {

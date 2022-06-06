@@ -7,6 +7,7 @@ import 'package:prjct_andie/screens/authenticate.dart/register.dart';
 import 'package:prjct_andie/screens/authenticate.dart/sign_in.dart';
 import 'package:prjct_andie/screens/home/home.dart';
 import 'package:prjct_andie/screens/wrapper.dart';
+import 'package:prjct_andie/services/andie_notifier.dart';
 import 'package:prjct_andie/services/auth.dart';
 import 'package:prjct_andie/testing/screens(sign_in)/homescreen.dart';
 import 'package:prjct_andie/testing/screens(sign_in)/mainscreen.dart';
@@ -34,6 +35,8 @@ class MyApp extends StatelessWidget {
         StreamProvider(
           create: (context) => context.read<AuthServices>().authStateChanges,
           initialData: null,
+        ),
+        ChangeNotifierProvider(create: (context) =>AndieNotifier(),
         ),
       ],
       child: MaterialApp(
