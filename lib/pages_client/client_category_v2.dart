@@ -10,16 +10,14 @@ import 'client_profile.dart';
 
 final db = FirebaseFirestore.instance;
 var tmpArray = ['ELECTRICIAN', 'HOUSE KEEPER'];
-final str = tmpArray.join(' ');
+//final str = tmpArray2.join(' ');
 
 /*void main() {
   runApp(const MaterialApp(home: ClientCategory()));
 }*/
 
-
 class ClientCategory extends StatefulWidget {
   const ClientCategory({Key? key}) : super(key: key);
-
 
 
   @override
@@ -27,20 +25,41 @@ class ClientCategory extends StatefulWidget {
 
 }
 
+var tmpArray2 = [''];
+String counter = '';
+
 class _ClientCategoryState extends State<ClientCategory> {
   bool isVisible = true;
-  final notifications = [
-    CheckBoxState(title: 'PANDAY'),
-    CheckBoxState(title: 'PLUMBER'),
-    CheckBoxState(title: 'PAINTER'),
-    CheckBoxState(title: 'GARDENER'),
-    CheckBoxState(title: 'COOK'),
-    CheckBoxState(title: 'TECHNICIAN'),
-    CheckBoxState(title: 'ELECTRICIAN'),
-    CheckBoxState(title: 'PLUMBER'),
-    CheckBoxState(title: 'HOUSE KEEPER'),
-    CheckBoxState(title: 'LAUNDERER'),
-  ];
+
+
+  Map<String, bool> values = {
+    'PANDAY': false,
+    'PLUMBER': false,
+    'PAINTER': false,
+    'GARDENER': false,
+    'COOK': false,
+    'TECHNICIAN': false,
+    'ELECTRICIAN': false,
+    'HOUSE KEEPER': false,
+    'LAUNDERER': false,
+  };
+
+
+
+  getCheckboxItems() {
+    values.forEach((key, value) {
+      if (value == true) {
+        tmpArray2.add(key);
+      }
+    });
+
+    // Printing all selected items on Terminal screen.
+    print(tmpArray2);
+    // Here you will get all your selected Checkbox items.
+
+    // Clear array after use.
+
+  }
 
 
   @override
@@ -157,12 +176,23 @@ class _ClientCategoryState extends State<ClientCategory> {
                         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 3,
                           childAspectRatio: 10,
-                          crossAxisSpacing: 50,
+                          crossAxisSpacing: 30,
                           mainAxisSpacing: 10,
                         ),
-                        children: [
-                          ...notifications.map(buildSingleCheckBox).toList(),
-                        ],
+                        children: values.keys.map((String key) {
+                          return CheckboxListTile(
+                            controlAffinity: ListTileControlAffinity.leading,
+                            title: Text(key),
+                            value: values[key],
+                            activeColor: Colors.pink,
+                            checkColor: Colors.white,
+                            onChanged: (bool? value) async {
+                              setState(() {
+                                values[key] = value!;
+                              });
+                            },
+                          );
+                        }).toList(),
                       ),
                     ),
                     Center(
@@ -171,7 +201,9 @@ class _ClientCategoryState extends State<ClientCategory> {
                         child: ElevatedButton(
                           child: const Text('DONE'),
                           onPressed: () async {
-                            print(tmpArray.toString());
+
+                            getCheckboxItems();
+                            print(tmpArray2.toString());
                             setState(() {
                               isVisible = !isVisible;
                             });
@@ -188,36 +220,39 @@ class _ClientCategoryState extends State<ClientCategory> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text('ANDIES/S (number of results here)',
+                    Text('ANDIES/S ($counter)',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 30,
                     ),
                     ),
                     Container(
-                      child: Text('Check box Results'),
+                      child: Text('Search results for: $tmpArray2'),
                       color: Colors.cyan,
-                      width: 100,
+                      width: 300,
                       height: 50,
                     ),
                     Container(
                       width: 1500,
                       height: 400,
                       child: StreamBuilder<QuerySnapshot>(
-                        stream: db.collection('users').where('role', isEqualTo: 'andie').where('skills', arrayContainsAny: tmpArray).snapshots(),
+                        stream: db.collection('users').where('role', isEqualTo: 'andie').where('skills', arrayContainsAny: tmpArray2).snapshots(),
                         builder: (context, snapshot) {
                           if (!snapshot.hasData) {
                             Text ('HELLO');
                             return const Center(
-
                               child: CircularProgressIndicator(),
                             );
                           } else {
+                              print(snapshot.data!.docs.length.toString());
+                              counter = snapshot.data!.docs.length.toString();
                             return ListView (
                               children: snapshot.data!.docs.map((doc) {
                                 return Card(
                                   child: ListTile(
+                                    leading: Text((doc.data() as Map<String, dynamic>)['ratings'] ),
                                     title: Text((doc.data() as Map<String, dynamic>)['name'] ),
+                                    subtitle: Text((doc.data() as Map<String, dynamic>)['skills'].toString())
                                   ),
                                 );
                               }).toList(),
@@ -232,6 +267,7 @@ class _ClientCategoryState extends State<ClientCategory> {
                         child: ElevatedButton(
                           child: const Text('Back to Categories'),
                           onPressed: () async {
+                            tmpArray2 = [''];
                             setState(() {
                               isVisible = !isVisible;
                             });
@@ -250,9 +286,6 @@ class _ClientCategoryState extends State<ClientCategory> {
 
     );
   }
-
-
-
 
   Widget buildSingleCheckBox(CheckBoxState checkbox) =>
       CheckboxListTile(
