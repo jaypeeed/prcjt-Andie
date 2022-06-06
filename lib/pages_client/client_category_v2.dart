@@ -11,9 +11,10 @@ import 'client_profile.dart';
 final db = FirebaseFirestore.instance;
 var tmpArray = ['ELECTRICIAN', 'HOUSE KEEPER'];
 final str = tmpArray.join(' ');
-void main() {
+
+/*void main() {
   runApp(const MaterialApp(home: ClientCategory()));
-}
+}*/
 
 
 class ClientCategory extends StatefulWidget {

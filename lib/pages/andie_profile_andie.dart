@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../services/auth.dart';
 import 'andie_my_job.dart';
@@ -7,6 +8,8 @@ import 'package:universal_html/html.dart' as html;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import 'andie_ratings.dart';
 
 /*
 void main() {
@@ -74,7 +77,7 @@ class _AndieProfileState extends State<AndieProfile> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(65),
         child: AppBar(
-          backgroundColor: Color.fromRGBO(255, 205, 84, 1.0),
+          backgroundColor: const Color.fromRGBO(255, 205, 84, 1.0),
           title: Image.asset('assets/andie_logo.png',
             width: 180,
           ),
@@ -94,8 +97,8 @@ class _AndieProfileState extends State<AndieProfile> {
                   ),
                   onPressed: (){
                     Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
-                        Animation secondaryAnimation)=>AndieMyJobs(),
-                        transitionDuration: Duration(seconds: 0)),
+                        Animation secondaryAnimation)=>const AndieMyJobs(),
+                        transitionDuration: const Duration(seconds: 0)),
                     );
                   },
                   child: const Text('My Jobs',
@@ -115,7 +118,12 @@ class _AndieProfileState extends State<AndieProfile> {
                   style: TextButton.styleFrom(
                     textStyle: const TextStyle(fontSize: 20),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
+                        Animation secondaryAnimation)=>const AndieRatings1(),
+                        transitionDuration: const Duration(seconds: 0)),
+                    );
+                  },
                   child: const Text('Ratings',
                     style: TextStyle(
                         color: Colors.white,
@@ -135,8 +143,8 @@ class _AndieProfileState extends State<AndieProfile> {
                   ),
                   onPressed: (){
                     Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
-                        Animation secondaryAnimation)=>AndieProfile(),
-                        transitionDuration: Duration(seconds: 0)),
+                        Animation secondaryAnimation)=>const AndieProfile(),
+                        transitionDuration: const Duration(seconds: 0)),
                     );
                   },
                   child: const Text('Profile',
@@ -149,18 +157,6 @@ class _AndieProfileState extends State<AndieProfile> {
                 ),
               ),
             ),
-            Center(
-              child: Container(
-                margin: const EdgeInsets.only(right: 65),
-                child: ElevatedButton(
-                  child: Text('Log out'),
-                  onPressed: () async {
-                    await _auth.signOut();
-                    html.window.location.reload();
-                  },
-                ),
-              ),
-            )
           ],
         ),
       ),
@@ -254,15 +250,15 @@ class _AndieProfileState extends State<AndieProfile> {
                   Row(
                     children: [
                       Container(
-                        margin: EdgeInsets.only(right: 30),
+                        margin: const EdgeInsets.only(right: 30),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
                               padding: const EdgeInsets.only(top: 5, bottom: 0),
-                              child: Text(
-                                'Phone Number: $myNumber',
-                                style: const TextStyle(
+                              child: const Text(
+                                'Phone Number:',
+                                style: TextStyle(
                                     fontSize: 20,
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
@@ -272,9 +268,9 @@ class _AndieProfileState extends State<AndieProfile> {
                             ),
                             Container(
                               padding: const EdgeInsets.only(top: 5, bottom: 0),
-                              child: Text(
-                                'Gmail: $myEmail',
-                                style: const TextStyle(
+                              child: const Text(
+                                'Gmail:',
+                                style: TextStyle(
                                     fontSize: 20,
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
@@ -284,9 +280,9 @@ class _AndieProfileState extends State<AndieProfile> {
                             ),
                             Container(
                               padding: const EdgeInsets.only(top: 5, bottom: 20),
-                              child: Text(
-                                'Facebook: $myFb',
-                                style: const TextStyle(
+                              child: const Text(
+                                'Facebook:',
+                                style: TextStyle(
                                     fontSize: 20,
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
@@ -302,10 +298,10 @@ class _AndieProfileState extends State<AndieProfile> {
                         children: [
                           Container(
                               padding: const EdgeInsets.only(top: 5, bottom: 0),
-                              child: const Text(
+                              child: Text(
                                 //number
-                                '',
-                                style: TextStyle(
+                                '$myNumber',
+                                style: const TextStyle(
                                     fontSize: 20,
                                     color: Colors.black,
                                     letterSpacing: 2.0),
@@ -313,10 +309,10 @@ class _AndieProfileState extends State<AndieProfile> {
                               )),
                           Container(
                             padding: const EdgeInsets.only(top: 5, bottom: 0),
-                            child: const Text(
+                            child: Text(
                               //email
-                              '',
-                              style: TextStyle(
+                              '$myEmail',
+                              style: const TextStyle(
                                   fontSize: 20,
                                   color: Colors.black,
                                   letterSpacing: 2.0),
@@ -325,10 +321,10 @@ class _AndieProfileState extends State<AndieProfile> {
                           ),
                           Container(
                             padding: const EdgeInsets.only(top: 5, bottom: 20),
-                            child: const Text(
+                            child: Text(
                               //name
-                              '',
-                              style: TextStyle(
+                              '$myName',
+                              style: const TextStyle(
                                   fontSize: 20,
                                   color: Colors.black,
                                   letterSpacing: 2.0),
@@ -339,8 +335,38 @@ class _AndieProfileState extends State<AndieProfile> {
                       ),
                     ],
                   ),
-
-
+                  Container(
+                    margin: EdgeInsets.only(top: 30),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        ElevatedButton(
+                            onPressed: () async {
+                              await _auth.signOut();
+                              html.window.location.reload();
+                            },
+                            style: ElevatedButton.styleFrom(
+                                minimumSize: Size(40,50),
+                                side: const BorderSide(
+                                  width: 1, color: Colors.black,
+                                ),
+                                primary: Color.fromRGBO(220, 57, 57, 1.0)
+                            ),
+                            child: Align(
+                              alignment: Alignment.bottomRight,
+                              child:  Text(
+                                "LOG OUT",
+                                style: GoogleFonts.roboto(
+                                    fontSize:21,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                    letterSpacing: 2.0),
+                                textAlign: TextAlign.center,
+                              ),
+                            ))
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),

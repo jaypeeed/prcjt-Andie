@@ -135,9 +135,14 @@ class _SignUpClientState extends State<SignUpClient> {
               flex: 1,
               child: Container(
                 margin: const EdgeInsets.all(50),
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(20)),
+                  image: DecorationImage(
+                    image: const AssetImage('spin_gear.gif'),
+                    fit: BoxFit.cover,
+                    colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.1), BlendMode.dstATop),
+                  ),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,

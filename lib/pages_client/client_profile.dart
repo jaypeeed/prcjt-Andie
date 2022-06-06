@@ -317,7 +317,6 @@ class _ClientProfileState extends State<ClientProfile> {
                       ),
                     ],
                   ),
-
                   Container(
                     margin: EdgeInsets.only(top: 30),
                     child: Row(

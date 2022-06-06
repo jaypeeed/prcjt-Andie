@@ -166,98 +166,93 @@ class _AndieRatings1State extends State<AndieRatings1> {
                   ),
                 ),
               ),
-              Center(
-                child: Container(
-                  margin: const EdgeInsets.only(right: 65),
-                  child: ElevatedButton(
-                    child: const Text('Log out'),
-                    onPressed: () async {
-                      await _auth.signOut();
-                      html.window.location.reload();
-                    },
-                  ),
-                ),
-              )
             ],
           ),
         ),
-        body: Row(
-          children: [
-            Expanded(
-              flex: 10,
-              child: Container(
-                padding: const EdgeInsets.all(30.0),
-                margin: const EdgeInsets.all(30.0),
-                width: 1500,
-                height: 800,
-                color: Colors.white,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      color: Colors.green,
-                      child: const Expanded(
-                        flex: 5,
-                        child: Text(
-                          'RATINGS',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 50.0,
-                            color: Colors.black,
+        body: Container(
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/background1.png'),
+                fit: BoxFit.cover,
+              )),
+          child: Row(
+            children: [
+              Expanded(
+                flex: 10,
+                child: Container(
+                  padding: const EdgeInsets.all(30.0),
+                  margin: const EdgeInsets.all(30.0),
+                  width: 1500,
+                  height: 800,
+                  color: Colors.white,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        color: Colors.green,
+                        child: const Expanded(
+                          flex: 5,
+                          child: Text(
+                            'RATINGS',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 50.0,
+                              color: Colors.black,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Expanded(
-                      flex: 10,
-                      child: Container(
-                        margin: EdgeInsets.only(left: 20),
-                        width: 300,
-                        height: 300,
-                        color: Colors.red,
+                      Expanded(
+                        flex: 10,
+                        child: Container(
+                          margin: EdgeInsets.only(left: 20),
+                          width: 300,
+                          height: 300,
+                          color: Colors.red,
+                        ),
                       ),
-                    ),
 
-                  ],
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 10,
-              child: Container(
-                padding: const EdgeInsets.all(30.0),
-                margin: const EdgeInsets.all(30.0),
-                width: 1500,
-                height: 800,
-                color: Colors.white,
-                child: GridView(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 1,
-                    childAspectRatio: 2,
-                    crossAxisSpacing: 2,
-                    mainAxisSpacing: 2,
+                    ],
                   ),
-                  children: [
-                    card,
-                    card,
-                    card,
-                    card,
-                    card,
-                    card,
-                    card,
-                    card,
-                    card,
-                    card,
-                    card,
-                    card,
-                    card,
-                    card,
-                    card,
-                  ],
                 ),
               ),
-            ),
-          ],
+              Expanded(
+                flex: 10,
+                child: Container(
+                  padding: const EdgeInsets.all(30.0),
+                  margin: const EdgeInsets.all(30.0),
+                  width: 1500,
+                  height: 800,
+                  color: Colors.white,
+                  child: GridView(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 1,
+                      childAspectRatio: 2,
+                      crossAxisSpacing: 2,
+                      mainAxisSpacing: 2,
+                    ),
+                    children: [
+                      card,
+                      card,
+                      card,
+                      card,
+                      card,
+                      card,
+                      card,
+                      card,
+                      card,
+                      card,
+                      card,
+                      card,
+                      card,
+                      card,
+                      card,
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ));
   }
 }

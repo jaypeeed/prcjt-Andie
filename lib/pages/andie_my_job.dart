@@ -106,18 +106,6 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                 ),
               ),
             ),
-            Center(
-              child: Container(
-                margin: const EdgeInsets.only(right: 65),
-                child: ElevatedButton(
-                  child: const Text('Log out'),
-                  onPressed: () async {
-                    await _auth.signOut();
-                    html.window.location.reload();
-                  },
-                ),
-              ),
-            )
           ],
         ),
       ),

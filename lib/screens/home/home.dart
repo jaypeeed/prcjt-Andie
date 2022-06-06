@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:prjct_andie/screens/home/profile_list.dart';
 import 'package:prjct_andie/models/profile.dart';
 
-import '../../appbar/andie_appbar.dart';
 import '../../models/profile.dart';
 import '../../pages/andie_my_job.dart';
 import '../../pages/andie_profile_andie.dart';
@@ -25,99 +24,91 @@ class Home extends StatelessWidget {
       initialData: null,
       child: Scaffold(
         backgroundColor: Colors.orangeAccent[50],
-        appBar: AppBar(
-          backgroundColor: const Color.fromRGBO(255, 205, 84, 1.0),
-          title: Image.asset('assets/andie_logo.png',
-            width: 180,
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(65),
+          child: AppBar(
+            backgroundColor: const Color.fromRGBO(255, 205, 84, 1.0),
+            title: Image.asset('assets/andie_logo.png',
+              width: 180,
+            ),
+            elevation: 0.0,
+            actions: <Widget>[
+              Center(
+                child: Container(
+                  margin: const EdgeInsets.only(right: 65),
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      textStyle: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w900,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                    onPressed: (){
+                      Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
+                          Animation secondaryAnimation)=>const AndieMyJobs(),
+                          transitionDuration: const Duration(seconds: 0)),
+                      );
+                    },
+                    child: const Text('My Jobs',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Center(
+                child: Container(
+                  margin: const EdgeInsets.only(right: 65),
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      textStyle: const TextStyle(fontSize: 20),
+                    ),
+                    onPressed: () {
+                      Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
+                          Animation secondaryAnimation)=>const AndieRatings1(),
+                          transitionDuration: const Duration(seconds: 0)),
+                      );
+                    },
+                    child: const Text('Ratings',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Center(
+                child: Container(
+                  margin: const EdgeInsets.only(right: 65),
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      textStyle: const TextStyle(fontSize: 20),
+                    ),
+                    onPressed: (){
+                      Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
+                          Animation secondaryAnimation)=>const AndieProfile(),
+                          transitionDuration: const Duration(seconds: 0)),
+                      );
+                    },
+                    child: const Text('Profile',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-          elevation: 0.0,
-          actions: <Widget>[
-            Center(
-              child: Container(
-                margin: const EdgeInsets.only(right: 65),
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    textStyle: const TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w900,
-                      decoration: TextDecoration.underline,
-                    ),
-                  ),
-                  onPressed: (){
-                    Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
-                        Animation secondaryAnimation)=>const AndieMyJobs(),
-                        transitionDuration: const Duration(seconds: 0)),
-                    );
-                  },
-                  child: const Text('My Jobs',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Center(
-              child: Container(
-                margin: const EdgeInsets.only(right: 65),
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    textStyle: const TextStyle(fontSize: 20),
-                  ),
-                  onPressed: () {
-                    Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
-                        Animation secondaryAnimation)=>const AndieRatings1(),
-                        transitionDuration: const Duration(seconds: 0)),
-                    );
-                  },
-                  child: const Text('Ratings',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Center(
-              child: Container(
-                margin: const EdgeInsets.only(right: 65),
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    textStyle: const TextStyle(fontSize: 20),
-                  ),
-                  onPressed: (){
-                    Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
-                        Animation secondaryAnimation)=>const AndieProfile(),
-                        transitionDuration: const Duration(seconds: 0)),
-                    );
-                  },
-                  child: const Text('Profile',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Center(
-              child: Container(
-                margin: const EdgeInsets.only(right: 65),
-                child: ElevatedButton(
-                  child: const Text('Log out'),
-                  onPressed: () async {
-                    await _auth.signOut();
-                  },
-                ),
-              ),
-            )
-          ],
         ),
         body: Container(
           decoration: const BoxDecoration(

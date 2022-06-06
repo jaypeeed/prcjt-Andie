@@ -129,9 +129,15 @@ class _RegisterState extends State<Register> {
               width: 1500,
               margin: const EdgeInsets.fromLTRB(40, 30, 40, 30),
               padding: const EdgeInsets.all(20),
-              decoration: const BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                image: DecorationImage(
+                  image: const AssetImage('spin_gear.gif'),
+                  fit: BoxFit.cover,
+                  colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.1), BlendMode.dstATop),
+                ),
+              ),
               child: Scrollbar(
                 controller: _scrollController, // <---- Here, the controller
                 isAlwaysShown: true,
@@ -153,42 +159,6 @@ class _RegisterState extends State<Register> {
                               ),
                             ),
                           ),
-                         /* const Expanded(
-                              flex: 50,
-                              child: const SizedBox(
-                                width: 10,
-                              )),
-                          Expanded(
-                            flex: 10,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                  width: 1,
-                                ),
-                              ),
-                              margin: const EdgeInsets.only(right: 20),
-                              child: TextButton(
-                                child: const Text(
-                                  'Sign Up As CLIENT??',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    PageRouteBuilder(
-                                        pageBuilder: (BuildContext context,
-                                                Animation animation,
-                                                Animation secondaryAnimation) =>
-                                            const SignUpClient(), //Change here to open Google Login
-                                        transitionDuration:
-                                            const Duration(seconds: 0)),
-                                  );
-                                },
-                              ),
-                            ),
-                          ),*/
                         ],
                       ),
                       Row(
