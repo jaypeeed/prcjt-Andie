@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../pages/andie_profile_andie.dart';
-
+void main() {
+  runApp(const MaterialApp(home: ViewAndie()));
+}
 class ViewAndie extends StatefulWidget {
   const ViewAndie({Key? key}) : super(key: key);
 
@@ -67,8 +69,8 @@ class _ViewAndieState extends State<ViewAndie> {
                 children:[
                   Center(
                     child: Text(
-                      'LIST OF ANDIE',
-                      style: GoogleFonts.robotoMono(
+                      'LIST OF ANDIE/s: ',
+                      style: GoogleFonts.roboto(
                         fontSize:45,
                         fontWeight: FontWeight.bold,
                       ),
@@ -85,7 +87,7 @@ class _ViewAndieState extends State<ViewAndie> {
                         color: Colors.white.withOpacity(0.5),
                         width:1300,
                         height: 500,
-                        child: Text('ANDIE List View Here'),
+                        child: const Text('ANDIE List View Here'),
                       )
                     ],
                   )

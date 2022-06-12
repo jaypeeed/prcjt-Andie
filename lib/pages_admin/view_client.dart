@@ -67,8 +67,8 @@ class _ViewClientState extends State<ViewClient> {
                 children:[
                   Center(
                     child: Text(
-                      'LIST OF CLIENT',
-                      style: GoogleFonts.robotoMono(
+                      'LIST OF CLIENT :',
+                      style: GoogleFonts.roboto(
                         fontSize:45,
                         fontWeight: FontWeight.bold,
                       ),
