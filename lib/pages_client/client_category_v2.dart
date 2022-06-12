@@ -10,6 +10,7 @@ import 'client_profile.dart';
 
 final db = FirebaseFirestore.instance;
 var tmpArray = ['ELECTRICIAN', 'HOUSE KEEPER'];
+TextEditingController _textFieldController = TextEditingController();
 //final str = tmpArray2.join(' ');
 
 /*void main() {
@@ -141,9 +142,11 @@ class _ClientCategoryState extends State<ClientCategory> {
               ),
             ]),
       ),
+
       body:
       Center(
         child: Container(
+
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: const BorderRadius.all(Radius.circular(20)),
@@ -244,18 +247,75 @@ class _ClientCategoryState extends State<ClientCategory> {
                               child: CircularProgressIndicator(),
                             );
                           } else {
+                            //snapshot.data.docs[index].id;
+                            snapshot.data!.docs.forEach(
+                                  (element) {
+                                // heres your data
+                                element.id;
+                                print(element.id);
+                              },
+                            );
                               print(snapshot.data!.docs.length.toString());
                               counter = snapshot.data!.docs.length.toString();
                             return ListView (
                               children: snapshot.data!.docs.map((doc) {
                                 return Card(
                                   child: ListTile(
+                                         // ()=>print((doc.data() as Map<String, dynamic>)['uid'])
+
+                                    onTap: (){
+                                      showDialog(context: context, builder: (context){
+                                        return AlertDialog(
+                                          title: Text(((doc.data() as Map<String, dynamic>)['name']) ),
+                                          content: Column(
+                                            children: [
+                                              TextField(
+                                                controller: _textFieldController,
+                                                textInputAction: TextInputAction.go,
+                                                keyboardType: TextInputType.numberWithOptions(),
+                                                decoration: InputDecoration(hintText: "Enter your note"),
+                                              ),
+                                              TextField(
+                                                controller: _textFieldController,
+                                                textInputAction: TextInputAction.go,
+                                                keyboardType: TextInputType.numberWithOptions(),
+                                                decoration: InputDecoration(hintText: "Enter your contact info"),
+                                              ),
+                                            ],
+
+
+                                          ),
+                                          actions: [
+                                            ElevatedButton(
+                                              onPressed: (){
+
+
+                                              },
+                                              child: Text('Offer Job'),
+                                              style: ElevatedButton.styleFrom(
+                                                primary: const Color.fromRGBO(111, 215, 85, 1.0),
+                                              ),
+                                            ),
+                                            ElevatedButton(
+                                              onPressed: () => Navigator.pop(context, false),
+                                              child: Text('Cancel'),
+                                              style: ElevatedButton.styleFrom(
+                                                primary: const Color.fromRGBO(220, 57, 57, 1.0),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      });
+                                    },
+
                                     leading: Text((doc.data() as Map<String, dynamic>)['ratings'] ),
                                     title: Text((doc.data() as Map<String, dynamic>)['name'] ),
                                     subtitle: Text((doc.data() as Map<String, dynamic>)['skills'].toString())
                                   ),
                                 );
                               }).toList(),
+
+
                             );
                           }
                         },
