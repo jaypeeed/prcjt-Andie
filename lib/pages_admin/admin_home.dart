@@ -71,10 +71,10 @@ class _AdminHomeState extends State<AdminHome> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Center(
+                     Center(
                       child: Text(
-                        'HI Admin!',
-                        style: TextStyle(
+                        'Hi Admin!',
+                        style: GoogleFonts.roboto(
                           fontWeight: FontWeight.bold,
                           fontSize: 100.0,
                           color: Colors.black,
@@ -83,10 +83,10 @@ class _AdminHomeState extends State<AdminHome> {
                     ),
                     Container(
                       margin: const EdgeInsets.only(top: 20),
-                      child: const Center(
+                      child:  Center(
                         child: Text(
                           'What would you like to do today?',
-                          style: TextStyle(
+                          style: GoogleFonts.roboto(
                             fontSize: 45.0,
                             color: Colors.black,
                           ),
@@ -119,7 +119,7 @@ class _AdminHomeState extends State<AdminHome> {
                           borderRadius: BorderRadius.all(const Radius.circular(10)),
                         ),
                         child: Text('View Client',
-                          style: GoogleFonts.robotoMono(
+                          style: GoogleFonts.roboto(
                             fontSize:45,
                             fontWeight: FontWeight.bold,
                           ),
@@ -135,7 +135,7 @@ class _AdminHomeState extends State<AdminHome> {
                         );
                       },
                       child: Container(
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         width: 500,
                         height: 500,
                         margin: const EdgeInsets.all(20.0),
@@ -145,7 +145,7 @@ class _AdminHomeState extends State<AdminHome> {
                           borderRadius: BorderRadius.all(const Radius.circular(10)),
                         ),
                         child: Text('View Andie',
-                          style: GoogleFonts.robotoMono(
+                          style: GoogleFonts.roboto(
                             fontSize:45,
                             fontWeight: FontWeight.bold,
                           ),
