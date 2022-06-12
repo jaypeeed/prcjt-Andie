@@ -293,20 +293,19 @@ class _CategoryAndieProfileState extends State<CategoryAndieProfile> {
                       children: [
                         ElevatedButton(
                             onPressed: () async {
-                              await _auth.signOut();
-                              html.window.location.reload();
+
                             },
                             style: ElevatedButton.styleFrom(
                                 minimumSize: Size(40,50),
                                 side: const BorderSide(
                                   width: 1, color: Colors.black,
                                 ),
-                                primary: Color.fromRGBO(220, 57, 57, 1.0)
+                                primary: Color.fromRGBO(111, 215, 85, 1.0)
                             ),
                             child: Align(
                               alignment: Alignment.bottomRight,
                               child:  Text(
-                                "LOG OUT",
+                                "OFFER JOB",
                                 style: GoogleFonts.roboto(
                                     fontSize:21,
                                     fontWeight: FontWeight.bold,
