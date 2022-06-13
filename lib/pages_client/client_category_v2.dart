@@ -12,9 +12,11 @@ import 'client_profile.dart';
 
 
 final db = FirebaseFirestore.instance;
+final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 var tmpArray = ['ELECTRICIAN', 'HOUSE KEEPER'];
 TextEditingController _textFieldController = TextEditingController();
 TextEditingController _textFieldControllerContInfo = TextEditingController();
+TextEditingController _textFieldControllerDate = TextEditingController();
 //final str = tmpArray2.join(' ');
 
 /*void main() {
@@ -32,8 +34,43 @@ class ClientCategory extends StatefulWidget {
 
 var tmpArray2 = [''];
 String counter = '';
+String myEmail = '';
+String myGender = '';
+String myAge = '';
+String myName = '';
+String myFb = '';
+String myNumber = '';
 
 class _ClientCategoryState extends State<ClientCategory> {
+  @override
+  void initState() {
+    super.initState();
+    _getdata();
+  }
+
+  final AuthService _auth = AuthService();
+  void _getdata() async {
+    User? user = _firebaseAuth.currentUser;
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(user?.uid)
+        .snapshots()
+        .listen((userData) {
+
+      setState(() {
+        myEmail = userData.data()!['email'];
+        myGender = userData.data()!['gender'];
+        myAge = userData.data()!['age'];
+        myNumber = userData.data()!['contNumber'];
+        myName = userData.data()!['name'];
+        myFb = userData.data()!['fb'];
+
+      });
+    });
+  }
+
+
+
   bool isVisible = true;
 
 
@@ -251,7 +288,6 @@ class _ClientCategoryState extends State<ClientCategory> {
                               child: CircularProgressIndicator(),
                             );
                           } else {
-
                             //snapshot.data.docs[index].id;
                             snapshot.data!.docs.forEach(
                                   (element) {
@@ -307,6 +343,12 @@ class _ClientCategoryState extends State<ClientCategory> {
                                                 keyboardType: TextInputType.numberWithOptions(),
                                                 decoration: InputDecoration(hintText: "Enter your contact info"),
                                               ),
+                                              TextField(
+                                                controller: _textFieldControllerDate,
+                                                textInputAction: TextInputAction.go,
+                                                keyboardType: TextInputType.numberWithOptions(),
+                                                decoration: InputDecoration(hintText: "Start date"),
+                                              ),
                                             ],
 
 
@@ -316,11 +358,42 @@ class _ClientCategoryState extends State<ClientCategory> {
                                               onPressed: () async {
                                                 String clientNote=  _textFieldController.text.trim();
                                                 String clientCont=  _textFieldControllerContInfo.text.trim();
+                                                String clientDate=  _textFieldControllerDate.text.trim();
                                                 //AuthService.addToLedger(context, test, widget.uAndie.ledgerItem('s','s','d'));
                                                /* FirebaseFirestore.instance.collection('users').doc(test).update({
                                                   'pendingClients': '$clientNote $clientCont',
 
                                                 });*/
+
+                                                FirebaseFirestore.instance
+                                                    .collection('users')
+                                                    .doc(test)
+                                                    .update({
+                                                  'pendingClients': FieldValue.arrayUnion([
+                                                    {"date": DateTime.now(),
+                                                      "clientUID": FirebaseAuth.instance.currentUser?.uid,
+                                                      "clientName": myName,
+                                                      "note": clientNote,
+                                                      "dateStart": clientDate,
+                                                      "clientCont": clientCont,
+                                                      "status": "pending"}
+                                                  ])
+                                                });
+
+                                                FirebaseFirestore.instance
+                                                    .collection('users')
+                                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                                    .update({
+                                                  'pendingAndie': FieldValue.arrayUnion([
+                                                    {"date": DateTime.now(),
+                                                      "andieUID": test,
+                                                      "andieName": ((doc.data() as Map<String, dynamic>)['name']),
+                                                      "note": clientNote,
+                                                      "dateStart": clientDate,
+                                                      "status": "pending"
+                                                      }
+                                                  ])
+                                                });
 
                                                /* 'pendingAndies' :FieldValue.arrayUnion({
                                                 {
