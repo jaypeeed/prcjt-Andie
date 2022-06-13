@@ -118,13 +118,26 @@ class _AdminHomeState extends State<AdminHome> {
                           border: Border.all(width: 2),
                           borderRadius: BorderRadius.all(const Radius.circular(10)),
                         ),
-                        child: Text('View Client',
-                          style: GoogleFonts.roboto(
-                            fontSize:45,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('View Client',
+                              style: GoogleFonts.roboto(
+                                fontSize:45,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 30),
+                              child: Center(
+                                child: Image.asset('client_typing.gif',
+                                  width: 200,
+                                  height: 200,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-
                       ),
                     ),
                     GestureDetector(
@@ -144,11 +157,25 @@ class _AdminHomeState extends State<AdminHome> {
                           border: Border.all(width: 2),
                           borderRadius: BorderRadius.all(const Radius.circular(10)),
                         ),
-                        child: Text('View Andie',
-                          style: GoogleFonts.roboto(
-                            fontSize:45,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('View Andie',
+                              style: GoogleFonts.roboto(
+                                fontSize:45,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 30),
+                              child: Center(
+                                child: Image.asset('andie_suit.gif',
+                                  width: 200,
+                                  height: 200,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
 
                       ),

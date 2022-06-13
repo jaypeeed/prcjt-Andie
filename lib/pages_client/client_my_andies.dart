@@ -416,7 +416,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                         margin: const EdgeInsets.only(right: 65, top: 20),
                         child: ElevatedButton(
                           child: const Text('CANCEL'),
-                          onPressed: () async {},
+                          onPressed: () => Navigator.pop(context, false),
                         ),
                       ),
                     ],

@@ -304,11 +304,34 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                               child: Container(
                                 margin: const EdgeInsets.only(left: 10, right: 10),
                                 child: ElevatedButton(
+                                  child: const Text('Accept'),
                                   style: ElevatedButton.styleFrom(
                                     primary: const Color.fromRGBO(111, 215, 85, 1.0),
                                   ),
-                                  onPressed: (){},
-                                  child: const Text('Accept'),
+                                  onPressed: (){
+                                    showDialog(context: context, builder: (context){
+                                      return AlertDialog(
+                                        title: Text("Hi Andie!"),
+                                        content: Text("You are About to Accept the Job. Are you sure you want to Accept the Job?"),
+                                        actions: [
+                                          ElevatedButton(
+                                            onPressed: (){},
+                                            child: Text('Yes I Accept'),
+                                            style: ElevatedButton.styleFrom(
+                                              primary: const Color.fromRGBO(111, 215, 85, 1.0),
+                                            ),
+                                          ),
+                                          ElevatedButton(
+                                            onPressed: () => Navigator.pop(context, false),
+                                            child: Text('Cancel'),
+                                            style: ElevatedButton.styleFrom(
+                                              primary: const Color.fromRGBO(220, 57, 57, 1.0),
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    });
+                                  },
                                 ),
                               ),
                             ),
@@ -320,7 +343,30 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                                   style: ElevatedButton.styleFrom(
                                     primary: const Color.fromRGBO(220, 57, 57, 1.0),
                                   ),
-                                  onPressed: (){},
+                                  onPressed: (){
+                                    showDialog(context: context, builder: (context){
+                                      return AlertDialog(
+                                        title: Text("Hi Andie!"),
+                                        content: Text("You are About to Decline the Job. Are you sure you want to Decline the Job?"),
+                                        actions: [
+                                          ElevatedButton(
+                                            onPressed: (){},
+                                            child: Text('Yes, Decline'),
+                                            style: ElevatedButton.styleFrom(
+                                              primary: const Color.fromRGBO(111, 215, 85, 1.0),
+                                            ),
+                                          ),
+                                          ElevatedButton(
+                                            onPressed: () => Navigator.pop(context, false),
+                                            child: Text('Cancel'),
+                                            style: ElevatedButton.styleFrom(
+                                              primary: const Color.fromRGBO(220, 57, 57, 1.0),
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    });
+                                  },
                                   child: const Text('Decline'),
                                 ),
                               ),

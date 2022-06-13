@@ -1,21 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../services/auth.dart';
-import 'andie_my_job.dart';
 import 'package:universal_html/html.dart' as html;
+import '../pages/andie_profile_andie.dart';
+import '../services/auth.dart';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
-import 'andie_ratings.dart';
-
-/*
-void main() {
-  runApp(const MaterialApp(home: AndieProfile()));
-}
-*/
 
 final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 List<dynamic> skillsList=[];
@@ -30,13 +21,15 @@ String myEmail = '';
 String myFb = '';
 String myNumber = '';
 
-class AndieProfile extends StatefulWidget {
-  const AndieProfile({Key? key}) : super(key: key);
+
+class CategoryAndieProfile extends StatefulWidget {
+  const CategoryAndieProfile({Key? key}) : super(key: key);
+
   @override
-  State<AndieProfile> createState() => _AndieProfileState();
+  State<CategoryAndieProfile> createState() => _CategoryAndieProfileState();
 }
 
-class _AndieProfileState extends State<AndieProfile> {
+class _CategoryAndieProfileState extends State<CategoryAndieProfile> {
   @override
   void initState() {
     super.initState();
@@ -70,6 +63,9 @@ class _AndieProfileState extends State<AndieProfile> {
       });
     });
   }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,57 +83,6 @@ class _AndieProfileState extends State<AndieProfile> {
                 margin: const EdgeInsets.only(right: 65),
                 child: TextButton(
                   style: TextButton.styleFrom(
-                    textStyle: const TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w900,
-                      decoration: TextDecoration.underline,
-                    ),
-                  ),
-                  onPressed: (){
-                    Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
-                        Animation secondaryAnimation)=>const AndieMyJobs(),
-                        transitionDuration: const Duration(seconds: 0)),
-                    );
-                  },
-                  child: const Text('My Jobs',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Center(
-              child: Container(
-                margin: const EdgeInsets.only(right: 65),
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    textStyle: const TextStyle(fontSize: 20),
-                  ),
-                  onPressed: () {
-                    Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
-                        Animation secondaryAnimation)=>const AndieRatings1(),
-                        transitionDuration: const Duration(seconds: 0)),
-                    );
-                  },
-                  child: const Text('Ratings',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Center(
-              child: Container(
-                margin: const EdgeInsets.only(right: 65),
-                child: TextButton(
-                  style: TextButton.styleFrom(
                     textStyle: const TextStyle(fontSize: 20),
                   ),
                   onPressed: (){
@@ -146,7 +91,7 @@ class _AndieProfileState extends State<AndieProfile> {
                         transitionDuration: const Duration(seconds: 0)),
                     );
                   },
-                  child: const Text('Profile',
+                  child: const Text('Log out',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -214,7 +159,7 @@ class _AndieProfileState extends State<AndieProfile> {
                   ]),
                   Container(
                     padding:
-                        const EdgeInsets.only(left: 10, top: 10, bottom: 10),
+                    const EdgeInsets.only(left: 10, top: 10, bottom: 10),
                     child: Text(
                       '$myName',
                       style: GoogleFonts.robotoMono(
@@ -224,7 +169,7 @@ class _AndieProfileState extends State<AndieProfile> {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                   Text(
+                  Text(
                     ' $myExp. $myEdu. $myYears',
                     style: GoogleFonts.roboto(
                       fontSize: 20,
@@ -232,18 +177,18 @@ class _AndieProfileState extends State<AndieProfile> {
                     ),
                     textAlign: TextAlign.left,
                   ),
-                   Container(
-                     padding: const EdgeInsets.only(top: 30,bottom: 10),
-                     child:  Text(
+                  Container(
+                    padding: const EdgeInsets.only(top: 30,bottom: 10),
+                    child:  Text(
                       'Contact Information',
-                       style: GoogleFonts.roboto(
-                           fontSize: 40,
-                           color: Colors.black,
-                           fontWeight: FontWeight.bold,
-                           letterSpacing: 2.0),
-                       textAlign: TextAlign.center,
+                      style: GoogleFonts.roboto(
+                          fontSize: 40,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 2.0),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
-                   ),
 
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -348,20 +293,19 @@ class _AndieProfileState extends State<AndieProfile> {
                       children: [
                         ElevatedButton(
                             onPressed: () async {
-                              await _auth.signOut();
-                              html.window.location.reload();
+
                             },
                             style: ElevatedButton.styleFrom(
                                 minimumSize: Size(40,50),
                                 side: const BorderSide(
                                   width: 1, color: Colors.black,
                                 ),
-                                primary: Color.fromRGBO(220, 57, 57, 1.0)
+                                primary: Color.fromRGBO(111, 215, 85, 1.0)
                             ),
                             child: Align(
                               alignment: Alignment.bottomRight,
                               child:  Text(
-                                "LOG OUT",
+                                "OFFER JOB",
                                 style: GoogleFonts.roboto(
                                     fontSize:21,
                                     fontWeight: FontWeight.bold,
@@ -381,6 +325,9 @@ class _AndieProfileState extends State<AndieProfile> {
       ),
     );
   }
+
+
+
   void getSkillsList() async{
     User? user = _firebaseAuth.currentUser;
     FirebaseFirestore.instance
@@ -411,9 +358,4 @@ class _AndieProfileState extends State<AndieProfile> {
 
     skillsList = value.data()!["skills"];
   }
-
-
-
 }
-
-
