@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:prjct_andie/checkbox/checkbox_state.dart';
+import 'package:prjct_andie/services/auth.dart';
 
+import '../models/userAndie.dart';
 import 'client_my_andies.dart';
 import 'client_profile.dart';
 
@@ -11,6 +14,7 @@ import 'client_profile.dart';
 final db = FirebaseFirestore.instance;
 var tmpArray = ['ELECTRICIAN', 'HOUSE KEEPER'];
 TextEditingController _textFieldController = TextEditingController();
+TextEditingController _textFieldControllerContInfo = TextEditingController();
 //final str = tmpArray2.join(' ');
 
 /*void main() {
@@ -18,8 +22,8 @@ TextEditingController _textFieldController = TextEditingController();
 }*/
 
 class ClientCategory extends StatefulWidget {
-  const ClientCategory({Key? key}) : super(key: key);
 
+  late final userAndie uAndie;
 
   @override
   State<ClientCategory> createState() => _ClientCategoryState();
@@ -247,6 +251,7 @@ class _ClientCategoryState extends State<ClientCategory> {
                               child: CircularProgressIndicator(),
                             );
                           } else {
+
                             //snapshot.data.docs[index].id;
                             snapshot.data!.docs.forEach(
                                   (element) {
@@ -258,17 +263,38 @@ class _ClientCategoryState extends State<ClientCategory> {
                               print(snapshot.data!.docs.length.toString());
                               counter = snapshot.data!.docs.length.toString();
                             return ListView (
+
                               children: snapshot.data!.docs.map((doc) {
+                                var test = (doc.data() as Map<String, dynamic>)['uid'];
+                                var name = ((doc.data() as Map<String, dynamic>)['name']);
+                                var skills = (doc.data() as Map<String, dynamic>)['skills'].toString();
+                                var age = (doc.data() as Map<String, dynamic>)['age'];
+                                var gender = (doc.data() as Map<String, dynamic>)['gender'];
+                                var exp = (doc.data() as Map<String, dynamic>)['experience'];
+                                var school = (doc.data() as Map<String, dynamic>)['school'];
+                                var yow =(doc.data() as Map<String, dynamic>)['yearsOfWork'];
+                                var cont = (doc.data() as Map<String, dynamic>)['contactNumber'];
+                                var email = (doc.data() as Map<String, dynamic>)['email'];
+                                var facebook =  (doc.data() as Map<String, dynamic>)['facebook'];
+
                                 return Card(
                                   child: ListTile(
                                          // ()=>print((doc.data() as Map<String, dynamic>)['uid'])
-
-                                    onTap: (){
+                                    onTap: ()  {
                                       showDialog(context: context, builder: (context){
                                         return AlertDialog(
-                                          title: Text(((doc.data() as Map<String, dynamic>)['name']) ),
+                                          title: Text(name ),
                                           content: Column(
                                             children: [
+                                              Text(skills),
+                                              Text(age),
+                                              Text(gender),
+                                              Text(exp),
+                                              Text(school),
+                                              Text(yow),
+                                              Text(cont),
+                                              Text(email),
+                                              Text(facebook),
                                               TextField(
                                                 controller: _textFieldController,
                                                 textInputAction: TextInputAction.go,
@@ -276,7 +302,7 @@ class _ClientCategoryState extends State<ClientCategory> {
                                                 decoration: InputDecoration(hintText: "Enter your note"),
                                               ),
                                               TextField(
-                                                controller: _textFieldController,
+                                                controller: _textFieldControllerContInfo,
                                                 textInputAction: TextInputAction.go,
                                                 keyboardType: TextInputType.numberWithOptions(),
                                                 decoration: InputDecoration(hintText: "Enter your contact info"),
@@ -287,9 +313,46 @@ class _ClientCategoryState extends State<ClientCategory> {
                                           ),
                                           actions: [
                                             ElevatedButton(
-                                              onPressed: (){
+                                              onPressed: () async {
+                                                String clientNote=  _textFieldController.text.trim();
+                                                String clientCont=  _textFieldControllerContInfo.text.trim();
+                                                //AuthService.addToLedger(context, test, widget.uAndie.ledgerItem('s','s','d'));
+                                               /* FirebaseFirestore.instance.collection('users').doc(test).update({
+                                                  'pendingClients': '$clientNote $clientCont',
+
+                                                });*/
+
+                                               /* 'pendingAndies' :FieldValue.arrayUnion({
+                                                {
+                                                "andieId": test,
+                                                "andieName": (doc.data() as Map<String, dynamic>)['name'],
+                                                },
+                                                }),*/
+                                                Navigator.pop(context, false);
 
 
+                                                /*getData() async {
+                                                  return await FirebaseFirestore.instance.collection('users').where('id', isEqualTo: FirebaseAuth.instance.currentUser).get();
+                                                }
+                                                getData().then((val){
+                                                  if(val.docs.length>0){
+                                                    //print(val.docs[0].data()['cart']);
+
+                                                    // Map map = val.docs[0].data()['cart'];
+                                                    var list = [val.docs[0].data()['pendingAndies']];
+                                                    // map.entries.forEach((e) {
+                                                    //   list.add();
+                                                    // });
+                                                    // List items = [val.docs[0].data()['cart'].toList()];
+                                                    FirebaseFirestore.instance.collection('users').doc().set({
+
+
+                                                    });
+                                                  }
+                                                  else{
+                                                    print("Not Found");
+                                                  }
+                                                });*/
                                               },
                                               child: Text('Offer Job'),
                                               style: ElevatedButton.styleFrom(

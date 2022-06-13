@@ -15,6 +15,8 @@ class userAndie {
   String selectedItem= '';
   String phto= '';
 
+
+
   userAndie(
       this.name,
     this.ratings,
@@ -44,8 +46,22 @@ userAndie.fromMap(Map<String, dynamic> data){
   phto= data['photo'];
 
 
-}
 
+}
+  Map<String, dynamic> ledgerItem(String clientUID, String note, String clientName) {
+
+    return {
+      'ledger': FieldValue.arrayUnion([
+        {
+          "date": DateTime.now(),
+          "clientUID": clientUID,
+          "clientName": clientName,
+          "note": note,
+
+        },
+      ]),
+    };
+  }
 
 
 }

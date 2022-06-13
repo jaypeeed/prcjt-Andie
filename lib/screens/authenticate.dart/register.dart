@@ -19,6 +19,9 @@ class Register extends StatefulWidget {
 }
 
 var tmpArray = [];
+var pendingClients = [];
+var finalClients = [];
+var historyClients = [];
 
 class _RegisterState extends State<Register> {
   TextEditingController emailController = new TextEditingController();
@@ -498,9 +501,9 @@ class _RegisterState extends State<Register> {
                                         "gender": selectedItem,
                                         "photo": "phto",
                                         "ratings": "ratng",
-                                        "pendingClients": "pendingClients",
-                                        "finalClients": "finalClients",
-                                        "historyClients": "historyClients",
+                                        "pendingClients": pendingClients,
+                                        "finalClients": finalClients,
+                                        "historyClients": historyClients,
                                         "role": "andie",
                                       });
                                     });
