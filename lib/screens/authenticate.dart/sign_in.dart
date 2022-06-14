@@ -172,7 +172,6 @@ class _SignInState extends State<SignIn> {
                               colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.1), BlendMode.dstATop),
                             ),
                       ),
-
                       //  color: Colors.white,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
