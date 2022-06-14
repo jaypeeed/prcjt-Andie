@@ -314,6 +314,11 @@ class _ClientCategoryState extends State<ClientCategory> {
                                 var email = (doc.data() as Map<String, dynamic>)['email'];
                                 var facebook =  (doc.data() as Map<String, dynamic>)['facebook'];
 
+ ///////////////////////////////////////////////RATING/////////////////////////////////////////////////////////////////////
+                                var rateCounts =  (doc.data() as Map<String, dynamic>)['rateCount'];
+                                var ratings =  (doc.data() as Map<String, dynamic>)['ratings'];
+                                ///////////////////////////////////////////////RATING/////////////////////////////////////////////////////////////////////
+
                                 return Card(
                                   child: ListTile(
                                          // ()=>print((doc.data() as Map<String, dynamic>)['uid'])
@@ -451,27 +456,54 @@ class _ClientCategoryState extends State<ClientCategory> {
                                                 String clientNote=  _textFieldController.text.trim();
                                                 String clientCont=  _textFieldControllerContInfo.text.trim();
                                                 String clientDate=  _textFieldControllerDate.text.trim();
+
+                                                FirebaseFirestore.instance
+                                                    .collection("pendingAndie")
+                                                    .doc()
+                                                    .set({
+                                                  "clientUID": FirebaseAuth.instance.currentUser?.uid,
+                                                  "andieUID": test,
+                                                  "andieName": name,
+                                                  "andieSkills": skills,
+                                                  "andieAge": age,
+                                                  "andieGender": gender,
+                                                  "andieExp": exp,
+                                                  "andieSchool": school,
+                                                  "andieYow": yow,
+                                                  "andieCont": cont,
+                                                  "andieEmail": email,
+                                                  "andieFacebook": facebook,
+                                                  "andieTotalRate": (doc.data() as Map<String, dynamic>)['totalRate'],
+                                                  "clientNote": clientNote,
+                                                  "dateTime": DateTime.now(),
+                                                  'startDate': clientDate,
+                                                  'clientCont': clientCont,
+                                                  'docUID': doc.id,
+                                                });
                                                 //AuthService.addToLedger(context, test, widget.uAndie.ledgerItem('s','s','d'));
                                                /* FirebaseFirestore.instance.collection('users').doc(test).update({
                                                   'pendingClients': '$clientNote $clientCont',
 
                                                 });*/
-
+//////////////////////////////////////////////RATINGGGGGGGGGGGG///////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                /*int rating = 4;
+                                                int rateCount = 1;
                                                 FirebaseFirestore.instance
                                                     .collection('users')
                                                     .doc(test)
                                                     .update({
-                                                  'pendingClients': FieldValue.arrayUnion([
-                                                    {"date": DateTime.now(),
-                                                      "clientUID": FirebaseAuth.instance.currentUser?.uid,
-                                                      "clientName": myName,
-                                                      "note": clientNote,
-                                                      "dateStart": clientDate,
-                                                      "clientCont": clientCont,
-                                                      "status": "pending"}
-                                                  ])
-                                                });
-
+                                                  'rates': FieldValue.arrayUnion([
+                                                    {
+                                                      "ratingNumber": rating,
+                                                      "client": FirebaseAuth.instance.currentUser?.uid,
+                                                      "note": clientNote}
+                                                  ]),
+                                                  'ratings': FieldValue.increment(rating),
+                                                  'rateCount': FieldValue.increment(rateCount),
+                                                  'totalRate': ratings/rateCounts
+                                                });*/
+/*
+//////////////////////////////////////////////RATINGGGGGGGGGGGG///////////////////////////////////////////////////////////////////////////////////////////////////////
                                                 FirebaseFirestore.instance
                                                     .collection('users')
                                                     .doc(FirebaseAuth.instance.currentUser?.uid)
@@ -485,7 +517,7 @@ class _ClientCategoryState extends State<ClientCategory> {
                                                       "status": "pending"
                                                       }
                                                   ])
-                                                });
+                                                });*/
 
                                                /* 'pendingAndies' :FieldValue.arrayUnion({
                                                 {
@@ -537,7 +569,7 @@ class _ClientCategoryState extends State<ClientCategory> {
                                       });
                                     },
 
-                                    leading: Text((doc.data() as Map<String, dynamic>)['ratings'] ),
+                                    leading: Text((doc.data() as Map<String, dynamic>)['totalRate'].toString()),
                                     title: Text((doc.data() as Map<String, dynamic>)['name'] ),
                                     subtitle: Text((doc.data() as Map<String, dynamic>)['skills'].toString())
                                   ),

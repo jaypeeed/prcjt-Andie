@@ -19,9 +19,11 @@ class Register extends StatefulWidget {
 }
 
 var tmpArray = [];
-var pendingClients = [];
-var finalClients = [];
-var historyClients = [];
+var rates = [];
+var totalRate = 0;
+var ratings = 0;
+var report = [];
+var rateCount = [];
 
 class _RegisterState extends State<Register> {
   TextEditingController emailController = new TextEditingController();
@@ -473,15 +475,8 @@ class _RegisterState extends State<Register> {
                                   if (password.isEmpty) {
                                     print("Password is Empty");
                                   } else {
-                                    context
-                                        .read<AuthServices>()
-                                        .signUp(
-                                          email,
-                                          password,
-                                        )
-                                        .then((value) async {
-                                      User? user =
-                                          FirebaseAuth.instance.currentUser;
+                                    context.read<AuthServices>().signUp(email, password,).then((value) async {
+                                      User? user = FirebaseAuth.instance.currentUser;
 
                                       await FirebaseFirestore.instance
                                           .collection("users")
@@ -500,10 +495,11 @@ class _RegisterState extends State<Register> {
                                         "facebook": fb,
                                         "gender": selectedItem,
                                         "photo": "phto",
-                                        "ratings": "ratng",
-                                        "pendingClients": pendingClients,
-                                        "finalClients": finalClients,
-                                        "historyClients": historyClients,
+                                        "rateCount": rateCount,
+                                        "totalRate": totalRate,
+                                        "rates": rates,
+                                        "ratings": ratings,
+                                        "reportCount": report,
                                         "role": "andie",
                                       });
                                     });

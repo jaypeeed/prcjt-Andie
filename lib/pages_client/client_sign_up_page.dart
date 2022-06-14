@@ -17,9 +17,6 @@ class SignUpClient extends StatefulWidget {
   @override
   State<SignUpClient> createState() => _SignUpClientState();
 }
-var pendingAndies = [];
-var finalAndies = [];
-var historyAndies = [];
 
 class _SignUpClientState extends State<SignUpClient> {
   TextEditingController emailController = new TextEditingController();
@@ -333,9 +330,6 @@ class _SignUpClientState extends State<SignUpClient> {
                                         "name": name,
                                         "fb": fb,
                                         "gender": selectedItem,
-                                        "pendingAndie": pendingAndies,
-                                        "finalAndie": finalAndies,
-                                        "historyAndie": historyAndies,
                                         "photo": "phto",
                                         "role": "user",
                                       });

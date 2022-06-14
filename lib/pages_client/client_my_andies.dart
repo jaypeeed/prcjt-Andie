@@ -284,7 +284,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                               border: Border.all(
                                 color: Colors.black,
                               )),
-                          child: FutureBuilder(
+                          /*child: FutureBuilder(
                               future: getData(),
                               builder: (_,
                                   AsyncSnapshot<List<DocumentSnapshot>>
@@ -320,14 +320,63 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                           ),
                                         );
                                       }
-                                      /* itemBuilder: (_, index) {
+                                      *//* itemBuilder: (_, index) {
                                       return Text(snapshot.data![index].data().toString());
-                                    }*/
+                                    }*//*
                                       );
                                 } else {
                                   return CircularProgressIndicator();
                                 }
-                              })),
+                              })*/
+
+
+
+                        child: StreamBuilder<QuerySnapshot>(
+                          stream: db.collection('pendingAndie').where('clientUID', isEqualTo: FirebaseAuth.instance.currentUser?.uid).snapshots(),
+                          builder: (context, snapshot) {
+                            if (!snapshot.hasData) {
+                              Text ('HELLO');
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            } else {
+                              //snapshot.data.docs[index].id;
+                              snapshot.data!.docs.forEach(
+                                    (element) {
+                                  // heres your data
+                                  element.id;
+                                  print(element.id);
+                                },
+                              );
+                              print(snapshot.data!.docs.length.toString());
+                              counter = snapshot.data!.docs.length.toString();
+                              return ListView (
+
+                                children: snapshot.data!.docs.map((doc) {
+                                  Timestamp t = (doc.data() as Map<String, dynamic>)['dateTime'];
+                                  ///////////////////////////////////////////////RATING/////////////////////////////////////////////////////////////////////
+/*                                var rateCounts =  (doc.data() as Map<String, dynamic>)['rateCount'];
+                                var ratings =  (doc.data() as Map<String, dynamic>)['ratings'];*/
+                                  ///////////////////////////////////////////////RATING/////////////////////////////////////////////////////////////////////
+
+                                  return Card(
+                                    child: ListTile(
+                                      // ()=>print((doc.data() as Map<String, dynamic>)['uid'])
+                                        onTap: ()  {},
+
+                                        leading: Text((doc.data() as Map<String, dynamic>)['andieName']),
+                                        title: Text((doc.data() as Map<String, dynamic>)['clientNote'] ),
+                                        subtitle: Text(t.toDate().toString() )
+                                    ),
+                                  );
+                                }).toList(),
+
+
+                              );
+                            }
+                          },
+                        ),
+                      ),
                     )
                   ],
                 ),
