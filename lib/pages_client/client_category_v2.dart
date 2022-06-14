@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:prjct_andie/checkbox/checkbox_state.dart';
 import 'package:prjct_andie/services/auth.dart';
 
@@ -319,18 +320,109 @@ class _ClientCategoryState extends State<ClientCategory> {
                                     onTap: ()  {
                                       showDialog(context: context, builder: (context){
                                         return AlertDialog(
-                                          title: Text(name ),
+                                          title: Text(name,
+                                            style: GoogleFonts.robotoMono(
+                                              fontSize:30,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
                                           content: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(skills),
-                                              Text(age),
-                                              Text(gender),
-                                              Text(exp),
-                                              Text(school),
-                                              Text(yow),
-                                              Text(cont),
-                                              Text(email),
-                                              Text(facebook),
+                                              Row(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  //------------------------------ CONTAINS THE TEXT ONLY -----------------------
+                                                  Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                    children: [
+                                                      Text('Age:',
+                                                        style: GoogleFonts.roboto(
+                                                          fontSize:20,
+                                                          fontWeight: FontWeight.bold,
+                                                        ),),
+                                                      Text('Gender:',
+                                                        style: GoogleFonts.roboto(
+                                                          fontSize:20,
+                                                          fontWeight: FontWeight.bold,
+                                                        ),),
+                                                      Text('Ep:',
+                                                        style: GoogleFonts.roboto(
+                                                          fontSize:20,
+                                                          fontWeight: FontWeight.bold,
+                                                        ),),
+                                                      Text('School:',
+                                                        style: GoogleFonts.roboto(
+                                                          fontSize:20,
+                                                          fontWeight: FontWeight.bold,
+                                                        ),),
+                                                      Text('Yow:',
+                                                        style: GoogleFonts.roboto(
+                                                          fontSize:20,
+                                                          fontWeight: FontWeight.bold,
+                                                        ),),
+                                                      Text('Cont:',
+                                                        style: GoogleFonts.roboto(
+                                                          fontSize:20,
+                                                          fontWeight: FontWeight.bold,
+                                                        ),),
+                                                      Text('Email:',
+                                                        style: GoogleFonts.roboto(
+                                                          fontSize:20,
+                                                          fontWeight: FontWeight.bold,
+                                                        ),),
+                                                      Text('Facebook:',
+                                                        style: GoogleFonts.roboto(
+                                                          fontSize:20,
+                                                          fontWeight: FontWeight.bold,
+                                                        ),),
+                                                    ],
+                                                  ),
+                                                  SizedBox(width: 30,),
+                                                  //------------------------------ CONTAINS THE DATA F TEXT ONLY KRSIH DIRI KA! -----------------------
+                                                  Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                    children: [
+                                                      Text(age,
+                                                        style: GoogleFonts.roboto(
+                                                          fontSize:20,
+                                                        ),),
+                                                      Text(gender,
+                                                        style: GoogleFonts.roboto(
+                                                          fontSize:20,
+                                                        ),),
+                                                      Text(exp,
+                                                        style: GoogleFonts.roboto(
+                                                          fontSize:20,
+                                                        ),),
+                                                      Text(school,
+                                                        style: GoogleFonts.roboto(
+                                                          fontSize:20,
+                                                        ),),
+                                                      Text(yow,
+                                                        style: GoogleFonts.roboto(
+                                                          fontSize:20,
+                                                        ),),
+                                                      Text(cont,
+                                                        style: GoogleFonts.roboto(
+                                                          fontSize:20,
+                                                        ),),
+                                                      Text(email,
+                                                        style: GoogleFonts.roboto(
+                                                          fontSize:20,
+                                                        ),),
+                                                      Text(facebook,
+                                                        style: GoogleFonts.roboto(
+                                                          fontSize:20,
+                                                        ),),
+                                                    ],
+                                                  )
+                                                ],
+                                              ),
                                               TextField(
                                                 controller: _textFieldController,
                                                 textInputAction: TextInputAction.go,
@@ -431,6 +523,7 @@ class _ClientCategoryState extends State<ClientCategory> {
                                               style: ElevatedButton.styleFrom(
                                                 primary: const Color.fromRGBO(111, 215, 85, 1.0),
                                               ),
+
                                             ),
                                             ElevatedButton(
                                               onPressed: () => Navigator.pop(context, false),
