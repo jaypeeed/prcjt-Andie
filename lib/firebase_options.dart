@@ -35,6 +35,16 @@ class DefaultFirebaseOptions {
           'DefaultFirebaseOptions have not been configured for macos - '
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
+      case TargetPlatform.windows:
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for windows - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
+      case TargetPlatform.linux:
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for linux - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       default:
         throw UnsupportedError(
           'DefaultFirebaseOptions are not supported for this platform.',
@@ -43,11 +53,11 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAkhd_DTk89Lgt-QtiVlUuSc7hALGfAxEg',
-    appId: '1:558196395458:web:54d18e6ed59a974ef95a5b',
-    messagingSenderId: '558196395458',
-    projectId: 'prjct-andie',
-    authDomain: 'prjct-andie.firebaseapp.com',
-    storageBucket: 'prjct-andie.appspot.com',
+    apiKey: "AIzaSyBouk4FMLLa9wEMfZVL_h2c9U91VJI3kfg",
+    appId: "1:658372452486:web:b0feafb8707aaed446f107",
+    messagingSenderId: "658372452486",
+    projectId: "prjct-andie-v2",
+    authDomain: "prjct-andie-v2.firebaseapp.com",
+    storageBucket: "prjct-andie-v2.appspot.com",
   );
 }

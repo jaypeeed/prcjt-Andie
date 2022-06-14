@@ -25,11 +25,85 @@ class ClientMyAndie extends StatefulWidget {
 }
 
 class _ClientMyAndieState extends State<ClientMyAndie> {
+  GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+
+  Future<void> showRatingDialog(BuildContext context) async {
+    await showDialog(
+        context: context,
+        builder: (context) {
+          final TextEditingController _textReviewController =
+              TextEditingController();
+          return StatefulBuilder(builder: (context, setstate) {
+            return AlertDialog(
+              content: Form(
+                  key: _formkey,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      TextFormField(
+                        controller: _textReviewController,
+                        validator: (value) {
+                          return value!.isNotEmpty ? null : "Invalid Field";
+                        },
+                        decoration:
+                            const InputDecoration(hintText: "Enter Some Text"),
+                      ),
+                      Center(
+                        child: RatingStars(
+                          value: value,
+                          onValueChanged: (v) {
+                            setState(() {
+                              value = v;
+                            });
+                          },
+                          starBuilder: (index, color) => Icon(
+                            Icons.star,
+                            color: color,
+                          ),
+                          starCount: 5,
+                          starSize: 30,
+                          valueLabelColor: const Color(0xff9b9b9b),
+                          valueLabelTextStyle: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w400,
+                              fontStyle: FontStyle.normal,
+                              fontSize: 12.0),
+                          valueLabelRadius: 10,
+                          maxValue: 5,
+                          starSpacing: 2,
+                          maxValueVisibility: true,
+                          valueLabelVisibility: true,
+                          animationDuration: const Duration(milliseconds: 100),
+                          valueLabelPadding: const EdgeInsets.symmetric(
+                              vertical: 1, horizontal: 8),
+                          valueLabelMargin: const EdgeInsets.only(right: 8),
+                          starOffColor: const Color(0xffe7e8ea),
+                          starColor: Colors.amber,
+                        ),
+                      ),
+                    ],
+                  )),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () {
+                    if (_formkey.currentState!.validate()) {
+                      Navigator.of(context).pop();
+                    }
+                  },
+                  child: Text('Hi'),
+                ),
+              ],
+            );
+          });
+        });
+  }
+
   @override
   void initState() {
     super.initState();
     _getdata();
   }
+
   var tmpArray2 = [''];
   String counter = '';
   String myEmail = '';
@@ -48,7 +122,6 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
         .doc(user?.uid)
         .snapshots()
         .listen((userData) {
-
       setState(() {
         myEmail = userData.data()!['email'];
         myGender = userData.data()!['gender'];
@@ -56,7 +129,6 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
         myNumber = userData.data()!['contNumber'];
         myName = userData.data()!['name'];
         myFb = userData.data()!['fb'];
-
       });
     });
   }
@@ -65,10 +137,10 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
     var firestore = FirebaseFirestore.instance;
     QuerySnapshot qn = await firestore
         .collection("users")
-        .where("uid", isEqualTo: FirebaseAuth.instance.currentUser?.uid).get();
+        .where("uid", isEqualTo: FirebaseAuth.instance.currentUser?.uid)
+        .get();
     return qn.docs;
   }
-
 
   double value = 3.5;
   @override
@@ -91,9 +163,14 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                     textStyle: const TextStyle(fontSize: 20),
                   ),
                   onPressed: () {
-                    Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
-                        Animation secondaryAnimation)=>const ClientMyAndie(),
-                        transitionDuration: const Duration(seconds: 0)),
+                    Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                          pageBuilder: (BuildContext context,
+                                  Animation animation,
+                                  Animation secondaryAnimation) =>
+                              const ClientMyAndie(),
+                          transitionDuration: const Duration(seconds: 0)),
                     );
                   },
                   child: const Text(
@@ -112,9 +189,14 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                     textStyle: const TextStyle(fontSize: 20),
                   ),
                   onPressed: () {
-                    Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
-                        Animation secondaryAnimation)=>ClientCategory(),
-                        transitionDuration: const Duration(seconds: 0)),
+                    Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                          pageBuilder: (BuildContext context,
+                                  Animation animation,
+                                  Animation secondaryAnimation) =>
+                              ClientCategory(),
+                          transitionDuration: const Duration(seconds: 0)),
                     );
                   },
                   child: const Text(
@@ -133,9 +215,14 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                     textStyle: const TextStyle(fontSize: 20),
                   ),
                   onPressed: () {
-                    Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
-                        Animation secondaryAnimation)=>ClientProfile(),
-                        transitionDuration: const Duration(seconds: 0)),
+                    Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                          pageBuilder: (BuildContext context,
+                                  Animation animation,
+                                  Animation secondaryAnimation) =>
+                              ClientProfile(),
+                          transitionDuration: const Duration(seconds: 0)),
                     );
                   },
                   child: const Text(
@@ -152,9 +239,9 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
       body: Container(
         decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/background1.png'),
-              fit: BoxFit.cover,
-            )),
+          image: AssetImage('assets/background1.png'),
+          fit: BoxFit.cover,
+        )),
         child: Row(
           children: [
             // ------------------ Left Side ----------------
@@ -171,7 +258,8 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [Expanded(
+                  children: [
+                    Expanded(
                       flex: 2,
                       child: Container(
                           margin: const EdgeInsets.only(left: 30, top: 30),
@@ -188,51 +276,58 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                     Expanded(
                       flex: 10,
                       child: Container(
-                        margin: const EdgeInsets.only(
-                            bottom: 30, left: 30, right: 30),
-                        decoration: BoxDecoration(
-                            borderRadius:
-                            const BorderRadius.all(Radius.circular(0)),
-                            border: Border.all(
-                              color: Colors.black,
-                            )),
-                            child:  FutureBuilder(
-                                future: getData(),
-                                builder: (_, AsyncSnapshot<List<DocumentSnapshot>> snapshot) {
-                                  if(snapshot.hasData){
-                                    return ListView.builder(
+                          margin: const EdgeInsets.only(
+                              bottom: 30, left: 30, right: 30),
+                          decoration: BoxDecoration(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(0)),
+                              border: Border.all(
+                                color: Colors.black,
+                              )),
+                          child: FutureBuilder(
+                              future: getData(),
+                              builder: (_,
+                                  AsyncSnapshot<List<DocumentSnapshot>>
+                                      snapshot) {
+                                if (snapshot.hasData) {
+                                  return ListView.builder(
                                       itemCount: snapshot.data!.length,
-                                        itemBuilder: (context,index){
-                                          return Card(
-                                            child: ListTile(
-                                              title: Text(snapshot.data![index].get('pendingAndie')[index].toString()),
-                                              onTap: () async{
-                                                FirebaseFirestore.instance
-                                                    .collection('users')
-                                                    .where("uid", isEqualTo: FirebaseAuth.instance.currentUser?.uid).get()
-                                                    .then((QuerySnapshot querySnapshot) {
-                                                  querySnapshot.docs.forEach((doc) {
-                                                    print(doc["pendingAndie"][0]["andieName"]);
-                                                  });
+                                      itemBuilder: (context, index) {
+                                        return Card(
+                                          child: ListTile(
+                                            title: Text(snapshot.data![index]
+                                                .get('pendingAndie')[index]
+                                                .toString()),
+                                            onTap: () async {
+                                              FirebaseFirestore.instance
+                                                  .collection('users')
+                                                  .where("uid",
+                                                      isEqualTo: FirebaseAuth
+                                                          .instance
+                                                          .currentUser
+                                                          ?.uid)
+                                                  .get()
+                                                  .then((QuerySnapshot
+                                                      querySnapshot) {
+                                                querySnapshot.docs
+                                                    .forEach((doc) {
+                                                  print(doc["pendingAndie"][0]
+                                                      ["andieName"]);
                                                 });
-                                                print("pressed index $index");
-                                              },
-                                            ),
-                                          );
-
-                                        }
-                                       /* itemBuilder: (_, index) {
+                                              });
+                                              print("pressed index $index");
+                                            },
+                                          ),
+                                        );
+                                      }
+                                      /* itemBuilder: (_, index) {
                                       return Text(snapshot.data![index].data().toString());
                                     }*/
-                                    );
-                                  }else{
+                                      );
+                                } else {
                                   return CircularProgressIndicator();
-
-                                  }
                                 }
-                            )
-
-                      ),
+                              })),
                     )
                   ],
                 ),
@@ -303,7 +398,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                               flex: 215,
                               child: Container(
                                 margin:
-                                const EdgeInsets.fromLTRB(0, 5, 195, 10),
+                                    const EdgeInsets.fromLTRB(0, 5, 195, 10),
                                 color: Colors.redAccent,
                                 child: const SizedBox(
                                   width: 150,
@@ -336,11 +431,14 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(
-                                    padding: const EdgeInsets.only(top: 5, bottom: 0),
-                                    child: const Text('Contact Number:',
+                                    padding: const EdgeInsets.only(
+                                        top: 5, bottom: 0),
+                                    child: const Text(
+                                      'Contact Number:',
                                     )),
                                 Container(
-                                    padding: const EdgeInsets.only(top: 5, bottom: 0),
+                                    padding: const EdgeInsets.only(
+                                        top: 5, bottom: 0),
                                     child: const Text('Messenger:')),
                               ],
                             ),
@@ -350,13 +448,15 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
-                                padding: const EdgeInsets.only(top: 5, bottom: 0),
+                                padding:
+                                    const EdgeInsets.only(top: 5, bottom: 0),
                                 color: Colors.redAccent,
                                 width: 150,
                                 height: 25,
                               ),
                               Container(
-                                padding: const EdgeInsets.only(top: 5, bottom: 0),
+                                padding:
+                                    const EdgeInsets.only(top: 5, bottom: 0),
                                 color: Colors.redAccent,
                                 width: 150,
                                 height: 25,
@@ -366,7 +466,6 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                         ],
                       ),
                     ),
-
                     Expanded(
                       flex: 100,
                       child: Container(
@@ -378,11 +477,11 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                               flex: 100,
                               child: Container(
                                 margin:
-                                const EdgeInsets.only(left: 10, right: 10),
+                                    const EdgeInsets.only(left: 10, right: 10),
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                     primary:
-                                    const Color.fromRGBO(111, 215, 85, 1.0),
+                                        const Color.fromRGBO(111, 215, 85, 1.0),
                                   ),
                                   onPressed: () {},
                                   child: const Text('DONE'),
@@ -393,14 +492,14 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                               flex: 100,
                               child: Container(
                                 margin:
-                                const EdgeInsets.only(left: 10, right: 10),
+                                    const EdgeInsets.only(left: 10, right: 10),
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                     primary:
-                                    const Color.fromRGBO(255, 205, 84, 1.0),
+                                        const Color.fromRGBO(255, 205, 84, 1.0),
                                   ),
-                                  onPressed: () {
-                                    openDialog();
+                                  onPressed: () async {
+                                    showRatingDialog(context);
                                   },
                                   child: const Text('RATE'),
                                 ),
@@ -423,96 +522,96 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
   Future openDialog() => showDialog(
       context: context,
       builder: (context) => SizedBox(
-        width: 835,
-        height: 538,
-        child: AlertDialog(
-          title: const Text(
-            'Review:Finn Is not a dog',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
-          ),
-          content: SizedBox(
-            width: 600,
-            height: 300,
-            /*padding: const EdgeInsets.only(left: 30),*/
-            child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  const Text("Job/s: "),
-                  Container(
-                      padding: const EdgeInsets.all(5),
-                      child: const Text("Date: ")),
-                  Center(
-                    child: RatingStars(
-                      value: value,
-                      onValueChanged: (v) {
-                        //
-                        setState(() {
-                          value = v;
-                        });
-                      },
-                      starBuilder: (index, color) => Icon(
-                        Icons.star,
-                        color: color,
-                      ),
-                      starCount: 5,
-                      starSize: 30,
-                      valueLabelColor: const Color(0xff9b9b9b),
-                      valueLabelTextStyle: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w400,
-                          fontStyle: FontStyle.normal,
-                          fontSize: 12.0),
-                      valueLabelRadius: 10,
-                      maxValue: 5,
-                      starSpacing: 2,
-                      maxValueVisibility: true,
-                      valueLabelVisibility: true,
-                      animationDuration: const Duration(milliseconds: 100),
-                      valueLabelPadding: const EdgeInsets.symmetric(
-                          vertical: 1, horizontal: 8),
-                      valueLabelMargin: const EdgeInsets.only(right: 8),
-                      starOffColor: const Color(0xffe7e8ea),
-                      starColor: Colors.amber,
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.only(top: 20),
-                    width: 600,
-                    child: const TextField(
-                        style: TextStyle(
-                          /*height: 3,*/
-                        ),
-                        minLines: 2,
-                        maxLines: 5,
-                        keyboardType: TextInputType.multiline,
-                        // maxLines: null,
-                        decoration: InputDecoration(
-                            labelText:
-                            "What do you feel about his/her service? Share your thoughts!   ",
-                            border: OutlineInputBorder())),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+            width: 835,
+            height: 538,
+            child: AlertDialog(
+              title: const Text(
+                'Review:Finn Is not a dog',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
+              ),
+              content: SizedBox(
+                width: 600,
+                height: 300,
+                /*padding: const EdgeInsets.only(left: 30),*/
+                child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      const Text("Job/s: "),
                       Container(
-                        margin: const EdgeInsets.only(right: 65, top: 20),
-                        child: ElevatedButton(
-                          child: const Text('DONE'),
-                          onPressed: () async {},
+                          padding: const EdgeInsets.all(5),
+                          child: const Text("Date: ")),
+                      Center(
+                        child: RatingStars(
+                          value: value,
+                          onValueChanged: (v) {
+                            //
+                            setState(() {
+                              value = v;
+                            });
+                          },
+                          starBuilder: (index, color) => Icon(
+                            Icons.star,
+                            color: color,
+                          ),
+                          starCount: 5,
+                          starSize: 30,
+                          valueLabelColor: const Color(0xff9b9b9b),
+                          valueLabelTextStyle: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w400,
+                              fontStyle: FontStyle.normal,
+                              fontSize: 12.0),
+                          valueLabelRadius: 10,
+                          maxValue: 5,
+                          starSpacing: 2,
+                          maxValueVisibility: true,
+                          valueLabelVisibility: true,
+                          animationDuration: const Duration(milliseconds: 100),
+                          valueLabelPadding: const EdgeInsets.symmetric(
+                              vertical: 1, horizontal: 8),
+                          valueLabelMargin: const EdgeInsets.only(right: 8),
+                          starOffColor: const Color(0xffe7e8ea),
+                          starColor: Colors.amber,
                         ),
                       ),
                       Container(
-                        margin: const EdgeInsets.only(right: 65, top: 20),
-                        child: ElevatedButton(
-                          child: const Text('CANCEL'),
-                          onPressed: () => Navigator.pop(context, false),
-                        ),
+                        padding: const EdgeInsets.only(top: 20),
+                        width: 600,
+                        child: const TextField(
+                            style: TextStyle(
+                                /*height: 3,*/
+                                ),
+                            minLines: 2,
+                            maxLines: 5,
+                            keyboardType: TextInputType.multiline,
+                            // maxLines: null,
+                            decoration: InputDecoration(
+                                labelText:
+                                    "What do you feel about his/her service? Share your thoughts!   ",
+                                border: OutlineInputBorder())),
                       ),
-                    ],
-                  ),
-                ]),
-          ),
-        ),
-      ));
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(right: 65, top: 20),
+                            child: ElevatedButton(
+                              child: const Text('DONE'),
+                              onPressed: () async {},
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(right: 65, top: 20),
+                            child: ElevatedButton(
+                              child: const Text('CANCEL'),
+                              onPressed: () => Navigator.pop(context, false),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ]),
+              ),
+            ),
+          ));
 }
