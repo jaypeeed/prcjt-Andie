@@ -263,7 +263,6 @@ class _ClientCategoryState extends State<ClientCategory> {
                         child: ElevatedButton(
                           child: const Text('DONE'),
                           onPressed: () async {
-
                             getCheckboxItems();
                             print(tmpArray2.toString());
                             setState(() {
