@@ -1,11 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:prjct_andie/screens/authenticate.dart/register.dart';
 import 'package:prjct_andie/services/auth.dart';
 import 'package:prjct_andie/testing/services(sign_in)/auth_services.dart';
 import 'package:provider/provider.dart';
-import '../../pages_client/client_sign_up_page.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -24,6 +22,11 @@ class _SignInState extends State<SignIn> {
   String email = '';
   String password = '';
   String error = '';
+
+  bool _isObscure = true;
+  void initState() {
+    _isObscure = true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -220,16 +223,29 @@ class _SignInState extends State<SignIn> {
                                     Expanded(
                                       flex: 100,
                                       child: TextFormField(
-                                        obscureText: true,
+                                        keyboardType: TextInputType.text,
+                                        obscureText: _isObscure,
                                         validator: (value) {
                                           return value!.isNotEmpty
                                               ? null
                                               : "Empty/Invalid Password";
                                         },
                                         controller: passwordController,
-                                        decoration: const InputDecoration(
+                                        decoration: InputDecoration(
                                           border: OutlineInputBorder(),
                                           hintText: 'Password',
+                                          suffixIcon: IconButton(
+                                            icon: Icon(
+                                              _isObscure
+                                                  ? Icons.visibility
+                                                  : Icons.visibility_off,
+                                            ),
+                                            onPressed: () {
+                                              setState(() {
+                                                _isObscure = !_isObscure;
+                                              });
+                                            },
+                                          ),
                                         ),
                                       ),
                                     ),
