@@ -40,10 +40,10 @@ String myFb = '';
 String myNumber = '';
 double rateCount = 0.0;
 double ratings2 = 0.0;
+TimeOfDay time = TimeOfDay.now();
+DateTime date = DateTime.now();
 
 class _ClientCategoryState extends State<ClientCategory> {
-  TimeOfDay time = TimeOfDay.now();
-  DateTime date = DateTime.now();
 
   String getDate() {
     if (date == null) {

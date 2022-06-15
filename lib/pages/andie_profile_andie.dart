@@ -30,6 +30,7 @@ String myEmail = '';
 String myFb = '';
 String myNumber = '';
 String myRating = '';
+String finalRate = '';
 
 
 class AndieProfile extends StatefulWidget {
@@ -69,7 +70,7 @@ class _AndieProfileState extends State<AndieProfile> {
         myFb = userData.data()!['facebook'];
         myNumber = userData.data()!['contactNumber'];
         myRating = userData.data()!['totalRate'].toString();
-
+        finalRate =double.parse(myRating).toStringAsPrecision(3);
       });
     });
   }
@@ -189,11 +190,12 @@ class _AndieProfileState extends State<AndieProfile> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'Rating: $myRating',
+                                'Rating: $finalRate',
                                 style: TextStyle(fontSize: 40),
                               ),
 
-                              Icon( Icons.star_outlined ),
+                              Icon( Icons.star_outlined,
+                                size: 40),
                             ],
                           ))),
                 ],

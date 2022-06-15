@@ -356,8 +356,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                                               isEqualTo: clientNote)
                                                           .get();
                                                   setState(() {
-                                                    name = (doc.data() as Map<String,
-                                                        dynamic>)['andieName'];
+                                                    name = snap.docs[0]['andieName'];
                                                     clientNote2 = ((doc.data() as Map<
                                                         String,
                                                         dynamic>)['clientNote']);
@@ -382,8 +381,6 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                                   setState(() {
                                                     rateCount =
                                                         snap2.docs[0]['rateCount'];
-                                                    ratings = snap2.docs[0]['totalRate']
-                                                        .toString();
                                                     ratings2 = snap2.docs[0]['ratings'];
                                                     skills = snap2.docs[0]['skills'].toString();
                                                   });
@@ -588,8 +585,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                                     isEqualTo: clientNote)
                                                     .get();
                                                 setState(() {
-                                                  name = (doc.data() as Map<String,
-                                                      dynamic>)['andieName'];
+                                                  name = snap.docs[0]['andieName'];
                                                   clientNote2 = ((doc.data() as Map<
                                                       String,
                                                       dynamic>)['clientNote']);
@@ -664,6 +660,15 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 25,
+                      child: Container(
+                        margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                        child:  Text(name,
+                            style: TextStyle(
+                                fontSize: 17.5, fontWeight: FontWeight.bold)),
                       ),
                     ),
                     Expanded(
