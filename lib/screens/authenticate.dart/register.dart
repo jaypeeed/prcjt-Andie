@@ -12,7 +12,6 @@ import '../../pages_client/client_sign_up_page.dart';
   runApp( MaterialApp(home: Register()));
 }*/
 
-
 class Register extends StatefulWidget {
   @override
   State<Register> createState() => _RegisterState();
@@ -49,8 +48,6 @@ class _RegisterState extends State<Register> {
   String number = '';
   String error = '';
 
-
-
   Map<String, bool> values = {
     'PANDAY': false,
     'PLUMBER': false,
@@ -61,10 +58,7 @@ class _RegisterState extends State<Register> {
     'ELECTRICIAN': false,
     'HOUSE KEEPER': false,
     'LAUNDERER': false,
-
   };
-
-
 
   getCheckboxItems() {
     values.forEach((key, value) {
@@ -119,10 +113,10 @@ class _RegisterState extends State<Register> {
                   child: const Text('Sign Up'),
                   onPressed: () {},
                 )),
-                *//* SizedBox(
+                */ /* SizedBox(
                         width: 20,
                         height: 20,
-                      ),*//*
+                      ),*/ /*
               )*/
             ],
           ),
@@ -134,345 +128,403 @@ class _RegisterState extends State<Register> {
               margin: const EdgeInsets.fromLTRB(40, 30, 40, 30),
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(20)),
                 image: DecorationImage(
                   image: const AssetImage('spin_gear.gif'),
                   fit: BoxFit.cover,
-                  colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.1), BlendMode.dstATop),
+                  colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.1), BlendMode.dstATop),
                 ),
               ),
               child: Scrollbar(
                 controller: _scrollController, // <---- Here, the controller
                 isAlwaysShown: true,
                 child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            // color: Colors.green,
-                            child: const Text(
-                              'Sign up as ANDIE',
-                              style: TextStyle(
-                                fontSize: 40,
-                                fontWeight: FontWeight.w900,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                width: 2,
-                              ),
-                            ),
-                            margin: const EdgeInsets.only(right: 20),
-                            child: TextButton(
+                  child: Form(
+                    key: _formkey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              // color: Colors.green,
                               child: const Text(
-                                'Sign up as CLIENT',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(color: Colors.black,
-                                  fontWeight: FontWeight.bold
+                                'Sign up as ANDIE',
+                                style: TextStyle(
+                                  fontSize: 40,
+                                  fontWeight: FontWeight.w900,
                                 ),
                               ),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  PageRouteBuilder(
-                                      pageBuilder: (BuildContext context,
-                                          Animation animation,
-                                          Animation secondaryAnimation) =>
-                                      const SignUpClient(), //Change here to open Google Login
-                                      transitionDuration:
-                                      const Duration(seconds: 0)),
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                      Container(
-                        // color: Colors.green,
-                        child: const Text(
-                          'Personal Information',
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.w900,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        // color: Colors.green,
-                        //padding: const EdgeInsets.only(left: 400, right: 400),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              flex: 2,
-                              child: Column(
-                                children: <Widget>[
-                                  TextFormField(
-                                    controller: nameController,
-                                    decoration: const InputDecoration(
-                                        hintText: 'Name',
-                                        focusedBorder: OutlineInputBorder(
-                                            borderSide:
-                                            BorderSide(color: Colors.grey))),
-                                  ),
-                                  const SizedBox(height: 20.0),
-                                  TextFormField(
-                                    controller: emailController,
-                                    decoration: const InputDecoration(
-                                        hintText: 'Email',
-                                        focusedBorder: OutlineInputBorder(
-                                            borderSide:
-                                                BorderSide(color: Colors.grey))),
-                                  ),
-                                  const SizedBox(height: 20.0),
-                                  TextFormField(
-                                    controller: passwordController,
-                                    decoration: const InputDecoration(
-                                        hintText: 'Password',
-                                        focusedBorder: OutlineInputBorder(
-                                            borderSide:
-                                                BorderSide(color: Colors.grey))),
-                                    obscureText: true,
-                                  ),
-                                  const SizedBox(height: 20.0),
-                                  const SizedBox(height: 12.0),
-                                  Text(
-                                    error,
-                                    style: const TextStyle(
-                                        color: Colors.red, fontSize: 14.0),
-                                  )
-                                ],
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 30,
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: Column(
-                                children: [
-                                  TextFormField(
-                                    controller: numberController,
-                                    decoration: const InputDecoration(
-                                        hintText: 'Phone no.',
-                                        focusedBorder: OutlineInputBorder(
-                                            borderSide:
-                                            BorderSide(color: Colors.grey))),
-                                  ),
-                                  const SizedBox(height: 20.0),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Expanded(
-                                        flex: 2,
-                                        child: Container(
-                                          //height: 48,
-                                          child: DropdownButtonFormField<String>(
-                                            dropdownColor: Colors.white,
-                                            value: selectedItem,
-                                            items: items
-                                                .map((item) => DropdownMenuItem(
-                                                value: item,
-                                                child: Text(
-                                                  item,
-                                                  style: const TextStyle(
-                                                      fontSize: 20,
-                                                      color: Colors.black,
-                                                      /*fontWeight: FontWeight.bold*/
-                                                  ),
-                                                )))
-                                                .toList(),
-                                            onChanged: (item) =>
-                                                setState(() =>  selectedItem = item),
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                          flex: 3,
-                                          child: Container(
-                                            margin: const EdgeInsets.only(
-                                             left: 40, right: 40),
-                                            child:TextFormField(
-                                              controller: ageController,
-                                              decoration: const InputDecoration(
-                                                border: OutlineInputBorder(),
-                                                hintText: 'Age',
-                                              ),
-                                            ),
-                                          )),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 20.0),
-                                  TextFormField(
-                                    controller: fbController,
-                                    decoration: const InputDecoration(
-                                        hintText: 'Facebook Link',
-                                        focusedBorder: OutlineInputBorder(
-                                            borderSide:
-                                            BorderSide(color: Colors.grey))),
-                                  ),
-                                  const SizedBox(height: 45.0),
-
-                                ],
-                              ),
-                            ),
-                            Container(
-                              //color: Colors.green,
-                              width: 30,
-                              height: 30,
                             ),
                           ],
                         ),
-                      ),
-                      //----------------------------------------
-                      Container(
-                       // color: Colors.blue,
-                        child: const Text(
-                          'Skills',
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.w900,
-                          ),
-                        ),
-                      ),
-                      Container(
-                          margin: const EdgeInsets.only(top: 10, left: 20),
-                          //color: Colors.pink,
-                          child: const Text(
-                            'Select the skill/s that best decribes your Talents and Capabilities:',
-                            style: TextStyle(
-                              fontSize: 18,
-                            ),
-                          )),
-                      Container(
-                        margin: const EdgeInsets.only(top: 5),
-                        //   color: Colors.blue,
-                        width: 1200,
-                        height: 180,
-                        child: GridView(
-                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3,
-                            childAspectRatio: 10,
-                            crossAxisSpacing: 30,
-                            mainAxisSpacing: 10,
-                          ),
-                          children: values.keys.map((String key) {
-                            return CheckboxListTile(
-                              controlAffinity: ListTileControlAffinity.leading,
-                              title: Text(key),
-                              value: values[key],
-                              activeColor: Colors.pink,
-                              checkColor: Colors.white,
-                              onChanged: (bool? value) async {
-                                setState(() {
-                                  values[key] = value!;
-                                });
-                              },
-                            );
-                          }).toList(),
-                        ),
-
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(top: 20),
-                        //   color: Colors.green,
-                        child: const Text(
-                          'Bio',
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.w900,
-                          ),
-                        ),
-                      ),
-                      Container(
-                          margin: const EdgeInsets.only(top: 10, left: 20),
-                          //   color: Colors.pink,
-                          child: const Text(
-                            'Hey ANDIE! Let us write your Bio! This will help us easily create your Profile.',
-                            style: TextStyle(
-                              fontSize: 18,
-                            ),
-                          )),
-                      Container(
-                        margin:
-                            const EdgeInsets.only(top: 15, left: 20, right: 25),
-                        //color: Colors.green,
-                        child: TextFormField(
-                          controller: expController,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            hintText:
-                                'Do you have any work experience/s? Explain it to us!',
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin:
-                            const EdgeInsets.only(top: 15, left: 20, right: 25),
-                        //color: Colors.green,
-                        child: TextFormField(
-                          controller: schoolController,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            hintText:
-                                'Did you go to any Technical Schools (ie. TESDA), Self- Taught, or something else?',
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin:
-                            const EdgeInsets.only(top: 15, left: 20, right: 25),
-                        //color: Colors.green,
-                        child: TextFormField(
-                          controller: yearsController,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            hintText: 'How long have you been in this Industry?',
-                          ),
-                        ),
-                      ),
-                      Center(
-                        child: Container(
-                          margin: const EdgeInsets.only(top: 20),
-                          // color: Colors.red,
-                          child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  primary: const Color.fromRGBO(255, 205, 84, 1.0),),
-                              child: const Text(
-                                'Register',
-                                style: TextStyle(color: Colors.white),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  width: 2,
+                                ),
                               ),
-                              onPressed: () {
-                                final String email = emailController.text.trim();
-                                final String password = passwordController.text.trim();
-                                final String exp = expController.text.trim();
-                                final String school = schoolController.text.trim();
-                                final String years = yearsController.text.trim();
-                                final String name = nameController.text.trim();
-                                final String age = ageController.text.trim();
-                                final String fb = fbController.text.trim();
-                                final String number = numberController.text.trim();
+                              margin: const EdgeInsets.only(right: 20),
+                              child: TextButton(
+                                child: const Text(
+                                  'Sign up as CLIENT',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    PageRouteBuilder(
+                                        pageBuilder: (BuildContext context,
+                                                Animation animation,
+                                                Animation secondaryAnimation) =>
+                                            const SignUpClient(), //Change here to open Google Login
+                                        transitionDuration:
+                                            const Duration(seconds: 0)),
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          // color: Colors.green,
+                          child: const Text(
+                            'Personal Information',
+                            style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          // color: Colors.green,
+                          //padding: const EdgeInsets.only(left: 400, right: 400),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child: Column(
+                                  children: <Widget>[
+                                    TextFormField(
+                                      controller: nameController,
+                                      validator: (value) {
+                                        return value!.isNotEmpty
+                                            ? null
+                                            : "Empty/Invalid Input";
+                                      },
+                                      decoration: const InputDecoration(
+                                          hintText: 'Name',
+                                          focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.grey))),
+                                    ),
+                                    const SizedBox(height: 20.0),
+                                    TextFormField(
+                                      controller: emailController,
+                                      validator: (value) {
+                                        return value!.isNotEmpty
+                                            ? null
+                                            : "Empty/Invalid Email";
+                                      },
+                                      decoration: const InputDecoration(
+                                          hintText: 'Email',
+                                          focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.grey))),
+                                    ),
+                                    const SizedBox(height: 20.0),
+                                    TextFormField(
+                                      controller: passwordController,
+                                      validator: (value) {
+                                        return value!.isNotEmpty
+                                            ? null
+                                            : "Empty/Invalid Password";
+                                      },
+                                      decoration: const InputDecoration(
+                                          hintText: 'Password',
+                                          focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.grey))),
+                                      obscureText: true,
+                                    ),
+                                    const SizedBox(height: 20.0),
+                                    const SizedBox(height: 12.0),
+                                    Text(
+                                      error,
+                                      style: const TextStyle(
+                                          color: Colors.red, fontSize: 14.0),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 30,
+                              ),
+                              Expanded(
+                                flex: 2,
+                                child: Column(
+                                  children: [
+                                    TextFormField(
+                                      controller: numberController,
+                                      validator: (value) {
+                                        return value!.isNotEmpty
+                                            ? null
+                                            : "Empty/Invalid Phone No.";
+                                      },
+                                      decoration: const InputDecoration(
+                                          hintText: 'Phone no.',
+                                          focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.grey))),
+                                    ),
+                                    const SizedBox(height: 20.0),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Expanded(
+                                          flex: 2,
+                                          child: Container(
+                                            //height: 48,
+                                            child:
+                                                DropdownButtonFormField<String>(
+                                              dropdownColor: Colors.white,
+                                              value: selectedItem,
+                                              items: items
+                                                  .map((item) =>
+                                                      DropdownMenuItem(
+                                                          value: item,
+                                                          child: Text(
+                                                            item,
+                                                            style:
+                                                                const TextStyle(
+                                                              fontSize: 20,
+                                                              color:
+                                                                  Colors.black,
+                                                              /*fontWeight: FontWeight.bold*/
+                                                            ),
+                                                          )))
+                                                  .toList(),
+                                              onChanged: (item) => setState(
+                                                  () => selectedItem = item),
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                            flex: 3,
+                                            child: Container(
+                                              margin: const EdgeInsets.only(
+                                                  left: 40, right: 40),
+                                              child: TextFormField(
+                                                controller: ageController,
+                                                validator: (value) {
+                                                  return value!.isNotEmpty
+                                                      ? null
+                                                      : "Empty/Invalid";
+                                                },
+                                                decoration:
+                                                    const InputDecoration(
+                                                  border: OutlineInputBorder(),
+                                                  hintText: 'Age',
+                                                ),
+                                              ),
+                                            )),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 20.0),
+                                    TextFormField(
+                                      controller: fbController,
+                                      validator: (value) {
+                                        return value!.isNotEmpty
+                                            ? null
+                                            : "Empty/Invalid Link";
+                                      },
+                                      decoration: const InputDecoration(
+                                          hintText: 'Facebook Link',
+                                          focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.grey))),
+                                    ),
+                                    const SizedBox(height: 45.0),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                //color: Colors.green,
+                                width: 30,
+                                height: 30,
+                              ),
+                            ],
+                          ),
+                        ),
+                        //----------------------------------------
+                        Container(
+                          // color: Colors.blue,
+                          child: const Text(
+                            'Skills',
+                            style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                        ),
+                        Container(
+                            margin: const EdgeInsets.only(top: 10, left: 20),
+                            //color: Colors.pink,
+                            child: const Text(
+                              'Select the skill/s that best decribes your Talents and Capabilities:',
+                              style: TextStyle(
+                                fontSize: 18,
+                              ),
+                            )),
+                        Container(
+                          margin: const EdgeInsets.only(top: 5),
+                          //   color: Colors.blue,
+                          width: 1200,
+                          height: 180,
+                          child: GridView(
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              childAspectRatio: 10,
+                              crossAxisSpacing: 30,
+                              mainAxisSpacing: 10,
+                            ),
+                            children: values.keys.map((String key) {
+                              return CheckboxListTile(
+                                controlAffinity:
+                                    ListTileControlAffinity.leading,
+                                title: Text(key),
+                                value: values[key],
+                                activeColor: Colors.pink,
+                                checkColor: Colors.white,
+                                onChanged: (bool? value) async {
+                                  setState(() {
+                                    values[key] = value!;
+                                  });
+                                },
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(top: 20),
+                          //   color: Colors.green,
+                          child: const Text(
+                            'Bio',
+                            style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                        ),
+                        Container(
+                            margin: const EdgeInsets.only(top: 10, left: 20),
+                            //   color: Colors.pink,
+                            child: const Text(
+                              'Hey ANDIE! Let us write your Bio! This will help us easily create your Profile.',
+                              style: TextStyle(
+                                fontSize: 18,
+                              ),
+                            )),
+                        Container(
+                          margin: const EdgeInsets.only(
+                              top: 15, left: 20, right: 25),
+                          //color: Colors.green,
+                          child: TextFormField(
+                            controller: expController,
+                            validator: (value) {
+                              return value!.isNotEmpty
+                                  ? null
+                                  : "Empty/Invalid Input";
+                            },
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText:
+                                  'Do you have any work experience/s? Explain it to us!',
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(
+                              top: 15, left: 20, right: 25),
+                          //color: Colors.green,
+                          child: TextFormField(
+                            controller: schoolController,
+                            validator: (value) {
+                              return value!.isNotEmpty
+                                  ? null
+                                  : "Empty/Invalid Input";
+                            },
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText:
+                                  'Did you go to any Technical Schools (ie. TESDA), Self- Taught, or something else?',
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(
+                              top: 15, left: 20, right: 25),
+                          //color: Colors.green,
+                          child: TextFormField(
+                            controller: yearsController,
+                            validator: (value) {
+                              return value!.isNotEmpty
+                                  ? null
+                                  : "Empty/Invalid Input";
+                            },
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText:
+                                  'How long have you been in this Industry?',
+                            ),
+                          ),
+                        ),
+                        Center(
+                          child: Container(
+                            margin: const EdgeInsets.only(top: 20),
+                            // color: Colors.red,
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary:
+                                      const Color.fromRGBO(255, 205, 84, 1.0),
+                                ),
+                                child: const Text(
+                                  'Register',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                onPressed: () {
+                                  final String email =
+                                      emailController.text.trim();
+                                  final String password =
+                                      passwordController.text.trim();
+                                  final String exp = expController.text.trim();
+                                  final String school =
+                                      schoolController.text.trim();
+                                  final String years =
+                                      yearsController.text.trim();
+                                  final String name =
+                                      nameController.text.trim();
+                                  final String age = ageController.text.trim();
+                                  final String fb = fbController.text.trim();
+                                  final String number =
+                                      numberController.text.trim();
 
-                                getCheckboxItems();
+                                  if (_formkey.currentState!.validate()) {
+                                    getCheckboxItems();
 
-                                if (email.isEmpty) {
-                                  print("Email is Empty");
-                                } else {
-                                  if (password.isEmpty) {
-                                    print("Password is Empty");
-                                  } else {
                                     context
                                         .read<AuthServices>()
                                         .signUp(
@@ -508,11 +560,19 @@ class _RegisterState extends State<Register> {
                                       });
                                     });
                                   }
-                                }
-                              }),
+
+                                  if (email.isEmpty) {
+                                    print("Email is Empty");
+                                  } else {
+                                    if (password.isEmpty) {
+                                      print("Password is Empty");
+                                    } else {}
+                                  }
+                                }),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),

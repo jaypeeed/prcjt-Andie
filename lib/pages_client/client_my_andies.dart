@@ -33,66 +33,113 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
         builder: (context) {
           final TextEditingController _textReviewController =
               TextEditingController();
-          return StatefulBuilder(builder: (context, setstate) {
+          return StatefulBuilder(builder: (context, setState) {
             return AlertDialog(
-              content: Form(
-                  key: _formkey,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      TextFormField(
-                        controller: _textReviewController,
-                        validator: (value) {
-                          return value!.isNotEmpty ? null : "Invalid Field";
-                        },
-                        decoration:
-                            const InputDecoration(hintText: "Enter Some Text"),
-                      ),
-                      Center(
-                        child: RatingStars(
-                          value: value,
-                          onValueChanged: (v) {
-                            setState(() {
-                              value = v;
-                            });
-                          },
-                          starBuilder: (index, color) => Icon(
-                            Icons.star,
-                            color: color,
-                          ),
-                          starCount: 5,
-                          starSize: 30,
-                          valueLabelColor: const Color(0xff9b9b9b),
-                          valueLabelTextStyle: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w400,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 12.0),
-                          valueLabelRadius: 10,
-                          maxValue: 5,
-                          starSpacing: 2,
-                          maxValueVisibility: true,
-                          valueLabelVisibility: true,
-                          animationDuration: const Duration(milliseconds: 100),
-                          valueLabelPadding: const EdgeInsets.symmetric(
-                              vertical: 1, horizontal: 8),
-                          valueLabelMargin: const EdgeInsets.only(right: 8),
-                          starOffColor: const Color(0xffe7e8ea),
-                          starColor: Colors.amber,
+              title: const Text(
+                'Review: [Andie Name]',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
+              ),
+              content: SizedBox(
+                width: 600,
+                height: 350,
+                child: Form(
+                    key: _formkey,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text("Job/s: [JOB LISTS]"),
                         ),
-                      ),
-                    ],
-                  )),
-              actions: <Widget>[
-                TextButton(
-                  onPressed: () {
-                    if (_formkey.currentState!.validate()) {
-                      Navigator.of(context).pop();
-                    }
-                  },
-                  child: Text('Hi'),
-                ),
-              ],
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text("Date: [CURRENT DATE]"),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: RatingStars(
+                            value: value,
+                            onValueChanged: (v) {
+                              setState(() {
+                                value = v;
+                              });
+                            },
+                            starBuilder: (index, color) => Icon(
+                              Icons.star,
+                              color: color,
+                            ),
+                            starCount: 5,
+                            starSize: 30,
+                            valueLabelColor: const Color(0xff9b9b9b),
+                            valueLabelTextStyle: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w400,
+                                fontStyle: FontStyle.normal,
+                                fontSize: 12.0),
+                            valueLabelRadius: 10,
+                            maxValue: 5,
+                            starSpacing: 2,
+                            maxValueVisibility: true,
+                            valueLabelVisibility: true,
+                            animationDuration:
+                                const Duration(milliseconds: 100),
+                            valueLabelPadding: const EdgeInsets.symmetric(
+                                vertical: 1, horizontal: 8),
+                            valueLabelMargin: const EdgeInsets.only(right: 8),
+                            starOffColor: const Color(0xffe7e8ea),
+                            starColor: Colors.amber,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextFormField(
+                              controller: _textReviewController,
+                              validator: (value) {
+                                return value!.isNotEmpty
+                                    ? null
+                                    : "Invalid Field";
+                              },
+                              style: const TextStyle(
+                                  /*height: 3,*/
+                                  ),
+                              minLines: 7,
+                              maxLines: 7,
+                              keyboardType: TextInputType.multiline,
+                              // maxLines: null,
+                              decoration: const InputDecoration(
+                                  hintText:
+                                      "What do you feel about his/her service? Share your thoughts!   ",
+                                  labelText: "Review/Comment",
+                                  border: OutlineInputBorder())),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 100,
+                              child: ElevatedButton(
+                                child: const Text('DONE'),
+                                onPressed: () {
+                                  if (_formkey.currentState!.validate()) {
+                                    Navigator.of(context).pop();
+                                  }
+                                },
+                              ),
+                            ),
+                            const SizedBox(width: 100),
+                            SizedBox(
+                              width: 100,
+                              child: ElevatedButton(
+                                child: const Text('CANCEL'),
+                                onPressed: () => Navigator.pop(context, false),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    )),
+              ),
             );
           });
         });
