@@ -205,10 +205,49 @@ class _AndieRatings1State extends State<AndieRatings1> {
                       Expanded(
                         flex: 10,
                         child: Container(
-                          margin: EdgeInsets.only(left: 20),
+                          margin: const EdgeInsets.only(left: 20),
                           width: 300,
                           height: 300,
                           color: Colors.red,
+                          child: Column(
+                            children: const [
+                              Text(
+                                '5',style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                                color: Colors.black,
+                              ),
+                              ),
+                              Text(
+                                '4',style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                                color: Colors.black,
+                              ),
+                              ),
+                              Text(
+                                '3',style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                                color: Colors.black,
+                              ),
+                              ),
+                              Text(
+                                '2',style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                                color: Colors.black,
+                              ),
+                              ),
+                              Text(
+                                '1',style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                                color: Colors.black,
+                              ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
 
