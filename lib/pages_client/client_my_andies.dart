@@ -25,6 +25,7 @@ String andieUID ='';
 double rateCount =  0.0;
 double ratings2 =  0.0;
 double rateCounter = 1.0;
+String skills = '';
 
 
 void main() => runApp(const MaterialApp(home: ClientMyAndie()));
@@ -310,50 +311,6 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                   border: Border.all(
                                     color: Colors.black,
                                   )),
-                              /*child: FutureBuilder(
-                                    future: getData(),
-                                    builder: (_,
-                                        AsyncSnapshot<List<DocumentSnapshot>>
-                                            snapshot) {
-                                      if (snapshot.hasData) {
-                                        return ListView.builder(
-                                            itemCount: snapshot.data!.length,
-                                            itemBuilder: (context, index) {
-                                              return Card(
-                                                child: ListTile(
-                                                  title: Text(snapshot.data![index]
-                                                      .get('pendingAndie')[index]
-                                                      .toString()),
-                                                  onTap: () async {
-                                                    FirebaseFirestore.instance
-                                                        .collection('users')
-                                                        .where("uid",
-                                                            isEqualTo: FirebaseAuth
-                                                                .instance
-                                                                .currentUser
-                                                                ?.uid)
-                                                        .get()
-                                                        .then((QuerySnapshot
-                                                            querySnapshot) {
-                                                      querySnapshot.docs
-                                                          .forEach((doc) {
-                                                        print(doc["pendingAndie"][0]
-                                                            ["andieName"]);
-                                                      });
-                                                    });
-                                                    print("pressed index $index");
-                                                  },
-                                                ),
-                                              );
-                                            }
-                                            */ /* itemBuilder: (_, index) {
-                                            return Text(snapshot.data![index].data().toString());
-                                          }*/ /*
-                                            );
-                                      } else {
-                                        return CircularProgressIndicator();
-                                      }
-                                    })*/
 
                               child: StreamBuilder<QuerySnapshot>(
                                 stream: db
@@ -424,6 +381,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                                     ratings = snap2.docs[0]['totalRate']
                                                         .toString();
                                                     ratings2 = snap2.docs[0]['ratings'];
+                                                    skills = snap2.docs[0]['skills'].toString();
                                                   });
                                                 },
                                                 leading: Text((doc.data() as Map<String,
@@ -454,50 +412,6 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                   border: Border.all(
                                     color: Colors.black,
                                   )),
-                              /*child: FutureBuilder(
-                                    future: getData(),
-                                    builder: (_,
-                                        AsyncSnapshot<List<DocumentSnapshot>>
-                                            snapshot) {
-                                      if (snapshot.hasData) {
-                                        return ListView.builder(
-                                            itemCount: snapshot.data!.length,
-                                            itemBuilder: (context, index) {
-                                              return Card(
-                                                child: ListTile(
-                                                  title: Text(snapshot.data![index]
-                                                      .get('pendingAndie')[index]
-                                                      .toString()),
-                                                  onTap: () async {
-                                                    FirebaseFirestore.instance
-                                                        .collection('users')
-                                                        .where("uid",
-                                                            isEqualTo: FirebaseAuth
-                                                                .instance
-                                                                .currentUser
-                                                                ?.uid)
-                                                        .get()
-                                                        .then((QuerySnapshot
-                                                            querySnapshot) {
-                                                      querySnapshot.docs
-                                                          .forEach((doc) {
-                                                        print(doc["pendingAndie"][0]
-                                                            ["andieName"]);
-                                                      });
-                                                    });
-                                                    print("pressed index $index");
-                                                  },
-                                                ),
-                                              );
-                                            }
-                                            */ /* itemBuilder: (_, index) {
-                                            return Text(snapshot.data![index].data().toString());
-                                          }*/ /*
-                                            );
-                                      } else {
-                                        return CircularProgressIndicator();
-                                      }
-                                    })*/
 
                               child: StreamBuilder<QuerySnapshot>(
                                 stream: db
@@ -538,22 +452,13 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                                     isEqualTo: clientNote)
                                                     .get();
                                                 setState(() {
-                                                  name = (doc.data() as Map<String,
-                                                      dynamic>)['andieName'];
-                                                  clientNote2 = ((doc.data() as Map<
-                                                      String,
-                                                      dynamic>)['clientNote']);
-                                                  startDate = (doc.data() as Map<
-                                                      String, dynamic>)['startDate'];
-                                                  andieCont = (doc.data() as Map<
-                                                      String, dynamic>)['andieCont'];
-                                                  fb = (doc.data() as Map<String,
-                                                      dynamic>)['andieFacebook'];
-                                                  ratings = (doc.data() as Map<String,
-                                                      dynamic>)['andieTotalRate']
-                                                      .toString();
-                                                  andieUID = (doc.data() as Map<
-                                                      String, dynamic>)['andieUID'];
+                                                  name = (doc.data() as Map<String, dynamic>)['andieName'];
+                                                  clientNote2 = ((doc.data() as Map<String, dynamic>)['clientNote']);
+                                                  startDate = (doc.data() as Map<String, dynamic>)['startDate'];
+                                                  andieCont = (doc.data() as Map<String, dynamic>)['andieCont'];
+                                                  fb = (doc.data() as Map<String, dynamic>)['andieFacebook'];
+                                                  ratings = (doc.data() as Map<String, dynamic>)['andieTotalRate'].toString();
+                                                  andieUID = (doc.data() as Map<String, dynamic>)['andieUID'];
                                                 });
                                                 final QuerySnapshot snap2 =
                                                 await FirebaseFirestore.instance
@@ -562,17 +467,14 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                                     isEqualTo: andieUID)
                                                     .get();
                                                 setState(() {
-                                                  rateCount =
-                                                  snap2.docs[0]['rateCount'];
-                                                  ratings = snap2.docs[0]['totalRate']
-                                                      .toString();
+                                                  rateCount = snap2.docs[0]['rateCount'];
+                                                  ratings = snap2.docs[0]['totalRate'].toString();
                                                   ratings2 = snap2.docs[0]['ratings'];
+                                                  skills = snap2.docs[0]['skills'].toString();
                                                 });
                                               },
-                                              leading: Text((doc.data() as Map<String,
-                                                  dynamic>)['andieName']),
-                                              title: Text((doc.data() as Map<String,
-                                                  dynamic>)['clientNote']),
+                                              leading: Text((doc.data() as Map<String, dynamic>)['andieName']),
+                                              title: Text((doc.data() as Map<String, dynamic>)['clientNote']),
                                               subtitle: Text(t.toDate().toString())),
                                         );
                                       }).toList(),
@@ -759,7 +661,16 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                       ),
                     ),
                     Expanded(
-                      flex: 50,
+                      flex: 25,
+                      child: Container(
+                        margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                        child:  Text(skills,
+                            style: TextStyle(
+                                fontSize: 17.5, fontWeight: FontWeight.bold)),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 25,
                       child: Container(
                         margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                         child: const Text('My Note',
