@@ -10,6 +10,8 @@ import 'package:universal_html/html.dart' as html;
 import 'package:prjct_andie/testing/screens(sign_in)/andiescreen.dart';
 import 'package:prjct_andie/testing/screens(sign_in)/homescreen.dart';
 
+import '../../pages_admin/admin_home.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -40,6 +42,8 @@ class _SplashScreenState extends State<SplashScreen> {
       navigateNext(ClientMenu());
     } else if (role == 'andie') {
       navigateNext(Home());
+    } else if (role == 'admin') {
+      navigateNext(AdminHome());
     }
   }
 
@@ -52,15 +56,22 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: Color.fromRGBO(255, 205, 84, 1.0),
       body: Center(
-        child:  Column(
+        child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-            Expanded(flex:1,child: Image.asset('assets/andie_logo.png',)),
-            Expanded(flex:5,child: Image.asset('andie_splash_screen.gif',)),
+            Expanded(
+                flex: 1,
+                child: Image.asset(
+                  'assets/andie_logo.png',
+                )),
+            Expanded(
+                flex: 5,
+                child: Image.asset(
+                  'andie_splash_screen.gif',
+                )),
           ],
         ),
       ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:prjct_andie/pages_admin/view_andie.dart';
 import 'package:prjct_andie/pages_admin/view_client.dart';
- import '../../pages/andie_my_job.dart';
+import '../../pages/andie_my_job.dart';
 import '../../pages/andie_profile_andie.dart';
 import '../../pages/andie_ratings.dart';
 import 'notes.dart';
@@ -19,6 +19,10 @@ class AdminHome extends StatefulWidget {
 }
 
 class _AdminHomeState extends State<AdminHome> {
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +31,8 @@ class _AdminHomeState extends State<AdminHome> {
         preferredSize: Size.fromHeight(65),
         child: AppBar(
           backgroundColor: const Color.fromRGBO(255, 205, 84, 1.0),
-          title: Image.asset('assets/andie_logo.png',
+          title: Image.asset(
+            'assets/andie_logo.png',
             width: 180,
           ),
           elevation: 0.0,
@@ -39,18 +44,23 @@ class _AdminHomeState extends State<AdminHome> {
                   style: TextButton.styleFrom(
                     textStyle: const TextStyle(fontSize: 20),
                   ),
-                  onPressed: (){
-                    Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
-                        Animation secondaryAnimation)=>const AndieProfile(),
-                        transitionDuration: const Duration(seconds: 0)),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                          pageBuilder: (BuildContext context,
+                                  Animation animation,
+                                  Animation secondaryAnimation) =>
+                              const AndieProfile(),
+                          transitionDuration: const Duration(seconds: 0)),
                     );
                   },
-                  child: const Text('Log out',
+                  child: const Text(
+                    'Log out',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
-                        fontWeight: FontWeight.bold
-                    ),
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -59,135 +69,148 @@ class _AdminHomeState extends State<AdminHome> {
         ),
       ),
       body: Container(
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/background2.png'),
-              fit: BoxFit.cover,
-            )),
-        child: Column(
-          children: [
-            // ---  THIS ROW IS FOR THE TEXT ---
-            Expanded(flex:4 ,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                     Center(
-                      child: Text(
-                        'Hi Admin!',
-                        style: GoogleFonts.roboto(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 100.0,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(top: 20),
-                      child:  Center(
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+            image: AssetImage('assets/background2.png'),
+            fit: BoxFit.cover,
+          )),
+          child: Column(
+            children: [
+              // ---  THIS ROW IS FOR THE TEXT ---
+              Expanded(
+                  flex: 4,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Center(
                         child: Text(
-                          'What would you like to do today?',
+                          'Hi Admin!',
                           style: GoogleFonts.roboto(
-                            fontSize: 45.0,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 100.0,
                             color: Colors.black,
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                )
-            ),
-            // ---  THIS ROW IS FOR THE CLIENT/ANDIE VIEWS ---
-            Expanded(flex:5 ,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: (){
-                        Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
-                            Animation secondaryAnimation)=>const ViewClient(),
-                            transitionDuration: const Duration(seconds: 0)),
-                        );
-                      },
-                      child: Container(
-                        padding: EdgeInsets.all(10),
-                        width: 500,
-                        height: 500,
-                        margin: const EdgeInsets.all(20.0),
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.5),
-                          border: Border.all(width: 2),
-                          borderRadius: BorderRadius.all(const Radius.circular(10)),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('View Client',
-                              style: GoogleFonts.roboto(
-                                fontSize:45,
-                                fontWeight: FontWeight.bold,
-                              ),
+                      Container(
+                        margin: const EdgeInsets.only(top: 20),
+                        child: Center(
+                          child: Text(
+                            'What would you like to do today?',
+                            style: GoogleFonts.roboto(
+                              fontSize: 45.0,
+                              color: Colors.black,
                             ),
-                            Container(
-                              margin: EdgeInsets.only(top: 30),
-                              child: Center(
-                                child: Image.asset('client_typing.gif',
-                                  width: 200,
-                                  height: 200,
-                                ),
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
                       ),
-                    ),
-                    GestureDetector(
-                      onTap: (){
-                        Navigator.push(context, PageRouteBuilder(pageBuilder: (BuildContext context, Animation animation,
-                            Animation secondaryAnimation)=>const ViewAndie(),
-                            transitionDuration: const Duration(seconds: 0)),
-                        );
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(10),
-                        width: 500,
-                        height: 500,
-                        margin: const EdgeInsets.all(20.0),
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.5),
-                          border: Border.all(width: 2),
-                          borderRadius: BorderRadius.all(const Radius.circular(10)),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('View Andie',
-                              style: GoogleFonts.roboto(
-                                fontSize:45,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(top: 30),
-                              child: Center(
-                                child: Image.asset('andie_suit.gif',
-                                  width: 200,
-                                  height: 200,
+                    ],
+                  )),
+              // ---  THIS ROW IS FOR THE CLIENT/ANDIE VIEWS ---
+              Expanded(
+                  flex: 5,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                                pageBuilder: (BuildContext context,
+                                        Animation animation,
+                                        Animation secondaryAnimation) =>
+                                    const ViewClient(),
+                                transitionDuration: const Duration(seconds: 0)),
+                          );
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          width: 500,
+                          height: 500,
+                          margin: const EdgeInsets.all(20.0),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.5),
+                            border: Border.all(width: 2),
+                            borderRadius:
+                                BorderRadius.all(const Radius.circular(10)),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'View Client',
+                                style: GoogleFonts.roboto(
+                                  fontSize: 45,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
-                            ),
-                          ],
+                              Container(
+                                margin: EdgeInsets.only(top: 30),
+                                child: Center(
+                                  child: Image.asset(
+                                    'client_typing.gif',
+                                    width: 200,
+                                    height: 200,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-
                       ),
-                    ),
-                  ],
-                )
-            ),
-          ],
-        )
-      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                                pageBuilder: (BuildContext context,
+                                        Animation animation,
+                                        Animation secondaryAnimation) =>
+                                    const ViewAndie(),
+                                transitionDuration: const Duration(seconds: 0)),
+                          );
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(10),
+                          width: 500,
+                          height: 500,
+                          margin: const EdgeInsets.all(20.0),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.5),
+                            border: Border.all(width: 2),
+                            borderRadius:
+                                BorderRadius.all(const Radius.circular(10)),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'View Andie',
+                                style: GoogleFonts.roboto(
+                                  fontSize: 45,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(top: 30),
+                                child: Center(
+                                  child: Image.asset(
+                                    'andie_suit.gif',
+                                    width: 200,
+                                    height: 200,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  )),
+            ],
+          )),
       //ProfileList(),
     );
   }
 }
-
