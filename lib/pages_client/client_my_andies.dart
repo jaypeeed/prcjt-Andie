@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
+import 'package:rating_dialog/rating_dialog.dart';
 
 import '../services/auth.dart';
 import 'client_category_v2.dart';
@@ -11,9 +12,20 @@ import 'client_profile.dart';
 final db = FirebaseFirestore.instance;
 final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 var tmpArray = ['ELECTRICIAN', 'HOUSE KEEPER'];
-TextEditingController _textFieldController = TextEditingController();
-TextEditingController _textFieldControllerContInfo = TextEditingController();
-TextEditingController _textFieldControllerDate = TextEditingController();
+String andieName = '';
+
+String name = '';
+String clientNote2 ='';
+String startDate = '';
+String andieCont = '';
+String fb = '';
+String ratings = '';
+String andieUID ='';
+
+double rateCount =  0.0;
+double ratings2 =  0.0;
+double rateCounter = 1.0;
+
 
 void main() => runApp(const MaterialApp(home: ClientMyAndie()));
 
@@ -25,78 +37,6 @@ class ClientMyAndie extends StatefulWidget {
 }
 
 class _ClientMyAndieState extends State<ClientMyAndie> {
-  GlobalKey<FormState> _formkey = GlobalKey<FormState>();
-
-  Future<void> showRatingDialog(BuildContext context) async {
-    await showDialog(
-        context: context,
-        builder: (context) {
-          final TextEditingController _textReviewController =
-              TextEditingController();
-          return StatefulBuilder(builder: (context, setstate) {
-            return AlertDialog(
-              content: Form(
-                  key: _formkey,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      TextFormField(
-                        controller: _textReviewController,
-                        validator: (value) {
-                          return value!.isNotEmpty ? null : "Invalid Field";
-                        },
-                        decoration:
-                            const InputDecoration(hintText: "Enter Some Text"),
-                      ),
-                      Center(
-                        child: RatingStars(
-                          value: value,
-                          onValueChanged: (v) {
-                            setState(() {
-                              value = v;
-                            });
-                          },
-                          starBuilder: (index, color) => Icon(
-                            Icons.star,
-                            color: color,
-                          ),
-                          starCount: 5,
-                          starSize: 30,
-                          valueLabelColor: const Color(0xff9b9b9b),
-                          valueLabelTextStyle: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w400,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 12.0),
-                          valueLabelRadius: 10,
-                          maxValue: 5,
-                          starSpacing: 2,
-                          maxValueVisibility: true,
-                          valueLabelVisibility: true,
-                          animationDuration: const Duration(milliseconds: 100),
-                          valueLabelPadding: const EdgeInsets.symmetric(
-                              vertical: 1, horizontal: 8),
-                          valueLabelMargin: const EdgeInsets.only(right: 8),
-                          starOffColor: const Color(0xffe7e8ea),
-                          starColor: Colors.amber,
-                        ),
-                      ),
-                    ],
-                  )),
-              actions: <Widget>[
-                TextButton(
-                  onPressed: () {
-                    if (_formkey.currentState!.validate()) {
-                      Navigator.of(context).pop();
-                    }
-                  },
-                  child: Text('Hi'),
-                ),
-              ],
-            );
-          });
-        });
-  }
 
   @override
   void initState() {
@@ -142,7 +82,6 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
     return qn.docs;
   }
 
-  double value = 3.5;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -340,10 +279,8 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                 child: CircularProgressIndicator(),
                               );
                             } else {
-                              //snapshot.data.docs[index].id;
                               snapshot.data!.docs.forEach(
                                     (element) {
-                                  // heres your data
                                   element.id;
                                   print(element.id);
                                 },
@@ -354,15 +291,32 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
 
                                 children: snapshot.data!.docs.map((doc) {
                                   Timestamp t = (doc.data() as Map<String, dynamic>)['dateTime'];
-                                  ///////////////////////////////////////////////RATING/////////////////////////////////////////////////////////////////////
-/*                                var rateCounts =  (doc.data() as Map<String, dynamic>)['rateCount'];
-                                var ratings =  (doc.data() as Map<String, dynamic>)['ratings'];*/
-                                  ///////////////////////////////////////////////RATING/////////////////////////////////////////////////////////////////////
+                                  var clientNote = ((doc.data() as Map<String, dynamic>)['clientNote']);
 
                                   return Card(
                                     child: ListTile(
-                                      // ()=>print((doc.data() as Map<String, dynamic>)['uid'])
-                                        onTap: ()  {},
+                                        onTap: () async {
+
+                                          final QuerySnapshot snap = await FirebaseFirestore.instance.collection('pendingAndie').where('clientNote', isEqualTo: clientNote).get();
+                                          setState(() {
+                                            name = (doc.data() as Map<String, dynamic>)['andieName'];
+                                            clientNote2 = ((doc.data() as Map<String, dynamic>)['clientNote']);
+                                            startDate = (doc.data() as Map<String, dynamic>)['startDate'];
+                                            andieCont = (doc.data() as Map<String, dynamic>)['andieCont'];
+                                            fb = (doc.data() as Map<String, dynamic>)['andieFacebook'];
+                                            ratings = (doc.data() as Map<String, dynamic>)['andieTotalRate'].toString();
+                                            andieUID = (doc.data() as Map<String, dynamic>)['andieUID'];
+
+
+                                          });
+                                          final QuerySnapshot snap2 = await FirebaseFirestore.instance.collection('users').where('uid', isEqualTo: andieUID).get();
+                                          setState(() {
+                                            rateCount =  snap2.docs[0]['rateCount'];
+                                            ratings =  snap2.docs[0]['totalRate'].toString();
+                                            ratings2 =  snap2.docs[0]['ratings'];
+
+                                          });
+                                        },
 
                                         leading: Text((doc.data() as Map<String, dynamic>)['andieName']),
                                         title: Text((doc.data() as Map<String, dynamic>)['clientNote'] ),
@@ -370,8 +324,6 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                     ),
                                   );
                                 }).toList(),
-
-
                               );
                             }
                           },
@@ -388,9 +340,11 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
             Expanded(
               flex: 10,
               child: Container(
+
                 padding: const EdgeInsets.all(40),
                 color: Colors.white,
                 margin: const EdgeInsets.all(30),
+
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -419,7 +373,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                     Expanded(
                       flex: 100,
                       child: Container(
-                        child: Text(note),
+                        child: Text(clientNote2),
                         margin: const EdgeInsets.fromLTRB(20, 0, 10, 10),
                         color: Colors.redAccent,
                         width: 600,
@@ -449,7 +403,8 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                 margin:
                                     const EdgeInsets.fromLTRB(0, 5, 195, 10),
                                 color: Colors.redAccent,
-                                child: const SizedBox(
+                                child:  SizedBox(
+                                  child: Text(startDate),
                                   width: 150,
                                   height: 25,
                                 ),
@@ -489,6 +444,10 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                     padding: const EdgeInsets.only(
                                         top: 5, bottom: 0),
                                     child: const Text('Messenger:')),
+                                Container(
+                                    padding: const EdgeInsets.only(
+                                        top: 5, bottom: 0),
+                                    child: const Text('Ratings:')),
                               ],
                             ),
                           ),
@@ -497,6 +456,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
+                                child: Text(andieCont),
                                 padding:
                                     const EdgeInsets.only(top: 5, bottom: 0),
                                 color: Colors.redAccent,
@@ -504,8 +464,17 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                 height: 25,
                               ),
                               Container(
+                                child: Text(fb),
                                 padding:
                                     const EdgeInsets.only(top: 5, bottom: 0),
+                                color: Colors.redAccent,
+                                width: 250,
+                                height: 25,
+                              ),
+                              Container(
+                                child: Text(ratings),
+                                padding:
+                                const EdgeInsets.only(top: 5, bottom: 0),
                                 color: Colors.redAccent,
                                 width: 150,
                                 height: 25,
@@ -548,7 +517,65 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                         const Color.fromRGBO(255, 205, 84, 1.0),
                                   ),
                                   onPressed: () async {
-                                    showRatingDialog(context);
+                                    //showRatingDialog(context);
+
+                                    final _dialog = RatingDialog(
+                                      initialRating: 1.0,
+                                      // your app's name?
+                                      title: const Text(
+                                        'Rate this Andie!',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      // encourage your user to leave a high rating?
+                                      message: const Text(
+                                        'Tap a star to set your rating',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(fontSize: 15),
+                                      ),
+                                      // your app's logo?
+                                      //image: const FlutterLogo(size: 100),
+                                      submitButtonText: 'Submit',
+                                      commentHint: 'Share your experience and help this Andie and other clients!',
+                                      onCancelled: () => print('cancelled'),
+                                      onSubmitted: (response) {
+                                        print('rating: ${response.rating}, comment: ${response.comment}');
+
+                                       /* // TODO: add your own logic
+                                        if (response.rating < 3.0) {
+                                          // send their comments to your email or anywhere you wish
+                                          // ask the user to contact you instead of leaving a bad review
+                                        } else {
+                                          _rateAndReviewApp();
+                                        }*/
+
+                                        double rating = response.rating;
+
+                                        FirebaseFirestore.instance
+                                            .collection('users')
+                                            .doc(andieUID)
+                                            .update({
+                                          'rates': FieldValue.arrayUnion([
+                                            {
+                                              "ratingNumber": rating,
+                                              "client": FirebaseAuth.instance.currentUser?.uid,
+                                              "note": response.comment}
+                                          ]),
+                                          'ratings': FieldValue.increment(rating),
+                                          'rateCount': FieldValue.increment(rateCounter),
+                                        });
+                                      },
+                                    );
+
+                                    // show the dialog
+                                    showDialog(
+                                      context: context,
+                                      barrierDismissible: false, // set to false if you want to force a rating
+                                      builder: (context) => _dialog,
+                                    );
                                   },
                                   child: const Text('RATE'),
                                 ),
@@ -568,99 +595,4 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
     );
   }
 
-  Future openDialog() => showDialog(
-      context: context,
-      builder: (context) => SizedBox(
-            width: 835,
-            height: 538,
-            child: AlertDialog(
-              title: const Text(
-                'Review:Finn Is not a dog',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
-              ),
-              content: SizedBox(
-                width: 600,
-                height: 300,
-                /*padding: const EdgeInsets.only(left: 30),*/
-                child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      const Text("Job/s: "),
-                      Container(
-                          padding: const EdgeInsets.all(5),
-                          child: const Text("Date: ")),
-                      Center(
-                        child: RatingStars(
-                          value: value,
-                          onValueChanged: (v) {
-                            //
-                            setState(() {
-                              value = v;
-                            });
-                          },
-                          starBuilder: (index, color) => Icon(
-                            Icons.star,
-                            color: color,
-                          ),
-                          starCount: 5,
-                          starSize: 30,
-                          valueLabelColor: const Color(0xff9b9b9b),
-                          valueLabelTextStyle: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w400,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 12.0),
-                          valueLabelRadius: 10,
-                          maxValue: 5,
-                          starSpacing: 2,
-                          maxValueVisibility: true,
-                          valueLabelVisibility: true,
-                          animationDuration: const Duration(milliseconds: 100),
-                          valueLabelPadding: const EdgeInsets.symmetric(
-                              vertical: 1, horizontal: 8),
-                          valueLabelMargin: const EdgeInsets.only(right: 8),
-                          starOffColor: const Color(0xffe7e8ea),
-                          starColor: Colors.amber,
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.only(top: 20),
-                        width: 600,
-                        child: const TextField(
-                            style: TextStyle(
-                                /*height: 3,*/
-                                ),
-                            minLines: 2,
-                            maxLines: 5,
-                            keyboardType: TextInputType.multiline,
-                            // maxLines: null,
-                            decoration: InputDecoration(
-                                labelText:
-                                    "What do you feel about his/her service? Share your thoughts!   ",
-                                border: OutlineInputBorder())),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(right: 65, top: 20),
-                            child: ElevatedButton(
-                              child: const Text('DONE'),
-                              onPressed: () async {},
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(right: 65, top: 20),
-                            child: ElevatedButton(
-                              child: const Text('CANCEL'),
-                              onPressed: () => Navigator.pop(context, false),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ]),
-              ),
-            ),
-          ));
 }

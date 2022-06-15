@@ -20,10 +20,10 @@ class Register extends StatefulWidget {
 
 var tmpArray = [];
 var rates = [];
-var totalRate = 0;
-var ratings = 0;
+double totalRate = 0.0;
+double ratings = 0.0;
 var report = [];
-var rateCount = [];
+double rateCount = 0.0;
 
 class _RegisterState extends State<Register> {
   TextEditingController emailController = new TextEditingController();

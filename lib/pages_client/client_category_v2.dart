@@ -41,6 +41,8 @@ String myAge = '';
 String myName = '';
 String myFb = '';
 String myNumber = '';
+double rateCount =  0.0;
+double ratings2 =  0.0;
 
 class _ClientCategoryState extends State<ClientCategory> {
   @override
@@ -67,6 +69,21 @@ class _ClientCategoryState extends State<ClientCategory> {
         myFb = userData.data()!['fb'];
 
       });
+    });
+
+    final QuerySnapshot snap2 = await FirebaseFirestore.instance.collection('users').where('uid', isEqualTo: andieUID).get();
+    setState(() {
+      rateCount =  snap2.docs[0]['rateCount'];
+      ratings2 =  snap2.docs[0]['ratings'];
+
+    });
+
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(andieUID)
+        .update({
+      'totalRate': ratings2/rateCount
+
     });
   }
 
@@ -314,10 +331,6 @@ class _ClientCategoryState extends State<ClientCategory> {
                                 var email = (doc.data() as Map<String, dynamic>)['email'];
                                 var facebook =  (doc.data() as Map<String, dynamic>)['facebook'];
 
- ///////////////////////////////////////////////RATING/////////////////////////////////////////////////////////////////////
-                                var rateCounts =  (doc.data() as Map<String, dynamic>)['rateCount'];
-                                var ratings =  (doc.data() as Map<String, dynamic>)['ratings'];
-                                ///////////////////////////////////////////////RATING/////////////////////////////////////////////////////////////////////
 
                                 return Card(
                                   child: ListTile(
@@ -479,6 +492,7 @@ class _ClientCategoryState extends State<ClientCategory> {
                                                   'startDate': clientDate,
                                                   'clientCont': clientCont,
                                                   'docUID': doc.id,
+                                                  'status': 'pending',
                                                 });
                                                 //AuthService.addToLedger(context, test, widget.uAndie.ledgerItem('s','s','d'));
                                                /* FirebaseFirestore.instance.collection('users').doc(test).update({
