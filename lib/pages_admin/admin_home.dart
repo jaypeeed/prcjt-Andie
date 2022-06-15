@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:prjct_andie/pages_admin/view_andie.dart';
 import 'package:prjct_andie/pages_admin/view_client.dart';
+import '../services/auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../../pages/andie_my_job.dart';
 import '../../pages/andie_profile_andie.dart';
 import '../../pages/andie_ratings.dart';
 import 'notes.dart';
+import 'package:universal_html/html.dart' as html;
 
 void main() {
   runApp(const MaterialApp(home: AdminHome()));
@@ -22,6 +26,8 @@ class _AdminHomeState extends State<AdminHome> {
   void initState() {
     super.initState();
   }
+
+  final AuthService _auth = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -44,16 +50,9 @@ class _AdminHomeState extends State<AdminHome> {
                   style: TextButton.styleFrom(
                     textStyle: const TextStyle(fontSize: 20),
                   ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      PageRouteBuilder(
-                          pageBuilder: (BuildContext context,
-                                  Animation animation,
-                                  Animation secondaryAnimation) =>
-                              const AndieProfile(),
-                          transitionDuration: const Duration(seconds: 0)),
-                    );
+                  onPressed: () async {
+                    await _auth.signOut();
+                    html.window.location.reload();
                   },
                   child: const Text(
                     'Log out',
