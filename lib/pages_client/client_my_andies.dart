@@ -484,6 +484,148 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                               ),
                             ),
                           ),
+                          Visibility(
+                            visible: isVisibleHistory,
+                            child: Container(
+                              width: 700,
+                              height: 460,
+                              margin: const EdgeInsets.only(
+                                  bottom: 30, right: 30),
+                              decoration: BoxDecoration(
+                                  color:  Color.fromRGBO(220, 57, 57, 1.0),
+                                  borderRadius:
+                                  const BorderRadius.all(Radius.circular(0)),
+                                  border: Border.all(
+                                    color: Colors.black,
+                                  )),
+                              /*child: FutureBuilder(
+                                    future: getData(),
+                                    builder: (_,
+                                        AsyncSnapshot<List<DocumentSnapshot>>
+                                            snapshot) {
+                                      if (snapshot.hasData) {
+                                        return ListView.builder(
+                                            itemCount: snapshot.data!.length,
+                                            itemBuilder: (context, index) {
+                                              return Card(
+                                                child: ListTile(
+                                                  title: Text(snapshot.data![index]
+                                                      .get('pendingAndie')[index]
+                                                      .toString()),
+                                                  onTap: () async {
+                                                    FirebaseFirestore.instance
+                                                        .collection('users')
+                                                        .where("uid",
+                                                            isEqualTo: FirebaseAuth
+                                                                .instance
+                                                                .currentUser
+                                                                ?.uid)
+                                                        .get()
+                                                        .then((QuerySnapshot
+                                                            querySnapshot) {
+                                                      querySnapshot.docs
+                                                          .forEach((doc) {
+                                                        print(doc["pendingAndie"][0]
+                                                            ["andieName"]);
+                                                      });
+                                                    });
+                                                    print("pressed index $index");
+                                                  },
+                                                ),
+                                              );
+                                            }
+                                            */ /* itemBuilder: (_, index) {
+                                            return Text(snapshot.data![index].data().toString());
+                                          }*/ /*
+                                            );
+                                      } else {
+                                        return CircularProgressIndicator();
+                                      }
+                                    })*/
+
+                              child: StreamBuilder<QuerySnapshot>(
+                                stream: db
+                                    .collection('pendingAndie')
+                                    .where('clientUID',
+                                    isEqualTo:
+                                    FirebaseAuth.instance.currentUser?.uid)
+                                    .snapshots(),
+                                builder: (context, snapshot) {
+                                  if (!snapshot.hasData) {
+                                    Text('HELLO');
+                                    return const Center(
+                                      child: CircularProgressIndicator(),
+                                    );
+                                  } else {
+                                    snapshot.data!.docs.forEach(
+                                          (element) {
+                                        element.id;
+                                        print(element.id);
+                                      },
+                                    );
+                                    print(snapshot.data!.docs.length.toString());
+                                    counter = snapshot.data!.docs.length.toString();
+                                    return ListView(
+                                      children: snapshot.data!.docs.map((doc) {
+                                        Timestamp t = (doc.data()
+                                        as Map<String, dynamic>)['dateTime'];
+                                        var clientNote = ((doc.data()
+                                        as Map<String, dynamic>)['clientNote']);
+
+                                        return Card(
+                                          child: ListTile(
+                                              onTap: () async {
+                                                final QuerySnapshot snap =
+                                                await FirebaseFirestore.instance
+                                                    .collection('pendingAndie')
+                                                    .where('clientNote',
+                                                    isEqualTo: clientNote)
+                                                    .get();
+                                                setState(() {
+                                                  name = (doc.data() as Map<String,
+                                                      dynamic>)['andieName'];
+                                                  clientNote2 = ((doc.data() as Map<
+                                                      String,
+                                                      dynamic>)['clientNote']);
+                                                  startDate = (doc.data() as Map<
+                                                      String, dynamic>)['startDate'];
+                                                  andieCont = (doc.data() as Map<
+                                                      String, dynamic>)['andieCont'];
+                                                  fb = (doc.data() as Map<String,
+                                                      dynamic>)['andieFacebook'];
+                                                  ratings = (doc.data() as Map<String,
+                                                      dynamic>)['andieTotalRate']
+                                                      .toString();
+                                                  andieUID = (doc.data() as Map<
+                                                      String, dynamic>)['andieUID'];
+                                                });
+                                                final QuerySnapshot snap2 =
+                                                await FirebaseFirestore.instance
+                                                    .collection('users')
+                                                    .where('uid',
+                                                    isEqualTo: andieUID)
+                                                    .get();
+                                                setState(() {
+                                                  rateCount =
+                                                  snap2.docs[0]['rateCount'];
+                                                  ratings = snap2.docs[0]['totalRate']
+                                                      .toString();
+                                                  ratings2 = snap2.docs[0]['ratings'];
+                                                });
+                                              },
+                                              leading: Text((doc.data() as Map<String,
+                                                  dynamic>)['andieName']),
+                                              title: Text((doc.data() as Map<String,
+                                                  dynamic>)['clientNote']),
+                                              subtitle: Text(t.toDate().toString())),
+                                        );
+                                      }).toList(),
+                                    );
+                                  }
+                                },
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     )
