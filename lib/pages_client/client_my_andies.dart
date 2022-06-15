@@ -82,6 +82,11 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
     return qn.docs;
   }
 
+  bool isVisiblePending = false;
+  bool isVisibleAccepted = false;
+  bool isVisibleHistory = false;
+  bool isVisibleButtons = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -187,6 +192,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
             Expanded(
               flex: 10,
               child: Container(
+                padding: EdgeInsets.only(left: 30),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: const BorderRadius.all(Radius.circular(20)),
@@ -201,7 +207,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                     Expanded(
                       flex: 2,
                       child: Container(
-                          margin: const EdgeInsets.only(left: 30, top: 30),
+                          margin: const EdgeInsets.only(top: 30),
                           child: const Text(
                             'My Andies',
                             style: TextStyle(
@@ -210,84 +216,373 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                             ),
                           )),
                     ),
+                    Expanded(
+                      flex:2,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex:2,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary:
+                                const Color.fromRGBO(255, 205, 84, 1.0),
+                              ),
+                              child: const Text('Pending'),
+                              onPressed: () async {
+                                setState(() {
+                                  isVisiblePending =true;
+                                  isVisibleAccepted =false;
+                                  isVisibleHistory =false;
+                                  isVisibleButtons = true;
+                                });
+                              },
+                            ),
+                          ),
+                          Expanded(
+                            flex:1,
+                            child: SizedBox(width: 1,),
+                          ),
+                          Expanded(
+                            flex:2,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary:
+                                const Color.fromRGBO(111, 215, 85, 1.0),
+                              ),
+                              child: const Text('Accepted'),
+                              onPressed: () async {
+                                setState(() {
+                                  isVisibleAccepted =true;
+                                  isVisiblePending =false;
+                                  isVisibleHistory =false;
+                                  isVisibleButtons = true;
+                                });
+                              },
+                            ),
+                          ),
+                          Expanded(
+                            flex:1,
+                            child: SizedBox(width: 1,),
+                          ),
+                          Expanded(
+                            flex:2,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: const Color.fromRGBO(220, 57, 57, 1.0),
+                              ),
+                              child: const Text('History'),
+                              onPressed: () async {
+                                setState(() {
+                                  isVisibleHistory =true;
+                                  isVisiblePending =false;
+                                  isVisibleAccepted =false;
+                                  isVisibleButtons = false;
+
+                                });
+                              },
+                            ),
+                          ),
+                          Expanded(
+                            flex:5,
+                            child: SizedBox(width: 10,),
+                          ),
+                        ],
+                      ),
+                    ),
 
                     // CONTAINER FOR LIST VIEW!!!!!!!!!!!!!
                     Expanded(
-                      flex: 10,
-                      child: Container(
-                          margin: const EdgeInsets.only(
-                              bottom: 30, left: 30, right: 30),
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(0)),
-                              border: Border.all(
-                                color: Colors.black,
-                              )),
+                      flex: 15,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Visibility (
+                            visible: isVisiblePending,
+                            child: Container(
+                              width: 700,
+                              height: 460,
+                              margin: const EdgeInsets.only(
+                                  bottom: 30, right: 30),
+                              decoration: BoxDecoration(
+                                color: Color.fromRGBO(255, 205, 84, 1.0),
+                                  borderRadius:
+                                      const BorderRadius.all(Radius.circular(0)),
+                                  border: Border.all(
+                                    color: Colors.black,
+                                  )),
+                              /*child: FutureBuilder(
+                                    future: getData(),
+                                    builder: (_,
+                                        AsyncSnapshot<List<DocumentSnapshot>>
+                                            snapshot) {
+                                      if (snapshot.hasData) {
+                                        return ListView.builder(
+                                            itemCount: snapshot.data!.length,
+                                            itemBuilder: (context, index) {
+                                              return Card(
+                                                child: ListTile(
+                                                  title: Text(snapshot.data![index]
+                                                      .get('pendingAndie')[index]
+                                                      .toString()),
+                                                  onTap: () async {
+                                                    FirebaseFirestore.instance
+                                                        .collection('users')
+                                                        .where("uid",
+                                                            isEqualTo: FirebaseAuth
+                                                                .instance
+                                                                .currentUser
+                                                                ?.uid)
+                                                        .get()
+                                                        .then((QuerySnapshot
+                                                            querySnapshot) {
+                                                      querySnapshot.docs
+                                                          .forEach((doc) {
+                                                        print(doc["pendingAndie"][0]
+                                                            ["andieName"]);
+                                                      });
+                                                    });
+                                                    print("pressed index $index");
+                                                  },
+                                                ),
+                                              );
+                                            }
+                                            */ /* itemBuilder: (_, index) {
+                                            return Text(snapshot.data![index].data().toString());
+                                          }*/ /*
+                                            );
+                                      } else {
+                                        return CircularProgressIndicator();
+                                      }
+                                    })*/
 
+                              child: StreamBuilder<QuerySnapshot>(
+                                stream: db
+                                    .collection('pendingAndie')
+                                    .where('clientUID',
+                                        isEqualTo:
+                                            FirebaseAuth.instance.currentUser?.uid)
+                                    .snapshots(),
+                                builder: (context, snapshot) {
+                                  if (!snapshot.hasData) {
+                                    Text('HELLO');
+                                    return const Center(
+                                      child: CircularProgressIndicator(),
+                                    );
+                                  } else {
+                                    snapshot.data!.docs.forEach(
+                                      (element) {
+                                        element.id;
+                                        print(element.id);
+                                      },
+                                    );
+                                    print(snapshot.data!.docs.length.toString());
+                                    counter = snapshot.data!.docs.length.toString();
+                                    return Container(
+                                      child: ListView(
+                                        children: snapshot.data!.docs.map((doc) {
+                                          Timestamp t = (doc.data()
+                                              as Map<String, dynamic>)['dateTime'];
+                                          var clientNote = ((doc.data()
+                                              as Map<String, dynamic>)['clientNote']);
 
-                        child: StreamBuilder<QuerySnapshot>(
-                          stream: db.collection('pendingAndie')
-                              .where('clientUID', isEqualTo: FirebaseAuth.instance.currentUser?.uid)
-                              .snapshots(),
-                          builder: (context, snapshot) {
-                            if (!snapshot.hasData) {
-                              Text ('HELLO');
-                              return const Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            } else {
-                              snapshot.data!.docs.forEach(
-                                    (element) {
-                                  element.id;
-                                  print(element.id);
+                                          return Card(
+                                            child: ListTile(
+                                                onTap: () async {
+                                                  final QuerySnapshot snap =
+                                                      await FirebaseFirestore.instance
+                                                          .collection('pendingAndie')
+                                                          .where('clientNote',
+                                                              isEqualTo: clientNote)
+                                                          .get();
+                                                  setState(() {
+                                                    name = (doc.data() as Map<String,
+                                                        dynamic>)['andieName'];
+                                                    clientNote2 = ((doc.data() as Map<
+                                                        String,
+                                                        dynamic>)['clientNote']);
+                                                    startDate = (doc.data() as Map<
+                                                        String, dynamic>)['startDate'];
+                                                    andieCont = (doc.data() as Map<
+                                                        String, dynamic>)['andieCont'];
+                                                    fb = (doc.data() as Map<String,
+                                                        dynamic>)['andieFacebook'];
+                                                    ratings = (doc.data() as Map<String,
+                                                            dynamic>)['andieTotal1']
+                                                        .toString();
+                                                    andieUID = (doc.data() as Map<
+                                                        String, dynamic>)['andieUID'];
+                                                  });
+                                                  final QuerySnapshot snap2 =
+                                                      await FirebaseFirestore.instance
+                                                          .collection('users')
+                                                          .where('uid',
+                                                              isEqualTo: andieUID)
+                                                          .get();
+                                                  setState(() {
+                                                    rateCount =
+                                                        snap2.docs[0]['rateCount'];
+                                                    ratings = snap2.docs[0]['totalRate']
+                                                        .toString();
+                                                    ratings2 = snap2.docs[0]['ratings'];
+                                                  });
+                                                },
+                                                leading: Text((doc.data() as Map<String,
+                                                    dynamic>)['andieName']),
+                                                title: Text((doc.data() as Map<String,
+                                                    dynamic>)['clientNote']),
+                                                subtitle: Text(t.toDate().toString())),
+                                          );
+                                        }).toList(),
+                                      ),
+                                    );
+                                  }
                                 },
-                              );
-                              print(snapshot.data!.docs.length.toString());
-                              counter = snapshot.data!.docs.length.toString();
+                              ),
+                            ),
+                          ),
+                          Visibility(
+                            visible: isVisibleAccepted,
+                            child: Container(
+                              width: 700,
+                              height: 460,
+                              margin: const EdgeInsets.only(
+                                  bottom: 30, right: 30),
+                              decoration: BoxDecoration(
+                                  color: Color.fromRGBO(111, 215, 85, 1.0),
+                                  borderRadius:
+                                  const BorderRadius.all(Radius.circular(0)),
+                                  border: Border.all(
+                                    color: Colors.black,
+                                  )),
+                              /*child: FutureBuilder(
+                                    future: getData(),
+                                    builder: (_,
+                                        AsyncSnapshot<List<DocumentSnapshot>>
+                                            snapshot) {
+                                      if (snapshot.hasData) {
+                                        return ListView.builder(
+                                            itemCount: snapshot.data!.length,
+                                            itemBuilder: (context, index) {
+                                              return Card(
+                                                child: ListTile(
+                                                  title: Text(snapshot.data![index]
+                                                      .get('pendingAndie')[index]
+                                                      .toString()),
+                                                  onTap: () async {
+                                                    FirebaseFirestore.instance
+                                                        .collection('users')
+                                                        .where("uid",
+                                                            isEqualTo: FirebaseAuth
+                                                                .instance
+                                                                .currentUser
+                                                                ?.uid)
+                                                        .get()
+                                                        .then((QuerySnapshot
+                                                            querySnapshot) {
+                                                      querySnapshot.docs
+                                                          .forEach((doc) {
+                                                        print(doc["pendingAndie"][0]
+                                                            ["andieName"]);
+                                                      });
+                                                    });
+                                                    print("pressed index $index");
+                                                  },
+                                                ),
+                                              );
+                                            }
+                                            */ /* itemBuilder: (_, index) {
+                                            return Text(snapshot.data![index].data().toString());
+                                          }*/ /*
+                                            );
+                                      } else {
+                                        return CircularProgressIndicator();
+                                      }
+                                    })*/
 
-                              return ListView (
+                              child: StreamBuilder<QuerySnapshot>(
+                                stream: db
+                                    .collection('pendingAndie')
+                                    .where('clientUID',
+                                    isEqualTo:
+                                    FirebaseAuth.instance.currentUser?.uid)
+                                    .snapshots(),
+                                builder: (context, snapshot) {
+                                  if (!snapshot.hasData) {
+                                    Text('HELLO');
+                                    return const Center(
+                                      child: CircularProgressIndicator(),
+                                    );
+                                  } else {
+                                    snapshot.data!.docs.forEach(
+                                          (element) {
+                                        element.id;
+                                        print(element.id);
+                                      },
+                                    );
+                                    print(snapshot.data!.docs.length.toString());
+                                    counter = snapshot.data!.docs.length.toString();
+                                    return ListView(
+                                      children: snapshot.data!.docs.map((doc) {
+                                        Timestamp t = (doc.data()
+                                        as Map<String, dynamic>)['dateTime'];
+                                        var clientNote = ((doc.data()
+                                        as Map<String, dynamic>)['clientNote']);
 
-                                children: snapshot.data!.docs.map((doc) {
-                                  Timestamp t = (doc.data() as Map<String, dynamic>)['dateTime'];
-                                  var clientNote = ((doc.data() as Map<String, dynamic>)['clientNote']);
-
-                                  return Card(
-                                    child: ListTile(
-                                        onTap: () async {
-
-                                          final QuerySnapshot snap = await FirebaseFirestore.instance.collection('pendingAndie').where('clientNote', isEqualTo: clientNote).get();
-                                          setState(() {
-                                            name = (doc.data() as Map<String, dynamic>)['andieName'];
-                                            clientNote2 = ((doc.data() as Map<String, dynamic>)['clientNote']);
-                                            startDate = (doc.data() as Map<String, dynamic>)['startDate'];
-                                            andieCont = (doc.data() as Map<String, dynamic>)['andieCont'];
-                                            fb = (doc.data() as Map<String, dynamic>)['andieFacebook'];
-                                            ratings = (doc.data() as Map<String, dynamic>)['andieTotalRate'].toString();
-                                            andieUID = (doc.data() as Map<String, dynamic>)['andieUID'];
-
-
-                                          });
-                                          final QuerySnapshot snap2 = await FirebaseFirestore.instance.collection('users').where('uid', isEqualTo: andieUID).get();
-                                          setState(() {
-                                            rateCount =  snap2.docs[0]['rateCount'];
-                                            ratings =  snap2.docs[0]['totalRate'].toString();
-                                            ratings2 =  snap2.docs[0]['ratings'];
-
-                                          });
-                                        },
-
-                                        leading: Text((doc.data() as Map<String, dynamic>)['andieName']),
-                                        title: Text((doc.data() as Map<String, dynamic>)['clientNote'] ),
-                                        subtitle: Text(t.toDate().toString() )
-                                    ),
-                                  );
-                                }).toList(),
-
-
-                              );
-                            }
-                          },
-                        ),
+                                        return Card(
+                                          child: ListTile(
+                                              onTap: () async {
+                                                final QuerySnapshot snap =
+                                                await FirebaseFirestore.instance
+                                                    .collection('pendingAndie')
+                                                    .where('clientNote',
+                                                    isEqualTo: clientNote)
+                                                    .get();
+                                                setState(() {
+                                                  name = (doc.data() as Map<String,
+                                                      dynamic>)['andieName'];
+                                                  clientNote2 = ((doc.data() as Map<
+                                                      String,
+                                                      dynamic>)['clientNote']);
+                                                  startDate = (doc.data() as Map<
+                                                      String, dynamic>)['startDate'];
+                                                  andieCont = (doc.data() as Map<
+                                                      String, dynamic>)['andieCont'];
+                                                  fb = (doc.data() as Map<String,
+                                                      dynamic>)['andieFacebook'];
+                                                  ratings = (doc.data() as Map<String,
+                                                      dynamic>)['andieTotalRate']
+                                                      .toString();
+                                                  andieUID = (doc.data() as Map<
+                                                      String, dynamic>)['andieUID'];
+                                                });
+                                                final QuerySnapshot snap2 =
+                                                await FirebaseFirestore.instance
+                                                    .collection('users')
+                                                    .where('uid',
+                                                    isEqualTo: andieUID)
+                                                    .get();
+                                                setState(() {
+                                                  rateCount =
+                                                  snap2.docs[0]['rateCount'];
+                                                  ratings = snap2.docs[0]['totalRate']
+                                                      .toString();
+                                                  ratings2 = snap2.docs[0]['ratings'];
+                                                });
+                                              },
+                                              leading: Text((doc.data() as Map<String,
+                                                  dynamic>)['andieName']),
+                                              title: Text((doc.data() as Map<String,
+                                                  dynamic>)['clientNote']),
+                                              subtitle: Text(t.toDate().toString())),
+                                        );
+                                      }).toList(),
+                                    );
+                                  }
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     )
                   ],
@@ -448,100 +743,110 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                       flex: 100,
                       child: Container(
                         margin: const EdgeInsets.fromLTRB(20, 20, 10, 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Expanded(
-                              flex: 100,
-                              child: Container(
-                                margin:
-                                    const EdgeInsets.only(left: 10, right: 10),
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    primary:
-                                        const Color.fromRGBO(111, 215, 85, 1.0),
+                        child: Visibility(
+                          visible: isVisibleButtons,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Expanded(
+                                flex: 100,
+                                child: Container(
+                                  margin:
+                                      const EdgeInsets.only(left: 10, right: 10),
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      primary:
+                                          const Color.fromRGBO(111, 215, 85, 1.0),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('DONE'),
                                   ),
-                                  onPressed: () {},
-                                  child: const Text('DONE'),
                                 ),
                               ),
-                            ),
-                            Expanded(
-                              flex: 100,
-                              child: Container(
-                                margin:
-                                    const EdgeInsets.only(left: 10, right: 10),
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    primary:
-                                        const Color.fromRGBO(255, 205, 84, 1.0),
-                                  ),
-                                  onPressed: () async {
-                                    //showRatingDialog(context);
+                              Expanded(
+                                flex: 100,
+                                child: Container(
+                                  margin:
+                                      const EdgeInsets.only(left: 10, right: 10),
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      primary:
+                                          const Color.fromRGBO(255, 205, 84, 1.0),
+                                    ),
+                                    onPressed: () async {
+                                      //showRatingDialog(context);
 
-                                    final _dialog = RatingDialog(
-                                      initialRating: 1.0,
-                                      // your app's name?
-                                      title: const Text(
-                                        'Rate this Andie!',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold,
+                                      final _dialog = RatingDialog(
+                                        initialRating: 1.0,
+                                        // your app's name?
+                                        title: const Text(
+                                          'Rate this Andie!',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
-                                      ),
-                                      // encourage your user to leave a high rating?
-                                      message: const Text(
-                                        'Tap a star to set your rating',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(fontSize: 15),
-                                      ),
-                                      // your app's logo?
-                                      //image: const FlutterLogo(size: 100),
-                                      submitButtonText: 'Submit',
-                                      commentHint: 'Share your experience and help this Andie and other clients!',
-                                      onCancelled: () => print('cancelled'),
-                                      onSubmitted: (response) {
-                                        print('rating: ${response.rating}, comment: ${response.comment}');
+                                        // encourage your user to leave a high rating?
+                                        message: const Text(
+                                          'Tap a star to set your rating',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(fontSize: 15),
+                                        ),
+                                        // your app's logo?
+                                        //image: const FlutterLogo(size: 100),
+                                        submitButtonText: 'Submit',
+                                        commentHint:
+                                            'Share your experience and help this Andie and other clients!',
+                                        onCancelled: () => print('cancelled'),
+                                        onSubmitted: (response) {
+                                          print(
+                                              'rating: ${response.rating}, comment: ${response.comment}');
 
-                                       /* // TODO: add your own logic
-                                        if (response.rating < 3.0) {
-                                          // send their comments to your email or anywhere you wish
-                                          // ask the user to contact you instead of leaving a bad review
-                                        } else {
-                                          _rateAndReviewApp();
-                                        }*/
+                                          /* // TODO: add your own logic
+                                          if (response.rating < 3.0) {
+                                            // send their comments to your email or anywhere you wish
+                                            // ask the user to contact you instead of leaving a bad review
+                                          } else {
+                                            _rateAndReviewApp();
+                                          }*/
 
-                                        double rating = response.rating;
+                                          double rating = response.rating;
 
-                                        FirebaseFirestore.instance
-                                            .collection('users')
-                                            .doc(andieUID)
-                                            .update({
-                                          'rates': FieldValue.arrayUnion([
-                                            {
-                                              "ratingNumber": rating,
-                                              "client": FirebaseAuth.instance.currentUser?.uid,
-                                              "note": response.comment}
-                                          ]),
-                                          'ratings': FieldValue.increment(rating),
-                                          'rateCount': FieldValue.increment(rateCounter),
-                                        });
-                                      },
-                                    );
+                                          FirebaseFirestore.instance
+                                              .collection('users')
+                                              .doc(andieUID)
+                                              .update({
+                                            'rates': FieldValue.arrayUnion([
+                                              {
+                                                "ratingNumber": rating,
+                                                "client": FirebaseAuth
+                                                    .instance.currentUser?.uid,
+                                                "note": response.comment
+                                              }
+                                            ]),
+                                            'ratings':
+                                                FieldValue.increment(rating),
+                                            'rateCount':
+                                                FieldValue.increment(rateCounter),
+                                          });
+                                        },
+                                      );
 
-                                    // show the dialog
-                                    showDialog(
-                                      context: context,
-                                      barrierDismissible: false, // set to false if you want to force a rating
-                                      builder: (context) => _dialog,
-                                    );
-                                  },
-                                  child: const Text('RATE'),
+                                      // show the dialog
+                                      showDialog(
+                                        context: context,
+                                        barrierDismissible:
+                                            false, // set to false if you want to force a rating
+                                        builder: (context) => _dialog,
+                                      );
+                                    },
+                                    child: const Text('RATE'),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     )
