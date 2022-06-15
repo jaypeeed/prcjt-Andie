@@ -158,198 +158,200 @@ class _ClientProfileState extends State<ClientProfile> {
             child: Container(
               color: Colors.white,
               padding: const EdgeInsets.only(right: 40, bottom: 40, top: 40),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(children: const [
-                  ]),
-                  Container(
-                    padding:
-                    const EdgeInsets.only(left: 10, top: 20, bottom: 10),
-                    child: Text(
-                      myName,
-                      style: GoogleFonts.robotoMono(
-                        fontSize:96,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-
-                  Container(
-                    padding: const EdgeInsets.only(top: 10,bottom: 30),
-                    child: Text(
-                      'Contact Information',
-                      style: GoogleFonts.roboto(
-                          fontSize: 40,
-                          color: Colors.black,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(children: const [
+                    ]),
+                    Container(
+                      padding:
+                      const EdgeInsets.only(left: 10, top: 20, bottom: 10),
+                      child: Text(
+                        myName,
+                        style: GoogleFonts.robotoMono(
+                          fontSize:96,
                           fontWeight: FontWeight.bold,
-                          letterSpacing: 2.0),
-                      textAlign: TextAlign.center,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
-                  ),
-                  Row(
-                    children: [
-                      //--------- THIS IS FOR TEXT LABEL --------
-                      Container(
-                        margin: const EdgeInsets.only(right: 30.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.only(top: 5, bottom: 0),
-                              child:  Text('Phone Number:',
-                                style: GoogleFonts.roboto(
-                                    fontSize: 35,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    letterSpacing: 2.0),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                            Container(
-                              padding: const EdgeInsets.only(top: 5, bottom: 0),
-                              child: Text('Gender:',
-                                style: GoogleFonts.roboto(
-                                    fontSize: 35,
-                                    fontWeight: FontWeight.bold,
-                                    letterSpacing: 2.0),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                            Container(
+
+                    Container(
+                      padding: const EdgeInsets.only(top: 10,bottom: 30),
+                      child: Text(
+                        'Contact Information',
+                        style: GoogleFonts.roboto(
+                            fontSize: 40,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 2.0),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        //--------- THIS IS FOR TEXT LABEL --------
+                        Container(
+                          margin: const EdgeInsets.only(right: 30.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
                                 padding: const EdgeInsets.only(top: 5, bottom: 0),
-                                child:   Text('Age:',
+                                child:  Text('Phone Number:',
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 35,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 2.0),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                              Container(
+                                padding: const EdgeInsets.only(top: 5, bottom: 0),
+                                child: Text('Gender:',
                                   style: GoogleFonts.roboto(
                                       fontSize: 35,
                                       fontWeight: FontWeight.bold,
+                                      letterSpacing: 2.0),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                              Container(
+                                  padding: const EdgeInsets.only(top: 5, bottom: 0),
+                                  child:   Text('Age:',
+                                    style: GoogleFonts.roboto(
+                                        fontSize: 35,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                        letterSpacing: 2.0),
+                                    textAlign: TextAlign.center,
+                                  )),
+                              Container(
+                                padding: const EdgeInsets.only(top: 5, bottom: 0),
+                                child: Text('Gmail:',
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 35,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 2.0),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                              Container(
+                                padding: const EdgeInsets.only(top: 5, bottom: 20),
+                                child: Text('Facebook:',
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 35,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 2.0),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        //----------- this is IS FOR DATA  --------
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.only(top: 5,),
+                              child:  Text(
+                                '$myNumber',
+                                style: GoogleFonts.roboto(
+                                    fontSize: 35,
+                                    color: Colors.black,
+                                    /*fontWeight: FontWeight.bold,*/
+                                    letterSpacing: 2.0),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.only(top: 5,),
+                              child:  Text(
+                                '$myGender',
+                                style: GoogleFonts.roboto(
+                                    fontSize: 35,
+                                    color: Colors.black,
+                                    /*fontWeight: FontWeight.bold,*/
+                                    letterSpacing: 2.0),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            Container(
+                                padding: const EdgeInsets.only(top: 5),
+                                child:  Text(
+                                  '$myAge',
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 35,
                                       color: Colors.black,
                                       letterSpacing: 2.0),
                                   textAlign: TextAlign.center,
                                 )),
                             Container(
-                              padding: const EdgeInsets.only(top: 5, bottom: 0),
-                              child: Text('Gmail:',
+                              padding: const EdgeInsets.only(top: 5,),
+                              child: Text(
+                                '$myEmail',
                                 style: GoogleFonts.roboto(
                                     fontSize: 35,
                                     color: Colors.black,
-                                    fontWeight: FontWeight.bold,
                                     letterSpacing: 2.0),
                                 textAlign: TextAlign.center,
                               ),
                             ),
                             Container(
                               padding: const EdgeInsets.only(top: 5, bottom: 20),
-                              child: Text('Facebook:',
+                              child: Text(
+                                '$myFb',
                                 style: GoogleFonts.roboto(
                                     fontSize: 35,
                                     color: Colors.black,
-                                    fontWeight: FontWeight.bold,
                                     letterSpacing: 2.0),
                                 textAlign: TextAlign.center,
                               ),
                             ),
                           ],
                         ),
-                      ),
-
-                      //----------- this is IS FOR DATA  --------
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.only(top: 5,),
-                            child:  Text(
-                              '$myNumber',
-                              style: GoogleFonts.roboto(
-                                  fontSize: 35,
-                                  color: Colors.black,
-                                  /*fontWeight: FontWeight.bold,*/
-                                  letterSpacing: 2.0),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.only(top: 5,),
-                            child:  Text(
-                              '$myGender',
-                              style: GoogleFonts.roboto(
-                                  fontSize: 35,
-                                  color: Colors.black,
-                                  /*fontWeight: FontWeight.bold,*/
-                                  letterSpacing: 2.0),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                          Container(
-                              padding: const EdgeInsets.only(top: 5),
-                              child:  Text(
-                                '$myAge',
-                                style: GoogleFonts.roboto(
-                                    fontSize: 35,
-                                    color: Colors.black,
-                                    letterSpacing: 2.0),
-                                textAlign: TextAlign.center,
-                              )),
-                          Container(
-                            padding: const EdgeInsets.only(top: 5,),
-                            child: Text(
-                              '$myEmail',
-                              style: GoogleFonts.roboto(
-                                  fontSize: 35,
-                                  color: Colors.black,
-                                  letterSpacing: 2.0),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.only(top: 5, bottom: 20),
-                            child: Text(
-                              '$myFb',
-                              style: GoogleFonts.roboto(
-                                  fontSize: 35,
-                                  color: Colors.black,
-                                  letterSpacing: 2.0),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 30),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        ElevatedButton(
-                            onPressed: () async {
-                              await _auth.signOut();
-                              html.window.location.reload();
-                            },
-                            style: ElevatedButton.styleFrom(
-                              minimumSize: Size(40,50),
-                              side: const BorderSide(
-                                width: 1, color: Colors.black,
-                              ),
-                              primary: Color.fromRGBO(220, 57, 57, 1.0)
-                            ),
-                            child: Align(
-                              alignment: Alignment.bottomRight,
-                              child:  Text(
-                                "LOG OUT",
-                                style: GoogleFonts.roboto(
-                                    fontSize:21,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                    letterSpacing: 2.0),
-                                textAlign: TextAlign.center,
-                              ),
-                            ))
                       ],
                     ),
-                  )
-                ],
+                    Container(
+                      margin: EdgeInsets.only(top: 30),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          ElevatedButton(
+                              onPressed: () async {
+                                await _auth.signOut();
+                                html.window.location.reload();
+                              },
+                              style: ElevatedButton.styleFrom(
+                                minimumSize: Size(40,50),
+                                side: const BorderSide(
+                                  width: 1, color: Colors.black,
+                                ),
+                                primary: Color.fromRGBO(220, 57, 57, 1.0)
+                              ),
+                              child: Align(
+                                alignment: Alignment.bottomRight,
+                                child:  Text(
+                                  "LOG OUT",
+                                  style: GoogleFonts.roboto(
+                                      fontSize:21,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                      letterSpacing: 2.0),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ))
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           )
