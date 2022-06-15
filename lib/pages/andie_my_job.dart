@@ -76,6 +76,7 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
   bool isVisibleAccepted = false;
   bool isVisibleHistory = false;
   bool isVisibleButtons = false;
+  bool isVisibleDoneButton = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -221,6 +222,7 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                                     isVisibleAccepted =false;
                                     isVisibleHistory =false;
                                     isVisibleButtons = false;
+                                    isVisibleDoneButton = false;
                                   });
                                 },
                               ),
@@ -243,6 +245,7 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                                     isVisiblePending =false;
                                     isVisibleHistory =false;
                                     isVisibleButtons = false;
+                                    isVisibleDoneButton = false;
                                   });
                                 },
                               ),
@@ -264,7 +267,7 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                                     isVisiblePending =false;
                                     isVisibleAccepted =false;
                                     isVisibleButtons = false;
-
+                                    isVisibleDoneButton = false;
                                   });
                                 },
                               ),
@@ -396,7 +399,8 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                                           return Card(
                                             child: ListTile(
                                                 onTap: () async {
-                                                  isVisibleButtons = true;
+
+                                                  isVisibleDoneButton = true;
                                                   final QuerySnapshot snap = await FirebaseFirestore.instance.collection('finalClient').where('clientNote', isEqualTo: clientNote).get();
                                                   setState(() {
                                                     name = (doc.data() as Map<String, dynamic>)['clientName'];
@@ -634,190 +638,226 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                         flex: 100,
                         child: Container(
                           margin: const EdgeInsets.fromLTRB(20, 20, 10, 10),
-                          child: Visibility(
-                            visible: isVisibleButtons,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Expanded(
-                                  flex: 100,
-                                  child: Container(
-                                    margin: const EdgeInsets.only(left: 10, right: 10),
-                                    child: ElevatedButton(
-                                      child: const Text('Accept'),
-                                      style: ElevatedButton.styleFrom(
-                                        primary: const Color.fromRGBO(111, 215, 85, 1.0),
-                                      ),
-                                      onPressed: (){
-                                        isVisibleButtons = false;
-                                        showDialog(context: context, builder: (context){
-                                          return AlertDialog(
-                                            title: Text("Hi Andie!"),
-                                            content: Text("You are About to Accept the Job. Are you sure you want to Accept the Job?"),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Visibility(
+                                visible: isVisibleDoneButton,
+                                child: Container(
+                                  margin:
+                                  const EdgeInsets.only(left: 10, right: 10),
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      primary:
+                                      const Color.fromRGBO(111, 215, 85, 1.0),
+                                    ),
+                                    onPressed: () {
+                                      showDialog(context: context, builder: (context){
+                                        return AlertDialog(
+                                            title: Text("Warning!"),
+                                            content: Text("Are you sure You are done with the Job?"),
                                             actions: [
                                               ElevatedButton(
-                                                onPressed: () async {
-
-                                                  final QuerySnapshot client =
-                                                      await FirebaseFirestore.instance
-                                                      .collection('users')
-                                                      .where('uid',
-                                                      isEqualTo: clientUID)
-                                                      .get();
-                                                  setState(() {
-                                                    clientUID2 = client.docs[0]['uid'];
-                                                    nameClient = client.docs[0]['name'];
-                                                    ageClient = client.docs[0]['age'];
-                                                    genderClient = client.docs[0]['gender'];
-                                                    contClient = client.docs[0]['contNumber'];
-                                                    emailClient = client.docs[0]['email'];
-                                                    facebookClient =  client.docs[0]['fb'];
-                                                  });
-
-                                                  FirebaseFirestore.instance
-                                                      .collection("finalClient")
-                                                      .doc()
-                                                      .set({
-                                                    "clientUID": clientUID,
-                                                    "andieUID": FirebaseAuth.instance.currentUser?.uid,
-                                                    "clientName": nameClient,
-                                                    "clientAge": ageClient,
-                                                    "clientGender": genderClient,
-                                                    "clientCont": contClient,
-                                                    "clientEmail": emailClient,
-                                                    "clientFacebook": facebookClient,
-                                                    "clientNote": clientNote2,
-                                                    "dateTime": DateTime.now(),
-                                                    'startDate': startDate,
-                                                    'docUID': docUID,
-                                                    'status': 'accepted',
-                                                  });
-
-                                                  final QuerySnapshot andie =
-                                                  await FirebaseFirestore.instance
-                                                      .collection('users')
-                                                      .where('uid',
-                                                      isEqualTo: FirebaseAuth.instance.currentUser?.uid)
-                                                      .get();
-                                                  setState(() {
-                                                    testAndie = andie.docs[0]['uid'];
-                                                    nameAndie = andie.docs[0]['name'];
-                                                    skillsAndie = andie.docs[0]['skills'].toString();
-                                                    ageAndie = andie.docs[0]['age'];
-                                                    genderAndie = andie.docs[0]['gender'];
-                                                    expAndie = andie.docs[0]['experience'];
-                                                    schoolAndie = andie.docs[0]['school'];
-                                                    yowAndie =andie.docs[0]['yearsOfWork'];
-                                                    contAndie = andie.docs[0]['contactNumber'];
-                                                    emailAndie = andie.docs[0]['email'];
-                                                    ratings = andie.docs[0]['totalRate'].toString();
-                                                    facebookAndie = andie.docs[0]['facebook'];
-                                                  });
-
-                                                  FirebaseFirestore.instance
-                                                      .collection("finalAndie")
-                                                      .doc()
-                                                      .set({
-                                                    "clientUID": clientUID,
-                                                    "andieUID":  FirebaseAuth.instance.currentUser?.uid,
-                                                    "andieName": nameAndie,
-                                                    "andieSkills": skillsAndie,
-                                                    "andieAge": ageAndie,
-                                                    "andieGender": genderAndie,
-                                                    "andieExp": expAndie,
-                                                    "andieSchool": schoolAndie,
-                                                    "andieYow": yowAndie,
-                                                    "andieCont": contAndie,
-                                                    "andieEmail": emailAndie,
-                                                    "andieFacebook": facebookAndie,
-                                                    "andieTotalRate": ratings,
-                                                    "clientNote": clientNote2,
-                                                    "dateTime": DateTime.now(),
-                                                    'startDate': startDate,
-                                                    'clientCont': clientCont,
-                                                    'docUID': docUID,
-                                                    'status': 'accepted',
-                                                  });
-                                                  final QuerySnapshot snap2 = await FirebaseFirestore.instance.collection('pendingClient').where('docUID', isEqualTo: docUID).get();
-                                                  setState(() {
-                                                    snap2.docs[0].reference.delete();
-                                                  });
-                                                  final QuerySnapshot snap3 = await FirebaseFirestore.instance.collection('pendingAndie').where('docUID', isEqualTo: docUID).get();
-                                                  setState(() {
-                                                    snap3.docs[0].reference.delete();
-                                                  });
-                                                  Navigator.pop(context, false);
-                                                },
-                                                child: Text('Yes I Accept'),
+                                                onPressed: () => Navigator.pop(context, false),
+                                                child: Text('Yes'),
                                                 style: ElevatedButton.styleFrom(
                                                   primary: const Color.fromRGBO(111, 215, 85, 1.0),
                                                 ),
                                               ),
                                               ElevatedButton(
                                                 onPressed: () => Navigator.pop(context, false),
-                                                child: Text('Cancel'),
+                                                child: Text('No'),
                                                 style: ElevatedButton.styleFrom(
                                                   primary: const Color.fromRGBO(220, 57, 57, 1.0),
                                                 ),
                                               ),
-                                            ],
-                                          );
-                                        });
-                                      },
-                                    ),
+                                            ]
+                                        );
+                                      });
+
+                                    },
+                                    child: const Text('DONE'),
                                   ),
                                 ),
-                                Expanded(
-                                  flex: 100,
-                                  child: Container(
-                                    margin: const EdgeInsets.only(left: 10, right: 10),
-                                    child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        primary: const Color.fromRGBO(220, 57, 57, 1.0),
-                                      ),
-                                      onPressed: (){
-                                        isVisibleButtons = false;
-                                        showDialog(context: context, builder: (context){
-                                          return AlertDialog(
-                                            title: Text("Hi Andie!"),
-                                            content: Text("You are About to Decline the Job. Are you sure you want to Decline the Job?"),
-                                            actions: [
-                                              ElevatedButton(
-                                                onPressed: () async {
-
-                                                  final QuerySnapshot snap2 = await FirebaseFirestore.instance.collection('pendingClient').where('docUID', isEqualTo: docUID).get();
-                                                  setState(() {
-                                                    snap2.docs[0].reference.delete();
-                                                  });
-
-                                                  clientNote2 ='';
-                                                  startDate = '';
-                                                  clientCont = '';
-                                                  fb = '';
-                                                  Navigator.pop(context, false);
-                                                },
-                                                child: Text('Yes, Decline'),
-                                                style: ElevatedButton.styleFrom(
-                                                  primary: const Color.fromRGBO(111, 215, 85, 1.0),
-                                                ),
-                                              ),
-                                              ElevatedButton(
-                                                onPressed: () => Navigator.pop(context, false),
-                                                child: Text('Cancel'),
-                                                style: ElevatedButton.styleFrom(
-                                                  primary: const Color.fromRGBO(220, 57, 57, 1.0),
-                                                ),
-                                              ),
-                                            ],
-                                          );
-                                        });
-                                      },
-                                      child: const Text('Decline'),
+                              ),
+                              Visibility(
+                                visible: isVisibleButtons,
+                                child: Container(
+                                  margin: const EdgeInsets.only(left: 10, right: 10),
+                                  child: ElevatedButton(
+                                    child: const Text('Accept'),
+                                    style: ElevatedButton.styleFrom(
+                                      primary: const Color.fromRGBO(111, 215, 85, 1.0),
                                     ),
+                                    onPressed: (){
+                                      isVisibleButtons = false;
+                                      showDialog(context: context, builder: (context){
+                                        return AlertDialog(
+                                          title: Text("Hi Andie!"),
+                                          content: Text("You are About to Accept the Job. Are you sure you want to Accept the Job?"),
+                                          actions: [
+                                            ElevatedButton(
+                                              onPressed: () async {
+
+                                                final QuerySnapshot client =
+                                                await FirebaseFirestore.instance
+                                                    .collection('users')
+                                                    .where('uid',
+                                                    isEqualTo: clientUID)
+                                                    .get();
+                                                setState(() {
+                                                  clientUID2 = client.docs[0]['uid'];
+                                                  nameClient = client.docs[0]['name'];
+                                                  ageClient = client.docs[0]['age'];
+                                                  genderClient = client.docs[0]['gender'];
+                                                  contClient = client.docs[0]['contNumber'];
+                                                  emailClient = client.docs[0]['email'];
+                                                  facebookClient =  client.docs[0]['fb'];
+                                                });
+
+                                                FirebaseFirestore.instance
+                                                    .collection("finalClient")
+                                                    .doc()
+                                                    .set({
+                                                  "clientUID": clientUID,
+                                                  "andieUID": FirebaseAuth.instance.currentUser?.uid,
+                                                  "clientName": nameClient,
+                                                  "clientAge": ageClient,
+                                                  "clientGender": genderClient,
+                                                  "clientCont": contClient,
+                                                  "clientEmail": emailClient,
+                                                  "clientFacebook": facebookClient,
+                                                  "clientNote": clientNote2,
+                                                  "dateTime": DateTime.now(),
+                                                  'startDate': startDate,
+                                                  'docUID': docUID,
+                                                  'status': 'accepted',
+                                                });
+
+                                                final QuerySnapshot andie =
+                                                await FirebaseFirestore.instance
+                                                    .collection('users')
+                                                    .where('uid',
+                                                    isEqualTo: FirebaseAuth.instance.currentUser?.uid)
+                                                    .get();
+                                                setState(() {
+                                                  testAndie = andie.docs[0]['uid'];
+                                                  nameAndie = andie.docs[0]['name'];
+                                                  skillsAndie = andie.docs[0]['skills'].toString();
+                                                  ageAndie = andie.docs[0]['age'];
+                                                  genderAndie = andie.docs[0]['gender'];
+                                                  expAndie = andie.docs[0]['experience'];
+                                                  schoolAndie = andie.docs[0]['school'];
+                                                  yowAndie =andie.docs[0]['yearsOfWork'];
+                                                  contAndie = andie.docs[0]['contactNumber'];
+                                                  emailAndie = andie.docs[0]['email'];
+                                                  ratings = andie.docs[0]['totalRate'].toString();
+                                                  facebookAndie = andie.docs[0]['facebook'];
+                                                });
+
+                                                FirebaseFirestore.instance
+                                                    .collection("finalAndie")
+                                                    .doc()
+                                                    .set({
+                                                  "clientUID": clientUID,
+                                                  "andieUID":  FirebaseAuth.instance.currentUser?.uid,
+                                                  "andieName": nameAndie,
+                                                  "andieSkills": skillsAndie,
+                                                  "andieAge": ageAndie,
+                                                  "andieGender": genderAndie,
+                                                  "andieExp": expAndie,
+                                                  "andieSchool": schoolAndie,
+                                                  "andieYow": yowAndie,
+                                                  "andieCont": contAndie,
+                                                  "andieEmail": emailAndie,
+                                                  "andieFacebook": facebookAndie,
+                                                  "andieTotalRate": ratings,
+                                                  "clientNote": clientNote2,
+                                                  "dateTime": DateTime.now(),
+                                                  'startDate': startDate,
+                                                  'clientCont': clientCont,
+                                                  'docUID': docUID,
+                                                  'status': 'accepted',
+                                                });
+                                                final QuerySnapshot snap2 = await FirebaseFirestore.instance.collection('pendingClient').where('docUID', isEqualTo: docUID).get();
+                                                setState(() {
+                                                  snap2.docs[0].reference.delete();
+                                                });
+                                                final QuerySnapshot snap3 = await FirebaseFirestore.instance.collection('pendingAndie').where('docUID', isEqualTo: docUID).get();
+                                                setState(() {
+                                                  snap3.docs[0].reference.delete();
+                                                });
+                                                Navigator.pop(context, false);
+                                              },
+                                              child: Text('Yes I Accept'),
+                                              style: ElevatedButton.styleFrom(
+                                                primary: const Color.fromRGBO(111, 215, 85, 1.0),
+                                              ),
+                                            ),
+                                            ElevatedButton(
+                                              onPressed: () => Navigator.pop(context, false),
+                                              child: Text('Cancel'),
+                                              style: ElevatedButton.styleFrom(
+                                                primary: const Color.fromRGBO(220, 57, 57, 1.0),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      });
+                                    },
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                              Visibility(
+                                visible: isVisibleButtons,
+                                child: Container(
+                                  margin: const EdgeInsets.only(left: 10, right: 10),
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      primary: const Color.fromRGBO(220, 57, 57, 1.0),
+                                    ),
+                                    onPressed: (){
+                                      isVisibleButtons = false;
+                                      showDialog(context: context, builder: (context){
+                                        return AlertDialog(
+                                          title: Text("Hi Andie!"),
+                                          content: Text("You are About to Decline the Job. Are you sure you want to Decline the Job?"),
+                                          actions: [
+                                            ElevatedButton(
+                                              onPressed: () async {
+
+                                                final QuerySnapshot snap2 = await FirebaseFirestore.instance.collection('pendingClient').where('docUID', isEqualTo: docUID).get();
+                                                setState(() {
+                                                  snap2.docs[0].reference.delete();
+                                                });
+
+                                                clientNote2 ='';
+                                                startDate = '';
+                                                clientCont = '';
+                                                fb = '';
+                                                Navigator.pop(context, false);
+                                              },
+                                              child: Text('Yes, Decline'),
+                                              style: ElevatedButton.styleFrom(
+                                                primary: const Color.fromRGBO(111, 215, 85, 1.0),
+                                              ),
+                                            ),
+                                            ElevatedButton(
+                                              onPressed: () => Navigator.pop(context, false),
+                                              child: Text('Cancel'),
+                                              style: ElevatedButton.styleFrom(
+                                                primary: const Color.fromRGBO(220, 57, 57, 1.0),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      });
+                                    },
+                                    child: const Text('Decline'),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       )
