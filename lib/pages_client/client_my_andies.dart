@@ -223,55 +223,12 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                               border: Border.all(
                                 color: Colors.black,
                               )),
-                          /*child: FutureBuilder(
-                              future: getData(),
-                              builder: (_,
-                                  AsyncSnapshot<List<DocumentSnapshot>>
-                                      snapshot) {
-                                if (snapshot.hasData) {
-                                  return ListView.builder(
-                                      itemCount: snapshot.data!.length,
-                                      itemBuilder: (context, index) {
-                                        return Card(
-                                          child: ListTile(
-                                            title: Text(snapshot.data![index]
-                                                .get('pendingAndie')[index]
-                                                .toString()),
-                                            onTap: () async {
-                                              FirebaseFirestore.instance
-                                                  .collection('users')
-                                                  .where("uid",
-                                                      isEqualTo: FirebaseAuth
-                                                          .instance
-                                                          .currentUser
-                                                          ?.uid)
-                                                  .get()
-                                                  .then((QuerySnapshot
-                                                      querySnapshot) {
-                                                querySnapshot.docs
-                                                    .forEach((doc) {
-                                                  print(doc["pendingAndie"][0]
-                                                      ["andieName"]);
-                                                });
-                                              });
-                                              print("pressed index $index");
-                                            },
-                                          ),
-                                        );
-                                      }
-                                      *//* itemBuilder: (_, index) {
-                                      return Text(snapshot.data![index].data().toString());
-                                    }*//*
-                                      );
-                                } else {
-                                  return CircularProgressIndicator();
-                                }
-                              })*/
-
 
 
                         child: StreamBuilder<QuerySnapshot>(
-                          stream: db.collection('pendingAndie').where('clientUID', isEqualTo: FirebaseAuth.instance.currentUser?.uid).snapshots(),
+                          stream: db.collection('pendingAndie')
+                              .where('clientUID', isEqualTo: FirebaseAuth.instance.currentUser?.uid)
+                              .snapshots(),
                           builder: (context, snapshot) {
                             if (!snapshot.hasData) {
                               Text ('HELLO');
@@ -287,6 +244,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                               );
                               print(snapshot.data!.docs.length.toString());
                               counter = snapshot.data!.docs.length.toString();
+
                               return ListView (
 
                                 children: snapshot.data!.docs.map((doc) {
@@ -324,6 +282,8 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                     ),
                                   );
                                 }).toList(),
+
+
                               );
                             }
                           },

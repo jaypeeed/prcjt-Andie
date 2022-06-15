@@ -494,30 +494,33 @@ class _ClientCategoryState extends State<ClientCategory> {
                                                   'docUID': doc.id,
                                                   'status': 'pending',
                                                 });
+
+                                                FirebaseFirestore.instance
+                                                    .collection("pendingClient")
+                                                    .doc()
+                                                    .set({
+                                                  "clientUID": FirebaseAuth.instance.currentUser?.uid,
+                                                  'clientName': myName,
+                                                  'clientEmail': myEmail,
+                                                  'clientGender': myGender,
+                                                  'clientAge': myAge,
+                                                  'clientFacebook': myFb,
+                                                  "andieUID": test,
+                                                  "clientNote": clientNote,
+                                                  "dateTime": DateTime.now(),
+                                                  'startDate': clientDate,
+                                                  'clientCont': clientCont,
+                                                  'docUID': doc.id,
+                                                  'status': 'pending',
+                                                });
+
                                                 //AuthService.addToLedger(context, test, widget.uAndie.ledgerItem('s','s','d'));
                                                /* FirebaseFirestore.instance.collection('users').doc(test).update({
                                                   'pendingClients': '$clientNote $clientCont',
 
                                                 });*/
-//////////////////////////////////////////////RATINGGGGGGGGGGGG///////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                /*int rating = 4;
-                                                int rateCount = 1;
-                                                FirebaseFirestore.instance
-                                                    .collection('users')
-                                                    .doc(test)
-                                                    .update({
-                                                  'rates': FieldValue.arrayUnion([
-                                                    {
-                                                      "ratingNumber": rating,
-                                                      "client": FirebaseAuth.instance.currentUser?.uid,
-                                                      "note": clientNote}
-                                                  ]),
-                                                  'ratings': FieldValue.increment(rating),
-                                                  'rateCount': FieldValue.increment(rateCount),
-                                                  'totalRate': ratings/rateCounts
-                                                });*/
-/*
-//////////////////////////////////////////////RATINGGGGGGGGGGGG///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                                                /*
                                                 FirebaseFirestore.instance
                                                     .collection('users')
                                                     .doc(FirebaseAuth.instance.currentUser?.uid)

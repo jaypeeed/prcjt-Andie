@@ -1,5 +1,7 @@
 import 'dart:html';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../services/auth.dart';
 import 'andie_profile_andie.dart';
@@ -10,6 +12,24 @@ import 'package:universal_html/html.dart' as html;
   runApp(const MaterialApp(home: AndieMyJobs()));
 }*/
 
+final db = FirebaseFirestore.instance;
+final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+var tmpArray = ['ELECTRICIAN', 'HOUSE KEEPER'];
+String andieName = '';
+
+String name = '';
+String clientNote2 ='';
+String startDate = '';
+String clientCont = '';
+String fb = '';
+String ratings = '';
+String clientUID ='';
+String docUID ='';
+
+double rateCount =  0.0;
+double ratings2 =  0.0;
+double rateCounter = 1.0;
+
 class AndieMyJobs extends StatefulWidget {
   const AndieMyJobs({Key? key}) : super(key: key);
 
@@ -19,6 +39,9 @@ class AndieMyJobs extends StatefulWidget {
 
 class _AndieMyJobsState extends State<AndieMyJobs> {
   final AuthService _auth = AuthService();
+
+  String counter = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -158,7 +181,64 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                             border: Border.all(
                               color: Colors.black,
                             )),
+
+                        child: StreamBuilder<QuerySnapshot>(
+                          stream: db.collection('pendingClient')
+                              .where('andieUID', isEqualTo: FirebaseAuth.instance.currentUser?.uid)
+                              .snapshots(),
+                          builder: (context, snapshot) {
+                            if (!snapshot.hasData) {
+                              Text ('HELLO');
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            } else {
+                              snapshot.data!.docs.forEach(
+                                    (element) {
+                                  element.id;
+                                  print(element.id);
+                                },
+                              );
+                              print(snapshot.data!.docs.length.toString());
+                              counter = snapshot.data!.docs.length.toString();
+
+                              return ListView (
+
+                                children: snapshot.data!.docs.map((doc) {
+                                  Timestamp t = (doc.data() as Map<String, dynamic>)['dateTime'];
+                                  var clientNote = ((doc.data() as Map<String, dynamic>)['clientNote']);
+
+                                  return Card(
+                                    child: ListTile(
+                                        onTap: () async {
+
+                                          final QuerySnapshot snap = await FirebaseFirestore.instance.collection('pendingClient').where('clientNote', isEqualTo: clientNote).get();
+                                          setState(() {
+                                            name = (doc.data() as Map<String, dynamic>)['clientName'];
+                                            clientNote2 = ((doc.data() as Map<String, dynamic>)['clientNote']);
+                                            startDate = (doc.data() as Map<String, dynamic>)['startDate'];
+                                            clientCont = (doc.data() as Map<String, dynamic>)['clientCont'];
+                                            fb = (doc.data() as Map<String, dynamic>)['clientFacebook'];
+                                            clientUID = (doc.data() as Map<String, dynamic>)['clientUID'];
+                                            docUID = (doc.data() as Map<String, dynamic>)['docUID'];
+                                          });
+                                        },
+
+                                        leading: Text((doc.data() as Map<String, dynamic>)['clientName']),
+                                        title: Text((doc.data() as Map<String, dynamic>)['clientNote'] ),
+                                        subtitle: Text((doc.data() as Map<String, dynamic>)['startDate'] )
+                                    ),
+                                  );
+                                }).toList(),
+
+
+                              );
+                            }
+                          },
+                        ),
+
                       ),
+
                     )
                   ],
                 ),
@@ -205,10 +285,10 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                       child: Container(
                         margin: const EdgeInsets.fromLTRB(20, 0, 10, 10),
                         color: Colors.redAccent,
-                        child: const SizedBox(
                           width: 600,
                           height: 50,
-                        ),
+                        child: Text(clientNote2),
+
                       ),
                     ),
                     Expanded(
@@ -233,10 +313,10 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                               child: Container(
                                 margin: const EdgeInsets.fromLTRB(0, 5, 195, 10),
                                 color: Colors.redAccent,
-                                child: const SizedBox(
+                                child: Text(startDate),
                                   width: 150,
                                   height: 25,
-                                ),
+
                               ),
                             ),
                           ],
@@ -263,10 +343,10 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                             Container(
                               margin: const EdgeInsets.only(left: 20),
                               color: Colors.redAccent,
-                              child: const SizedBox(
+                              child: Text(clientCont),
                                 width: 150,
                                 height: 25,
-                              ),
+
                             ),
                           ],
                         ),
@@ -282,10 +362,10 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                             Container(
                               margin: const EdgeInsets.only(left: 48),
                               color: Colors.redAccent,
-                              child: const SizedBox(
-                                width: 150,
+                              child: Text(fb),
+                                width: 250,
                                 height: 25,
-                              ),
+
                             ),
                           ],
                         ),
@@ -315,7 +395,12 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                                         content: Text("You are About to Accept the Job. Are you sure you want to Accept the Job?"),
                                         actions: [
                                           ElevatedButton(
-                                            onPressed: (){},
+                                            onPressed: (){
+
+
+
+
+                                            },
                                             child: Text('Yes I Accept'),
                                             style: ElevatedButton.styleFrom(
                                               primary: const Color.fromRGBO(111, 215, 85, 1.0),
@@ -350,7 +435,20 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                                         content: Text("You are About to Decline the Job. Are you sure you want to Decline the Job?"),
                                         actions: [
                                           ElevatedButton(
-                                            onPressed: (){},
+                                            onPressed: () async {
+
+                                              final QuerySnapshot snap2 = await FirebaseFirestore.instance.collection('pendingClient').where('docUID', isEqualTo: docUID).get();
+                                              setState(() {
+                                                snap2.docs[0].reference.delete();
+                                              });
+                                              
+                                              clientNote2 ='';
+                                              startDate = '';
+                                              clientCont = '';
+                                              fb = '';
+
+                                              Navigator.pop(context, false);
+                                            },
                                             child: Text('Yes, Decline'),
                                             style: ElevatedButton.styleFrom(
                                               primary: const Color.fromRGBO(111, 215, 85, 1.0),

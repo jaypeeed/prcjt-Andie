@@ -29,6 +29,8 @@ String myAge = '';
 String myEmail = '';
 String myFb = '';
 String myNumber = '';
+String myRating = '';
+
 
 class AndieProfile extends StatefulWidget {
   const AndieProfile({Key? key}) : super(key: key);
@@ -66,10 +68,13 @@ class _AndieProfileState extends State<AndieProfile> {
         myEmail = userData.data()!['email'];
         myFb = userData.data()!['facebook'];
         myNumber = userData.data()!['contactNumber'];
+        myRating = userData.data()!['totalRate'].toString();
 
       });
     });
   }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -180,9 +185,16 @@ class _AndieProfileState extends State<AndieProfile> {
                       flex: 20,
                       child: Container(
                           padding: const EdgeInsets.only(top: 40),
-                          child: const Text(
-                            'Set Rating SOON',
-                            style: TextStyle(fontSize: 40),
+                          child:  Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Rating: $myRating',
+                                style: TextStyle(fontSize: 40),
+                              ),
+
+                              Icon( Icons.star_outlined ),
+                            ],
                           ))),
                 ],
               ),
