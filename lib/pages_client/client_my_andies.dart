@@ -86,8 +86,8 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
   bool isVisiblePending = true;
   bool isVisibleAccepted = false;
   bool isVisibleHistory = false;
-  bool isVisibleButtons = true;
-
+  bool isVisibleButtons = false;
+  bool isVisibleDelButton = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -234,7 +234,8 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                   isVisiblePending =true;
                                   isVisibleAccepted =false;
                                   isVisibleHistory =false;
-                                  isVisibleButtons = true;
+                                  isVisibleButtons = false;
+                                  isVisibleDelButton = false;
                                 });
                               },
                             ),
@@ -256,7 +257,8 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                   isVisibleAccepted =true;
                                   isVisiblePending =false;
                                   isVisibleHistory =false;
-                                  isVisibleButtons = true;
+                                  isVisibleButtons = false;
+                                  isVisibleDelButton = false;
                                 });
                               },
                             ),
@@ -278,6 +280,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                   isVisiblePending =false;
                                   isVisibleAccepted =false;
                                   isVisibleButtons = false;
+                                  isVisibleDelButton = false;
 
                                 });
                               },
@@ -345,6 +348,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                           return Card(
                                             child: ListTile(
                                                 onTap: () async {
+                                                  isVisibleDelButton = true;
                                                   final QuerySnapshot snap =
                                                       await FirebaseFirestore.instance
                                                           .collection('pendingAndie')
@@ -445,6 +449,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                         return Card(
                                           child: ListTile(
                                               onTap: () async {
+                                                isVisibleButtons = true;
                                                 final QuerySnapshot snap =
                                                 await FirebaseFirestore.instance
                                                     .collection('finalAndie')
@@ -797,110 +802,146 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                       flex: 100,
                       child: Container(
                         margin: const EdgeInsets.fromLTRB(20, 20, 10, 10),
-                        child: Visibility(
-                          visible: isVisibleButtons,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Expanded(
-                                flex: 100,
-                                child: Container(
-                                  margin:
-                                      const EdgeInsets.only(left: 10, right: 10),
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      primary:
-                                          const Color.fromRGBO(111, 215, 85, 1.0),
-                                    ),
-                                    onPressed: () {},
-                                    child: const Text('DONE'),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Visibility(
+                              visible: isVisibleDelButton,
+                              child: Container(
+                                margin:
+                                const EdgeInsets.only(left: 10, right: 10),
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    primary:
+                                    const Color.fromRGBO(220, 57, 57, 1.0),
                                   ),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 100,
-                                child: Container(
-                                  margin:
-                                      const EdgeInsets.only(left: 10, right: 10),
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      primary:
-                                          const Color.fromRGBO(255, 205, 84, 1.0),
-                                    ),
-                                    onPressed: () async {
-                                      //showRatingDialog(context);
-
-                                      final _dialog = RatingDialog(
-                                        initialRating: 1.0,
-                                        // your app's name?
-                                        title: const Text(
-                                          'Rate this Andie!',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontSize: 25,
-                                            fontWeight: FontWeight.bold,
+                                  onPressed: () {
+                                  showDialog(context: context, builder: (context){
+                                    return AlertDialog(
+                                      title: Text("Warning!"),
+                                      content: Text("You are About to Cancel the Job. Are you sure you want to Cancel the Job?"),
+                                      actions: [
+                                        ElevatedButton(
+                                          onPressed: () => Navigator.pop(context, false),
+                                          child: Text('Yes'),
+                                          style: ElevatedButton.styleFrom(
+                                            primary: const Color.fromRGBO(111, 215, 85, 1.0),
                                           ),
                                         ),
-                                        // encourage your user to leave a high rating?
-                                        message: const Text(
-                                          'Tap a star to set your rating',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(fontSize: 15),
+                                        ElevatedButton(
+                                          onPressed: () => Navigator.pop(context, false),
+                                          child: Text('No'),
+                                          style: ElevatedButton.styleFrom(
+                                            primary: const Color.fromRGBO(220, 57, 57, 1.0),
+                                          ),
                                         ),
-                                        // your app's logo?
-                                        //image: const FlutterLogo(size: 100),
-                                        submitButtonText: 'Submit',
-                                        commentHint:
-                                            'Share your experience and help this Andie and other clients!',
-                                        onCancelled: () => print('cancelled'),
-                                        onSubmitted: (response) {
-                                          print(
-                                              'rating: ${response.rating}, comment: ${response.comment}');
-
-                                          /* // TODO: add your own logic
-                                          if (response.rating < 3.0) {
-                                            // send their comments to your email or anywhere you wish
-                                            // ask the user to contact you instead of leaving a bad review
-                                          } else {
-                                            _rateAndReviewApp();
-                                          }*/
-
-                                          double rating = response.rating;
-
-                                          FirebaseFirestore.instance
-                                              .collection('users')
-                                              .doc(andieUID)
-                                              .update({
-                                            'rates': FieldValue.arrayUnion([
-                                              {
-                                                "ratingNumber": rating,
-                                                "client": FirebaseAuth
-                                                    .instance.currentUser?.uid,
-                                                "note": response.comment
-                                              }
-                                            ]),
-                                            'ratings':
-                                                FieldValue.increment(rating),
-                                            'rateCount':
-                                                FieldValue.increment(rateCounter),
-                                          });
-                                        },
-                                      );
-
-                                      // show the dialog
-                                      showDialog(
-                                        context: context,
-                                        barrierDismissible:
-                                            false, // set to false if you want to force a rating
-                                        builder: (context) => _dialog,
-                                      );
-                                    },
-                                    child: const Text('RATE'),
-                                  ),
+                                      ]
+                                    );
+                                  });
+                                  },
+                                  child: const Text('Cancel'),
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                            Visibility(
+                              visible: isVisibleButtons,
+                              child: Container(
+                                margin:
+                                const EdgeInsets.only(left: 10, right: 10),
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    primary:
+                                    const Color.fromRGBO(111, 215, 85, 1.0),
+                                  ),
+                                  onPressed: () {
+
+                                  },
+                                  child: const Text('DONE'),
+                                ),
+                              ),
+                            ),
+                            Visibility(
+                              visible: isVisibleButtons,
+                              child: Container(
+                                margin:
+                                const EdgeInsets.only(left: 10, right: 10),
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    primary:
+                                    const Color.fromRGBO(255, 205, 84, 1.0),
+                                  ),
+                                  onPressed: () async {
+                                    //showRatingDialog(context);
+                                    final _dialog = RatingDialog(
+                                      initialRating: 1.0,
+                                      // your app's name?
+                                      title: const Text(
+                                        'Rate this Andie!',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      // encourage your user to leave a high rating?
+                                      message: const Text(
+                                        'Tap a star to set your rating',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(fontSize: 15),
+                                      ),
+                                      // your app's logo?
+                                      //image: const FlutterLogo(size: 100),
+                                      submitButtonText: 'Submit',
+                                      commentHint:
+                                      'Share your experience and help this Andie and other clients!',
+                                      onCancelled: () => print('cancelled'),
+                                      onSubmitted: (response) {
+                                        print(
+                                            'rating: ${response.rating}, comment: ${response.comment}');
+
+                                        /* // TODO: add your own logic
+                                              if (response.rating < 3.0) {
+                                                // send their comments to your email or anywhere you wish
+                                                // ask the user to contact you instead of leaving a bad review
+                                              } else {
+                                                _rateAndReviewApp();
+                                              }*/
+
+                                        double rating = response.rating;
+
+                                        FirebaseFirestore.instance
+                                            .collection('users')
+                                            .doc(andieUID)
+                                            .update({
+                                          'rates': FieldValue.arrayUnion([
+                                            {
+                                              "ratingNumber": rating,
+                                              "client": FirebaseAuth
+                                                  .instance.currentUser?.uid,
+                                              "note": response.comment
+                                            }
+                                          ]),
+                                          'ratings':
+                                          FieldValue.increment(rating),
+                                          'rateCount':
+                                          FieldValue.increment(rateCounter),
+                                        });
+                                      },
+                                    );
+
+                                    // show the dialog
+                                    showDialog(
+                                      context: context,
+                                      barrierDismissible:
+                                      false, // set to false if you want to force a rating
+                                      builder: (context) => _dialog,
+                                    );
+                                  },
+                                  child: const Text('RATE'),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     )

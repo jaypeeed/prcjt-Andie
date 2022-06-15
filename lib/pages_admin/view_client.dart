@@ -85,7 +85,7 @@ class _ViewClientState extends State<ViewClient> {
                         color: Colors.white.withOpacity(0.5),
                         width:1300,
                         height: 500,
-                        child: Text('CLIENT List View Here'),
+                        child: const Text('CLIENT List View Here'),
                       )
                     ],
                   )
