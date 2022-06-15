@@ -415,7 +415,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
 
                               child: StreamBuilder<QuerySnapshot>(
                                 stream: db
-                                    .collection('pendingAndie')
+                                    .collection('finalAndie')
                                     .where('clientUID',
                                     isEqualTo:
                                     FirebaseAuth.instance.currentUser?.uid)
@@ -447,7 +447,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                               onTap: () async {
                                                 final QuerySnapshot snap =
                                                 await FirebaseFirestore.instance
-                                                    .collection('pendingAndie')
+                                                    .collection('finalAndie')
                                                     .where('clientNote',
                                                     isEqualTo: clientNote)
                                                     .get();
@@ -475,7 +475,8 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                               },
                                               leading: Text((doc.data() as Map<String, dynamic>)['andieName']),
                                               title: Text((doc.data() as Map<String, dynamic>)['clientNote']),
-                                              subtitle: Text(t.toDate().toString())),
+                                              subtitle: Text((doc.data() as Map<String, dynamic>)['startDate']),
+                                          ),
                                         );
                                       }).toList(),
                                     );

@@ -513,59 +513,8 @@ class _ClientCategoryState extends State<ClientCategory> {
                                                   'status': 'pending',
                                                 });
 
-                                                //AuthService.addToLedger(context, test, widget.uAndie.ledgerItem('s','s','d'));
-                                               /* FirebaseFirestore.instance.collection('users').doc(test).update({
-                                                  'pendingClients': '$clientNote $clientCont',
-
-                                                });*/
-
-                                                /*
-                                                FirebaseFirestore.instance
-                                                    .collection('users')
-                                                    .doc(FirebaseAuth.instance.currentUser?.uid)
-                                                    .update({
-                                                  'pendingAndie': FieldValue.arrayUnion([
-                                                    {"date": DateTime.now(),
-                                                      "andieUID": test,
-                                                      "andieName": ((doc.data() as Map<String, dynamic>)['name']),
-                                                      "note": clientNote,
-                                                      "dateStart": clientDate,
-                                                      "status": "pending"
-                                                      }
-                                                  ])
-                                                });*/
-
-                                               /* 'pendingAndies' :FieldValue.arrayUnion({
-                                                {
-                                                "andieId": test,
-                                                "andieName": (doc.data() as Map<String, dynamic>)['name'],
-                                                },
-                                                }),*/
                                                 Navigator.pop(context, false);
 
-
-                                                /*getData() async {
-                                                  return await FirebaseFirestore.instance.collection('users').where('id', isEqualTo: FirebaseAuth.instance.currentUser).get();
-                                                }
-                                                getData().then((val){
-                                                  if(val.docs.length>0){
-                                                    //print(val.docs[0].data()['cart']);
-
-                                                    // Map map = val.docs[0].data()['cart'];
-                                                    var list = [val.docs[0].data()['pendingAndies']];
-                                                    // map.entries.forEach((e) {
-                                                    //   list.add();
-                                                    // });
-                                                    // List items = [val.docs[0].data()['cart'].toList()];
-                                                    FirebaseFirestore.instance.collection('users').doc().set({
-
-
-                                                    });
-                                                  }
-                                                  else{
-                                                    print("Not Found");
-                                                  }
-                                                });*/
                                               },
                                               child: Text('Offer Job'),
                                               style: ElevatedButton.styleFrom(

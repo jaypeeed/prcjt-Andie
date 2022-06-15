@@ -27,6 +27,35 @@ String ratings = '';
 String clientUID ='';
 String docUID ='';
 
+String clientUID2 ='';
+String nameClient = '';
+String ratingsClient = '';
+String ageClient = '';
+String genderClient = '';
+String contClient = '';
+String emailClient = '';
+String facebookClient =  '';
+
+String testAndie = '';
+String nameAndie = '';
+String skillsAndie = '';
+String ageAndie = '';
+String genderAndie = '';
+String expAndie = '';
+String schoolAndie = '';
+String yowAndie = '';
+String contAndie = '';
+String emailAndie = '';
+String facebookAndie = '';
+
+String age = '';
+String gender = '';
+String cont = '';
+String email = '';
+String facebook =  '';
+
+
+
 double rateCount =  0.0;
 double ratings2 =  0.0;
 double rateCounter = 1.0;
@@ -297,7 +326,7 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                                         return Card(
                                           child: ListTile(
                                               onTap: () async {
-
+                                                print(clientUID);
                                                 final QuerySnapshot snap = await FirebaseFirestore.instance.collection('pendingClient').where('clientNote', isEqualTo: clientNote).get();
                                                 setState(() {
                                                   name = (doc.data() as Map<String, dynamic>)['clientName'];
@@ -341,7 +370,7 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                                   )),
 
                               child: StreamBuilder<QuerySnapshot>(
-                                stream: db.collection('pendingClient')
+                                stream: db.collection('finalClient')
                                     .where('andieUID', isEqualTo: FirebaseAuth.instance.currentUser?.uid)
                                     .snapshots(),
                                 builder: (context, snapshot) {
@@ -370,7 +399,7 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                                           child: ListTile(
                                               onTap: () async {
 
-                                                final QuerySnapshot snap = await FirebaseFirestore.instance.collection('pendingClient').where('clientNote', isEqualTo: clientNote).get();
+                                                final QuerySnapshot snap = await FirebaseFirestore.instance.collection('finalClient').where('clientNote', isEqualTo: clientNote).get();
                                                 setState(() {
                                                   name = (doc.data() as Map<String, dynamic>)['clientName'];
                                                   clientNote2 = ((doc.data() as Map<String, dynamic>)['clientNote']);
@@ -444,13 +473,13 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
 
                                                 final QuerySnapshot snap = await FirebaseFirestore.instance.collection('pendingClient').where('clientNote', isEqualTo: clientNote).get();
                                                 setState(() {
-                                                  name = (doc.data() as Map<String, dynamic>)['clientName'];
-                                                  clientNote2 = ((doc.data() as Map<String, dynamic>)['clientNote']);
-                                                  startDate = (doc.data() as Map<String, dynamic>)['startDate'];
-                                                  clientCont = (doc.data() as Map<String, dynamic>)['clientCont'];
-                                                  fb = (doc.data() as Map<String, dynamic>)['clientFacebook'];
-                                                  clientUID = (doc.data() as Map<String, dynamic>)['clientUID'];
-                                                  docUID = (doc.data() as Map<String, dynamic>)['docUID'];
+                                                  name = snap.docs[0]['clientName'];
+                                                  clientNote2 = snap.docs[0]['clientNote'];
+                                                  startDate = snap.docs[0]['startDate'];
+                                                  clientCont = snap.docs[0]['clientCont'];
+                                                  fb = snap.docs[0]['clientFacebook'];
+                                                  clientUID = snap.docs[0]['clientUID'];
+                                                  docUID = snap.docs[0]['docUID'];
                                                 });
                                               },
 
@@ -460,7 +489,6 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                                           ),
                                         );
                                       }).toList(),
-
 
                                     );
                                   }
@@ -629,7 +657,97 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                                           content: Text("You are About to Accept the Job. Are you sure you want to Accept the Job?"),
                                           actions: [
                                             ElevatedButton(
-                                              onPressed: (){
+                                              onPressed: () async {
+
+                                                final QuerySnapshot client =
+                                                    await FirebaseFirestore.instance
+                                                    .collection('users')
+                                                    .where('uid',
+                                                    isEqualTo: clientUID)
+                                                    .get();
+                                                setState(() {
+                                                  clientUID2 = client.docs[0]['uid'];
+                                                  nameClient = client.docs[0]['name'];
+                                                  ageClient = client.docs[0]['age'];
+                                                  genderClient = client.docs[0]['gender'];
+                                                  contClient = client.docs[0]['contNumber'];
+                                                  emailClient = client.docs[0]['email'];
+                                                  facebookClient =  client.docs[0]['fb'];
+                                                });
+
+                                                FirebaseFirestore.instance
+                                                    .collection("finalClient")
+                                                    .doc()
+                                                    .set({
+                                                  "clientUID": clientUID,
+                                                  "andieUID": FirebaseAuth.instance.currentUser?.uid,
+                                                  "clientName": nameClient,
+                                                  "clientAge": ageClient,
+                                                  "clientGender": genderClient,
+                                                  "clientCont": contClient,
+                                                  "clientEmail": emailClient,
+                                                  "clientFacebook": facebookClient,
+                                                  "clientNote": clientNote2,
+                                                  "dateTime": DateTime.now(),
+                                                  'startDate': startDate,
+                                                  'docUID': docUID,
+                                                  'status': 'accepted',
+                                                });
+
+                                                final QuerySnapshot andie =
+                                                await FirebaseFirestore.instance
+                                                    .collection('users')
+                                                    .where('uid',
+                                                    isEqualTo: FirebaseAuth.instance.currentUser?.uid)
+                                                    .get();
+                                                setState(() {
+                                                  testAndie = andie.docs[0]['uid'];
+                                                  nameAndie = andie.docs[0]['name'];
+                                                  skillsAndie = andie.docs[0]['skills'].toString();
+                                                  ageAndie = andie.docs[0]['age'];
+                                                  genderAndie = andie.docs[0]['gender'];
+                                                  expAndie = andie.docs[0]['experience'];
+                                                  schoolAndie = andie.docs[0]['school'];
+                                                  yowAndie =andie.docs[0]['yearsOfWork'];
+                                                  contAndie = andie.docs[0]['contactNumber'];
+                                                  emailAndie = andie.docs[0]['email'];
+                                                  ratings = andie.docs[0]['totalRate'].toString();
+                                                  facebookAndie = andie.docs[0]['facebook'];
+                                                });
+
+                                                FirebaseFirestore.instance
+                                                    .collection("finalAndie")
+                                                    .doc()
+                                                    .set({
+                                                  "clientUID": clientUID,
+                                                  "andieUID":  FirebaseAuth.instance.currentUser?.uid,
+                                                  "andieName": nameAndie,
+                                                  "andieSkills": skillsAndie,
+                                                  "andieAge": ageAndie,
+                                                  "andieGender": genderAndie,
+                                                  "andieExp": expAndie,
+                                                  "andieSchool": schoolAndie,
+                                                  "andieYow": yowAndie,
+                                                  "andieCont": contAndie,
+                                                  "andieEmail": emailAndie,
+                                                  "andieFacebook": facebookAndie,
+                                                  "andieTotalRate": ratings,
+                                                  "clientNote": clientNote2,
+                                                  "dateTime": DateTime.now(),
+                                                  'startDate': startDate,
+                                                  'clientCont': clientCont,
+                                                  'docUID': docUID,
+                                                  'status': 'accepted',
+                                                });
+                                                final QuerySnapshot snap2 = await FirebaseFirestore.instance.collection('pendingClient').where('docUID', isEqualTo: docUID).get();
+                                                setState(() {
+                                                  snap2.docs[0].reference.delete();
+                                                });
+                                                final QuerySnapshot snap3 = await FirebaseFirestore.instance.collection('pendingAndie').where('docUID', isEqualTo: docUID).get();
+                                                setState(() {
+                                                  snap3.docs[0].reference.delete();
+                                                });
+                                                Navigator.pop(context, false);
                                               },
                                               child: Text('Yes I Accept'),
                                               style: ElevatedButton.styleFrom(
