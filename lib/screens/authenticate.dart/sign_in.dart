@@ -7,7 +7,6 @@ import 'package:prjct_andie/testing/services(sign_in)/auth_services.dart';
 import 'package:provider/provider.dart';
 import '../../pages_client/client_sign_up_page.dart';
 
-
 class SignIn extends StatefulWidget {
   @override
   State<SignIn> createState() => _SignInState();
@@ -19,8 +18,7 @@ class _SignInState extends State<SignIn> {
   final AuthService _auth = AuthService();
   final _formkey = GlobalKey<FormState>();
 
-  void googleSignIn()async{
-  }
+  void googleSignIn() async {}
 
   //text field state
   String email = '';
@@ -53,7 +51,7 @@ class _SignInState extends State<SignIn> {
                     ),
                   ),
                 ),
-               // SizedBox(width: 30,),
+                // SizedBox(width: 30,),
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
@@ -102,36 +100,33 @@ class _SignInState extends State<SignIn> {
                           Expanded(
                             flex: 50,
                             child: RichText(
-                                text:  TextSpan(
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 75,
-                                    color: Colors.white,
-                                    letterSpacing: 3,
-                                    shadows: [
-                                      Shadow(
-                                        blurRadius: 4.0,
-                                        color: Colors.black.withOpacity(.25),
-                                        offset: const Offset(0.0, 4.0),
-                                      ),
-                                    ]
+                                text: TextSpan(
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 75,
+                                        color: Colors.white,
+                                        letterSpacing: 3,
+                                        shadows: [
+                                          Shadow(
+                                            blurRadius: 4.0,
+                                            color:
+                                                Colors.black.withOpacity(.25),
+                                            offset: const Offset(0.0, 4.0),
+                                          ),
+                                        ]),
+                                    children: [
+                                  TextSpan(
+                                    style: GoogleFonts.inter(),
+                                    text:
+                                        "THERE ARE A\nLOT OF\nPEOPLE THAT\nNEED YOUR\nHELP THAN YOU\n",
                                   ),
-                                  children: [
-                                    TextSpan(
-                                      style: GoogleFonts.inter(
-                                      ),
-                                      text: "THERE ARE A\nLOT OF\nPEOPLE THAT\nNEED YOUR\nHELP THAN YOU\n",
+                                  const TextSpan(
+                                    text: 'THINK!',
+                                    style: const TextStyle(
+                                      color: Colors.red,
                                     ),
-                                    const TextSpan(
-                                      text: 'THINK!',
-                                      style: const TextStyle(
-                                        color: Colors.red,
-                                      ),
-
-                                    )
-                                  ]
-                                )
-                            ),
+                                  )
+                                ])),
                           ),
                           /*ElevatedButton(
                             onPressed: () {
@@ -164,13 +159,15 @@ class _SignInState extends State<SignIn> {
                       margin: const EdgeInsets.only(
                           left: 50, right: 50, top: 80, bottom: 100),
                       decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: const BorderRadius.all(const Radius.circular(20)),
-                            image: DecorationImage(
-                              image: const AssetImage('spin_gear.gif'),
-                              fit: BoxFit.cover,
-                              colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.1), BlendMode.dstATop),
-                            ),
+                        color: Colors.white,
+                        borderRadius:
+                            const BorderRadius.all(const Radius.circular(20)),
+                        image: DecorationImage(
+                          image: const AssetImage('spin_gear.gif'),
+                          fit: BoxFit.cover,
+                          colorFilter: ColorFilter.mode(
+                              Colors.black.withOpacity(0.1), BlendMode.dstATop),
+                        ),
                       ),
                       //  color: Colors.white,
                       child: Column(
@@ -206,6 +203,11 @@ class _SignInState extends State<SignIn> {
                                       flex: 100,
                                       child: TextFormField(
                                         controller: emailController,
+                                        validator: (value) {
+                                          return value!.isNotEmpty
+                                              ? null
+                                              : "Empty/Invalid Email";
+                                        },
                                         decoration: const InputDecoration(
                                           border: OutlineInputBorder(),
                                           hintText: 'Email',
@@ -218,6 +220,12 @@ class _SignInState extends State<SignIn> {
                                     Expanded(
                                       flex: 100,
                                       child: TextFormField(
+                                        obscureText: true,
+                                        validator: (value) {
+                                          return value!.isNotEmpty
+                                              ? null
+                                              : "Empty/Invalid Password";
+                                        },
                                         controller: passwordController,
                                         decoration: const InputDecoration(
                                           border: OutlineInputBorder(),
@@ -257,7 +265,9 @@ class _SignInState extends State<SignIn> {
                                         height: 70,
                                         child: ElevatedButton(
                                             style: ElevatedButton.styleFrom(
-                                                primary: const Color.fromRGBO(255, 205, 84, 1.0),),
+                                              primary: const Color.fromRGBO(
+                                                  255, 205, 84, 1.0),
+                                            ),
                                             child: const Text(
                                               'Log In',
                                               textAlign: TextAlign.center,
@@ -270,19 +280,26 @@ class _SignInState extends State<SignIn> {
                                               final String email =
                                                   emailController.text.trim();
                                               final String password =
-                                                  passwordController.text.trim();
-
-                                              if (email.isEmpty) {
-                                                print("Email is Empty");
-                                              } else {
-                                                if (password.isEmpty) {
-                                                  print("Password is Empty");
-                                                } else {
-                                                  context
-                                                      .read<AuthServices>()
-                                                      .login(email, password);
-                                                }
+                                                  passwordController.text
+                                                      .trim();
+                                              if (_formkey.currentState!
+                                                  .validate()) {
+                                                context
+                                                    .read<AuthServices>()
+                                                    .login(email, password);
                                               }
+                                              //   if (email.isEmpty) {
+                                              //     print("Email is Empty");
+                                              //   } else {
+                                              //     if (password.isEmpty) {
+                                              //       print("Password is Empty");
+                                              //     } else {
+                                              //       context
+                                              //           .read<AuthServices>()
+                                              //           .login(email, password);
+                                              //     }
+                                              //   }
+                                              // }
                                             }),
                                       ),
                                     ),

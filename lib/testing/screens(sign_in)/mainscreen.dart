@@ -26,6 +26,11 @@ class _MainScreenState extends State<MainScreen> {
             Container(
               margin: EdgeInsets.symmetric(horizontal: 50.0),
               child: TextFormField(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Empty/Invalid email";
+                  }
+                },
                 controller: emailController,
                 decoration: InputDecoration(
                   hintText: "EMAIL...",
@@ -36,6 +41,11 @@ class _MainScreenState extends State<MainScreen> {
               margin: EdgeInsets.symmetric(horizontal: 50.0),
               child: TextFormField(
                 controller: passwordController,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Empty/Invalid email";
+                  }
+                },
                 obscureText: true,
                 decoration: InputDecoration(
                   hintText: "PASSWORD...",

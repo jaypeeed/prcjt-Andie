@@ -18,6 +18,10 @@ class SignUpClient extends StatefulWidget {
   State<SignUpClient> createState() => _SignUpClientState();
 }
 
+var pendingAndies = [];
+var finalAndies = [];
+var historyAndies = [];
+
 class _SignUpClientState extends State<SignUpClient> {
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
@@ -26,6 +30,7 @@ class _SignUpClientState extends State<SignUpClient> {
   TextEditingController genderController = new TextEditingController();
   TextEditingController nameController = new TextEditingController();
   TextEditingController fbController = new TextEditingController();
+  final _formkey = GlobalKey<FormState>();
 
   String email = '';
   String password = '';
@@ -141,173 +146,202 @@ class _SignUpClientState extends State<SignUpClient> {
                   image: DecorationImage(
                     image: const AssetImage('spin_gear.gif'),
                     fit: BoxFit.cover,
-                    colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.1), BlendMode.dstATop),
+                    colorFilter: ColorFilter.mode(
+                        Colors.black.withOpacity(0.1), BlendMode.dstATop),
                   ),
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Expanded(
-                      flex: 10,
-                      child: Center(
-                        child: Container(
-                          margin: const EdgeInsets.only(top: 20, bottom: 10),
-                          child: const Text(
-                            'Sign Up as CLIENT!',
-                            style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.w900,
+                child: Form(
+                  key: _formkey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Expanded(
+                        flex: 10,
+                        child: Center(
+                          child: Container(
+                            margin: const EdgeInsets.only(top: 20, bottom: 10),
+                            child: const Text(
+                              'Sign Up as CLIENT!',
+                              style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.w900,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    Expanded(
-                      flex: 10,
-                      child: Container(
-                        margin:
-                            const EdgeInsets.only(top: 5, left: 40, right: 40),
-                        child: TextFormField(
-                          controller: nameController,
-                          decoration: const InputDecoration(
-                              hintText: 'Name',
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.grey))),
+                      Expanded(
+                        flex: 10,
+                        child: Container(
+                          margin: const EdgeInsets.only(
+                              top: 5, left: 40, right: 40),
+                          child: TextFormField(
+                            controller: nameController,
+                            decoration: const InputDecoration(
+                                hintText: 'Name',
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.grey))),
+                          ),
                         ),
                       ),
-                    ),
-                    Expanded(
-                      flex: 10,
-                      child: Container(
-                        margin:
-                            const EdgeInsets.only(top: 5, left: 40, right: 40),
-                        child: TextFormField(
-                          controller: emailController,
-                          decoration: const InputDecoration(
-                              hintText: 'Email',
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.grey))),
+                      Expanded(
+                        flex: 10,
+                        child: Container(
+                          margin: const EdgeInsets.only(
+                              top: 5, left: 40, right: 40),
+                          child: TextFormField(
+                            controller: emailController,
+                            validator: (value) {
+                              return value!.isNotEmpty
+                                  ? null
+                                  : "Empty/Invalid Email";
+                            },
+                            decoration: const InputDecoration(
+                                hintText: 'Email',
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.grey))),
+                          ),
                         ),
                       ),
-                    ),
-                    Expanded(
-                      flex: 10,
-                      child: Container(
-                        margin:
-                            const EdgeInsets.only(top: 15, left: 40, right: 40),
-                        child: TextFormField(
-                          controller: passwordController,
-                          decoration: const InputDecoration(
-                              hintText: 'Password',
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.grey))),
-                          obscureText: true,
+                      Expanded(
+                        flex: 10,
+                        child: Container(
+                          margin: const EdgeInsets.only(
+                              top: 15, left: 40, right: 40),
+                          child: TextFormField(
+                            controller: passwordController,
+                            validator: (value) {
+                              return value!.isNotEmpty
+                                  ? null
+                                  : "Empty/Invalid Password";
+                            },
+                            decoration: const InputDecoration(
+                                hintText: 'Password',
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.grey))),
+                            obscureText: true,
+                          ),
                         ),
                       ),
-                    ),
-                    Expanded(
-                      flex: 10,
-                      child: Container(
-                        margin: const EdgeInsets.only(top: 5, left: 45),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              flex: 2,
-                              child: Container(
-                                height: 48,
-                                child: DropdownButtonFormField<String>(
-                                  dropdownColor: Colors.white,
-                                  value: selectedItem,
-                                  items: items
-                                      .map((item) => DropdownMenuItem(
-                                          value: item,
-                                          child: Text(
-                                            item,
-                                            style: const TextStyle(
-                                                fontSize: 20,
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold),
-                                          )))
-                                      .toList(),
-                                  onChanged: (item) =>
-                                      setState(() => selectedItem = item),
+                      Expanded(
+                        flex: 10,
+                        child: Container(
+                          margin: const EdgeInsets.only(top: 5, left: 45),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child: Container(
+                                  height: 48,
+                                  child: DropdownButtonFormField<String>(
+                                    dropdownColor: Colors.white,
+                                    value: selectedItem,
+                                    items: items
+                                        .map((item) => DropdownMenuItem(
+                                            value: item,
+                                            child: Text(
+                                              item,
+                                              style: const TextStyle(
+                                                  fontSize: 20,
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold),
+                                            )))
+                                        .toList(),
+                                    onChanged: (item) =>
+                                        setState(() => selectedItem = item),
+                                  ),
                                 ),
                               ),
-                            ),
-                            Expanded(
-                                flex: 3,
-                                child: Container(
-                                  margin: const EdgeInsets.only(
-                                      top: 5, left: 40, right: 40),
-                                  child: TextFormField(
-                                    controller: ageController,
-                                    decoration: const InputDecoration(
-                                      border: OutlineInputBorder(),
-                                      hintText: 'Age',
+                              Expanded(
+                                  flex: 3,
+                                  child: Container(
+                                    margin: const EdgeInsets.only(
+                                        top: 5, left: 40, right: 40),
+                                    child: TextFormField(
+                                      controller: ageController,
+                                      validator: (value) {
+                                        return value!.isNotEmpty
+                                            ? null
+                                            : "Empty/Invalid Input";
+                                      },
+                                      decoration: const InputDecoration(
+                                        border: OutlineInputBorder(),
+                                        hintText: 'Age',
+                                      ),
                                     ),
-                                  ),
-                                )),
-                          ],
+                                  )),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    Expanded(
-                      flex: 10,
-                      child: Container(
-                        margin:
-                            const EdgeInsets.only(top: 5, left: 40, right: 40),
-                        child: TextFormField(
-                          controller: numberController,
-                          decoration: const InputDecoration(
-                              hintText: 'Phone Number',
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.grey))),
+                      Expanded(
+                        flex: 10,
+                        child: Container(
+                          margin: const EdgeInsets.only(
+                              top: 5, left: 40, right: 40),
+                          child: TextFormField(
+                            controller: numberController,
+                            validator: (value) {
+                              return value!.isNotEmpty
+                                  ? null
+                                  : "Empty/Invalid Phone No.";
+                            },
+                            decoration: const InputDecoration(
+                                hintText: 'Phone Number',
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.grey))),
+                          ),
                         ),
                       ),
-                    ),
-                    Expanded(
-                      flex: 10,
-                      child: Container(
-                        margin:
-                            const EdgeInsets.only(top: 5, left: 40, right: 40),
-                        child: TextFormField(
-                          controller: fbController,
-                          decoration: const InputDecoration(
-                              hintText: 'Facebook Link',
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.grey))),
+                      Expanded(
+                        flex: 10,
+                        child: Container(
+                          margin: const EdgeInsets.only(
+                              top: 5, left: 40, right: 40),
+                          child: TextFormField(
+                            controller: fbController,
+                            validator: (value) {
+                              return value!.isNotEmpty
+                                  ? null
+                                  : "Empty/Invalid Link";
+                            },
+                            decoration: const InputDecoration(
+                                hintText: 'Facebook Link',
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.grey))),
+                          ),
                         ),
                       ),
-                    ),
-                    Expanded(
-                      flex: 5,
-                      child: Container(
-                        margin:
-                            const EdgeInsets.only(top: 1, left: 40, right: 50),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                final String email =
-                                    emailController.text.trim();
-                                final String password =
-                                    passwordController.text.trim();
+                      Expanded(
+                        flex: 5,
+                        child: Container(
+                          margin: const EdgeInsets.only(
+                              top: 1, left: 40, right: 50),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  final String email =
+                                      emailController.text.trim();
+                                  final String password =
+                                      passwordController.text.trim();
 
-                                final String age = ageController.text.trim();
-                                final String number =
-                                    numberController.text.trim();
-                                final String name = nameController.text.trim();
-                                final String fb = fbController.text.trim();
+                                  final String age = ageController.text.trim();
+                                  final String number =
+                                      numberController.text.trim();
+                                  final String name =
+                                      nameController.text.trim();
+                                  final String fb = fbController.text.trim();
 
-                                if (email.isEmpty) {
-                                  print("Email is Empty");
-                                } else {
-                                  if (password.isEmpty) {
-                                    print("Password is Empty");
-                                  } else {
+                                  if (_formkey.currentState!.validate()) {
                                     context
                                         .read<AuthServices>()
                                         .signUp(
@@ -335,75 +369,83 @@ class _SignUpClientState extends State<SignUpClient> {
                                       });
                                     });
                                   }
-                                }
-                              },
-                              icon: const Icon(
-                                Icons.arrow_circle_right_rounded,
-                                size: 40,
-                                color: Color.fromRGBO(137, 137, 137, 1.0),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const Expanded(
-                      flex: 10,
-                      child: Center(
-                        child: Text(
-                          'or',
-                          style: TextStyle(
-                            fontSize: 25,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 10,
-                      child: Container(
-                        margin: const EdgeInsets.only(
-                            left: 40, right: 40, bottom: 30),
-                        child: OutlinedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              PageRouteBuilder(
-                                  pageBuilder: (BuildContext context,
-                                          Animation animation,
-                                          Animation secondaryAnimation) =>
-                                      const AndieSignUp3(), //Change here to open Google Login
-                                  transitionDuration:
-                                      const Duration(seconds: 0)),
-                            );
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                margin: const EdgeInsets.only(right: 20),
-                                child: const Image(
-                                  image: const AssetImage(
-                                    'assets/google.png',
-                                  ),
-                                  width: 20,
-                                  height: 20,
-                                ),
-                              ),
-                              const Text(
-                                'Sign Up Using Google',
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
+
+                                  if (email.isEmpty) {
+                                    print("Email is Empty");
+                                  } else {
+                                    if (password.isEmpty) {
+                                      print("Password is Empty");
+                                    } else {}
+                                  }
+                                },
+                                icon: const Icon(
+                                  Icons.arrow_circle_right_rounded,
+                                  size: 40,
+                                  color: Color.fromRGBO(137, 137, 137, 1.0),
                                 ),
                               ),
                             ],
                           ),
                         ),
                       ),
-                    ),
+                      const Expanded(
+                        flex: 10,
+                        child: Center(
+                          child: Text(
+                            'or',
+                            style: TextStyle(
+                              fontSize: 25,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 10,
+                        child: Container(
+                          margin: const EdgeInsets.only(
+                              left: 40, right: 40, bottom: 30),
+                          child: OutlinedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                    pageBuilder: (BuildContext context,
+                                            Animation animation,
+                                            Animation secondaryAnimation) =>
+                                        const AndieSignUp3(), //Change here to open Google Login
+                                    transitionDuration:
+                                        const Duration(seconds: 0)),
+                              );
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  margin: const EdgeInsets.only(right: 20),
+                                  child: const Image(
+                                    image: const AssetImage(
+                                      'assets/google.png',
+                                    ),
+                                    width: 20,
+                                    height: 20,
+                                  ),
+                                ),
+                                const Text(
+                                  'Sign Up Using Google',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
 
-                    // BUTTON FOR GOOGLE SIGN IN
-                  ],
+                      // BUTTON FOR GOOGLE SIGN IN
+                    ],
+                  ),
                 ),
               ),
             )
