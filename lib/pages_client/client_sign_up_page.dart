@@ -364,9 +364,6 @@ class _SignUpClientState extends State<SignUpClient> {
                                         "name": name,
                                         "fb": fb,
                                         "gender": selectedItem,
-                                        "pendingAndie": pendingAndies,
-                                        "finalAndie": finalAndies,
-                                        "historyAndie": historyAndies,
                                         "photo": "phto",
                                         "role": "user",
                                       });

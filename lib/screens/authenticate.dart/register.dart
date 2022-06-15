@@ -18,9 +18,11 @@ class Register extends StatefulWidget {
 }
 
 var tmpArray = [];
-var pendingClients = [];
-var finalClients = [];
-var historyClients = [];
+var rates = [];
+double totalRate = 0.0;
+double ratings = 0.0;
+var report = [];
+double rateCount = 0.0;
 
 class _RegisterState extends State<Register> {
   TextEditingController emailController = new TextEditingController();
@@ -552,10 +554,11 @@ class _RegisterState extends State<Register> {
                                         "facebook": fb,
                                         "gender": selectedItem,
                                         "photo": "phto",
-                                        "ratings": "ratng",
-                                        "pendingClients": pendingClients,
-                                        "finalClients": finalClients,
-                                        "historyClients": historyClients,
+                                        "rateCount": rateCount,
+                                        "totalRate": totalRate,
+                                        "rates": rates,
+                                        "ratings": ratings,
+                                        "reportCount": report,
                                         "role": "andie",
                                       });
                                     });
