@@ -36,7 +36,8 @@ class MyApp extends StatelessWidget {
           create: (context) => context.read<AuthServices>().authStateChanges,
           initialData: null,
         ),
-        ChangeNotifierProvider(create: (context) =>AndieNotifier(),
+        ChangeNotifierProvider(
+          create: (context) => AndieNotifier(),
         ),
       ],
       child: MaterialApp(
