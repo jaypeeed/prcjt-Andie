@@ -610,10 +610,6 @@ class _ClientCategoryState extends State<ClientCategory> {
                                                         child: ElevatedButton(
                                                           onPressed: () {
                                                             pickDate(context);
-                                                            setState(() {
-                                                              getDate();
-                                                              getTime();
-                                                            });
                                                           },
                                                           child:
                                                               Text(getDate()),
@@ -625,14 +621,20 @@ class _ClientCategoryState extends State<ClientCategory> {
                                                         child: ElevatedButton(
                                                           onPressed: () {
                                                             pickTime(context);
-                                                            setState(() {
-                                                              getDate();
-                                                              getTime();
-                                                            });
                                                           },
                                                           child:
                                                               Text(getTime()),
                                                         ),
+                                                      ),
+                                                      IconButton(
+                                                        icon: const Icon(
+                                                            Icons.refresh),
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            getDate();
+                                                            getTime();
+                                                          });
+                                                        },
                                                       ),
                                                     ],
                                                   ),
