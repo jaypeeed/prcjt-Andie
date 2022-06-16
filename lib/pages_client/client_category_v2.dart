@@ -307,7 +307,7 @@ class _ClientCategoryState extends State<ClientCategory> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      'ANDIES/S ($counter)',
+                      'ANDIES/S',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 30,
@@ -315,7 +315,7 @@ class _ClientCategoryState extends State<ClientCategory> {
                     ),
                     Container(
                       child: Text('Search results for: $tmpArray2'),
-                      color: Colors.cyan,
+                      //color: Colors.cyan,
                       width: 300,
                       height: 50,
                     ),
