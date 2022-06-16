@@ -80,6 +80,19 @@ class _AndieRatings1State extends State<AndieRatings1> {
         five = userData.data()!['Five'].toString();
         myRating = userData.data()!['totalRate'].toString();
         finalRate =double.parse(myRating).toStringAsPrecision(3);
+        if(one == 'null'){
+          one = '0';
+        }if(two == 'null'){
+          two = '0';
+        }if(three == 'null'){
+          three = '0';
+        }if(four == 'null'){
+          four = '0';
+        }if(one == 'null'){
+          five = '0';
+        }
+
+
         print(myRateCounter);
       });
     });
