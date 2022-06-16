@@ -1137,6 +1137,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                             FieldValue.increment(rating),
                                             'rateCount':
                                             FieldValue.increment(rateCounter),
+                                            'totalRate': ratings2/rateCount,
                                           });
                                         }
                                         if (response.rating == 2.0) {
@@ -1157,6 +1158,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                             FieldValue.increment(rating),
                                             'rateCount':
                                             FieldValue.increment(rateCounter),
+                                            'totalRate': ratings2/rateCount,
                                           });
                                         }
                                         if (response.rating == 3.0) {
@@ -1177,6 +1179,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                             FieldValue.increment(rating),
                                             'rateCount':
                                             FieldValue.increment(rateCounter),
+                                            'totalRate': ratings2/rateCount,
                                           });
                                         }
                                         if (response.rating == 4.0) {
@@ -1197,6 +1200,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                             FieldValue.increment(rating),
                                             'rateCount':
                                             FieldValue.increment(rateCounter),
+                                            'totalRate': ratings2/rateCount,
                                           });
                                         }
                                         if (response.rating == 5.0) {
@@ -1219,6 +1223,18 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                             FieldValue.increment(rateCounter),
                                           });
                                         }
+
+                                        FirebaseFirestore.instance
+                                            .collection('ratings')
+                                            .doc()
+                                            .set({
+                                          'clientName': myName,
+                                          'dateRated':DateTime.now(),
+                                          'comment': response.comment,
+                                          'rate': response.rating,
+                                          'clientUID': FirebaseAuth.instance.currentUser?.uid,
+                                          'andieUID': andieUID,
+                                        });
 
                                       },
                                     );
