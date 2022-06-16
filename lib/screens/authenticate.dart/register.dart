@@ -22,7 +22,7 @@ var tmpArray = [];
 var rates = [];
 double totalRate = 0.0;
 double ratings = 0.0;
-var report = [];
+int report = 0;
 double rateCount = 0.0;
 
 class _RegisterState extends State<Register> {

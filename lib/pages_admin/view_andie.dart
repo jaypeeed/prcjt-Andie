@@ -1,12 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:prjct_andie/pages/andie_ratings.dart';
 
 import '../pages/andie_profile_andie.dart';
 
 final db = FirebaseFirestore.instance;
+final db2 = FirebaseFirestore.instance;
 String counter = '';
+final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+String name = '';
+String comment ='';
+String dateSubmitted = '';
 
 void main() {
   runApp(const MaterialApp(home: ViewAndie()));
@@ -19,6 +26,8 @@ class ViewAndie extends StatefulWidget {
 }
 
 class _ViewAndieState extends State<ViewAndie> {
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -131,50 +140,63 @@ class _ViewAndieState extends State<ViewAndie> {
                                                 ),
                                               ),
                                               content: Container(
-                                                height: 250,
-                                                child: Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    Container(
-                                                      child: const Text('Name',
-                                                          style:TextStyle(
-                                                              fontSize: 30,
-                                                              fontWeight: FontWeight.bold)
-                                                      ),
-                                                      margin: const EdgeInsets.only(bottom: 20),
-                                                    ),
-                                                    const Text('Client Note:',
-                                                        style: TextStyle(
-                                                            fontSize: 20,
-                                                            fontWeight: FontWeight.bold)),
-                                                    Container(
-                                                      width: 300,
-                                                      margin: const EdgeInsets.only(left: 15),
-                                                      child: const Text('She did not pay me! She said bayran lang tika candy! Like mga 500 kabuok kay wala pa koy money. T.T',
-                                                          style: TextStyle(
-                                                            fontSize: 20,
-                                                          )),
-                                                    ),
-                                                  ],
+                                                padding: const EdgeInsets.all(30.0),
+                                                margin: const EdgeInsets.all(20.0),
+                                                width: 1000,
+                                                height: 700,
+                                                color: Colors.white,
+                                                child: StreamBuilder<QuerySnapshot>(
+                                                  stream: db2.collection('reportAndie')
+                                                      .where('andieUID', isEqualTo: uid)
+                                                      .snapshots(),
+                                                  builder: (context, snapshot) {
+                                                    if (!snapshot.hasData) {
+                                                      Text ('HELLO');
+                                                      return const Center(
+                                                        child: CircularProgressIndicator(),
+                                                      );
+                                                    } else {
+                                                      snapshot.data!.docs.forEach(
+                                                            (element) {
+                                                          element.id;
+                                                          print(element.id);
+                                                        },
+                                                      );
+                                                      print(snapshot.data!.docs.length.toString());
+
+                                                      return ListView (
+                                                        children: snapshot.data!.docs.map((doc) {
+                                                          Timestamp t = (doc.data() as Map<String, dynamic>)['dateReported'];
+                                                          var name =(doc.data() as Map<String, dynamic>)['clientName'];
+                                                          var comment = (doc.data() as Map<String, dynamic>)['comment'];
+                                                          dateSubmitted =t.toDate().toString();
+
+                                                          return Card(
+                                                            child: ListTile(
+                                                                leading: Text('Client Name: $name'),
+                                                                title: Text('Remarks: $comment'),
+                                                                subtitle: Text('Date Reported: $dateSubmitted'),
+                                                            ),
+                                                          );
+                                                        }).toList(),
+
+                                                      );
+                                                    }
+                                                  },
                                                 ),
                                               ),
                                               actions: [
                                                 ElevatedButton(
                                                   onPressed: () async {
-                                                    final QuerySnapshot snap2 = await FirebaseFirestore.instance.collection('users').where('uid', isEqualTo: uid).get();
-                                                    setState(() {
-                                                      snap2.docs[0].reference.delete();
-                                                    });
-                                                    Navigator.pop(context, false);
                                                   },
-                                                  child: Text('Yes, Delete'),
+                                                  child: Text('Okay'),
                                                   style: ElevatedButton.styleFrom(
                                                     primary: const Color.fromRGBO(111, 215, 85, 1.0),
                                                   ),
                                                 ),
                                                 ElevatedButton(
                                                   onPressed: () => Navigator.pop(context, false),
-                                                  child: Text('Cancel'),
+                                                  child: Text('Back'),
                                                   style: ElevatedButton.styleFrom(
                                                     primary: const Color.fromRGBO(220, 57, 57, 1.0),
                                                   ),

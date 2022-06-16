@@ -10,6 +10,9 @@ import '../services/auth.dart';
 import 'client_category_v2.dart';
 import 'client_profile.dart';
 
+TextEditingController _textFieldController = TextEditingController();
+String reportComment = '';
+
 final db = FirebaseFirestore.instance;
 final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 var tmpArray = ['ELECTRICIAN', 'HOUSE KEEPER'];
@@ -35,6 +38,9 @@ String yowAndie = '';
 String contAndie = '';
 String emailAndie = '';
 String facebookAndie = '';
+
+int reportCounter = 1;
+int reportCount = 0;
 
 double rateCount = 0.0;
 double ratings2 = 0.0;
@@ -530,6 +536,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                                 docUID = (doc.data() as Map<
                                                     String, dynamic>)['docUID'];
                                               });
+
                                               final QuerySnapshot snap2 =
                                                   await FirebaseFirestore
                                                       .instance
@@ -553,6 +560,93 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                                 print(ratings);
                                               }
                                               ;
+                                            },
+                                            onLongPress: () async{
+                                              showDialog(context: context, builder: (context){
+                                                return AlertDialog(
+                                                  title: const Center(
+                                                    child: Text("Report Andie?",
+                                                        style: TextStyle(
+                                                            fontSize: 40,
+                                                            fontWeight: FontWeight.bold)
+                                                    ),
+                                                  ),
+                                                  content: Container(
+                                                    height: 250,
+                                                    child: TextField(
+                                                      controller: _textFieldController,
+                                                      textInputAction: TextInputAction.go,
+                                                      keyboardType: TextInputType.numberWithOptions(),
+                                                      decoration: InputDecoration(
+                                                        hintText: 'Tell us why you want to report this Andie'
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  actions: [
+                                                    ElevatedButton(
+                                                      onPressed: () async {
+                                                         reportComment = _textFieldController.text.trim();
+
+                                                        FirebaseFirestore.instance
+                                                            .collection('reportAndie')
+                                                            .doc()
+                                                            .set({
+                                                          'clientName': myName,
+                                                          'dateReported':DateTime.now(),
+                                                          'comment': reportComment,
+                                                          'clientUID': FirebaseAuth.instance.currentUser?.uid,
+                                                          'andieUID': andieUID,
+                                                        });
+
+                                                        final QuerySnapshot snap3 =
+                                                        await FirebaseFirestore
+                                                            .instance
+                                                            .collection('finalAndie')
+                                                            .where('clientNote',
+                                                            isEqualTo: clientNote2)
+                                                            .where('andieUID',
+                                                            isEqualTo: andieUID)
+                                                            .get();
+                                                        setState(() {
+                                                          snap3.docs[0].reference.delete();
+                                                        });
+
+                                                         FirebaseFirestore.instance
+                                                             .collection('users')
+                                                             .doc(andieUID)
+                                                             .update({
+                                                           'reportCount': FieldValue.increment(reportCounter),
+                                                         });
+
+                                                        name = '';
+                                                        clientNote2 = '';
+                                                        startDate = '';
+                                                        andieCont = '';
+                                                        fb = '';
+                                                        ratings = '';
+                                                        andieUID = '';
+                                                        skills = '';
+
+                                                        reportComment = '';
+                                                        Navigator.pop(context, false);
+                                                      },
+                                                      child: Text('Report'),
+                                                      style: ElevatedButton.styleFrom(
+                                                        primary: const Color.fromRGBO(111, 215, 85, 1.0),
+                                                      ),
+                                                    ),
+                                                    ElevatedButton(
+                                                      onPressed: () => Navigator.pop(context, false),
+                                                      child: Text('Cancel'),
+                                                      style: ElevatedButton.styleFrom(
+                                                        primary: const Color.fromRGBO(220, 57, 57, 1.0),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                );
+                                              });
+
+
                                             },
                                             leading: Text((doc.data() as Map<
                                                 String, dynamic>)['andieName']),

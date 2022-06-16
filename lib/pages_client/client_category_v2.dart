@@ -588,10 +588,7 @@ class _ClientCategoryState extends State<ClientCategory> {
                                                   actions: [
                                                     ElevatedButton(
                                                       onPressed: () async {
-                                                        String clientNote =
-                                                            _textFieldController
-                                                                .text
-                                                                .trim();
+                                                        String clientNote = _textFieldController.text.trim();
                                                         String clientCont =
                                                             _textFieldControllerContInfo
                                                                 .text
