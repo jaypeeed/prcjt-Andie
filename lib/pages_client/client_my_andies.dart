@@ -1113,7 +1113,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                       commentHint:
                                           'Share your experience and help this Andie and other clients!',
                                       onCancelled: () => print('cancelled'),
-                                      onSubmitted: (response) {
+                                      onSubmitted: (response) async{
                                         print(
                                             'rating: ${response.rating}, comment: ${response.comment}');
 
@@ -1235,6 +1235,79 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                           'clientUID': FirebaseAuth.instance.currentUser?.uid,
                                           'andieUID': andieUID,
                                         });
+
+                                        final QuerySnapshot andie =
+                                            await FirebaseFirestore.instance
+                                            .collection('users')
+                                            .where('uid', isEqualTo: andieUID)
+                                            .get();
+                                        setState(() {
+                                          testAndie = andie.docs[0]['uid'];
+                                          nameAndie = andie.docs[0]['name'];
+                                          skillsAndie =
+                                              andie.docs[0]['skills'].toString();
+                                          ageAndie = andie.docs[0]['age'];
+                                          genderAndie = andie.docs[0]['gender'];
+                                          expAndie = andie.docs[0]['experience'];
+                                          schoolAndie = andie.docs[0]['school'];
+                                          yowAndie = andie.docs[0]['yearsOfWork'];
+                                          contAndie =
+                                          andie.docs[0]['contactNumber'];
+                                          emailAndie = andie.docs[0]['email'];
+                                          ratings =
+                                              andie.docs[0]['totalRate'].toString();
+                                          facebookAndie = andie.docs[0]['facebook'];
+                                        });
+
+                                        FirebaseFirestore.instance
+                                            .collection("historyAndie")
+                                            .doc()
+                                            .set({
+                                          "clientUID": FirebaseAuth
+                                              .instance.currentUser?.uid,
+                                          "andieUID": andieUID,
+                                          "andieName": nameAndie,
+                                          "andieSkills": skillsAndie,
+                                          "andieAge": ageAndie,
+                                          "andieGender": genderAndie,
+                                          "andieExp": expAndie,
+                                          "andieSchool": schoolAndie,
+                                          "andieYow": yowAndie,
+                                          "andieCont": contAndie,
+                                          "andieEmail": emailAndie,
+                                          "andieFacebook": facebookAndie,
+                                          "andieTotalRate": ratings,
+                                          "clientNote": clientNote2,
+                                          "dateFinished": DateTime.now(),
+                                          'startDate': startDate,
+                                          'clientCont': myNumber,
+                                          'docUID': docUID,
+                                          'status': 'history',
+                                        });
+
+                                        final QuerySnapshot snap3 =
+                                            await FirebaseFirestore
+                                            .instance
+                                            .collection('finalAndie')
+                                            .where('clientNote',
+                                            isEqualTo: clientNote2)
+                                            .where('andieUID',
+                                            isEqualTo: andieUID)
+                                            .get();
+                                        setState(() {
+                                          snap3.docs[0].reference.delete();
+                                        });
+
+                                        name = '';
+                                        clientNote2 = '';
+                                        startDate = '';
+                                        andieCont = '';
+                                        fb = '';
+                                        ratings = '';
+                                        andieUID = '';
+                                        skills = '';
+
+
 
                                       },
                                     );
