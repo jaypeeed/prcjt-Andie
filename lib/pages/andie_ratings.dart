@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:prjct_andie/pages_client/client_my_andies.dart';
 
 import '../services/auth.dart';
@@ -304,7 +305,7 @@ class _AndieRatings1State extends State<AndieRatings1> {
                         ),
                       ),
                       Expanded(
-                        flex: 50,
+                        flex: 40,
                         child: Center(
                           child: Container(
                             margin: const EdgeInsets.only(left: 20),
@@ -361,7 +362,7 @@ class _AndieRatings1State extends State<AndieRatings1> {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Row(
-                                      children: [
+                                      children: const [
                                         Icon( Icons.star_outlined,size: 50,),
                                         Icon( Icons.star_outlined,size: 50,),
                                         Icon( Icons.star_outlined,size: 50,),
@@ -370,7 +371,7 @@ class _AndieRatings1State extends State<AndieRatings1> {
                                       ],
                                     ),
                                     Row(
-                                      children: [
+                                      children: const [
                                         Icon( Icons.star_outlined,size: 50,),
                                         Icon( Icons.star_outlined,size: 50,),
                                         Icon( Icons.star_outlined,size: 50,),
@@ -378,20 +379,20 @@ class _AndieRatings1State extends State<AndieRatings1> {
                                       ],
                                     ),
                                     Row(
-                                      children: [
+                                      children: const [
                                         Icon( Icons.star_outlined,size: 50,),
                                         Icon( Icons.star_outlined,size: 50,),
                                         Icon( Icons.star_outlined,size: 50,),
                                       ],
                                     ),
                                     Row(
-                                      children: [
+                                      children: const [
                                         Icon( Icons.star_outlined,size: 50,),
                                         Icon( Icons.star_outlined,size: 50,),
                                       ],
                                     ),
                                     Row(
-                                      children: [
+                                      children: const [
                                         Icon( Icons.star_outlined,size: 50,),
                                       ],
                                     ),
@@ -493,16 +494,48 @@ class _AndieRatings1State extends State<AndieRatings1> {
                             var rate =(doc.data() as Map<String, dynamic>)['rate'].toString();
                             var comment = (doc.data() as Map<String, dynamic>)['comment'];
                             dateSubmitted =t.toDate().toString();
-
                             return Card(
                               child: ListTile(
-
                                   leading: CircleAvatar(backgroundImage: AssetImage("assets/male.png")),
-                                  title: Text('$name: $comment'),
-                                  subtitle: Column(
+                                  title: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text('Rate: $rate'),
-                                      Text('Date Rated: $dateSubmitted'),
+                                      Text('$name',
+                                        style: GoogleFonts.roboto(
+                                            fontSize: 30,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            letterSpacing: 2.0),),
+                                      Text('$dateSubmitted',
+                                        style: GoogleFonts.roboto(
+                                          fontSize: 20,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w300,
+                                          letterSpacing: 2.0),),
+                                    ],
+                                  ),
+                                  subtitle: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text('Rate: $rate',
+                                          style: GoogleFonts.roboto(
+                                              fontSize: 20,
+                                              color: Colors.black,
+                                              letterSpacing: 2.0)
+                                      ),
+                                      Text('Comment:',style: GoogleFonts.roboto(
+                                          fontSize: 20,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          letterSpacing: 2.0)),
+                                      Container(
+                                        margin: EdgeInsets.only(top:20, left: 20),
+                                        height: 100,
+                                        child: Text('$comment',style: GoogleFonts.roboto(
+                                            fontSize: 20,
+                                            color: Colors.black,
+                                            letterSpacing: 2.0)),
+                                      ),
                                     ],
                                   )
                               ),
