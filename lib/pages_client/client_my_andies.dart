@@ -574,7 +574,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
 
                               child: StreamBuilder<QuerySnapshot>(
                                 stream: db
-                                    .collection('pendingAndie')
+                                    .collection('historyAndie')
                                     .where('clientUID',
                                     isEqualTo:
                                     FirebaseAuth.instance.currentUser?.uid)
@@ -597,7 +597,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                     return ListView(
                                       children: snapshot.data!.docs.map((doc) {
                                         Timestamp t = (doc.data()
-                                        as Map<String, dynamic>)['dateTime'];
+                                        as Map<String, dynamic>)['dateFinished'];
                                         var clientNote = ((doc.data()
                                         as Map<String, dynamic>)['clientNote']);
 
@@ -606,7 +606,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                               onTap: () async {
                                                 final QuerySnapshot snap =
                                                 await FirebaseFirestore.instance
-                                                    .collection('pendingAndie')
+                                                    .collection('historyAndie')
                                                     .where('clientNote',
                                                     isEqualTo: clientNote)
                                                     .get();

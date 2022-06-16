@@ -476,7 +476,6 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                                           return Card(
                                             child: ListTile(
                                                 onTap: () async {
-
                                                   final QuerySnapshot snap = await FirebaseFirestore.instance.collection('historyClient').where('clientNote', isEqualTo: clientNote).get();
                                                   setState(() {
                                                     name = snap.docs[0]['clientName'];
