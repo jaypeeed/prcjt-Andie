@@ -1004,13 +1004,11 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                                         print(
                                             'rating: ${response.rating}, comment: ${response.comment}');
 
-                                        /* // TODO: add your own logic
+                                         // TODO: add your own logic
                                               if (response.rating < 3.0) {
                                                 // send their comments to your email or anywhere you wish
                                                 // ask the user to contact you instead of leaving a bad review
-                                              } else {
-                                                _rateAndReviewApp();
-                                              }*/
+                                              }
 
                                         double rating = response.rating;
 
