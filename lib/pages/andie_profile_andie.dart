@@ -188,6 +188,8 @@ class _AndieProfileState extends State<AndieProfile> {
                     flex: 80,
                     child: Image.asset(
                       finalGender,
+                      width: 50,
+                      height: 50,
                     ),
                   ),
                   Expanded(

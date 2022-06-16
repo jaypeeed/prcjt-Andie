@@ -461,7 +461,7 @@ class _AndieRatings1State extends State<AndieRatings1> {
                 flex: 10,
                 child: Container(
                   padding: const EdgeInsets.all(30.0),
-                  margin: const EdgeInsets.all(30.0),
+                  margin: const EdgeInsets.all(20.0),
                   width: 1500,
                   height: 800,
                   color: Colors.white,
