@@ -123,8 +123,41 @@ class _ViewAndieState extends State<ViewAndie> {
                                         onTap: () async{
                                           showDialog(context: context, builder: (context){
                                             return AlertDialog(
-                                              title: Text("Hi Andie!"),
-                                              content: Text("You are About to DELETE this Andie Account"),
+                                              title: const Center(
+                                                child: Text("Report",
+                                                    style: TextStyle(
+                                                        fontSize: 40,
+                                                        fontWeight: FontWeight.bold)
+                                                ),
+                                              ),
+                                              content: Container(
+                                                height: 250,
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Container(
+                                                      child: const Text('Name',
+                                                          style:TextStyle(
+                                                              fontSize: 30,
+                                                              fontWeight: FontWeight.bold)
+                                                      ),
+                                                      margin: const EdgeInsets.only(bottom: 20),
+                                                    ),
+                                                    const Text('Client Note:',
+                                                        style: TextStyle(
+                                                            fontSize: 20,
+                                                            fontWeight: FontWeight.bold)),
+                                                    Container(
+                                                      width: 300,
+                                                      margin: const EdgeInsets.only(left: 15),
+                                                      child: const Text('She did not pay me! She said bayran lang tika candy! Like mga 500 kabuok kay wala pa koy money. T.T',
+                                                          style: TextStyle(
+                                                            fontSize: 20,
+                                                          )),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
                                               actions: [
                                                 ElevatedButton(
                                                   onPressed: () async {

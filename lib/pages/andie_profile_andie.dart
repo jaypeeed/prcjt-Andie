@@ -32,6 +32,8 @@ String myNumber = '';
 String myRating = '';
 String finalRate = '';
 
+String finalGender = 'assets/profile_sample.jpg';
+
 
 class AndieProfile extends StatefulWidget {
   const AndieProfile({Key? key}) : super(key: key);
@@ -71,6 +73,13 @@ class _AndieProfileState extends State<AndieProfile> {
         myNumber = userData.data()!['contactNumber'];
         myRating = userData.data()!['totalRate'].toString();
         finalRate =double.parse(myRating).toStringAsPrecision(3);
+
+        if(myGender=='Male'){
+        finalGender= 'assets/male.png';
+        }else{
+          finalGender= 'assets/female.png';
+        }
+
       });
     });
   }
@@ -178,7 +187,9 @@ class _AndieProfileState extends State<AndieProfile> {
                   Expanded(
                     flex: 80,
                     child: Image.asset(
-                      'assets/profile_sample.jpg',
+                      finalGender,
+                      width: 50,
+                      height: 50,
                     ),
                   ),
                   Expanded(

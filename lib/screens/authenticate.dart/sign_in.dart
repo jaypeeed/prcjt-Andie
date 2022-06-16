@@ -166,7 +166,7 @@ class _SignInState extends State<SignIn> {
                         borderRadius:
                             const BorderRadius.all(const Radius.circular(20)),
                         image: DecorationImage(
-                          image: const AssetImage('spin_gear.gif'),
+                          image: const AssetImage('assets/spin_gear.gif'),
                           fit: BoxFit.cover,
                           colorFilter: ColorFilter.mode(
                               Colors.black.withOpacity(0.1), BlendMode.dstATop),

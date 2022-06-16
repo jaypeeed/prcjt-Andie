@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -7,6 +9,27 @@ import '../services/auth.dart';
 import 'andie_my_job.dart';
 import 'andie_profile_andie.dart';
 import 'package:universal_html/html.dart' as html;
+
+final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+String name = '';
+String clientNote2 ='';
+String startDate = '';
+String clientCont = '';
+String fb = '';
+String ratings = '';
+String clientUID ='';
+String docUID ='';
+String myRateCounter = '';
+String myRating = '';
+String finalRate = '';
+
+String one = '';
+String two = '';
+String three = '';
+String four = '';
+String five = '';
+
+
 
 void main() {
   runApp( MaterialApp(
@@ -31,6 +54,50 @@ class AndieRatings1 extends StatefulWidget {
 }
 
 class _AndieRatings1State extends State<AndieRatings1> {
+  String counter = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _getdata();
+  }
+
+
+  final AuthService _auth = AuthService();
+  void _getdata() async {
+    User? user = _firebaseAuth.currentUser;
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(user?.uid)
+        .snapshots()
+        .listen((userData) {
+      setState(() {
+        myRateCounter = userData.data()!['rateCount'].toString();
+        one = userData.data()!['One'].toString();
+        two = userData.data()!['Two'].toString();
+        three = userData.data()!['Three'].toString();
+        four = userData.data()!['Four'].toString();
+        five = userData.data()!['Five'].toString();
+        myRating = userData.data()!['totalRate'].toString();
+        finalRate =double.parse(myRating).toStringAsPrecision(3);
+        if(one == 'null'){
+          one = '0';
+        }if(two == 'null'){
+          two = '0';
+        }if(three == 'null'){
+          three = '0';
+        }if(four == 'null'){
+          four = '0';
+        }if(one == 'null'){
+          five = '0';
+        }
+
+
+        print(myRateCounter);
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final AuthService _auth = AuthService();
@@ -40,42 +107,61 @@ class _AndieRatings1State extends State<AndieRatings1> {
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Card(
-          color: const Color.fromRGBO(255, 205, 84, 1.0),
-          elevation: 9,
+          //color: const Color.fromRGBO(255, 205, 84, 1.0),
+          elevation: 5,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                alignment: Alignment.topLeft,
-                margin: const EdgeInsets.fromLTRB(4.0, 3.0, 10.0, 2.0),
-                child: const Text(
-                  "Name: ",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          child: Container(
+            margin: EdgeInsets.all(15),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CircleAvatar(
+                  backgroundColor: Colors.greenAccent[400],
+                  radius: 30,
+                  child: const Image(
+                    height: 30,
+                    width: 30,
+                    image: AssetImage(
+                      'male.png',
+                    ),
+                  )
+                ), //C
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      alignment: Alignment.topLeft,
+                      margin: const EdgeInsets.fromLTRB(4.0, 3.0, 10.0, 2.0),
+                      child: const Text(
+                        "Name: ",
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(5.0, 2.0, 10.0, 10.0),
+                      child: const Text(
+                        "Date: ",
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
+                    ),Container(
+                      margin: const EdgeInsets.fromLTRB(5.0, 2.0, 10.0, 10.0),
+                      child: const Text(
+                        "Comment:",
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
+                    ),
+                    Container(
+                      margin:EdgeInsets.only(left: 30),
+                      color: Colors.cyan,
+                      width: 130,
+                      height: 90,
+                    )
+                  ],
                 ),
-              ),
-              Container(
-                margin: const EdgeInsets.fromLTRB(5.0, 2.0, 10.0, 10.0),
-                child: const Text(
-                  "Date: ",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                ),
-              ),Container(
-                margin: const EdgeInsets.fromLTRB(5.0, 2.0, 10.0, 10.0),
-                child: const Text(
-                  "Comment:",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                ),
-              ),
-              Container(
-                margin:EdgeInsets.only(left: 30),
-                color: Colors.cyan,
-                width: 130,
-                height: 90,
-              )
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -133,7 +219,7 @@ class _AndieRatings1State extends State<AndieRatings1> {
                           transitionDuration: const Duration(seconds: 0)),
                       );
                     },
-                    child: const Text('Ratings',
+                    child:  const Text('Ratings',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
@@ -189,11 +275,11 @@ class _AndieRatings1State extends State<AndieRatings1> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        color: Colors.green,
-                        child: const Expanded(
+                        //color: Colors.green,
+                        child:  Expanded(
                           flex: 5,
                           child: Text(
-                            'RATINGS',
+                            'RATINGS ($finalRate)',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 50.0,
@@ -203,53 +289,154 @@ class _AndieRatings1State extends State<AndieRatings1> {
                         ),
                       ),
                       Expanded(
-                        flex: 10,
-                        child: Container(
-                          margin: const EdgeInsets.only(left: 20),
-                          width: 300,
-                          height: 300,
-                          color: Colors.red,
-                          child: Column(
-                            children: const [
-                              Text(
-                                '5',style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20.0,
-                                color: Colors.black,
-                              ),
-                              ),
-                              Text(
-                                '4',style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20.0,
-                                color: Colors.black,
-                              ),
-                              ),
-                              Text(
-                                '3',style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20.0,
-                                color: Colors.black,
-                              ),
-                              ),
-                              Text(
-                                '2',style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20.0,
-                                color: Colors.black,
-                              ),
-                              ),
-                              Text(
-                                '1',style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20.0,
-                                color: Colors.black,
-                              ),
-                              ),
-                            ],
+                        flex: 50,
+                        child: Center(
+                          child: Container(
+                            margin: const EdgeInsets.only(left: 20),
+                            width: 500,
+                            height: 300,
+                           // color: Colors.red,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                // ----------- Numbers-------------
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: const [
+                                    Text(
+                                      '5',style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 50.0,
+                                      color: Colors.black,
+                                    ),
+                                    ),
+                                    Text(
+                                      '4',style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 50.0,
+                                      color: Colors.black,
+                                    ),
+                                    ),
+                                    Text(
+                                      '3',style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 50.0,
+                                      color: Colors.black,
+                                    ),
+                                    ),
+                                    Text(
+                                      '2',style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 50.0,
+                                      color: Colors.black,
+                                    ),
+                                    ),
+                                    Text(
+                                      '1',style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 50.0,
+                                      color: Colors.black,
+                                    ),
+                                    ),
+                                  ],
+                                ),
+                                // ----------- Stars-------------
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon( Icons.star_outlined,size: 50,),
+                                        Icon( Icons.star_outlined,size: 50,),
+                                        Icon( Icons.star_outlined,size: 50,),
+                                        Icon( Icons.star_outlined,size: 50,),
+                                        Icon( Icons.star_outlined,size: 50,),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Icon( Icons.star_outlined,size: 50,),
+                                        Icon( Icons.star_outlined,size: 50,),
+                                        Icon( Icons.star_outlined,size: 50,),
+                                        Icon( Icons.star_outlined,size: 50,),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Icon( Icons.star_outlined,size: 50,),
+                                        Icon( Icons.star_outlined,size: 50,),
+                                        Icon( Icons.star_outlined,size: 50,),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Icon( Icons.star_outlined,size: 50,),
+                                        Icon( Icons.star_outlined,size: 50,),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Icon( Icons.star_outlined,size: 50,),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                // ----------- Number of Rates -------------
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children:  [
+                                    Text(
+                                      '($five)',style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 50.0,
+                                      color: Colors.black,
+                                    ),
+                                    ),
+                                    Text(
+                                      '($four)',style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 50.0,
+                                      color: Colors.black,
+                                    ),
+                                    ),
+                                    Text(
+                                      '($three)',style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 50.0,
+                                      color: Colors.black,
+                                    ),
+                                    ),
+                                    Text(
+                                      '($two)',style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 50.0,
+                                      color: Colors.black,
+                                    ),
+                                    ),
+                                    Text('($one)',
+                                      style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 50.0,
+                                      color: Colors.black,
+                                    ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
+                      Expanded(
+                        flex: 10,
+                          child: Text('Total Rate: $myRateCounter',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 50.0,
+                              color: Colors.black,
+                            ),
+                          ))
 
                     ],
                   ),
@@ -259,34 +446,61 @@ class _AndieRatings1State extends State<AndieRatings1> {
                 flex: 10,
                 child: Container(
                   padding: const EdgeInsets.all(30.0),
-                  margin: const EdgeInsets.all(30.0),
+                  margin: const EdgeInsets.all(20.0),
                   width: 1500,
                   height: 800,
                   color: Colors.white,
-                  child: GridView(
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 1,
-                      childAspectRatio: 2,
-                      crossAxisSpacing: 2,
-                      mainAxisSpacing: 2,
-                    ),
-                    children: [
-                      card,
-                      card,
-                      card,
-                      card,
-                      card,
-                      card,
-                      card,
-                      card,
-                      card,
-                      card,
-                      card,
-                      card,
-                      card,
-                      card,
-                      card,
-                    ],
+                  child: StreamBuilder<QuerySnapshot>(
+                    stream: db.collection('historyClient')
+                        .where('andieUID', isEqualTo: FirebaseAuth.instance.currentUser?.uid)
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        Text ('HELLO');
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else {
+                        snapshot.data!.docs.forEach(
+                              (element) {
+                            element.id;
+                            print(element.id);
+                          },
+                        );
+                        print(snapshot.data!.docs.length.toString());
+                        counter = snapshot.data!.docs.length.toString();
+
+                        return ListView (
+
+                          children: snapshot.data!.docs.map((doc) {
+                            Timestamp t = (doc.data() as Map<String, dynamic>)['dateFinished'];
+                            var clientNote = ((doc.data() as Map<String, dynamic>)['clientNote']);
+
+                            return Card(
+                              child: ListTile(
+                                  onTap: () async {
+                                    final QuerySnapshot snap = await FirebaseFirestore.instance.collection('historyClient').where('clientNote', isEqualTo: clientNote).get();
+                                    setState(() {
+                                      name = snap.docs[0]['clientName'];
+                                      clientNote2 = snap.docs[0]['clientNote'];
+                                      startDate = snap.docs[0]['startDate'];
+                                      clientCont = snap.docs[0]['clientCont'];
+                                      fb = snap.docs[0]['clientFacebook'];
+                                      clientUID = snap.docs[0]['clientUID'];
+                                      docUID = snap.docs[0]['docUID'];
+                                    });
+                                  },
+
+                                  leading: Text((doc.data() as Map<String, dynamic>)['clientName']),
+                                  title: Text((doc.data() as Map<String, dynamic>)['clientNote'] ),
+                                  subtitle: Text((doc.data() as Map<String, dynamic>)['startDate'] )
+                              ),
+                            );
+                          }).toList(),
+
+                        );
+                      }
+                    },
                   ),
                 ),
               ),
