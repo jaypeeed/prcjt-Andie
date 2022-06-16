@@ -2,8 +2,10 @@ import 'dart:html';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../services/auth.dart';
 import 'andie_profile_andie.dart';
 import 'andie_ratings.dart';
@@ -548,7 +550,6 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                       Expanded(
                         flex:50,
                         child: Container(
-
                           margin: const EdgeInsets.fromLTRB(10,0, 10,0),
                           child: const Text('Client Note',
                               style: TextStyle(
@@ -558,8 +559,16 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                       Expanded(
                         flex: 100,
                         child: Container(
+                          padding: EdgeInsets.all(5.0),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                              const BorderRadius.all(const Radius.circular(5)),
+                              border: Border.all(
+                                color: Colors.black,
+                              )),
                           margin: const EdgeInsets.fromLTRB(20, 0, 10, 10),
-                          color: Colors.redAccent,
+                          //color: Colors.redAccent,
                             width: 600,
                             height: 50,
                           child: Text(clientNote2),
@@ -587,7 +596,7 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                                 flex: 215,
                                 child: Container(
                                   margin: const EdgeInsets.fromLTRB(0, 5, 195, 10),
-                                  color: Colors.redAccent,
+                                  //color: Colors.redAccent,
                                   child: Text(startDate),
                                     width: 150,
                                     height: 25,
@@ -613,34 +622,39 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                         child: Container(
                           margin: const EdgeInsets.fromLTRB(20, 0, 10, 0),
                           child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              const Text('Contact Number:'),
-                              Container(
-                                margin: const EdgeInsets.only(left: 20),
-                                color: Colors.redAccent,
-                                child: Text(clientCont),
-                                  width: 150,
-                                  height: 25,
-
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                                children: [
+                                   Text('Contact Number:',
+                                    style: GoogleFonts.roboto(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                   Text('Facebook:',
+                                    style: GoogleFonts.roboto(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 50,
-                        child: Container(
-                          margin: const EdgeInsets.fromLTRB(20, 0, 10, 0),
-                          child: Row(
-                            children: [
-                              const Text(' Messenger:'),
-                              Container(
-                                margin: const EdgeInsets.only(left: 48),
-                                color: Colors.redAccent,
-                                child: Text(fb),
-                                  width: 250,
-                                  height: 25,
-
+                              SizedBox(width: 20,),
+                              Column(
+                                mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    // color: Colors.redAccent,
+                                    child: Text(clientCont),
+                                  ),
+                                  Container(
+                                    //color: Colors.redAccent,
+                                    child: Text(fb),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
