@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:prjct_andie/pages_client/client_my_andies.dart';
 
 import '../services/auth.dart';
 import 'andie_my_job.dart';
@@ -11,14 +12,13 @@ import 'andie_profile_andie.dart';
 import 'package:universal_html/html.dart' as html;
 
 final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+final db = FirebaseFirestore.instance;
 String name = '';
-String clientNote2 ='';
-String startDate = '';
-String clientCont = '';
-String fb = '';
+String comment ='';
+String dateSubmitted = '';
+String rate = '';
 String ratings = '';
 String clientUID ='';
-String docUID ='';
 String myRateCounter = '';
 String myRating = '';
 String finalRate = '';
@@ -88,7 +88,7 @@ class _AndieRatings1State extends State<AndieRatings1> {
           three = '0';
         }if(four == 'null'){
           four = '0';
-        }if(one == 'null'){
+        }if(five == 'null'){
           five = '0';
         }
 
@@ -96,6 +96,21 @@ class _AndieRatings1State extends State<AndieRatings1> {
         print(myRateCounter);
       });
     });
+
+    final QuerySnapshot snap = await FirebaseFirestore.instance.collection('ratings').where('andieUID', isEqualTo: FirebaseAuth.instance.currentUser?.uid).get();
+    setState(() {
+      name = snap.docs[0]['clientName'];
+      comment = snap.docs[0]['comment'];
+      //dateSubmitted = snap.docs[0]['dateRated'];
+      rate = snap.docs[0]['rate'].toString();
+      andieUID = snap.docs[0]['andieUID'];
+      clientUID = snap.docs[0]['clientUID'];
+
+      Timestamp t = snap.docs[0]['dateRated'];
+      dateSubmitted = t.toDate().toString();
+    });
+
+
   }
 
   @override
@@ -451,7 +466,7 @@ class _AndieRatings1State extends State<AndieRatings1> {
                   height: 800,
                   color: Colors.white,
                   child: StreamBuilder<QuerySnapshot>(
-                    stream: db.collection('historyClient')
+                    stream: db.collection('ratings')
                         .where('andieUID', isEqualTo: FirebaseAuth.instance.currentUser?.uid)
                         .snapshots(),
                     builder: (context, snapshot) {
@@ -473,27 +488,23 @@ class _AndieRatings1State extends State<AndieRatings1> {
                         return ListView (
 
                           children: snapshot.data!.docs.map((doc) {
-                            Timestamp t = (doc.data() as Map<String, dynamic>)['dateFinished'];
-                            var clientNote = ((doc.data() as Map<String, dynamic>)['clientNote']);
+                            Timestamp t = (doc.data() as Map<String, dynamic>)['dateRated'];
+                            var name =(doc.data() as Map<String, dynamic>)['clientName'];
+                            var rate =(doc.data() as Map<String, dynamic>)['rate'].toString();
+                            var comment = (doc.data() as Map<String, dynamic>)['comment'];
+                            dateSubmitted =t.toDate().toString();
 
                             return Card(
                               child: ListTile(
-                                  onTap: () async {
-                                    final QuerySnapshot snap = await FirebaseFirestore.instance.collection('historyClient').where('clientNote', isEqualTo: clientNote).get();
-                                    setState(() {
-                                      name = snap.docs[0]['clientName'];
-                                      clientNote2 = snap.docs[0]['clientNote'];
-                                      startDate = snap.docs[0]['startDate'];
-                                      clientCont = snap.docs[0]['clientCont'];
-                                      fb = snap.docs[0]['clientFacebook'];
-                                      clientUID = snap.docs[0]['clientUID'];
-                                      docUID = snap.docs[0]['docUID'];
-                                    });
-                                  },
 
-                                  leading: Text((doc.data() as Map<String, dynamic>)['clientName']),
-                                  title: Text((doc.data() as Map<String, dynamic>)['clientNote'] ),
-                                  subtitle: Text((doc.data() as Map<String, dynamic>)['startDate'] )
+                                  leading: CircleAvatar(backgroundImage: AssetImage("assets/male.png")),
+                                  title: Text('$name: $comment'),
+                                  subtitle: Column(
+                                    children: [
+                                      Text('Rate: $rate'),
+                                      Text('Date Rated: $dateSubmitted'),
+                                    ],
+                                  )
                               ),
                             );
                           }).toList(),
