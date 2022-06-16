@@ -19,6 +19,8 @@ String myAge = '';
 String myName = '';
 String myFb = '';
 String myNumber = '';
+String finalGender = 'assets/profile_sample.jpg';
+
 
 class ClientProfile extends StatefulWidget {
   @override
@@ -49,6 +51,12 @@ class _ClientProfileState extends State<ClientProfile> {
         myName = userData.data()!['name'];
         myFb = userData.data()!['fb'];
 
+
+        if(myGender=='Male'){
+          finalGender= 'assets/male.png';
+        }else{
+          finalGender= 'assets/female.png';
+        }
       });
     });
         }
@@ -143,7 +151,7 @@ class _ClientProfileState extends State<ClientProfile> {
                   Expanded(
                     flex: 100,
                     child: Image.asset(
-                      'assets/profile_sample.jpg',
+                      finalGender,
                     ),
                   ),
                 ],
