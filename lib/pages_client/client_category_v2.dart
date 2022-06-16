@@ -40,11 +40,10 @@ String myFb = '';
 String myNumber = '';
 double rateCount = 0.0;
 double ratings2 = 0.0;
+TimeOfDay time = TimeOfDay.now();
+DateTime date = DateTime.now();
 
 class _ClientCategoryState extends State<ClientCategory> {
-  TimeOfDay time = TimeOfDay.now();
-  DateTime date = DateTime.now();
-
   String getDate() {
     if (date == null) {
       return 'Select Date';
@@ -252,33 +251,35 @@ class _ClientCategoryState extends State<ClientCategory> {
                       style:
                           TextStyle(fontSize: 60, fontWeight: FontWeight.bold),
                     ),
-                    Container(
-                      margin: const EdgeInsets.only(top: 5),
-                      //   color: Colors.blue,
-                      width: 1200,
-                      height: 180,
-                      child: GridView(
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          childAspectRatio: 10,
-                          crossAxisSpacing: 30,
-                          mainAxisSpacing: 10,
+                    Center(
+                      child: Container(
+                        margin: const EdgeInsets.only(top: 5),
+                        //   color: Colors.blue,
+                        width: 1200,
+                        height: 180,
+                        child: GridView(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            childAspectRatio: 10,
+                            crossAxisSpacing: 30,
+                            mainAxisSpacing: 10,
+                          ),
+                          children: values.keys.map((String key) {
+                            return CheckboxListTile(
+                              controlAffinity: ListTileControlAffinity.leading,
+                              title: Text(key),
+                              value: values[key],
+                              activeColor: Colors.pink,
+                              checkColor: Colors.white,
+                              onChanged: (bool? value) async {
+                                setState(() {
+                                  values[key] = value!;
+                                });
+                              },
+                            );
+                          }).toList(),
                         ),
-                        children: values.keys.map((String key) {
-                          return CheckboxListTile(
-                            controlAffinity: ListTileControlAffinity.leading,
-                            title: Text(key),
-                            value: values[key],
-                            activeColor: Colors.pink,
-                            checkColor: Colors.white,
-                            onChanged: (bool? value) async {
-                              setState(() {
-                                values[key] = value!;
-                              });
-                            },
-                          );
-                        }).toList(),
                       ),
                     ),
                     Center(
@@ -394,110 +395,73 @@ class _ClientCategoryState extends State<ClientCategory> {
                                                         CrossAxisAlignment
                                                             .start,
                                                     children: [
-                                                      Text(skills),
+                                                      Container(
+                                                          width: 350,
+                                                          child: Text(skills)),
                                                       Row(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                         children: [
                                                           //------------------------------ CONTAINS THE TEXT ONLY -----------------------
                                                           Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceBetween,
+                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                             children: [
                                                               Text(
                                                                 'Age:',
-                                                                style:
-                                                                    GoogleFonts
-                                                                        .roboto(
+                                                                style: GoogleFonts.roboto(
                                                                   fontSize: 20,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
+                                                                  fontWeight: FontWeight.bold,
                                                                 ),
                                                               ),
                                                               Text(
                                                                 'Gender:',
-                                                                style:
-                                                                    GoogleFonts
-                                                                        .roboto(
+                                                                style: GoogleFonts.roboto(
                                                                   fontSize: 20,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
+                                                                  fontWeight:FontWeight.bold,
                                                                 ),
                                                               ),
                                                               Text(
                                                                 'Ep:',
-                                                                style:
-                                                                    GoogleFonts
-                                                                        .roboto(
+                                                                style: GoogleFonts.roboto(
                                                                   fontSize: 20,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
+                                                                  fontWeight: FontWeight.bold,
                                                                 ),
                                                               ),
                                                               Text(
                                                                 'School:',
                                                                 style:
-                                                                    GoogleFonts
-                                                                        .roboto(
-                                                                  fontSize: 20,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
+                                                                    GoogleFonts.roboto(fontSize: 20,
+                                                                  fontWeight: FontWeight.bold,
                                                                 ),
                                                               ),
                                                               Text(
                                                                 'Yow:',
-                                                                style:
-                                                                    GoogleFonts
-                                                                        .roboto(
+                                                                style: GoogleFonts.roboto(
                                                                   fontSize: 20,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
+                                                                  fontWeight: FontWeight.bold,
                                                                 ),
                                                               ),
                                                               Text(
                                                                 'Cont:',
                                                                 style:
-                                                                    GoogleFonts
-                                                                        .roboto(
+                                                                    GoogleFonts.roboto(
                                                                   fontSize: 20,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
+                                                                  fontWeight:FontWeight.bold,
                                                                 ),
                                                               ),
                                                               Text(
                                                                 'Email:',
-                                                                style:
-                                                                    GoogleFonts
-                                                                        .roboto(
+                                                                style: GoogleFonts.roboto(
                                                                   fontSize: 20,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
+                                                                  fontWeight:FontWeight.bold,
                                                                 ),
                                                               ),
                                                               Text(
                                                                 'Facebook:',
-                                                                style:
-                                                                    GoogleFonts
-                                                                        .roboto(
+                                                                style:GoogleFonts.roboto(
                                                                   fontSize: 20,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
+                                                                  fontWeight:FontWeight.bold,
                                                                 ),
                                                               ),
                                                             ],
@@ -516,65 +480,48 @@ class _ClientCategoryState extends State<ClientCategory> {
                                                             children: [
                                                               Text(
                                                                 age,
-                                                                style:
-                                                                    GoogleFonts
-                                                                        .roboto(
-                                                                  fontSize: 20,
+                                                                style:GoogleFonts.roboto(fontSize: 20,
                                                                 ),
                                                               ),
                                                               Text(
                                                                 gender,
-                                                                style:
-                                                                    GoogleFonts
-                                                                        .roboto(
+                                                                style:GoogleFonts.roboto(
                                                                   fontSize: 20,
                                                                 ),
                                                               ),
                                                               Text(
                                                                 exp,
-                                                                style:
-                                                                    GoogleFonts
-                                                                        .roboto(
+                                                                style:GoogleFonts.roboto(
                                                                   fontSize: 20,
                                                                 ),
                                                               ),
                                                               Text(
                                                                 school,
-                                                                style:
-                                                                    GoogleFonts
-                                                                        .roboto(
+                                                                style:GoogleFonts.roboto(
                                                                   fontSize: 20,
                                                                 ),
                                                               ),
                                                               Text(
                                                                 yow,
-                                                                style:
-                                                                    GoogleFonts
-                                                                        .roboto(
+                                                                style:GoogleFonts.roboto(
                                                                   fontSize: 20,
                                                                 ),
                                                               ),
                                                               Text(
                                                                 cont,
-                                                                style:
-                                                                    GoogleFonts
-                                                                        .roboto(
+                                                                style:GoogleFonts.roboto(
                                                                   fontSize: 20,
                                                                 ),
                                                               ),
                                                               Text(
                                                                 email,
-                                                                style:
-                                                                    GoogleFonts
-                                                                        .roboto(
+                                                                style:GoogleFonts.roboto(
                                                                   fontSize: 20,
                                                                 ),
                                                               ),
                                                               Text(
                                                                 facebook,
-                                                                style:
-                                                                    GoogleFonts
-                                                                        .roboto(
+                                                                style:GoogleFonts.roboto(
                                                                   fontSize: 20,
                                                                 ),
                                                               ),

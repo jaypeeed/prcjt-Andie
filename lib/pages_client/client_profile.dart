@@ -21,8 +21,6 @@ String myFb = '';
 String myNumber = '';
 
 class ClientProfile extends StatefulWidget {
-
-
   @override
   State<ClientProfile> createState() => _ClientProfileState();
 }
