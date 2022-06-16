@@ -170,7 +170,6 @@ class _ViewAndieState extends State<ViewAndie> {
                                                           var name =(doc.data() as Map<String, dynamic>)['clientName'];
                                                           var comment = (doc.data() as Map<String, dynamic>)['comment'];
                                                           dateSubmitted =t.toDate().toString();
-
                                                           return Card(
                                                             child: ListTile(
                                                                 leading: Text('Client Name: $name'),
@@ -194,7 +193,7 @@ class _ViewAndieState extends State<ViewAndie> {
                                                     });
                                                     Navigator.pop(context, false);
                                                   },
-                                                  child: Text('Yes, Delete'),
+                                                  child: Text('Yes, Ban'),
                                                   style: ElevatedButton.styleFrom(
                                                     primary: const Color.fromRGBO(111, 215, 85, 1.0),
                                                   ),

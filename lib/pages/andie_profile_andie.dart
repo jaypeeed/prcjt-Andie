@@ -368,38 +368,59 @@ class _AndieProfileState extends State<AndieProfile> {
                           ),
                         ],
                       ),
-                      Container(
-                        margin: EdgeInsets.only(top: 30),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            ElevatedButton(
-                                onPressed: () async {
-                                  await _auth.signOut();
-                                  html.window.location.reload();
-                                },
-                                style: ElevatedButton.styleFrom(
-                                    minimumSize: Size(40,50),
-                                    side: const BorderSide(
-                                      width: 1, color: Colors.black,
+                      Column(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(top: 30),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                ElevatedButton(
+                                    onPressed: () async {
+                                      await _auth.signOut();
+                                      html.window.location.reload();
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                        minimumSize: Size(40,50),
+                                        side: const BorderSide(
+                                          width: 1, color: Colors.black,
+                                        ),
+                                        primary: Color.fromRGBO(220, 57, 57, 1.0)
                                     ),
-                                    primary: Color.fromRGBO(220, 57, 57, 1.0)
-                                ),
-                                child: Align(
-                                  alignment: Alignment.bottomRight,
-                                  child:  Text(
-                                    "LOG OUT",
-                                    style: GoogleFonts.roboto(
-                                        fontSize:21,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                        letterSpacing: 2.0),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                )),
-                            SizedBox(width: 20,),
-                          ],
-                        ),
+                                    child: Align(
+                                      alignment: Alignment.bottomRight,
+                                      child:  Text(
+                                        "LOG OUT",
+                                        style: GoogleFonts.roboto(
+                                            fontSize:21,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                            letterSpacing: 2.0),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    )),
+                                SizedBox(width: 20,),
+
+                              ],
+                            ),
+                          ),
+                          Text('Having Some Trouble?',
+                            style: GoogleFonts.robotoMono(
+                                fontSize: 20,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w900,
+                                letterSpacing: 2.0),
+                            textAlign: TextAlign.left,
+                          ),
+                          Text('Contact us @ myandie@gmail.com',
+                            style: GoogleFonts.robotoMono(
+                                fontSize: 20,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w900,
+                                letterSpacing: 2.0),
+                            textAlign: TextAlign.left,
+                          ),
+                        ],
                       )
                     ],
                   ),
