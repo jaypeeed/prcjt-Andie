@@ -20,6 +20,8 @@ String ratings = '';
 String clientUID ='';
 String docUID ='';
 String myRateCounter = '';
+String myRating = '';
+String finalRate = '';
 
 String one = '';
 String two = '';
@@ -71,6 +73,13 @@ class _AndieRatings1State extends State<AndieRatings1> {
         .listen((userData) {
       setState(() {
         myRateCounter = userData.data()!['rateCount'].toString();
+        one = userData.data()!['One'].toString();
+        two = userData.data()!['Two'].toString();
+        three = userData.data()!['Three'].toString();
+        four = userData.data()!['Four'].toString();
+        five = userData.data()!['Five'].toString();
+        myRating = userData.data()!['totalRate'].toString();
+        finalRate =double.parse(myRating).toStringAsPrecision(3);
         print(myRateCounter);
       });
     });
@@ -197,7 +206,7 @@ class _AndieRatings1State extends State<AndieRatings1> {
                           transitionDuration: const Duration(seconds: 0)),
                       );
                     },
-                    child: const Text('Ratings',
+                    child:  const Text('Ratings',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
@@ -254,10 +263,10 @@ class _AndieRatings1State extends State<AndieRatings1> {
                     children: [
                       Container(
                         //color: Colors.green,
-                        child: const Expanded(
+                        child:  Expanded(
                           flex: 5,
                           child: Text(
-                            'RATINGS',
+                            'RATINGS ($finalRate)',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 50.0,
@@ -363,37 +372,37 @@ class _AndieRatings1State extends State<AndieRatings1> {
                                 // ----------- Number of Rates -------------
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: const [
+                                  children:  [
                                     Text(
-                                      '(32)',style: TextStyle(
+                                      '($five)',style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 50.0,
                                       color: Colors.black,
                                     ),
                                     ),
                                     Text(
-                                      '(32)',style: TextStyle(
+                                      '($four)',style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 50.0,
                                       color: Colors.black,
                                     ),
                                     ),
                                     Text(
-                                      '(32)',style: TextStyle(
+                                      '($three)',style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 50.0,
                                       color: Colors.black,
                                     ),
                                     ),
                                     Text(
-                                      '(32)',style: TextStyle(
+                                      '($two)',style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 50.0,
                                       color: Colors.black,
                                     ),
                                     ),
-                                    Text(
-                                      '(32)',style: TextStyle(
+                                    Text('($one)',
+                                      style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 50.0,
                                       color: Colors.black,
