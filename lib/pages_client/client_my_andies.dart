@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:rating_dialog/rating_dialog.dart';
 
 import '../services/auth.dart';
@@ -650,7 +651,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
-                      flex: 110,
+                      flex: 80,
                       child: Container(
                         margin: const EdgeInsets.all(10),
                         child: const Text(
@@ -663,7 +664,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                       ),
                     ),
                     Expanded(
-                      flex: 25,
+                      flex: 30,
                       child: Container(
                         margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                         child:  Text(name,
@@ -672,12 +673,14 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                       ),
                     ),
                     Expanded(
-                      flex: 25,
-                      child: Container(
-                        margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                        child:  Text(skills,
-                            style: TextStyle(
-                                fontSize: 17.5, fontWeight: FontWeight.bold)),
+                      flex: 100,
+                      child: SingleChildScrollView(
+                        child: Container(
+                          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                          child:  Text(skills,
+                              style: TextStyle(
+                                  fontSize: 17.5, fontWeight: FontWeight.bold)),
+                        ),
                       ),
                     ),
                     Expanded(
@@ -692,9 +695,17 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                     Expanded(
                       flex: 100,
                       child: Container(
+                        padding: EdgeInsets.all(5.0),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius:
+                            const BorderRadius.all(const Radius.circular(5)),
+                            border: Border.all(
+                              color: Colors.black,
+                            )),
                         child: Text(clientNote2),
                         margin: const EdgeInsets.fromLTRB(20, 0, 10, 10),
-                        color: Colors.redAccent,
+                        //color: Colors.redAccent,
                         width: 600,
                         height: 50,
                       ),
@@ -721,7 +732,7 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                               child: Container(
                                 margin:
                                     const EdgeInsets.fromLTRB(0, 5, 195, 10),
-                                color: Colors.redAccent,
+                                //color: Colors.redAccent,
                                 child:  SizedBox(
                                   child: Text(startDate),
                                   width: 150,
@@ -744,60 +755,45 @@ class _ClientMyAndieState extends State<ClientMyAndie> {
                       ),
                     ),
                     Container(
+                      height: 70,
                       margin: const EdgeInsets.fromLTRB(20, 0, 10, 0),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           //--------- this for TEXT LABEL-----------
                           Container(
                             margin: const EdgeInsets.only(right: 30.0),
                             child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Container(
-                                    padding: const EdgeInsets.only(
-                                        top: 5, bottom: 0),
-                                    child: const Text(
-                                      'Contact Number:',
-                                    )),
-                                Container(
-                                    padding: const EdgeInsets.only(
-                                        top: 5, bottom: 0),
-                                    child: const Text('Messenger:')),
-                                Container(
-                                    padding: const EdgeInsets.only(
-                                        top: 5, bottom: 0),
-                                    child: const Text('Ratings:')),
+                                Text('Contact Number:',
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text('Facebook:',
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),),
+                                Text('Ratings:',
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),),
                               ],
                             ),
                           ),
                           //--------- this for TEXT DATA-----------
                           Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Container(
-                                child: Text(andieCont),
-                                padding:
-                                    const EdgeInsets.only(top: 5, bottom: 0),
-                                color: Colors.redAccent,
-                                width: 150,
-                                height: 25,
-                              ),
-                              Container(
-                                child: Text(fb),
-                                padding:
-                                    const EdgeInsets.only(top: 5, bottom: 0),
-                                color: Colors.redAccent,
-                                width: 250,
-                                height: 25,
-                              ),
-                              Container(
-                                child: Text(ratings),
-                                padding:
-                                const EdgeInsets.only(top: 5, bottom: 0),
-                                color: Colors.redAccent,
-                                width: 150,
-                                height: 25,
-                              ),
+                              Text(andieCont),
+                              Text(fb),
+                              Text(ratings),
                             ],
                           )
                         ],
