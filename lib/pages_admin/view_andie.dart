@@ -188,15 +188,20 @@ class _ViewAndieState extends State<ViewAndie> {
                                               actions: [
                                                 ElevatedButton(
                                                   onPressed: () async {
+                                                    final QuerySnapshot snap2 = await FirebaseFirestore.instance.collection('users').where('uid', isEqualTo: uid).get();
+                                                    setState(() {
+                                                      snap2.docs[0].reference.delete();
+                                                    });
+                                                    Navigator.pop(context, false);
                                                   },
-                                                  child: Text('Okay'),
+                                                  child: Text('Yes, Delete'),
                                                   style: ElevatedButton.styleFrom(
                                                     primary: const Color.fromRGBO(111, 215, 85, 1.0),
                                                   ),
                                                 ),
                                                 ElevatedButton(
                                                   onPressed: () => Navigator.pop(context, false),
-                                                  child: Text('Back'),
+                                                  child: Text('Cancel'),
                                                   style: ElevatedButton.styleFrom(
                                                     primary: const Color.fromRGBO(220, 57, 57, 1.0),
                                                   ),
