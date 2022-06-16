@@ -643,6 +643,7 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                               ),
                               SizedBox(width: 20,),
                               Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment:MainAxisAlignment.spaceBetween,
                                 children: [
                                   Container(

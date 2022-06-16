@@ -188,8 +188,8 @@ class _AndieProfileState extends State<AndieProfile> {
                     flex: 80,
                     child: Image.asset(
                       finalGender,
-                      width: 50,
-                      height: 50,
+                      width: 150,
+                      height: 150,
                     ),
                   ),
                   Expanded(
@@ -204,8 +204,7 @@ class _AndieProfileState extends State<AndieProfile> {
                                 style: TextStyle(fontSize: 40),
                               ),
 
-                              Icon( Icons.star_outlined,
-                                size: 40),
+                              Icon(Icons.star_outlined, size: 40),
                             ],
                           ))),
                 ],
