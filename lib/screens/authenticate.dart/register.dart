@@ -133,7 +133,7 @@ class _RegisterState extends State<Register> {
                 color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(20)),
                 image: DecorationImage(
-                  image: const AssetImage('spin_gear.gif'),
+                  image: const AssetImage('assets/spin_gear.gif'),
                   fit: BoxFit.cover,
                   colorFilter: ColorFilter.mode(
                       Colors.black.withOpacity(0.1), BlendMode.dstATop),

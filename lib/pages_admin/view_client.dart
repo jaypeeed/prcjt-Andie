@@ -20,7 +20,7 @@ class _ViewClientState extends State<ViewClient> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(65),
+        preferredSize: const Size.fromHeight(65),
         child: AppBar(
           backgroundColor: const Color.fromRGBO(255, 205, 84, 1.0),
           title: Image.asset('assets/andie_logo.png',
@@ -96,7 +96,7 @@ class _ViewClientState extends State<ViewClient> {
                               .snapshots(),
                           builder: (context, snapshot) {
                             if (!snapshot.hasData) {
-                              Text('HELLO');
+                              const Text('HELLO');
                               return const Center(
                                 child: CircularProgressIndicator(),
                               );
@@ -120,8 +120,41 @@ class _ViewClientState extends State<ViewClient> {
                                         onTap: () async{
                                           showDialog(context: context, builder: (context){
                                             return AlertDialog(
-                                              title: Text("Hi Andie!"),
-                                              content: Text("You are About to DELETE this Andie Account"),
+                                              title: const Center(
+                                                child: Text("Report",
+                                                    style: TextStyle(
+                                                        fontSize: 40,
+                                                        fontWeight: FontWeight.bold)
+                                                ),
+                                              ),
+                                              content: Container(
+                                                height: 250,
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Container(
+                                                      child: const Text('Name',
+                                                          style:TextStyle(
+                                                              fontSize: 30,
+                                                              fontWeight: FontWeight.bold)
+                                                      ),
+                                                      margin: const EdgeInsets.only(bottom: 20),
+                                                    ),
+                                                    const Text('Andie Note:',
+                                                        style: TextStyle(
+                                                        fontSize: 20,
+                                                        fontWeight: FontWeight.bold)),
+                                                    Container(
+                                                      width: 300,
+                                                      margin: const EdgeInsets.only(left: 15),
+                                                      child: const Text('She did not pay me! She said bayran lang tika candy! Like mga 500 kabuok kay wala pa koy money. T.T',
+                                                          style: TextStyle(
+                                                              fontSize: 20,
+                                                             )),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
                                               actions: [
                                                 ElevatedButton(
                                                   onPressed: () async {
@@ -131,14 +164,14 @@ class _ViewClientState extends State<ViewClient> {
                                                     });
                                                     Navigator.pop(context, false);
                                                   },
-                                                  child: Text('Yes, Delete'),
+                                                  child: const Text('Yes, Delete'),
                                                   style: ElevatedButton.styleFrom(
                                                     primary: const Color.fromRGBO(111, 215, 85, 1.0),
                                                   ),
                                                 ),
                                                 ElevatedButton(
                                                   onPressed: () => Navigator.pop(context, false),
-                                                  child: Text('Cancel'),
+                                                  child: const Text('Cancel'),
                                                   style: ElevatedButton.styleFrom(
                                                     primary: const Color.fromRGBO(220, 57, 57, 1.0),
                                                   ),

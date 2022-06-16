@@ -148,7 +148,7 @@ class _AdminHomeState extends State<AdminHome> {
                                 margin: EdgeInsets.only(top: 30),
                                 child: Center(
                                   child: Image.asset(
-                                    'client_typing.gif',
+                                    'assets/client_typing.gif',
                                     width: 200,
                                     height: 200,
                                   ),
@@ -195,7 +195,7 @@ class _AdminHomeState extends State<AdminHome> {
                                 margin: EdgeInsets.only(top: 30),
                                 child: Center(
                                   child: Image.asset(
-                                    'andie_suit.gif',
+                                    'assets/andie_suit.gif',
                                     width: 200,
                                     height: 200,
                                   ),
