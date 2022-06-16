@@ -189,7 +189,7 @@ class _ViewClientState extends State<ViewClient> {
                                                     });
                                                     Navigator.pop(context, false);
                                                   },
-                                                  child: const Text('Yes, Delete'),
+                                                  child: const Text('Yes, Ban'),
                                                   style: ElevatedButton.styleFrom(
                                                     primary: const Color.fromRGBO(111, 215, 85, 1.0),
                                                   ),
