@@ -140,10 +140,10 @@ class _ViewAndieState extends State<ViewAndie> {
                                                 ),
                                               ),
                                               content: Container(
-                                                padding: const EdgeInsets.all(30.0),
-                                                margin: const EdgeInsets.all(20.0),
-                                                width: 1000,
-                                                height: 700,
+                                                padding: const EdgeInsets.all(10.0),
+                                                margin: const EdgeInsets.all(10.0),
+                                                width: 600,
+                                                height: 500,
                                                 color: Colors.white,
                                                 child: StreamBuilder<QuerySnapshot>(
                                                   stream: db2.collection('reportAndie')
