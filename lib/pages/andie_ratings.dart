@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -7,6 +9,25 @@ import '../services/auth.dart';
 import 'andie_my_job.dart';
 import 'andie_profile_andie.dart';
 import 'package:universal_html/html.dart' as html;
+
+final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+String name = '';
+String clientNote2 ='';
+String startDate = '';
+String clientCont = '';
+String fb = '';
+String ratings = '';
+String clientUID ='';
+String docUID ='';
+String myRateCounter = '';
+
+String one = '';
+String two = '';
+String three = '';
+String four = '';
+String five = '';
+
+
 
 void main() {
   runApp( MaterialApp(
@@ -31,6 +52,30 @@ class AndieRatings1 extends StatefulWidget {
 }
 
 class _AndieRatings1State extends State<AndieRatings1> {
+  String counter = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _getdata();
+  }
+
+
+  final AuthService _auth = AuthService();
+  void _getdata() async {
+    User? user = _firebaseAuth.currentUser;
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(user?.uid)
+        .snapshots()
+        .listen((userData) {
+      setState(() {
+        myRateCounter = userData.data()!['rateCount'].toString();
+        print(myRateCounter);
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final AuthService _auth = AuthService();
@@ -363,7 +408,7 @@ class _AndieRatings1State extends State<AndieRatings1> {
                       ),
                       Expanded(
                         flex: 10,
-                          child: Text('Total Rate: 160',
+                          child: Text('Total Rate: $myRateCounter',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 50.0,
@@ -383,30 +428,57 @@ class _AndieRatings1State extends State<AndieRatings1> {
                   width: 1500,
                   height: 800,
                   color: Colors.white,
-                  child: GridView(
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 1,
-                      childAspectRatio: 2,
-                      crossAxisSpacing: 2,
-                      mainAxisSpacing: 2,
-                    ),
-                    children: [
-                      card,
-                      card,
-                      card,
-                      card,
-                      card,
-                      card,
-                      card,
-                      card,
-                      card,
-                      card,
-                      card,
-                      card,
-                      card,
-                      card,
-                      card,
-                    ],
+                  child: StreamBuilder<QuerySnapshot>(
+                    stream: db.collection('historyClient')
+                        .where('andieUID', isEqualTo: FirebaseAuth.instance.currentUser?.uid)
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        Text ('HELLO');
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else {
+                        snapshot.data!.docs.forEach(
+                              (element) {
+                            element.id;
+                            print(element.id);
+                          },
+                        );
+                        print(snapshot.data!.docs.length.toString());
+                        counter = snapshot.data!.docs.length.toString();
+
+                        return ListView (
+
+                          children: snapshot.data!.docs.map((doc) {
+                            Timestamp t = (doc.data() as Map<String, dynamic>)['dateFinished'];
+                            var clientNote = ((doc.data() as Map<String, dynamic>)['clientNote']);
+
+                            return Card(
+                              child: ListTile(
+                                  onTap: () async {
+                                    final QuerySnapshot snap = await FirebaseFirestore.instance.collection('historyClient').where('clientNote', isEqualTo: clientNote).get();
+                                    setState(() {
+                                      name = snap.docs[0]['clientName'];
+                                      clientNote2 = snap.docs[0]['clientNote'];
+                                      startDate = snap.docs[0]['startDate'];
+                                      clientCont = snap.docs[0]['clientCont'];
+                                      fb = snap.docs[0]['clientFacebook'];
+                                      clientUID = snap.docs[0]['clientUID'];
+                                      docUID = snap.docs[0]['docUID'];
+                                    });
+                                  },
+
+                                  leading: Text((doc.data() as Map<String, dynamic>)['clientName']),
+                                  title: Text((doc.data() as Map<String, dynamic>)['clientNote'] ),
+                                  subtitle: Text((doc.data() as Map<String, dynamic>)['startDate'] )
+                              ),
+                            );
+                          }).toList(),
+
+                        );
+                      }
+                    },
                   ),
                 ),
               ),
