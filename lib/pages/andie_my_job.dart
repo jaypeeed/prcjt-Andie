@@ -58,6 +58,11 @@ String facebook =  '';
 
 String clientNote='';
 
+TextEditingController _textFieldController = TextEditingController();
+String reportComment = '';
+int reportCounter = 1;
+int reportCount = 0;
+
 double rateCount =  0.0;
 double ratings2 =  0.0;
 double rateCounter = 1.0;
@@ -70,6 +75,11 @@ class AndieMyJobs extends StatefulWidget {
 }
 
 class _AndieMyJobsState extends State<AndieMyJobs> {
+  @override
+  void initState() {
+    super.initState();
+    _getdata();
+  }
   final AuthService _auth = AuthService();
 
   String counter = '';
@@ -79,6 +89,35 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
   bool isVisibleHistory = false;
   bool isVisibleButtons = false;
   bool isVisibleDoneButton = false;
+
+  String myEmail = '';
+  String myGender = '';
+  String myAge = '';
+  String myName = '';
+  String myFb = '';
+  String myNumber = '';
+  String note = '';
+
+  void _getdata() async {
+    User? user = _firebaseAuth.currentUser;
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(user?.uid)
+        .snapshots()
+        .listen((userData) {
+      setState(() {
+        myEmail = userData.data()!['email'];
+        myGender = userData.data()!['gender'];
+        myAge = userData.data()!['age'];
+        myNumber = userData.data()!['contNumber'];
+        myName = userData.data()!['name'];
+        myFb = userData.data()!['fb'];
+      });
+    });
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -416,7 +455,90 @@ class _AndieMyJobsState extends State<AndieMyJobs> {
                                                     docUID = snap.docs[0]['docUID'];
                                                   });
                                                 },
+                                                onLongPress: ()async{
+                                                  showDialog(context: context, builder: (context){
+                                                    return AlertDialog(
+                                                      title: const Center(
+                                                        child: Text("Report Client?",
+                                                            style: TextStyle(
+                                                                fontSize: 40,
+                                                                fontWeight: FontWeight.bold)
+                                                        ),
+                                                      ),
+                                                      content: Container(
+                                                        height: 250,
+                                                        child: TextField(
+                                                          controller: _textFieldController,
+                                                          textInputAction: TextInputAction.go,
+                                                          keyboardType: TextInputType.numberWithOptions(),
+                                                          decoration: InputDecoration(
+                                                              hintText: 'Tell us why you want to report this Client'
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      actions: [
+                                                        ElevatedButton(
+                                                          onPressed: () async {
+                                                            reportComment = _textFieldController.text.trim();
 
+                                                            FirebaseFirestore.instance
+                                                                .collection('reportClient')
+                                                                .doc()
+                                                                .set({
+                                                              'andieName': myName,
+                                                              'dateReported':DateTime.now(),
+                                                              'comment': reportComment,
+                                                              'clientUID': clientUID,
+                                                              'andieUID': FirebaseAuth.instance.currentUser?.uid,
+                                                            });
+
+                                                            final QuerySnapshot snap3 =
+                                                            await FirebaseFirestore
+                                                                .instance
+                                                                .collection('finalClient')
+                                                                .where('clientNote',
+                                                                isEqualTo: clientNote2)
+                                                                .where('clientUID',
+                                                                isEqualTo: clientUID)
+                                                                .get();
+                                                            setState(() {
+                                                              snap3.docs[0].reference.delete();
+                                                            });
+
+                                                            FirebaseFirestore.instance
+                                                                .collection('users')
+                                                                .doc(clientUID)
+                                                                .update({
+                                                              'reportCount': FieldValue.increment(reportCounter),
+                                                            });
+
+                                                            name='';
+                                                            clientNote2 ='';
+                                                            startDate = '';
+                                                            clientCont = '';
+                                                            fb = '';
+
+                                                            reportComment = '';
+                                                            Navigator.pop(context, false);
+                                                          },
+                                                          child: Text('Report'),
+                                                          style: ElevatedButton.styleFrom(
+                                                            primary: const Color.fromRGBO(111, 215, 85, 1.0),
+                                                          ),
+                                                        ),
+                                                        ElevatedButton(
+                                                          onPressed: () => Navigator.pop(context, false),
+                                                          child: Text('Cancel'),
+                                                          style: ElevatedButton.styleFrom(
+                                                            primary: const Color.fromRGBO(220, 57, 57, 1.0),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  });
+
+
+                                                },
                                                 leading: Text((doc.data() as Map<String, dynamic>)['clientName']),
                                                 title: Text((doc.data() as Map<String, dynamic>)['clientNote'] ),
                                                 subtitle: Text(t.toDate().toString() )

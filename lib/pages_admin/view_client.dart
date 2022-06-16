@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,6 +8,12 @@ import '../pages/andie_profile_andie.dart';
 
 final db = FirebaseFirestore.instance;
 String counter = '';
+final db2 = FirebaseFirestore.instance;
+final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+String name = '';
+String comment ='';
+String dateSubmitted = '';
+
 
 class ViewClient extends StatefulWidget {
   const ViewClient({Key? key}) : super(key: key);
@@ -128,31 +135,49 @@ class _ViewClientState extends State<ViewClient> {
                                                 ),
                                               ),
                                               content: Container(
-                                                height: 250,
-                                                child: Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    Container(
-                                                      child: const Text('Name',
-                                                          style:TextStyle(
-                                                              fontSize: 30,
-                                                              fontWeight: FontWeight.bold)
-                                                      ),
-                                                      margin: const EdgeInsets.only(bottom: 20),
-                                                    ),
-                                                    const Text('Andie Note:',
-                                                        style: TextStyle(
-                                                        fontSize: 20,
-                                                        fontWeight: FontWeight.bold)),
-                                                    Container(
-                                                      width: 300,
-                                                      margin: const EdgeInsets.only(left: 15),
-                                                      child: const Text('She did not pay me! She said bayran lang tika candy! Like mga 500 kabuok kay wala pa koy money. T.T',
-                                                          style: TextStyle(
-                                                              fontSize: 20,
-                                                             )),
-                                                    ),
-                                                  ],
+                                                padding: const EdgeInsets.all(10.0),
+                                                margin: const EdgeInsets.all(10.0),
+                                                width: 600,
+                                                height: 500,
+                                                color: Colors.white,
+                                                child: StreamBuilder<QuerySnapshot>(
+                                                  stream: db2.collection('reportClient')
+                                                      .where('clientUID', isEqualTo: uid)
+                                                      .snapshots(),
+                                                  builder: (context, snapshot) {
+                                                    if (!snapshot.hasData) {
+                                                      Text ('HELLO');
+                                                      return const Center(
+                                                        child: CircularProgressIndicator(),
+                                                      );
+                                                    } else {
+                                                      snapshot.data!.docs.forEach(
+                                                            (element) {
+                                                          element.id;
+                                                          print(element.id);
+                                                        },
+                                                      );
+                                                      print(snapshot.data!.docs.length.toString());
+
+                                                      return ListView (
+                                                        children: snapshot.data!.docs.map((doc) {
+                                                          Timestamp t = (doc.data() as Map<String, dynamic>)['dateReported'];
+                                                          var name =(doc.data() as Map<String, dynamic>)['andieName'];
+                                                          var comment = (doc.data() as Map<String, dynamic>)['comment'];
+                                                          dateSubmitted =t.toDate().toString();
+
+                                                          return Card(
+                                                            child: ListTile(
+                                                              leading: Text('Client Name: $name'),
+                                                              title: Text('Remarks: $comment'),
+                                                              subtitle: Text('Date Reported: $dateSubmitted'),
+                                                            ),
+                                                          );
+                                                        }).toList(),
+
+                                                      );
+                                                    }
+                                                  },
                                                 ),
                                               ),
                                               actions: [
@@ -181,6 +206,8 @@ class _ViewClientState extends State<ViewClient> {
                                           });
 
                                         },
+                                        leading: Text((doc.data()
+                                        as Map<String, dynamic>)['reportCount'].toString()),
                                         title: Text((doc.data()
                                         as Map<String, dynamic>)['name']),
                                         subtitle: Text((doc.data()

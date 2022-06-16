@@ -21,6 +21,7 @@ class SignUpClient extends StatefulWidget {
 var pendingAndies = [];
 var finalAndies = [];
 var historyAndies = [];
+int report = 0;
 
 class _SignUpClientState extends State<SignUpClient> {
   TextEditingController emailController = new TextEditingController();
@@ -422,6 +423,7 @@ class _SignUpClientState extends State<SignUpClient> {
                                         "contNumber": number,
                                         "name": name,
                                         "fb": fb,
+                                        'reportCount': report,
                                         "gender": selectedItem,
                                         "photo": "phto",
                                         "role": "user",
