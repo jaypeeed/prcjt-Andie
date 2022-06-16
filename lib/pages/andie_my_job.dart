@@ -56,6 +56,7 @@ String cont = '';
 String email = '';
 String facebook =  '';
 
+String email2 = '';
 String clientNote='';
 
 TextEditingController _textFieldController = TextEditingController();

@@ -33,6 +33,7 @@ class _SignUpClientState extends State<SignUpClient> {
   TextEditingController fbController = new TextEditingController();
   final _formkey = GlobalKey<FormState>();
 
+  String email2 = '';
   String email = '';
   String password = '';
   String age = '';

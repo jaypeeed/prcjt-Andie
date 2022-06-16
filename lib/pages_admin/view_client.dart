@@ -13,7 +13,7 @@ final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 String name = '';
 String comment ='';
 String dateSubmitted = '';
-
+String email2 = '';
 
 class ViewClient extends StatefulWidget {
   const ViewClient({Key? key}) : super(key: key);
