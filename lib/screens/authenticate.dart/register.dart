@@ -17,6 +17,7 @@ class Register extends StatefulWidget {
   State<Register> createState() => _RegisterState();
 }
 
+int agePerson = 0;
 var tmpArray = [];
 var rates = [];
 double totalRate = 0.0;
@@ -221,9 +222,15 @@ class _RegisterState extends State<Register> {
                                     TextFormField(
                                       controller: nameController,
                                       validator: (value) {
-                                        return value!.isNotEmpty
-                                            ? null
-                                            : "Empty/Invalid Input";
+                                        if (value!.isNotEmpty) {
+                                          if (value.length < 6) {
+                                            return 'Use your complete name';
+                                          } else {
+                                            return null;
+                                          }
+                                        } else {
+                                          return "Empty input";
+                                        }
                                       },
                                       decoration: const InputDecoration(
                                           hintText: 'Name',
@@ -235,9 +242,16 @@ class _RegisterState extends State<Register> {
                                     TextFormField(
                                       controller: emailController,
                                       validator: (value) {
-                                        return value!.isNotEmpty
-                                            ? null
-                                            : "Empty/Invalid Email";
+                                        if (value!.isNotEmpty) {
+                                          if (value.contains('@') &&
+                                              value.contains('.com')) {
+                                            return null;
+                                          } else {
+                                            return 'Not a valid email';
+                                          }
+                                        } else {
+                                          return "Empty/Invalid Email";
+                                        }
                                       },
                                       decoration: const InputDecoration(
                                           hintText: 'Email',
@@ -249,9 +263,15 @@ class _RegisterState extends State<Register> {
                                     TextFormField(
                                       controller: passwordController,
                                       validator: (value) {
-                                        return value!.isNotEmpty
-                                            ? null
-                                            : "Empty/Invalid Password";
+                                        if (value!.isNotEmpty) {
+                                          if (value.length < 6) {
+                                            return 'Password is too short';
+                                          } else {
+                                            return null;
+                                          }
+                                        } else {
+                                          return "Empty/Invalid Password";
+                                        }
                                       },
                                       decoration: const InputDecoration(
                                           hintText: 'Password',
@@ -280,9 +300,15 @@ class _RegisterState extends State<Register> {
                                     TextFormField(
                                       controller: numberController,
                                       validator: (value) {
-                                        return value!.isNotEmpty
-                                            ? null
-                                            : "Empty/Invalid Phone No.";
+                                        if (value!.isNotEmpty) {
+                                          if (value.length < 10) {
+                                            return 'Invalid Phone No.';
+                                          } else {
+                                            return null;
+                                          }
+                                        } else {
+                                          return "Empty input";
+                                        }
                                       },
                                       decoration: const InputDecoration(
                                           hintText: 'Phone no.',
@@ -331,9 +357,32 @@ class _RegisterState extends State<Register> {
                                               child: TextFormField(
                                                 controller: ageController,
                                                 validator: (value) {
-                                                  return value!.isNotEmpty
-                                                      ? null
-                                                      : "Empty/Invalid";
+                                                  if (value!.isNotEmpty) {
+                                                    if (value.contains('-') ||
+                                                        value == '1' ||
+                                                        value == '2' ||
+                                                        value == '3' ||
+                                                        value == '4' ||
+                                                        value == '5' ||
+                                                        value == '6' ||
+                                                        value == '7' ||
+                                                        value == '8' ||
+                                                        value == '9' ||
+                                                        value == '10' ||
+                                                        value == '11' ||
+                                                        value == '12' ||
+                                                        value == '13' ||
+                                                        value == '14' ||
+                                                        value == '15' ||
+                                                        value == '16' ||
+                                                        value == '17') {
+                                                      return 'You must be 18 or above';
+                                                    } else {
+                                                      return null;
+                                                    }
+                                                  } else {
+                                                    return "Empty input";
+                                                  }
                                                 },
                                                 decoration:
                                                     const InputDecoration(
@@ -348,9 +397,15 @@ class _RegisterState extends State<Register> {
                                     TextFormField(
                                       controller: fbController,
                                       validator: (value) {
-                                        return value!.isNotEmpty
-                                            ? null
-                                            : "Empty/Invalid Link";
+                                        if (value!.isNotEmpty) {
+                                          if (value.contains('.com')) {
+                                            return null;
+                                          } else {
+                                            return 'Not a valid FB link';
+                                          }
+                                        } else {
+                                          return "Empty";
+                                        }
                                       },
                                       decoration: const InputDecoration(
                                           hintText: 'Facebook Link',
@@ -447,9 +502,15 @@ class _RegisterState extends State<Register> {
                           child: TextFormField(
                             controller: expController,
                             validator: (value) {
-                              return value!.isNotEmpty
-                                  ? null
-                                  : "Empty/Invalid Input";
+                              if (value!.isNotEmpty) {
+                                if (value.length < 5) {
+                                  return 'Insufficient Data';
+                                } else {
+                                  return null;
+                                }
+                              } else {
+                                return "Empty input";
+                              }
                             },
                             decoration: const InputDecoration(
                               border: OutlineInputBorder(),
@@ -465,9 +526,15 @@ class _RegisterState extends State<Register> {
                           child: TextFormField(
                             controller: schoolController,
                             validator: (value) {
-                              return value!.isNotEmpty
-                                  ? null
-                                  : "Empty/Invalid Input";
+                              if (value!.isNotEmpty) {
+                                if (value.length < 5) {
+                                  return 'Insufficient Data';
+                                } else {
+                                  return null;
+                                }
+                              } else {
+                                return "Empty input";
+                              }
                             },
                             decoration: const InputDecoration(
                               border: OutlineInputBorder(),
@@ -483,9 +550,15 @@ class _RegisterState extends State<Register> {
                           child: TextFormField(
                             controller: yearsController,
                             validator: (value) {
-                              return value!.isNotEmpty
-                                  ? null
-                                  : "Empty/Invalid Input";
+                              if (value!.isNotEmpty) {
+                                if (value.length < 5) {
+                                  return 'Insufficient Data';
+                                } else {
+                                  return null;
+                                }
+                              } else {
+                                return "Empty input";
+                              }
                             },
                             decoration: const InputDecoration(
                               border: OutlineInputBorder(),

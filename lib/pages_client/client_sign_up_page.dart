@@ -178,6 +178,17 @@ class _SignUpClientState extends State<SignUpClient> {
                               top: 5, left: 40, right: 40),
                           child: TextFormField(
                             controller: nameController,
+                            validator: (value) {
+                              if (value!.isNotEmpty) {
+                                if (value.length < 6) {
+                                  return 'Use your complete name';
+                                } else {
+                                  return null;
+                                }
+                              } else {
+                                return "Empty input";
+                              }
+                            },
                             decoration: const InputDecoration(
                                 hintText: 'Name',
                                 focusedBorder: OutlineInputBorder(
@@ -194,9 +205,16 @@ class _SignUpClientState extends State<SignUpClient> {
                           child: TextFormField(
                             controller: emailController,
                             validator: (value) {
-                              return value!.isNotEmpty
-                                  ? null
-                                  : "Empty/Invalid Email";
+                              if (value!.isNotEmpty) {
+                                if (value.contains('@') &&
+                                    value.contains('.com')) {
+                                  return null;
+                                } else {
+                                  return 'Not a valid email';
+                                }
+                              } else {
+                                return "Empty/Invalid Email";
+                              }
                             },
                             decoration: const InputDecoration(
                                 hintText: 'Email',
@@ -214,9 +232,15 @@ class _SignUpClientState extends State<SignUpClient> {
                           child: TextFormField(
                             controller: passwordController,
                             validator: (value) {
-                              return value!.isNotEmpty
-                                  ? null
-                                  : "Empty/Invalid Password";
+                              if (value!.isNotEmpty) {
+                                if (value.length < 6) {
+                                  return 'Password is too short';
+                                } else {
+                                  return null;
+                                }
+                              } else {
+                                return "Empty/Invalid Password";
+                              }
                             },
                             decoration: const InputDecoration(
                                 hintText: 'Password',
@@ -265,9 +289,32 @@ class _SignUpClientState extends State<SignUpClient> {
                                     child: TextFormField(
                                       controller: ageController,
                                       validator: (value) {
-                                        return value!.isNotEmpty
-                                            ? null
-                                            : "Empty/Invalid Input";
+                                        if (value!.isNotEmpty) {
+                                          if (value.contains('-') ||
+                                              value == '1' ||
+                                              value == '2' ||
+                                              value == '3' ||
+                                              value == '4' ||
+                                              value == '5' ||
+                                              value == '6' ||
+                                              value == '7' ||
+                                              value == '8' ||
+                                              value == '9' ||
+                                              value == '10' ||
+                                              value == '11' ||
+                                              value == '12' ||
+                                              value == '13' ||
+                                              value == '14' ||
+                                              value == '15' ||
+                                              value == '16' ||
+                                              value == '17') {
+                                            return 'You must be 18 or above';
+                                          } else {
+                                            return null;
+                                          }
+                                        } else {
+                                          return "Empty input";
+                                        }
                                       },
                                       decoration: const InputDecoration(
                                         border: OutlineInputBorder(),
@@ -287,9 +334,15 @@ class _SignUpClientState extends State<SignUpClient> {
                           child: TextFormField(
                             controller: numberController,
                             validator: (value) {
-                              return value!.isNotEmpty
-                                  ? null
-                                  : "Empty/Invalid Phone No.";
+                              if (value!.isNotEmpty) {
+                                if (value.length < 10) {
+                                  return 'Invalid Phone No.';
+                                } else {
+                                  return null;
+                                }
+                              } else {
+                                return "Empty input";
+                              }
                             },
                             decoration: const InputDecoration(
                                 hintText: 'Phone Number',
@@ -307,9 +360,15 @@ class _SignUpClientState extends State<SignUpClient> {
                           child: TextFormField(
                             controller: fbController,
                             validator: (value) {
-                              return value!.isNotEmpty
-                                  ? null
-                                  : "Empty/Invalid Link";
+                              if (value!.isNotEmpty) {
+                                if (value.contains('.com')) {
+                                  return null;
+                                } else {
+                                  return 'Not a valid FB link';
+                                }
+                              } else {
+                                return "Empty";
+                              }
                             },
                             decoration: const InputDecoration(
                                 hintText: 'Facebook Link',
@@ -388,60 +447,60 @@ class _SignUpClientState extends State<SignUpClient> {
                           ),
                         ),
                       ),
-                      const Expanded(
-                        flex: 10,
-                        child: Center(
-                          child: Text(
-                            'or',
-                            style: TextStyle(
-                              fontSize: 25,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 10,
-                        child: Container(
-                          margin: const EdgeInsets.only(
-                              left: 40, right: 40, bottom: 30),
-                          child: OutlinedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                PageRouteBuilder(
-                                    pageBuilder: (BuildContext context,
-                                            Animation animation,
-                                            Animation secondaryAnimation) =>
-                                        const AndieSignUp3(), //Change here to open Google Login
-                                    transitionDuration:
-                                        const Duration(seconds: 0)),
-                              );
-                            },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  margin: const EdgeInsets.only(right: 20),
-                                  child: const Image(
-                                    image: const AssetImage(
-                                      'assets/google.png',
-                                    ),
-                                    width: 20,
-                                    height: 20,
-                                  ),
-                                ),
-                                const Text(
-                                  'Sign Up Using Google',
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
+                      // const Expanded(
+                      //   flex: 10,
+                      //   child: Center(
+                      //     child: Text(
+                      //       'or',
+                      //       style: TextStyle(
+                      //         fontSize: 25,
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+                      // Expanded(
+                      //   flex: 10,
+                      //   child: Container(
+                      //     margin: const EdgeInsets.only(
+                      //         left: 40, right: 40, bottom: 30),
+                      //     child: OutlinedButton(
+                      //       onPressed: () {
+                      //         Navigator.push(
+                      //           context,
+                      //           PageRouteBuilder(
+                      //               pageBuilder: (BuildContext context,
+                      //                       Animation animation,
+                      //                       Animation secondaryAnimation) =>
+                      //                   const AndieSignUp3(), //Change here to open Google Login
+                      //               transitionDuration:
+                      //                   const Duration(seconds: 0)),
+                      //         );
+                      //       },
+                      //       child: Row(
+                      //         mainAxisAlignment: MainAxisAlignment.center,
+                      //         children: [
+                      //           Container(
+                      //             margin: const EdgeInsets.only(right: 20),
+                      //             child: const Image(
+                      //               image: const AssetImage(
+                      //                 'assets/google.png',
+                      //               ),
+                      //               width: 20,
+                      //               height: 20,
+                      //             ),
+                      //           ),
+                      //           const Text(
+                      //             'Sign Up Using Google',
+                      //             style: const TextStyle(
+                      //               fontWeight: FontWeight.bold,
+                      //               color: Colors.black,
+                      //             ),
+                      //           ),
+                      //         ],
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
 
                       // BUTTON FOR GOOGLE SIGN IN
                     ],

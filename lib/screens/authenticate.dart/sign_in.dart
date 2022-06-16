@@ -207,9 +207,16 @@ class _SignInState extends State<SignIn> {
                                       child: TextFormField(
                                         controller: emailController,
                                         validator: (value) {
-                                          return value!.isNotEmpty
-                                              ? null
-                                              : "Empty/Invalid Email";
+                                          if (value!.isNotEmpty) {
+                                            if (value.contains('@') &&
+                                                value.contains('.com')) {
+                                              return null;
+                                            } else {
+                                              return 'Not a valid email';
+                                            }
+                                          } else {
+                                            return "Empty/Invalid Email";
+                                          }
                                         },
                                         decoration: const InputDecoration(
                                           border: OutlineInputBorder(),
@@ -226,9 +233,15 @@ class _SignInState extends State<SignIn> {
                                         keyboardType: TextInputType.text,
                                         obscureText: _isObscure,
                                         validator: (value) {
-                                          return value!.isNotEmpty
-                                              ? null
-                                              : "Empty/Invalid Password";
+                                          if (value!.isNotEmpty) {
+                                            if (value.length < 6) {
+                                              return 'Password is too short';
+                                            } else {
+                                              return null;
+                                            }
+                                          } else {
+                                            return "Empty/Invalid Password";
+                                          }
                                         },
                                         controller: passwordController,
                                         decoration: InputDecoration(
