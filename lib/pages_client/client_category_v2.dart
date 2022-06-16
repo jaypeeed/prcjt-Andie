@@ -588,6 +588,8 @@ class _ClientCategoryState extends State<ClientCategory> {
                                                   actions: [
                                                     ElevatedButton(
                                                       onPressed: () async {
+                                                        String date = getDate();
+                                                        String time= getTime();
                                                         String clientNote = _textFieldController.text.trim();
                                                         String clientCont =
                                                             _textFieldControllerContInfo
@@ -631,12 +633,13 @@ class _ClientCategoryState extends State<ClientCategory> {
                                                           "dateTime":
                                                               DateTime.now(),
                                                           'startDate':
-                                                              clientDate,
+                                                              '$date $time',
                                                           'clientCont':
                                                               clientCont,
                                                           'docUID': doc.id,
                                                           'status': 'pending',
                                                         });
+                                                        print('$date $time');
 
                                                         FirebaseFirestore
                                                             .instance
@@ -663,7 +666,7 @@ class _ClientCategoryState extends State<ClientCategory> {
                                                           "dateTime":
                                                               DateTime.now(),
                                                           'startDate':
-                                                              clientDate,
+                                                              '$date $time',
                                                           'clientCont':
                                                               clientCont,
                                                           'docUID': doc.id,
